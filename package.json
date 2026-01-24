@@ -8,5 +8,8 @@
     "dev:cms": "bun run --filter cms dev",
     "build": "bun run --filter '*' build",
     "lint": "bun run --filter '*' lint"
+  },
+  "devDependencies": {
+    "shadcn": "^3.7.0"
   }
 }
