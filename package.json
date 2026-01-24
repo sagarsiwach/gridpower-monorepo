@@ -1,0 +1,12 @@
+{
+  "name": "gridpower-monorepo",
+  "private": true,
+  "workspaces": ["website", "cms"],
+  "scripts": {
+    "dev": "bun run --filter '*' dev",
+    "dev:website": "bun run --filter website dev",
+    "dev:cms": "bun run --filter cms dev",
+    "build": "bun run --filter '*' build",
+    "lint": "bun run --filter '*' lint"
+  }
+}
