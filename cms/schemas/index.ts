@@ -1,25 +1,11 @@
-import { heroSlide } from "./heroSlide";
-import { product } from "./product";
-import { solutionSection } from "./solutionSection";
-import { weAreOpen } from "./weAreOpen";
-import { statsSection } from "./statsSection";
-import { partner } from "./partner";
-import { contactSection } from "./contactSection";
-import { footerCta } from "./footerCta";
+import { homepage } from "./homepage";
 import { siteSettings } from "./siteSettings";
-import { gridDrive } from "./gridDrive";
+import { product } from "./product";
 
 export const schemaTypes = [
-  // Content
-  heroSlide,
-  solutionSection,
-  product,
-  gridDrive,
-  weAreOpen,
-  statsSection,
-  partner,
-  contactSection,
-  footerCta,
-  // Settings
+  // Singletons
+  homepage,
   siteSettings,
+  // Collections
+  product,
 ];
