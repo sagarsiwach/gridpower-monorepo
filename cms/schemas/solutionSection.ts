@@ -1,30 +1,42 @@
 import { defineType, defineField } from "sanity";
 
-export const heroSlide = defineType({
-  name: "heroSlide",
-  title: "Hero Slide",
+export const solutionSection = defineType({
+  name: "solutionSection",
+  title: "Solution Section",
   type: "document",
   fields: [
     defineField({
       name: "overline",
-      title: "Brand/Overline",
+      title: "Overline",
       type: "string",
-      description: "e.g. GRIDENERGY, GRIDCHARGE",
+      description: "GRIDENERGY or GRIDCHARGE",
     }),
     defineField({
-      name: "headline",
-      title: "Headline",
+      name: "title",
+      title: "Title",
       type: "string",
+      description: "e.g. Home Energy, Office Charging",
     }),
     defineField({
       name: "subtitle",
       title: "Subtitle",
+      type: "string",
+    }),
+    defineField({
+      name: "body",
+      title: "Body Text",
       type: "text",
-      rows: 3,
+      rows: 4,
+    }),
+    defineField({
+      name: "benefits",
+      title: "Key Benefits",
+      type: "array",
+      of: [{ type: "string" }],
     }),
     defineField({
       name: "ctaText",
-      title: "CTA Button Text",
+      title: "CTA Text",
       type: "string",
     }),
     defineField({
@@ -44,6 +56,18 @@ export const heroSlide = defineType({
       type: "url",
     }),
     defineField({
+      name: "products",
+      title: "Featured Products",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "product" }] }],
+    }),
+    defineField({
+      name: "sectionId",
+      title: "Section ID (for anchor links)",
+      type: "string",
+      description: "e.g. gridenergy-home, gridcharge-office",
+    }),
+    defineField({
       name: "order",
       title: "Display Order",
       type: "number",
@@ -58,7 +82,7 @@ export const heroSlide = defineType({
   ],
   preview: {
     select: {
-      title: "headline",
+      title: "title",
       subtitle: "overline",
       media: "backgroundImage",
     },
