@@ -8,6 +8,15 @@ export const meta: MetaFunction = () => [
     content:
       "Smart home chargers from 7.4 kW to 22 kW. Works with any EV. Scheduled charging, solar integration, app control. Launch Q2 2026.",
   },
+  { property: "og:title", content: "Home EV charging — GridCharge | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "Smart home chargers from 7.4 kW to 22 kW. Works with any EV. Scheduled charging, solar integration, app control. Launch Q2 2026.",
+  },
+  { property: "og:url", content: "/charge/solutions/home" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 export default function ChargeHomeSolutionPage() {

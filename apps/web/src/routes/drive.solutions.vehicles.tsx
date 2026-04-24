@@ -25,6 +25,15 @@ export const meta: MetaFunction = () => [
     content:
       "Complete powertrain platforms for OEMs. 2W, 3W, 4W. Full specs published. Launch Q2 2026.",
   },
+  { property: "og:title", content: "OEM powertrain integration — GridDrive | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "Complete powertrain platforms for OEMs. 2W, 3W, 4W. Full specs published. Launch Q2 2026.",
+  },
+  { property: "og:url", content: "/drive/solutions/vehicles" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 // ─── Per-vehicle-class data ───────────────────────────────────────────────────

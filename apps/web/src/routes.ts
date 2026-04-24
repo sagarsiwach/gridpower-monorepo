@@ -30,4 +30,10 @@ export default [
   route("contact", "routes/contact.tsx"),
   route("signup", "routes/signup.tsx"),
   route("blog", "routes/blog._index.tsx"),
+
+  // SEO (WEB.7)
+  route("sitemap.xml", "routes/sitemap[.xml].tsx"),
+
+  // 404 catch-all — must be last
+  route("*", "routes/$.tsx"),
 ] satisfies RouteConfig;

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /design-system
+
+Sitemap: https://gridpower.co.in/sitemap.xml

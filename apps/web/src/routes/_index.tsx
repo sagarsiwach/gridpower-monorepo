@@ -23,6 +23,9 @@ export const meta: MetaFunction = () => [
   { name: "description", content: "GridPower builds India's open energy storage, EV charging, and drive platform. Launching Q2 2026." },
   { property: "og:title", content: "GridPower" },
   { property: "og:description", content: "India's open energy + EV charging + drive platform. Launching Q2 2026." },
+  { property: "og:url", content: "/" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 // ─── Section 1: Hero ──────────────────────────────────────────────────────────

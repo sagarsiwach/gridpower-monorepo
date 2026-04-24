@@ -14,14 +14,21 @@ import {
 import { Package } from "lucide-react";
 
 export const meta: MetaFunction = () => [
-  {
-    title: "GridEnergy products — Battery storage systems | GridPower",
-  },
+  { title: "GridEnergy products — Battery storage systems | GridPower" },
   {
     name: "description",
     content:
       "Batteries, inverters, and ESS from 5 kWh to 1 MWh. Full specs published — no NDA required.",
   },
+  { property: "og:title", content: "GridEnergy products — Battery storage systems | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "Batteries, inverters, and ESS from 5 kWh to 1 MWh. Full specs published — no NDA required.",
+  },
+  { property: "og:url", content: "/energy/products" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 // ── Product data (verbatim from ProductsPage.jsx) ──────────────────────────

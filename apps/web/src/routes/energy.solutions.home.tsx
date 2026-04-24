@@ -8,6 +8,15 @@ export const meta: MetaFunction = () => [
     content:
       "Residential solar storage from 5 to 21 kWh. Works with any solar setup, any inverter. Launch Q2 2026.",
   },
+  { property: "og:title", content: "Home battery storage — GridEnergy | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "Residential solar storage from 5 to 21 kWh. Works with any solar setup, any inverter. Launch Q2 2026.",
+  },
+  { property: "og:url", content: "/energy/solutions/home" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 export default function EnergyHomesSolutionPage() {
