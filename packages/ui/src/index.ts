@@ -179,3 +179,31 @@ export type { EmptyStateProps } from "./components/empty-state.js";
 
 export { Skeleton, SkeletonText, SkeletonCard } from "./components/skeleton.js";
 export type { SkeletonProps } from "./components/skeleton.js";
+
+// DS.4 — Utility / marketing primitives
+export { DotGrid } from "./components/dot-grid.js";
+export type { DotGridProps } from "./components/dot-grid.js";
+
+export { SectionLabel, sectionLabelVariants } from "./components/section-label.js";
+export type { SectionLabelProps } from "./components/section-label.js";
+
+export { SectionDivider } from "./components/section-divider.js";
+export type { SectionDividerProps } from "./components/section-divider.js";
+
+export { SectionHeader, sectionHeaderVariants } from "./components/section-header.js";
+export type { SectionHeaderProps } from "./components/section-header.js";
+
+export { ImgPlaceholder, imgPlaceholderVariants } from "./components/img-placeholder.js";
+export type { ImgPlaceholderProps, ImgPlaceholderIcon } from "./components/img-placeholder.js";
+
+export { ProcessSteps, processStepsVariants } from "./components/process-steps.js";
+export type { ProcessStepsProps, ProcessStep } from "./components/process-steps.js";
+
+export { NumbersBar } from "./components/numbers-bar.js";
+export type { NumbersBarProps, Stat } from "./components/numbers-bar.js";
+
+export { CTASection, ctaSectionVariants } from "./components/cta-section.js";
+export type { CTASectionProps } from "./components/cta-section.js";
+
+export { LogoCloud } from "./components/logo-cloud.js";
+export type { LogoCloudProps, Logo } from "./components/logo-cloud.js";
