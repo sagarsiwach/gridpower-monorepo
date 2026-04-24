@@ -13,7 +13,7 @@ export const meta: MetaFunction = () => {
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <div className="bg-background text-foreground">
       <div className="mx-auto max-w-7xl px-6 py-32">
         <p className="gp-label-red mb-4">GridPower / Homepage scaffold</p>
         <h1 className="font-heading text-display tracking-tight">
@@ -32,6 +32,6 @@ export default function HomePage() {
           </a>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

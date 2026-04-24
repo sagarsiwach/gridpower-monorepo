@@ -1,5 +1,8 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import "@gridpower/ui/styles.css";
+import { AnnouncementBar } from "~/components/announcement-bar";
+import { SiteHeader } from "~/components/site-header";
+import { SiteFooter } from "~/components/site-footer";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,5 +23,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <AnnouncementBar />
+      <SiteHeader />
+      <main className="min-h-screen">
+        <Outlet />
+      </main>
+      <SiteFooter />
+    </>
+  );
 }
