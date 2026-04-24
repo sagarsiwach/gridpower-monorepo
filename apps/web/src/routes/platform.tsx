@@ -1,18 +1,382 @@
+import * as React from "react";
+import { Link } from "react-router";
 import type { MetaFunction } from "react-router";
+import {
+  Button,
+  DotGrid,
+  SectionLabel,
+  SectionDivider,
+  FeatureCard,
+  ImgPlaceholder,
+  CTASection,
+} from "@gridpower/ui";
+import { Globe, Lock, Database, Zap, Plug, Server } from "lucide-react";
 
 export const meta: MetaFunction = () => [
-  { title: "GridPower — platform (placeholder)" },
-  { name: "robots", content: "noindex" },
+  {
+    title: "The GridPower platform — Open APIs, OEM partnerships | GridPower",
+  },
+  {
+    name: "description",
+    content:
+      "GridOS connects your storage, chargers, and powertrain BMS. One API. Zero fragmentation.",
+  },
 ];
 
-export default function platformPage() {
+// ── Page ─────────────────────────────────────────────────────────────────────
+
+export default function PlatformPage() {
   return (
-    <main className="mx-auto max-w-7xl px-6 py-32">
-      <p className="gp-label-red mb-4">Placeholder route</p>
-      <h1 className="font-heading text-h1">platform</h1>
-      <p className="gp-body-lg mt-4 text-muted-foreground">
-        This route is replaced by a Phase 2 sub-issue agent.
-      </p>
-    </main>
+    <div>
+      {/* Hero — dark bg matching prototype */}
+      <section className="relative overflow-hidden bg-sand-12 py-24 min-h-[80vh] flex items-center">
+        <DotGrid color="rgba(58,57,55,0.7)" />
+        <div className="relative mx-auto max-w-7xl px-10 w-full grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20 items-center">
+          {/* Copy */}
+          <div>
+            <SectionLabel variant="neutral">GRIDOS · THE PLATFORM</SectionLabel>
+            <h1 className="font-display text-[clamp(36px,5vw,68px)] font-semibold text-dark-12 tracking-tight leading-[1.05] mb-6">
+              One platform.
+              <br />
+              Every asset.
+            </h1>
+            <p className="font-body text-[18px] text-dark-11 leading-[1.7] mb-10 max-w-[440px]">
+              GridOS connects your storage, chargers, and powertrain BMS. One
+              API. Zero fragmentation.
+            </p>
+            <div className="flex gap-3 flex-wrap">
+              <Button asChild>
+                <Link to="/signup">Get early access</Link>
+              </Button>
+              <Button variant="ghost" asChild>
+                <Link to="/contact">Talk to us</Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Visual — architecture diagram placeholder */}
+          <div className="hidden lg:flex flex-col gap-4">
+            <ImgPlaceholder
+              theme="dark"
+              aspect="16/9"
+              label="GridPower Console · Dashboard · Energy + Charge"
+            />
+            <div className="grid grid-cols-3 gap-3">
+              {["Storage", "Charging", "Powertrain"].map((layer) => (
+                <div
+                  key={layer}
+                  className="bg-dark-3 border border-dark-6 rounded-card p-4 flex items-center justify-center"
+                >
+                  <span className="font-mono text-label text-dark-9 uppercase tracking-widest text-center">
+                    {layer}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Three pillars — Open APIs / OEM partnerships / Data sovereignty */}
+      <section className="bg-sand-1 py-24">
+        <SectionDivider />
+        <div className="mx-auto max-w-7xl px-10 pt-16">
+          <SectionLabel>THREE PILLARS</SectionLabel>
+          <h2 className="font-display text-h2 font-semibold text-sand-12 tracking-tight mb-12 max-w-xl">
+            No lock-in. By design.
+          </h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <FeatureCard
+              icon={<Globe className="h-5 w-5" />}
+              label="OPEN APIS"
+              title="Works with anything."
+              description="OCPP 2.0.1, Modbus TCP, REST API, MQTT. Every protocol published. No NDA. Integrate any hardware or third-party platform."
+            />
+            <FeatureCard
+              icon={<Plug className="h-5 w-5" />}
+              label="OEM PARTNERSHIPS"
+              title="Hardware you choose."
+              description="GridOS ships with first-party GridEnergy, GridCharge, and GridDrive hardware support. Open to any OEM hardware via the device SDK."
+            />
+            <FeatureCard
+              icon={<Lock className="h-5 w-5" />}
+              label="DATA SOVEREIGNTY"
+              title="Your data, your assets."
+              description="You own your data. Export any time. Switch hardware without losing history. Multi-tenant with role-based access."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Architecture diagram */}
+      <section className="bg-sand-2 py-24">
+        <SectionDivider />
+        <div className="mx-auto max-w-7xl px-10 pt-16">
+          <SectionLabel>ARCHITECTURE</SectionLabel>
+          <h2 className="font-display text-h2 font-semibold text-sand-12 tracking-tight mb-12">
+            Hardware → GridOS → Apps
+          </h2>
+
+          {/* Three-column architecture diagram */}
+          <div className="flex overflow-hidden rounded-card border border-sand-6">
+            {[
+              {
+                label: "HARDWARE",
+                items: [
+                  "Batteries (COMO, ATLAS)",
+                  "Chargers (AC + DC)",
+                  "Powertrain BMS (GridDrive)",
+                ],
+                dark: false,
+              },
+              {
+                label: "GRIDOS",
+                items: [
+                  "Device management",
+                  "Data aggregation",
+                  "Automation rules",
+                  "Open API (REST, MQTT)",
+                ],
+                dark: true,
+              },
+              {
+                label: "APPLICATIONS",
+                items: [
+                  "GridCharge App",
+                  "GridPower Console",
+                  "GridEnergy Console",
+                  "Third-party integrations",
+                ],
+                dark: false,
+              },
+            ].map((layer, i) => (
+              <React.Fragment key={layer.label}>
+                <div
+                  className={[
+                    "flex-1 p-8",
+                    layer.dark ? "bg-sand-12" : "bg-sand-1",
+                  ].join(" ")}
+                >
+                  <SectionLabel variant={layer.dark ? "neutral" : "red"}>
+                    {layer.label}
+                  </SectionLabel>
+                  <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
+                    {layer.items.map((item) => (
+                      <li key={item} className="flex items-center gap-2">
+                        <span
+                          className={[
+                            "w-1 h-1 rounded-full flex-shrink-0",
+                            layer.dark ? "bg-grid-red" : "bg-sand-7",
+                          ].join(" ")}
+                        />
+                        <span
+                          className={[
+                            "font-body text-body-sm leading-snug",
+                            layer.dark ? "text-dark-11" : "text-sand-11",
+                          ].join(" ")}
+                        >
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {i < 2 && (
+                  <div className="w-px bg-sand-6 flex-shrink-0 flex items-center justify-center">
+                    <div className="w-7 h-7 rounded-full bg-sand-12 flex items-center justify-center flex-shrink-0">
+                      <span className="font-mono text-[10px] text-grid-red">
+                        →
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* Architecture image placeholder */}
+          <div className="mt-10">
+            <ImgPlaceholder
+              aspect="16/9"
+              label="GridOS architecture diagram — Hardware → GridOS → Apps"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Built for India */}
+      <section className="bg-sand-12 py-20 relative overflow-hidden">
+        <DotGrid color="rgba(58,57,55,0.6)" />
+        <div className="relative mx-auto max-w-7xl px-10">
+          <SectionLabel variant="neutral">BUILT FOR INDIA</SectionLabel>
+          <h2 className="font-display text-[clamp(24px,3vw,40px)] font-semibold text-dark-12 tracking-tight mb-12">
+            Open ecosystem. Indian infrastructure.
+          </h2>
+          <div className="grid grid-cols-1 gap-px bg-dark-6 rounded-card overflow-hidden md:grid-cols-3">
+            {[
+              {
+                label: "OPEN STANDARDS",
+                title: "Works with anything.",
+                sub: "OCPP 2.0.1, Modbus TCP, REST API, MQTT. Every protocol published. No NDA.",
+              },
+              {
+                label: "FULL TRANSPARENCY",
+                title: "No black boxes.",
+                sub: "Full specs, API docs, and integration guides available from day one. Before you buy.",
+              },
+              {
+                label: "NO LOCK-IN",
+                title: "Your data, your assets.",
+                sub: "You own your data. Export any time. Switch hardware without losing history.",
+              },
+            ].map((p) => (
+              <div key={p.label} className="bg-dark-2 p-8">
+                <SectionLabel variant="neutral">{p.label}</SectionLabel>
+                <div className="font-display text-[20px] font-semibold text-dark-12 mb-3">
+                  {p.title}
+                </div>
+                <p className="font-body text-body-sm text-dark-11 leading-relaxed">
+                  {p.sub}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* API preview */}
+      <section className="bg-sand-1 py-24">
+        <SectionDivider />
+        <div className="mx-auto max-w-7xl px-10 pt-16">
+          <SectionLabel>API PREVIEW</SectionLabel>
+          <h2 className="font-display text-h2 font-semibold text-sand-12 tracking-tight mb-4">
+            REST-first. MQTT-native.
+          </h2>
+          <p className="font-body text-body-lg text-sand-11 leading-relaxed mb-10 max-w-xl">
+            Full API reference published before launch. No NDA, no approval
+            process. Start integrating today.
+          </p>
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {/* REST example */}
+            <div>
+              <div className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">
+                REST · Get site energy status
+              </div>
+              <pre className="bg-sand-12 text-dark-11 rounded-card p-6 overflow-x-auto font-mono text-[13px] leading-relaxed">
+                {`curl -X GET \\
+  https://api.gridpower.co.in/v1/sites/{site_id}/energy \\
+  -H "Authorization: Bearer <token>" \\
+  -H "Content-Type: application/json"
+
+# Response
+{
+  "site_id": "site_abc123",
+  "soc_percent": 72,
+  "solar_kw": 4.2,
+  "grid_import_kw": 0.0,
+  "battery_kw": -1.8,
+  "timestamp": "2026-04-25T02:58:00Z"
+}`}
+              </pre>
+            </div>
+
+            {/* SDK snippet */}
+            <div>
+              <div className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">
+                Node.js SDK · Start a charge session
+              </div>
+              <pre className="bg-sand-12 text-dark-11 rounded-card p-6 overflow-x-auto font-mono text-[13px] leading-relaxed">
+                {`import { GridOS } from "@gridpower/sdk";
+
+const client = new GridOS({ apiKey: process.env.GRIDOS_KEY });
+
+// Start a charge session
+const session = await client.charge.sessions.start({
+  charger_id: "charger_xyz789",
+  connector: 1,
+  max_energy_kwh: 20,
+});
+
+console.log(session.id); // session_456def
+// → charging started`}
+              </pre>
+            </div>
+          </div>
+
+          <div className="mt-8 flex gap-3 flex-wrap">
+            <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-sand-2 border border-sand-6 rounded-btn">
+              <Server className="h-4 w-4 text-sand-9" />
+              <span className="font-mono text-label text-sand-11 uppercase tracking-widest">
+                Full API docs — Q2 2026
+              </span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-sand-2 border border-sand-6 rounded-btn">
+              <Database className="h-4 w-4 text-sand-9" />
+              <span className="font-mono text-label text-sand-11 uppercase tracking-widest">
+                MQTT reference — Q2 2026
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partner CTA */}
+      <section className="bg-sand-2 py-20">
+        <SectionDivider />
+        <div className="mx-auto max-w-7xl px-10 pt-16">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+            {/* OEM integrator CTA */}
+            <div className="bg-sand-1 border border-sand-6 rounded-card p-10">
+              <SectionLabel>OEM INTEGRATORS</SectionLabel>
+              <h3 className="font-display text-h3 font-semibold text-sand-12 tracking-tight mb-4">
+                Build on GridOS.
+              </h3>
+              <p className="font-body text-body-sm text-sand-11 leading-relaxed mb-8">
+                Integrate your EV hardware with GridOS via the device SDK.
+                Published protocol specs, no NDA, no certification gate.
+              </p>
+              <Button asChild>
+                <Link to="/contact">Talk to partnerships</Link>
+              </Button>
+            </div>
+
+            {/* Fleet / site operator CTA */}
+            <div className="bg-sand-12 rounded-card p-10 relative overflow-hidden">
+              <DotGrid color="rgba(58,57,55,0.5)" />
+              <div className="relative">
+                <SectionLabel variant="neutral">FLEET OPERATORS</SectionLabel>
+                <h3 className="font-display text-h3 font-semibold text-dark-12 tracking-tight mb-4">
+                  Get early access to GridOS.
+                </h3>
+                <p className="font-body text-body-sm text-dark-11 leading-relaxed mb-8">
+                  Be first to the platform when we launch Q2 2026. Monitor
+                  every charger, battery, and session from one dashboard.
+                </p>
+                <Button asChild>
+                  <Link to="/signup">Get early access</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <CTASection
+        heading="Get early access to GridOS."
+        description="Be among the first on the platform when we launch Q2 2026."
+        primaryCta={
+          <Button asChild>
+            <Link to="/signup">Get early access</Link>
+          </Button>
+        }
+        secondaryCta={
+          <Button variant="ghost" asChild>
+            <Link to="/contact">Talk to us</Link>
+          </Button>
+        }
+      />
+    </div>
   );
 }
