@@ -12,3 +12,10 @@ build/
 coverage/
 .vscode/
 .idea/
+
+# react-router v7 generated types
+.react-router/
+**/.react-router/
+
+# tsc incremental build info
+*.tsbuildinfo
