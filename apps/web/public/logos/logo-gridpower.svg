@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 40" fill="none">
+  
+  <rect x="0" y="8" width="6" height="6" fill="#FA0016"></rect>
+  <rect x="10" y="8" width="6" height="6" fill="#FA0016"></rect>
+  <rect x="20" y="8" width="6" height="6" fill="#FA0016"></rect>
+  <rect x="0" y="17" width="6" height="6" fill="#21201c"></rect>
+  <rect x="10" y="17" width="6" height="6" fill="#FA0016"></rect>
+  <rect x="20" y="17" width="6" height="6" fill="#21201c"></rect>
+  <rect x="0" y="26" width="6" height="6" fill="#21201c"></rect>
+  <rect x="10" y="26" width="6" height="6" fill="#21201c"></rect>
+  <rect x="20" y="26" width="6" height="6" fill="#21201c"></rect>
+  
+  <text x="36" y="28" font-family="&#39;Syne&#39;, &#39;Clash Grotesk&#39;, sans-serif" font-weight="600" font-size="20" fill="#21201c" letter-spacing="-0.3">GRIDPOWER</text>
+</svg>
