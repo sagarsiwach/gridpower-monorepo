@@ -9,6 +9,15 @@ export const meta: MetaFunction = () => [
     content:
       "GridEnergy delivers scalable battery energy storage systems for homes, commercial sites, and utility-scale projects across India. Launching Q2 2026.",
   },
+  { property: "og:title", content: "GridEnergy — Battery storage for India | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "GridEnergy delivers scalable battery energy storage systems for homes, commercial sites, and utility-scale projects across India. Launching Q2 2026.",
+  },
+  { property: "og:url", content: "/energy" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 const data: VerticalData = {

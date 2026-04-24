@@ -17,6 +17,15 @@ export const meta: MetaFunction = () => [
     content:
       "Tell us about your project and we'll come back within one working day.",
   },
+  { property: "og:title", content: "Contact us — GridPower" },
+  {
+    property: "og:description",
+    content:
+      "Tell us about your project and we'll come back within one working day.",
+  },
+  { property: "og:url", content: "/contact" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 export async function action({ request }: ActionFunctionArgs) {

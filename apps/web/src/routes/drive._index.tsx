@@ -9,6 +9,15 @@ export const meta: MetaFunction = () => [
     content:
       "GridDrive delivers complete powertrain platforms for 2W, 3W, and 4W OEMs — motors, controllers, battery packs. Full specs, no NDA. Launching Q2 2026.",
   },
+  { property: "og:title", content: "GridDrive — Open EV powertrain platform for OEMs | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "GridDrive delivers complete powertrain platforms for 2W, 3W, and 4W OEMs — motors, controllers, battery packs. Full specs, no NDA. Launching Q2 2026.",
+  },
+  { property: "og:url", content: "/drive" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 const data: VerticalData = {

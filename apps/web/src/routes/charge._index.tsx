@@ -9,6 +9,15 @@ export const meta: MetaFunction = () => [
     content:
       "GridCharge delivers home wallboxes to highway ultra-fast EV charging stations. Revenue-ready, solar-integrated, fleet-capable. Launching Q2 2026.",
   },
+  { property: "og:title", content: "GridCharge — EV charging infrastructure for India | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "GridCharge delivers home wallboxes to highway ultra-fast EV charging stations. Revenue-ready, solar-integrated, fleet-capable. Launching Q2 2026.",
+  },
+  { property: "og:url", content: "/charge" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 const data: VerticalData = {

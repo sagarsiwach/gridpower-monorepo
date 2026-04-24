@@ -14,6 +14,15 @@ export const meta: MetaFunction = () => [
     content:
       "GridPower is the trading name for DeltaEV Mobility Private Limited — an Indian energy technology company designing, manufacturing, and deploying the three layers of the clean energy transition.",
   },
+  { property: "og:title", content: "About GridPower — Building India's open energy platform" },
+  {
+    property: "og:description",
+    content:
+      "GridPower is the trading name for DeltaEV Mobility Private Limited — an Indian energy technology company designing, manufacturing, and deploying the three layers of the clean energy transition.",
+  },
+  { property: "og:url", content: "/about" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 const timeline = [

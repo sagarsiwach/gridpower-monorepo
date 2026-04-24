@@ -13,14 +13,21 @@ import {
 import { Globe, Lock, Database, Zap, Plug, Server } from "lucide-react";
 
 export const meta: MetaFunction = () => [
-  {
-    title: "The GridPower platform — Open APIs, OEM partnerships | GridPower",
-  },
+  { title: "The GridPower platform — Open APIs, OEM partnerships | GridPower" },
   {
     name: "description",
     content:
       "GridOS connects your storage, chargers, and powertrain BMS. One API. Zero fragmentation.",
   },
+  { property: "og:title", content: "The GridPower platform — Open APIs, OEM partnerships | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "GridOS connects your storage, chargers, and powertrain BMS. One API. Zero fragmentation.",
+  },
+  { property: "og:url", content: "/platform" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 // ── Page ─────────────────────────────────────────────────────────────────────

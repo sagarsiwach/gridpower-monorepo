@@ -16,6 +16,15 @@ export const meta: MetaFunction = () => [
     content:
       "Be among the first to access GridPower's platform when we launch Q2 2026.",
   },
+  { property: "og:title", content: "Join the waitlist — GridPower" },
+  {
+    property: "og:description",
+    content:
+      "Be among the first to access GridPower's platform when we launch Q2 2026.",
+  },
+  { property: "og:url", content: "/signup" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 export async function action({ request }: ActionFunctionArgs) {

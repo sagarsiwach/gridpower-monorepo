@@ -8,6 +8,15 @@ export const meta: MetaFunction = () => [
     content:
       "Commercial and industrial energy storage from 30 to 500 kWh. Cut peak demand charges and replace diesel backup. Launch Q2 2026.",
   },
+  { property: "og:title", content: "Commercial & industrial storage — GridEnergy | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "Commercial and industrial energy storage from 30 to 500 kWh. Cut peak demand charges and replace diesel backup. Launch Q2 2026.",
+  },
+  { property: "og:url", content: "/energy/solutions/commercial" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 export default function EnergyCommercialSolutionPage() {

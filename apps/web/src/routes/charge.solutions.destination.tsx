@@ -8,6 +8,15 @@ export const meta: MetaFunction = () => [
     content:
       "Fast charging for hotels, malls, restaurants, resorts. Revenue-ready from day one. Launch Q2 2026.",
   },
+  { property: "og:title", content: "Destination & public charging — GridCharge | GridPower" },
+  {
+    property: "og:description",
+    content:
+      "Fast charging for hotels, malls, restaurants, resorts. Revenue-ready from day one. Launch Q2 2026.",
+  },
+  { property: "og:url", content: "/charge/solutions/destination" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 export default function ChargeDestinationSolutionPage() {

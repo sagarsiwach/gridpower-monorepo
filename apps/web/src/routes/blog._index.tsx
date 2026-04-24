@@ -16,6 +16,15 @@ export const meta: MetaFunction = () => [
     content:
       "Technical writing from the GridPower team. Specs, deployments, and open energy infrastructure.",
   },
+  { property: "og:title", content: "Blog — GridPower" },
+  {
+    property: "og:description",
+    content:
+      "Technical writing from the GridPower team. Specs, deployments, and open energy infrastructure.",
+  },
+  { property: "og:url", content: "/blog" },
+  { property: "og:image", content: "/og-default.svg" },
+  { name: "twitter:card", content: "summary_large_image" },
 ];
 
 const categories = ["All", "Energy", "Charging", "Platform", "Deployments"];
