@@ -4,6 +4,100 @@
 
 export { cn } from "./lib/utils.js";
 
+// DS.1 primitives
+export { Button, buttonVariants } from "./components/button";
+export type { ButtonProps } from "./components/button";
+export { Input } from "./components/input";
+export type { InputProps } from "./components/input";
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from "./components/select";
+export { Checkbox } from "./components/checkbox";
+export { RadioGroup, RadioGroupItem } from "./components/radio-group";
+export { Switch } from "./components/switch";
+export { Badge, badgeVariants } from "./components/badge";
+export type { BadgeProps } from "./components/badge";
+export { Pill, pillVariants } from "./components/pill";
+export type { PillProps } from "./components/pill";
+export { StatusBadge, statusBadgeVariants } from "./components/status-badge";
+export type { StatusBadgeProps } from "./components/status-badge";
+
+// DS.2 — Cards + Data display
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "./components/card.js";
+
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableCaption,
+} from "./components/table.js";
+
+export { ProductCard } from "./components/product-card.js";
+export type { ProductCardProps } from "./components/product-card.js";
+
+export { SolutionCard } from "./components/solution-card.js";
+export type { SolutionCardProps } from "./components/solution-card.js";
+
+export { FeatureCard } from "./components/feature-card.js";
+export type { FeatureCardProps } from "./components/feature-card.js";
+
+export { VerticalCard } from "./components/vertical-card.js";
+export type { VerticalCardProps } from "./components/vertical-card.js";
+
+export { ProjectCard } from "./components/project-card.js";
+export type { ProjectCardProps } from "./components/project-card.js";
+
+export { TestimonialCard } from "./components/testimonial-card.js";
+export type { TestimonialCardProps } from "./components/testimonial-card.js";
+
+export { SubsectionNav } from "./components/subsection-nav.js";
+export type { SubsectionNavProps, SubsectionNavItem } from "./components/subsection-nav.js";
+
+export { StatCard } from "./components/stat-card.js";
+export type { StatCardProps, TrendDirection } from "./components/stat-card.js";
+
+export { DataTable } from "./components/data-table.js";
+export type { DataTableProps, DataTableColumn } from "./components/data-table.js";
+
+export { SpecTable } from "./components/spec-table.js";
+export type { SpecTableProps, SpecRow } from "./components/spec-table.js";
+
+export {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from "./components/tooltip.js";
+
+export { LineChart } from "./components/charts/line-chart.js";
+export type { LineChartProps, LineChartSeries, LineChartDataPoint } from "./components/charts/line-chart.js";
+
+export { BarChart } from "./components/charts/bar-chart.js";
+export type { BarChartProps, BarChartSeries, BarChartDataPoint } from "./components/charts/bar-chart.js";
+
+export { HeatmapChart } from "./components/charts/heatmap-chart.js";
+export type { HeatmapChartProps, HeatmapValue } from "./components/charts/heatmap-chart.js";
+
 // DS.3 — Navigation + Feedback
 export { Navbar, GridMark } from "./components/navbar.js";
 export type { NavbarProps, NavbarItem, NavItem, MegaMenuSection } from "./components/navbar.js";
