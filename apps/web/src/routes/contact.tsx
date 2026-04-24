@@ -96,7 +96,7 @@ export default function ContactPage() {
           <h1 className="font-heading text-display tracking-tight text-sand-12 leading-[1.05] mb-4">
             Let's build your energy future.
           </h1>
-          <p className="text-lg text-sand-11 leading-relaxed">
+          <p className="font-body text-body-lg text-sand-11 leading-relaxed">
             Tell us about your project and we'll come back within one working
             day.
           </p>
@@ -111,11 +111,11 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div>
             {actionData?.ok ? (
-              <div className="rounded-xl border border-sand-6 bg-sand-2 p-8 text-center">
-                <p className="font-heading text-lg font-semibold text-sand-12 mb-2">
+              <div className="rounded-card border border-sand-6 bg-sand-2 p-8 text-center">
+                <p className="font-heading text-h4 font-semibold text-sand-12 mb-2">
                   Message sent.
                 </p>
-                <p className="text-sm text-sand-11">
+                <p className="font-body text-body-sm text-sand-11">
                   We'll be in touch within one working day.
                 </p>
               </div>
@@ -123,34 +123,34 @@ export default function ContactPage() {
               <Form method="post" noValidate>
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="block text-sm text-sand-11 mb-1.5">
+                    <label className="block text-body-sm text-sand-11 mb-1.5">
                       Name <span className="text-grid-red">*</span>
                     </label>
                     <input
                       name="name"
                       placeholder="Your name"
-                      className="w-full rounded-lg border border-sand-6 bg-sand-1 px-3.5 py-3 text-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 transition-colors"
+                      className="w-full rounded-input border border-sand-6 bg-sand-1 px-3.5 py-3 text-body-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors"
                       onBlur={handleBlur}
                     />
                     {touched.name && errors.name && (
-                      <p className="mt-1 text-xs text-destructive">
+                      <p className="mt-1 text-body-sm text-destructive">
                         {errors.name}
                       </p>
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm text-sand-11 mb-1.5">
+                    <label className="block text-body-sm text-sand-11 mb-1.5">
                       Email <span className="text-grid-red">*</span>
                     </label>
                     <input
                       name="email"
                       type="email"
                       placeholder="your@email.com"
-                      className="w-full rounded-lg border border-sand-6 bg-sand-1 px-3.5 py-3 text-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 transition-colors"
+                      className="w-full rounded-input border border-sand-6 bg-sand-1 px-3.5 py-3 text-body-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors"
                       onBlur={handleBlur}
                     />
                     {touched.email && errors.email && (
-                      <p className="mt-1 text-xs text-destructive">
+                      <p className="mt-1 text-body-sm text-destructive">
                         {errors.email}
                       </p>
                     )}
@@ -158,34 +158,34 @@ export default function ContactPage() {
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-sm text-sand-11 mb-1.5">
+                  <label className="block text-body-sm text-sand-11 mb-1.5">
                     Company
                   </label>
                   <input
                     name="company"
                     placeholder="Your company"
-                    className="w-full rounded-lg border border-sand-6 bg-sand-1 px-3.5 py-3 text-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 transition-colors"
+                    className="w-full rounded-input border border-sand-6 bg-sand-1 px-3.5 py-3 text-body-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors"
                   />
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-sm text-sand-11 mb-1.5">
+                  <label className="block text-body-sm text-sand-11 mb-1.5">
                     Phone
                   </label>
                   <input
                     name="phone"
                     placeholder="+91 98765 43210"
-                    className="w-full rounded-lg border border-sand-6 bg-sand-1 px-3.5 py-3 text-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 transition-colors"
+                    className="w-full rounded-input border border-sand-6 bg-sand-1 px-3.5 py-3 text-body-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors"
                   />
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-sm text-sand-11 mb-1.5">
+                  <label className="block text-body-sm text-sand-11 mb-1.5">
                     Area of interest
                   </label>
                   <select
                     name="interest"
-                    className="w-full rounded-lg border border-sand-6 bg-sand-1 px-3.5 py-3 text-sm text-sand-12 outline-none focus:border-sand-7 transition-colors cursor-pointer"
+                    className="w-full rounded-input border border-sand-6 bg-sand-1 px-3.5 py-3 text-body-sm text-sand-12 outline-none focus:border-sand-7 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors cursor-pointer"
                   >
                     <option value="">Select one</option>
                     {interestOptions.map((o) => (
@@ -195,18 +195,18 @@ export default function ContactPage() {
                 </div>
 
                 <div className="mb-6">
-                  <label className="block text-sm text-sand-11 mb-1.5">
+                  <label className="block text-body-sm text-sand-11 mb-1.5">
                     Message <span className="text-grid-red">*</span>
                   </label>
                   <textarea
                     name="message"
                     placeholder="Tell us about your project…"
                     rows={5}
-                    className="w-full rounded-lg border border-sand-6 bg-sand-1 px-3.5 py-3 text-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 transition-colors resize-y"
+                    className="w-full rounded-input border border-sand-6 bg-sand-1 px-3.5 py-3 text-body-sm text-sand-12 placeholder:text-sand-8 outline-none focus:border-sand-7 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors resize-y"
                     onBlur={handleBlur}
                   />
                   {touched.message && errors.message && (
-                    <p className="mt-1 text-xs text-destructive">
+                    <p className="mt-1 text-body-sm text-destructive">
                       {errors.message}
                     </p>
                   )}
@@ -225,7 +225,7 @@ export default function ContactPage() {
               <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-sand-9 mb-4">
                 REGISTERED OFFICE
               </p>
-              <p className="text-sm text-sand-11 leading-[1.8]">
+              <p className="font-body text-body-sm text-sand-11 leading-[1.8]">
                 DeltaEV Mobility Private Limited
                 <br />
                 GIDC Verna, Goa — 403 722
@@ -237,7 +237,7 @@ export default function ContactPage() {
               <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-sand-9 mb-4">
                 MANUFACTURING
               </p>
-              <p className="text-sm text-sand-11 leading-[1.8]">
+              <p className="font-body text-body-sm text-sand-11 leading-[1.8]">
                 Dharwad, Karnataka
                 <br />
                 India
@@ -247,7 +247,7 @@ export default function ContactPage() {
               <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-sand-9 mb-4">
                 CONTACT
               </p>
-              <p className="text-sm text-sand-11 leading-[1.8]">
+              <p className="font-body text-body-sm text-sand-11 leading-[1.8]">
                 hello@gridpower.co.in
                 <br />
                 +91 98765 43210
@@ -255,7 +255,7 @@ export default function ContactPage() {
             </div>
 
             {/* Map placeholder */}
-            <div className="relative overflow-hidden rounded-xl border border-sand-6 bg-sand-3 h-44 flex items-center justify-center">
+            <div className="relative overflow-hidden rounded-card border border-sand-6 bg-sand-3 h-44 flex items-center justify-center">
               <DotGrid
                 className="absolute inset-0"
                 color="var(--sand-5)"
