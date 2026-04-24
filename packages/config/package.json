@@ -1,0 +1,11 @@
+{
+  "name": "@gridpower/config",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tsconfig.base": "./tsconfig.base.json",
+    "./tsconfig.react": "./tsconfig.react.json"
+  },
+  "files": ["tsconfig.*.json"]
+}

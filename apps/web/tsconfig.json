@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "types": ["@react-router/node", "vite/client"],
+    "noEmit": true,
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": [".react-router/types/**/*", "src/**/*", "vite.config.ts", "react-router.config.ts"]
+}
