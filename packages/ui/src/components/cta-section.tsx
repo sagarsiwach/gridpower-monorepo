@@ -94,7 +94,7 @@ const CTASection = React.forwardRef<HTMLElement, CTASectionProps>(
           <h2
             className={cn(
               "font-heading text-h2 leading-tight tracking-[-0.015em] mb-4",
-              isDark ? "text-dark-12" : "text-heading",
+              isDark ? "text-dark-12" : "text-foreground",
             )}
           >
             {heading}

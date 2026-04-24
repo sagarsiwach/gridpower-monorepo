@@ -79,7 +79,7 @@ export default function BlogIndexPage() {
           <h1 className="font-heading text-display tracking-tight text-sand-12 leading-[1.05] mb-3">
             GridPower Field Notes.
           </h1>
-          <p className="text-lg text-sand-11">
+          <p className="font-body text-body-lg text-sand-11">
             Technical writing from the team. No fluff — specs, deployments, and
             open energy infrastructure.
           </p>
@@ -98,7 +98,8 @@ export default function BlogIndexPage() {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={[
-                  "rounded-full border px-4 py-1.5 text-sm transition-all",
+                  "rounded-pill border px-4 py-1.5 font-body text-body-sm transition-all",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                   activeCategory === cat
                     ? "border-sand-12 bg-sand-12 text-sand-1"
                     : "border-sand-6 bg-transparent text-sand-11 hover:border-sand-8",
@@ -110,7 +111,7 @@ export default function BlogIndexPage() {
           </div>
 
           {/* Empty state — no posts published yet */}
-          <div className="rounded-xl border border-sand-6 bg-sand-2 py-24">
+          <div className="rounded-card border border-sand-6 bg-sand-2 py-24">
             <EmptyState
               title="First post coming soon — Q2 2026"
               description={`Technical writing from the GridPower team on ${
@@ -146,7 +147,7 @@ export default function BlogIndexPage() {
                 {filtered.map((post) => (
                   <div
                     key={post.title}
-                    className="rounded-xl border border-sand-6 bg-sand-1 overflow-hidden opacity-60"
+                    className="rounded-card border border-sand-6 bg-sand-1 overflow-hidden opacity-60"
                   >
                     {/* Placeholder cover */}
                     <div className="relative h-36 bg-sand-3 flex items-center justify-center overflow-hidden">
@@ -160,10 +161,10 @@ export default function BlogIndexPage() {
                       </span>
                     </div>
                     <div className="px-6 py-5">
-                      <span className="inline-block rounded-full border border-sand-5 bg-sand-3 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.06em] text-grid-red mb-3">
+                      <span className="inline-block rounded-pill border border-sand-5 bg-sand-3 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.06em] text-grid-red mb-3">
                         {post.cat}
                       </span>
-                      <p className="font-heading text-sm font-semibold text-sand-12 leading-snug mb-4">
+                      <p className="font-heading text-body-sm font-semibold text-sand-12 leading-snug mb-4">
                         {post.title}
                       </p>
                       <p className="font-mono text-[10px] tracking-wide text-sand-8">
@@ -177,7 +178,7 @@ export default function BlogIndexPage() {
           )}
 
           {/* Newsletter CTA */}
-          <div className="mt-20 rounded-xl bg-sand-12 px-8 py-12 relative overflow-hidden text-center">
+          <div className="mt-20 rounded-card bg-sand-12 px-8 py-12 relative overflow-hidden text-center">
             <DotGrid
               className="absolute inset-0"
               color="rgba(58,57,55,0.55)"
@@ -190,7 +191,7 @@ export default function BlogIndexPage() {
               <h2 className="font-heading text-h1 font-semibold text-dark-12 tracking-tight mb-3">
                 Get notified when we publish.
               </h2>
-              <p className="text-base text-dark-11 mb-8 max-w-md mx-auto">
+              <p className="font-body text-body text-dark-11 mb-8 max-w-md mx-auto">
                 Energy storage, EV charging, and open infrastructure — straight
                 to your inbox. No spam.
               </p>

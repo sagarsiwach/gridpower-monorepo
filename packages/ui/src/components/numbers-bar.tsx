@@ -53,7 +53,7 @@ const NumbersBar = React.forwardRef<HTMLDivElement, NumbersBarProps>(
             <div
               className={cn(
                 "font-heading text-h2 leading-tight mb-2",
-                stat.accent ? "text-grid-red" : "text-heading",
+                stat.accent ? "text-grid-red" : "text-foreground",
               )}
             >
               {stat.value}

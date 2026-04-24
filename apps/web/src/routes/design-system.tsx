@@ -209,7 +209,7 @@ const TYPE_SCALE = [
     size: "72px / 80px",
     ls: "−2%",
     sample: "The Open Energy Platform",
-    className: "font-display font-semibold tracking-[-0.02em] text-heading",
+    className: "font-display font-semibold tracking-[-0.02em] text-foreground",
     style: { fontSize: 42, lineHeight: "1.1" },
   },
   {
@@ -219,7 +219,7 @@ const TYPE_SCALE = [
     size: "56px / 64px",
     ls: "−1.5%",
     sample: "Energy that works for you",
-    className: "font-display font-semibold text-heading",
+    className: "font-display font-semibold text-foreground",
     style: { fontSize: 36, lineHeight: "1.14" },
   },
   {
@@ -229,7 +229,7 @@ const TYPE_SCALE = [
     size: "40px / 48px",
     ls: "−1%",
     sample: "Charging infrastructure that pays for itself",
-    className: "font-display font-semibold text-heading",
+    className: "font-display font-semibold text-foreground",
     style: { fontSize: 28, lineHeight: "1.2" },
   },
   {
@@ -239,7 +239,7 @@ const TYPE_SCALE = [
     size: "24px / 32px",
     ls: "−0.5%",
     sample: "Three verticals. One platform.",
-    className: "font-display font-semibold text-heading",
+    className: "font-display font-semibold text-foreground",
     style: { fontSize: 22, lineHeight: "1.33" },
   },
   {
@@ -249,7 +249,7 @@ const TYPE_SCALE = [
     size: "18px / 28px",
     ls: "0",
     sample: "Home Charging",
-    className: "font-body font-semibold text-heading",
+    className: "font-body font-semibold text-foreground",
     style: { fontSize: 18, lineHeight: "1.55" },
   },
   {

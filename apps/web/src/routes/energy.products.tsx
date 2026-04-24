@@ -154,7 +154,7 @@ export default function EnergyProductsPage() {
             ]}
           />
           <SectionLabel>GRIDENERGY · PRODUCTS</SectionLabel>
-          <h1 className="font-display text-display font-semibold text-sand-12 tracking-tight leading-tight mb-4 max-w-2xl">
+          <h1 className="font-heading text-display font-semibold text-sand-12 tracking-tight leading-tight mb-4 max-w-2xl">
             Every scale. One ecosystem.
           </h1>
           <p className="font-body text-body-lg text-sand-11 max-w-xl leading-relaxed">
@@ -175,7 +175,8 @@ export default function EnergyProductsPage() {
               type="button"
               onClick={() => setActiveCategory(cat)}
               className={[
-                "px-4 py-1.5 rounded-full border font-body text-[13px] transition-colors duration-fast",
+                "px-4 py-1.5 rounded-pill border font-body text-body-sm transition-colors duration-fast",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                 activeCategory === cat
                   ? "border-sand-12 bg-sand-12 text-sand-1"
                   : "border-sand-6 bg-transparent text-sand-11 hover:bg-sand-3",

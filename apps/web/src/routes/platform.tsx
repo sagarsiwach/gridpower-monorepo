@@ -42,12 +42,12 @@ export default function PlatformPage() {
           {/* Copy */}
           <div>
             <SectionLabel variant="neutral">GRIDOS · THE PLATFORM</SectionLabel>
-            <h1 className="font-display text-[clamp(36px,5vw,68px)] font-semibold text-dark-12 tracking-tight leading-[1.05] mb-6">
+            <h1 className="font-heading text-display font-semibold text-dark-12 tracking-tight leading-[1.05] mb-6">
               One platform.
               <br />
               Every asset.
             </h1>
-            <p className="font-body text-[18px] text-dark-11 leading-[1.7] mb-10 max-w-[440px]">
+            <p className="font-body text-h4 text-dark-11 leading-[1.7] mb-10 max-w-md">
               GridOS connects your storage, chargers, and powertrain BMS. One
               API. Zero fragmentation.
             </p>
@@ -89,7 +89,7 @@ export default function PlatformPage() {
         <SectionDivider />
         <div className="mx-auto max-w-7xl px-10 pt-16">
           <SectionLabel>THREE PILLARS</SectionLabel>
-          <h2 className="font-display text-h2 font-semibold text-sand-12 tracking-tight mb-12 max-w-xl">
+          <h2 className="font-heading text-h2 font-semibold text-sand-12 tracking-tight mb-12 max-w-xl">
             No lock-in. By design.
           </h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -120,7 +120,7 @@ export default function PlatformPage() {
         <SectionDivider />
         <div className="mx-auto max-w-7xl px-10 pt-16">
           <SectionLabel>ARCHITECTURE</SectionLabel>
-          <h2 className="font-display text-h2 font-semibold text-sand-12 tracking-tight mb-12">
+          <h2 className="font-heading text-h2 font-semibold text-sand-12 tracking-tight mb-12">
             Hardware → GridOS → Apps
           </h2>
 
@@ -216,7 +216,7 @@ export default function PlatformPage() {
         <DotGrid color="rgba(58,57,55,0.6)" />
         <div className="relative mx-auto max-w-7xl px-10">
           <SectionLabel variant="neutral">BUILT FOR INDIA</SectionLabel>
-          <h2 className="font-display text-[clamp(24px,3vw,40px)] font-semibold text-dark-12 tracking-tight mb-12">
+          <h2 className="font-heading text-h2 font-semibold text-dark-12 tracking-tight mb-12">
             Open ecosystem. Indian infrastructure.
           </h2>
           <div className="grid grid-cols-1 gap-px bg-dark-6 rounded-card overflow-hidden md:grid-cols-3">
@@ -239,7 +239,7 @@ export default function PlatformPage() {
             ].map((p) => (
               <div key={p.label} className="bg-dark-2 p-8">
                 <SectionLabel variant="neutral">{p.label}</SectionLabel>
-                <div className="font-display text-[20px] font-semibold text-dark-12 mb-3">
+                <div className="font-heading text-body-lg font-semibold text-dark-12 mb-3">
                   {p.title}
                 </div>
                 <p className="font-body text-body-sm text-dark-11 leading-relaxed">
@@ -256,7 +256,7 @@ export default function PlatformPage() {
         <SectionDivider />
         <div className="mx-auto max-w-7xl px-10 pt-16">
           <SectionLabel>API PREVIEW</SectionLabel>
-          <h2 className="font-display text-h2 font-semibold text-sand-12 tracking-tight mb-4">
+          <h2 className="font-heading text-h2 font-semibold text-sand-12 tracking-tight mb-4">
             REST-first. MQTT-native.
           </h2>
           <p className="font-body text-body-lg text-sand-11 leading-relaxed mb-10 max-w-xl">
@@ -336,7 +336,7 @@ console.log(session.id); // session_456def
             {/* OEM integrator CTA */}
             <div className="bg-sand-1 border border-sand-6 rounded-card p-10">
               <SectionLabel>OEM INTEGRATORS</SectionLabel>
-              <h3 className="font-display text-h3 font-semibold text-sand-12 tracking-tight mb-4">
+              <h3 className="font-heading text-h3 font-semibold text-sand-12 tracking-tight mb-4">
                 Build on GridOS.
               </h3>
               <p className="font-body text-body-sm text-sand-11 leading-relaxed mb-8">
@@ -353,7 +353,7 @@ console.log(session.id); // session_456def
               <DotGrid color="rgba(58,57,55,0.5)" />
               <div className="relative">
                 <SectionLabel variant="neutral">FLEET OPERATORS</SectionLabel>
-                <h3 className="font-display text-h3 font-semibold text-dark-12 tracking-tight mb-4">
+                <h3 className="font-heading text-h3 font-semibold text-dark-12 tracking-tight mb-4">
                   Get early access to GridOS.
                 </h3>
                 <p className="font-body text-body-sm text-dark-11 leading-relaxed mb-8">

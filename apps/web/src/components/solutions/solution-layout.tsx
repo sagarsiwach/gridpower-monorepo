@@ -196,7 +196,7 @@ export function SolutionLayout({
 
             {/* Arrow */}
             <div className="hidden md:flex items-center justify-center pt-10">
-              <span className="font-mono text-xl text-grid-red">→</span>
+              <span className="font-mono text-body-lg text-grid-red">→</span>
             </div>
 
             {/* Solutions */}
@@ -262,7 +262,7 @@ export function SolutionLayout({
         <SectionDivider />
         <div className="mx-auto max-w-7xl px-6 pt-16">
           <SectionLabel>KEY SPECIFICATIONS</SectionLabel>
-          <h2 className="font-heading text-h2 text-heading mb-8">
+          <h2 className="font-heading text-h2 text-foreground mb-8">
             Full specs. No NDA.
           </h2>
           <div className="max-w-xl">

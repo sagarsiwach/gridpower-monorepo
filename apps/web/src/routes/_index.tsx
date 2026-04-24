@@ -197,8 +197,8 @@ function PlatformShowcase() {
         {/* Right: device mock */}
         <div className="relative h-96 flex items-center justify-center">
           {/* MacBook-like frame */}
-          <div className="absolute inset-x-10 bottom-0 bg-dark-3 border border-dark-6 rounded-xl p-3 shadow-2xl">
-            <div className="relative bg-dark-2 rounded-lg h-40 overflow-hidden flex items-center justify-center">
+          <div className="absolute inset-x-10 bottom-0 bg-dark-3 border border-dark-6 rounded-card p-3 shadow-xl">
+            <div className="relative bg-dark-2 rounded-card h-40 overflow-hidden flex items-center justify-center">
               <DotGrid color="var(--dark-5)" />
               <div className="relative font-mono text-label text-dark-9 uppercase text-center">
                 GridPower Console<br />Dashboard view
@@ -207,8 +207,8 @@ function PlatformShowcase() {
             <div className="h-1.5 bg-dark-4 rounded-b mx-[-4px] mt-1" />
           </div>
           {/* Phone overlay */}
-          <div className="absolute top-0 right-0 w-24 bg-dark-4 border border-dark-6 rounded-2xl p-1.5 shadow-2xl">
-            <div className="bg-dark-2 rounded-xl h-44 flex items-center justify-center overflow-hidden">
+          <div className="absolute top-0 right-0 w-24 bg-dark-4 border border-dark-6 rounded-modal p-1.5 shadow-xl">
+            <div className="bg-dark-2 rounded-card h-44 flex items-center justify-center overflow-hidden">
               <div className="font-mono text-[9px] text-grid-red uppercase tracking-widest text-center">
                 GridCharge<br />App
               </div>

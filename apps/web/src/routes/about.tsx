@@ -86,7 +86,7 @@ export default function AboutPage() {
           <h1 className="font-heading text-display tracking-tight text-sand-12 leading-[1.05] mb-6 max-w-3xl">
             Building India's open energy infrastructure.
           </h1>
-          <p className="text-lg text-sand-11 leading-relaxed max-w-2xl">
+          <p className="font-body text-body-lg text-sand-11 leading-relaxed max-w-2xl">
             GridPower is the trading name for DeltaEV Mobility Private Limited —
             an Indian energy technology company designing, manufacturing, and
             deploying the three layers of the clean energy transition.
@@ -100,28 +100,28 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 pt-16 grid grid-cols-1 lg:grid-cols-2 gap-20">
           <div>
             <SectionLabel className="mb-4">OUR STORY</SectionLabel>
-            <p className="text-base text-sand-11 leading-[1.8] mb-5">
+            <p className="font-body text-body text-sand-11 leading-[1.8] mb-5">
               We started in EV powertrains — supplying motors, controllers, and
               battery packs to two-wheeler and three-wheeler OEMs across India.
               That work taught us something important: the hardware is the easy
               part.
             </p>
-            <p className="text-base text-sand-11 leading-[1.8] mb-5">
+            <p className="font-body text-body text-sand-11 leading-[1.8] mb-5">
               The hard part is the software layer that connects everything —
               that monitors your storage, manages your chargers, and tells you
               what your fleet is doing at 2am. That layer didn't exist, so we
               built it.
             </p>
-            <p className="text-base text-sand-11 leading-[1.8]">
+            <p className="font-body text-body text-sand-11 leading-[1.8]">
               GridPower is the result: a hardware + software platform for the
               full energy stack. Storage, charging, and powertrain — on a single
               open platform, with full specs published and zero lock-in.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-px bg-sand-6 rounded-xl overflow-hidden self-start">
+          <div className="grid grid-cols-2 gap-px bg-sand-6 rounded-card overflow-hidden self-start">
             {facts.map(([title, label]) => (
               <div key={title} className="bg-sand-2 px-5 py-6">
-                <p className="font-heading text-base font-semibold text-sand-12 mb-1">
+                <p className="font-heading text-body font-semibold text-sand-12 mb-1">
                   {title}
                 </p>
                 <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-sand-9">
@@ -145,10 +145,10 @@ export default function AboutPage() {
             {team.map((member) => (
               <div
                 key={member.role}
-                className="bg-sand-1 border border-sand-6 rounded-xl p-6 flex gap-4 items-start"
+                className="bg-sand-1 border border-sand-6 rounded-card p-6 flex gap-4 items-start"
               >
                 <div className="w-11 h-11 rounded-full bg-sand-3 border border-sand-6 shrink-0 flex items-center justify-center">
-                  <span className="font-heading text-sm font-semibold text-sand-9">
+                  <span className="font-heading text-body-sm font-semibold text-sand-9">
                     {member.name[0]}
                   </span>
                 </div>
@@ -156,10 +156,10 @@ export default function AboutPage() {
                   <p className="font-heading text-[15px] font-semibold text-sand-12 mb-1">
                     {member.name}
                   </p>
-                  <p className="text-sm font-medium text-grid-red mb-1">
+                  <p className="font-body text-body-sm font-medium text-grid-red mb-1">
                     {member.role}
                   </p>
-                  <p className="text-xs text-sand-9">{member.note}</p>
+                  <p className="font-body text-body-sm text-sand-9">{member.note}</p>
                 </div>
               </div>
             ))}
@@ -175,7 +175,7 @@ export default function AboutPage() {
         <SectionDivider />
         <div className="mx-auto max-w-7xl px-6 pt-16">
           <SectionLabel className="mb-6">TIMELINE</SectionLabel>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-px bg-sand-6 rounded-xl overflow-hidden">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-px bg-sand-6 rounded-card overflow-hidden">
             {timeline.map((item, i) => (
               <div
                 key={item.year}
@@ -186,14 +186,14 @@ export default function AboutPage() {
                 }
               >
                 <p
-                  className={`font-heading text-xl font-semibold mb-2 ${
+                  className={`font-heading text-body-lg font-semibold mb-2 ${
                     i === timeline.length - 1 ? "text-grid-red" : "text-sand-12"
                   }`}
                 >
                   {item.year}
                 </p>
                 <p
-                  className={`text-sm leading-snug ${
+                  className={`font-body text-body-sm leading-snug ${
                     i === timeline.length - 1 ? "text-dark-11" : "text-sand-11"
                   }`}
                 >
@@ -219,7 +219,7 @@ export default function AboutPage() {
           <h2 className="font-heading text-h1 font-semibold text-dark-12 tracking-tight mb-4">
             Made in Dharwad, Karnataka.
           </h2>
-          <p className="text-base text-dark-11 leading-relaxed mb-8">
+          <p className="font-body text-body text-dark-11 leading-relaxed mb-8">
             All GridPower hardware is assembled at our facility in Dharwad,
             Karnataka. First commercial deployments at GIDC Verna, Goa.
           </p>

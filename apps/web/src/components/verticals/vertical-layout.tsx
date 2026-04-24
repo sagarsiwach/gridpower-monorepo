@@ -114,7 +114,7 @@ function VerticalHero({
             className="h-8 mb-8 object-contain object-left"
           />
           <SectionLabel>{label}</SectionLabel>
-          <h1 className="font-display text-display tracking-tight leading-tight text-sand-12 mb-6">
+          <h1 className="font-heading text-display tracking-tight leading-tight text-sand-12 mb-6">
             {headline}
           </h1>
           <p className="font-body text-body-lg text-sand-11 leading-relaxed max-w-lg mb-10">
