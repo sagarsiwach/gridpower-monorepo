@@ -1,0 +1,37 @@
+@import "@gridpower/tokens/all.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Baseline document defaults */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--text-body);
+    background: var(--bg-page);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--text-heading);
+  }
+
+  /* Focus ring using GridRed */
+  :focus-visible {
+    outline: 2px solid var(--grid-red);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--grid-red);
+    color: #fff;
+  }
+}

@@ -1,0 +1,373 @@
+/*
+ * GridPower Design System — CSS Custom Properties
+ * Version: 1.0 | 2026-04-25
+ * Source: GridPower-MASTER-BRIEF-2026-04-24.md
+ *
+ * Fonts are self-hosted in this package (see ./fonts.css and ../fonts/).
+ * Clash Grotesk for display/heading, Inter for body, Geist Mono for mono.
+ */
+
+:root {
+  /* ─── BRAND COLOR ─────────────────────────────────────────────── */
+  --grid-red:           #FA0016;
+  --grid-red-hover:     #E00014;
+  --grid-red-active:    #C80012;
+  --grid-red-light-bg:  #FFF0F0;
+  --grid-red-text:      #FA0016;
+
+  /* ─── SAND SCALE (Light mode — Radix Sand) ────────────────────── */
+  --sand-1:  #fdfdfc; /* Page background */
+  --sand-2:  #f9f9f8; /* Subtle / card background */
+  --sand-3:  #f1f0ef; /* UI element bg, input bg */
+  --sand-4:  #e9e8e6; /* Hovered element */
+  --sand-5:  #e2e1de; /* Active element */
+  --sand-6:  #dad9d6; /* Borders, grid lines, dividers */
+  --sand-7:  #cfceca; /* Stronger borders, focus rings */
+  --sand-8:  #bcbbb5; /* Placeholder text, disabled */
+  --sand-9:  #8d8d86; /* Muted text, secondary labels */
+  --sand-10: #82827c; /* Secondary text */
+  --sand-11: #63635e; /* Body text */
+  --sand-12: #21201c; /* Headlines, high contrast */
+
+  /* ─── DARK SCALE (Dark mode — for Console + App) ─────────────── */
+  --dark-1:  #111110; /* Darkest bg */
+  --dark-2:  #191918; /* Card bg on dark */
+  --dark-3:  #222221; /* Elevated element */
+  --dark-4:  #2a2a28; /* Hover state */
+  --dark-5:  #31312e; /* Active state */
+  --dark-6:  #3b3a37; /* Borders, grid lines, dividers */
+  --dark-7:  #494844; /* Stronger borders */
+  --dark-8:  #62615b; /* Placeholder on dark */
+  --dark-9:  #8d8d86; /* Muted */
+  --dark-10: #a1a09a; /* Secondary */
+  --dark-11: #c5c4bf; /* Body text */
+  --dark-12: #eeeeec; /* Headlines */
+
+  /* ─── SEMANTIC COLORS ────────────────────────────────────────── */
+  --color-success:        #30A46C;
+  --color-success-bg:     #EFFAF3;
+  --color-warning:        #F5A623;
+  --color-warning-bg:     #FFF8EB;
+  --color-error:          #E5484D;
+  --color-error-bg:       #FFF1F1;
+  --color-info:           #3B82F6;
+  --color-info-bg:        #EFF5FF;
+
+  /* ─── SEMANTIC ALIASES (light mode) ─────────────────────────── */
+  --bg-page:         var(--sand-1);
+  --bg-subtle:       var(--sand-2);
+  --bg-element:      var(--sand-3);
+  --bg-hover:        var(--sand-4);
+  --bg-active:       var(--sand-5);
+  --border:          var(--sand-6);
+  --border-strong:   var(--sand-7);
+  --text-placeholder: var(--sand-8);
+  --text-muted:      var(--sand-9);
+  --text-secondary:  var(--sand-10);
+  --text-body:       var(--sand-11);
+  --text-heading:    var(--sand-12);
+
+  /* ─── FONTS ──────────────────────────────────────────────────── */
+  --font-display:   'Clash Grotesk', system-ui, -apple-system, sans-serif;
+  --font-heading:   'Clash Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans:      'Inter', system-ui, -apple-system, sans-serif;
+  --font-body:      var(--font-sans);
+  --font-mono:      'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ─── TYPE SCALE (Desktop, 1440px+) ─────────────────────────── */
+  --text-display-size:   72px;
+  --text-display-lh:     80px;
+  --text-display-ls:     -0.02em;
+  --text-display-weight: 600;
+  --text-display-font:   var(--font-display);
+
+  --text-h1-size:   56px;
+  --text-h1-lh:     64px;
+  --text-h1-ls:     -0.015em;
+  --text-h1-weight: 600;
+  --text-h1-font:   var(--font-heading);
+
+  --text-h2-size:   40px;
+  --text-h2-lh:     48px;
+  --text-h2-ls:     -0.01em;
+  --text-h2-weight: 600;
+  --text-h2-font:   var(--font-heading);
+
+  --text-h3-size:   24px;
+  --text-h3-lh:     32px;
+  --text-h3-ls:     -0.005em;
+  --text-h3-weight: 600;
+  --text-h3-font:   var(--font-heading);
+
+  --text-h4-size:   18px;
+  --text-h4-lh:     28px;
+  --text-h4-ls:     0;
+  --text-h4-weight: 600;
+  --text-h4-font:   var(--font-body);
+
+  --text-body-lg-size:   20px;
+  --text-body-lg-lh:     32px;
+  --text-body-lg-weight: 400;
+  --text-body-lg-font:   var(--font-body);
+
+  --text-body-size:   16px;
+  --text-body-lh:     26px;
+  --text-body-weight: 400;
+  --text-body-font:   var(--font-body);
+
+  --text-body-sm-size:   14px;
+  --text-body-sm-lh:     22px;
+  --text-body-sm-weight: 400;
+  --text-body-sm-font:   var(--font-body);
+
+  --text-label-size:   12px;
+  --text-label-lh:     16px;
+  --text-label-ls:     0.08em;
+  --text-label-weight: 500;
+  --text-label-font:   var(--font-mono);
+
+  --text-code-size:   14px;
+  --text-code-lh:     22px;
+  --text-code-weight: 400;
+  --text-code-font:   var(--font-mono);
+
+  /* ─── TYPE SCALE (Mobile, 390px) ────────────────────────────── */
+  --text-display-mobile-size: 36px;
+  --text-display-mobile-lh:   42px;
+  --text-h1-mobile-size:      28px;
+  --text-h1-mobile-lh:        34px;
+  --text-h2-mobile-size:      24px;
+  --text-h2-mobile-lh:        30px;
+  --text-h3-mobile-size:      20px;
+  --text-h3-mobile-lh:        26px;
+  --text-body-lg-mobile-size: 17px;
+  --text-body-lg-mobile-lh:   26px;
+  --text-body-mobile-size:    15px;
+  --text-body-mobile-lh:      24px;
+  --text-body-sm-mobile-size: 13px;
+  --text-body-sm-mobile-lh:   20px;
+  --text-label-mobile-size:   11px;
+  --text-label-mobile-lh:     14px;
+
+  /* ─── SPACING ────────────────────────────────────────────────── */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-30:  120px;
+  --space-40:  160px;
+
+  /* Semantic spacing */
+  --section-pad-y:    96px;
+  --card-pad:         24px;
+  --card-pad-lg:      32px;
+  --grid-gap:         24px;
+  --stack-tight:      8px;
+  --stack-normal:     16px;
+  --stack-loose:      24px;
+  --btn-pad-lg:       16px 32px;
+  --btn-pad-md:       12px 24px;
+  --btn-pad-sm:       8px 16px;
+  --input-pad:        12px 16px;
+  --icon-text-gap:    8px;
+
+  /* ─── BORDER RADIUS ─────────────────────────────────────────── */
+  --radius-tooltip:  6px;
+  --radius-btn:      8px;
+  --radius-input:    8px;
+  --radius-card:     12px;
+  --radius-modal:    16px;
+  --radius-pill:     999px;
+  --radius-img:      8px;
+
+  /* ─── SHADOWS ────────────────────────────────────────────────── */
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg:  0 8px 24px rgba(0,0,0,0.12);
+  --shadow-xl:  0 16px 48px rgba(0,0,0,0.16);
+
+  /* ─── GRID MOTIF ─────────────────────────────────────────────── */
+  /* Apply as background to page sections */
+  --grid-dot-color:   var(--sand-6);
+  --grid-dot-size:    1px;
+  --grid-dot-spacing: 16px;
+  --grid-bg: radial-gradient(circle, var(--sand-6) 1px, transparent 1px);
+  --grid-bg-size: 16px 16px;
+
+  /* ─── TRANSITIONS ────────────────────────────────────────────── */
+  --transition-fast:   150ms ease-out;
+  --transition-normal: 200ms ease-out;
+  --transition-slow:   300ms ease-out;
+}
+
+/* ─── DARK MODE SEMANTIC ALIASES ─────────────────────────────────── */
+[data-theme="dark"] {
+  --bg-page:          var(--dark-1);
+  --bg-subtle:        var(--dark-2);
+  --bg-element:       var(--dark-3);
+  --bg-hover:         var(--dark-4);
+  --bg-active:        var(--dark-5);
+  --border:           var(--dark-6);
+  --border-strong:    var(--dark-7);
+  --text-placeholder: var(--dark-8);
+  --text-muted:       var(--dark-9);
+  --text-secondary:   var(--dark-10);
+  --text-body:        var(--dark-11);
+  --text-heading:     var(--dark-12);
+  --grid-dot-color:   var(--dark-6);
+}
+
+/* ─── UTILITY CLASSES ────────────────────────────────────────────── */
+
+/* Typography */
+.gp-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display-size);
+  line-height: var(--text-display-lh);
+  letter-spacing: var(--text-display-ls);
+  font-weight: var(--text-display-weight);
+  color: var(--text-heading);
+}
+.gp-h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h1-size);
+  line-height: var(--text-h1-lh);
+  letter-spacing: var(--text-h1-ls);
+  font-weight: var(--text-h1-weight);
+  color: var(--text-heading);
+}
+.gp-h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2-size);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-ls);
+  font-weight: var(--text-h2-weight);
+  color: var(--text-heading);
+}
+.gp-h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3-size);
+  line-height: var(--text-h3-lh);
+  letter-spacing: var(--text-h3-ls);
+  font-weight: var(--text-h3-weight);
+  color: var(--text-heading);
+}
+.gp-h4 {
+  font-family: var(--font-body);
+  font-size: var(--text-h4-size);
+  line-height: var(--text-h4-lh);
+  font-weight: var(--text-h4-weight);
+  color: var(--text-heading);
+}
+.gp-body-lg {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg-size);
+  line-height: var(--text-body-lg-lh);
+  font-weight: var(--text-body-lg-weight);
+  color: var(--text-body);
+}
+.gp-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-lh);
+  font-weight: var(--text-body-weight);
+  color: var(--text-body);
+}
+.gp-body-sm {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-lh);
+  font-weight: var(--text-body-sm-weight);
+  color: var(--text-body);
+}
+.gp-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label-size);
+  line-height: var(--text-label-lh);
+  letter-spacing: var(--text-label-ls);
+  font-weight: var(--text-label-weight);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.gp-label-red {
+  font-family: var(--font-mono);
+  font-size: var(--text-label-size);
+  line-height: var(--text-label-lh);
+  letter-spacing: var(--text-label-ls);
+  font-weight: var(--text-label-weight);
+  text-transform: uppercase;
+  color: var(--grid-red);
+}
+.gp-code {
+  font-family: var(--font-mono);
+  font-size: var(--text-code-size);
+  line-height: var(--text-code-lh);
+  font-weight: var(--text-code-weight);
+  color: var(--text-body);
+}
+
+/* Grid background pattern */
+.gp-grid-bg {
+  background-image: var(--grid-bg);
+  background-size: var(--grid-bg-size);
+}
+
+/* Cards */
+.gp-card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--card-pad);
+}
+
+/* Buttons */
+.gp-btn-primary {
+  background: var(--grid-red);
+  color: #fff;
+  border: 1px solid var(--grid-red);
+  border-radius: var(--radius-btn);
+  padding: var(--btn-pad-md);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+.gp-btn-primary:hover { background: var(--grid-red-hover); border-color: var(--grid-red-hover); }
+.gp-btn-primary:active { background: var(--grid-red-active); border-color: var(--grid-red-active); }
+
+.gp-btn-ghost {
+  background: transparent;
+  color: var(--text-heading);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-btn);
+  padding: var(--btn-pad-md);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.gp-btn-ghost:hover { background: var(--bg-hover); }
+.gp-btn-ghost:active { background: var(--bg-active); }
+
+.gp-btn-secondary {
+  background: var(--bg-element);
+  color: var(--text-heading);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-btn);
+  padding: var(--btn-pad-md);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.gp-btn-secondary:hover { background: var(--bg-hover); }

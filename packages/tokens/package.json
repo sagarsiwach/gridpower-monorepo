@@ -1,0 +1,23 @@
+{
+  "name": "@gridpower/tokens",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./src/tokens.css",
+    "./fonts.css": "./src/fonts.css",
+    "./all.css": "./src/all.css",
+    "./tailwind-preset": "./tailwind-preset.cjs",
+    "./fonts/*": "./fonts/*"
+  },
+  "files": ["src", "fonts", "tailwind-preset.cjs"],
+  "scripts": {
+    "lint": "biome check src",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  }
+}

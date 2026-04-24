@@ -1,15 +1,24 @@
 {
   "name": "gridpower-monorepo",
+  "version": "0.0.1",
   "private": true,
-  "workspaces": ["website", "cms"],
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
   "scripts": {
-    "dev": "bun run --filter '*' dev",
-    "dev:website": "bun run --filter website dev",
-    "dev:cms": "bun run --filter cms dev",
-    "build": "bun run --filter '*' build",
-    "lint": "bun run --filter '*' lint"
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "biome format --write .",
+    "check": "biome check --write ."
   },
   "devDependencies": {
-    "shadcn": "^3.7.0"
+    "@biomejs/biome": "^1.9.4",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
   }
 }
