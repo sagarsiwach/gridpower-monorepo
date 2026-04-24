@@ -6,5 +6,5 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "tailwind.config.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tailwind.config.ts", "tailwind-preset.d.ts"]
 }
