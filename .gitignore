@@ -19,3 +19,9 @@ coverage/
 
 # tsc incremental build info
 *.tsbuildinfo
+
+# wrangler / cloudflare
+.wrangler/
+**/.wrangler/
+worker-configuration.d.ts
+**/worker-configuration.d.ts
