@@ -7,7 +7,7 @@ export default [
   // Public routes (NOT wrapped in shell)
   route("login", "routes/login.tsx"),
 
-  // Protected routes — wrapped in ConsoleShell layout
+  // Protected routes, wrapped in ConsoleShell layout
   layout("routes/_shell.tsx", [
     route("dashboard", "routes/dashboard.tsx"),
     // Stations: index list + detail by ID
@@ -18,6 +18,6 @@ export default [
     route("settings", "routes/settings.tsx"),
   ]),
 
-  // 404 catch-all — must be last
+  // 404 catch-all, must be last
   route("*", "routes/$.tsx"),
 ] satisfies RouteConfig;

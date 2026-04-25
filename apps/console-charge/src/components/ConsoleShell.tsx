@@ -137,7 +137,7 @@ export function ConsoleShell() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      {/* Desktop sidebar — hidden below lg */}
+      {/* Desktop sidebar, hidden below lg */}
       <div className="hidden lg:flex">
         <Sidebar
           appName="GridCharge"

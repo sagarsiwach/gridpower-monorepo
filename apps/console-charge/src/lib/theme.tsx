@@ -41,7 +41,7 @@ export function ThemeProvider({
         return;
       }
     } catch {
-      // ignore — localStorage may be unavailable
+      // ignore: localStorage may be unavailable
     }
     applyTheme(defaultTheme);
   }, [defaultTheme]);

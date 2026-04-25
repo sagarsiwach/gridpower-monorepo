@@ -1,5 +1,5 @@
 /**
- * StationDetailPanel — inline side panel for station detail.
+ * StationDetailPanel: inline side panel for station detail.
  * Used by both /stations (index) and /stations/:stationId.
  *
  * Shows:
@@ -52,7 +52,7 @@ const STATUS_LABEL: Record<string, string> = {
   charging: "Charging",
 };
 
-// ─── Port status colors (semantic tokens only — no raw hex) ───────────────
+// ─── Port status colors (semantic tokens only, no raw hex) ───────────────
 
 const PORT_COLORS: Record<PortStatus, string> = {
   available: "border-success bg-success/10 dark:bg-success/20",
@@ -263,9 +263,8 @@ export function StationDetailPanel({
             {station.activeSessions.map((session) => (
               <li
                 key={session.id}
-                tabIndex={0}
                 aria-label={`Session for ${session.userName}, port ${session.portNumber} ${session.portType}, started ${session.startTime}, revenue ${session.revenue}, energy ${session.energyKwh} kilowatt hours`}
-                className="flex items-center gap-2 rounded-[6px] border border-border bg-muted px-3 py-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="flex items-center gap-2 rounded-[6px] border border-border bg-muted px-3 py-2"
               >
                 {/* User avatar */}
                 <div

@@ -1,5 +1,5 @@
 /**
- * CON.3 — Station Detail (full-page view)
+ * CON.3: Station Detail (full-page view)
  * Route: /stations/:stationId
  *
  * Renders a full-page detail view for a single station.
@@ -59,7 +59,7 @@ export default function StationDetail() {
         </span>
       </nav>
 
-      {/* Detail panel — wider layout */}
+      {/* Detail panel, wider layout */}
       <div className="w-full max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
         <StationDetailPanel station={station} />
       </div>

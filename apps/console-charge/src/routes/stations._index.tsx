@@ -1,5 +1,5 @@
 /**
- * CON.3 — Stations list
+ * CON.3: Stations list
  * Route: /stations (index)
  *
  * Features:

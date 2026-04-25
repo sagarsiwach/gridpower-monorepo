@@ -1,5 +1,5 @@
 /**
- * CON.4 — Analytics view
+ * CON.4: Analytics view
  *
  * KPI row · revenue trend (line) · sessions heatmap · energy mix donut
  * top-10 stations bar · station performance table · customer insights panel
@@ -22,6 +22,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   cn,
+  type BarChartSeries,
+  type LineChartSeries,
 } from "@gridpower/ui";
 import { Download, ChevronDown, TrendingUp, TrendingDown } from "lucide-react";
 import {
@@ -429,7 +431,7 @@ function EnergyMixDonut({ period }: EnergyDonutProps) {
           </svg>
         </div>
 
-        {/* Legend — color, label, and pattern marker so color isn't sole signal */}
+        {/* Legend: color, label, and pattern marker so color isn't sole signal */}
         <ul className="flex flex-col gap-3" aria-label="Energy mix legend">
           {items.map((item, idx) => (
             <li key={item.label} className="flex items-center gap-2">
@@ -813,29 +815,62 @@ function KpiCard({
 
 // ─── Analytics page ───────────────────────────────────────────────────────────
 
+// Hoisted: stable references prevent the memoized chart components from
+// re-rendering when only unrelated parent state (e.g. notice toast) changes.
+const REVENUE_LINE_SERIES: LineChartSeries[] = [
+  {
+    dataKey: "revenue",
+    name: "Revenue (INR)",
+    color: "var(--grid-red)",
+    strokeWidth: 2,
+  },
+];
+
+const TOP_STATIONS_BAR_SERIES: BarChartSeries[] = [
+  {
+    dataKey: "revenue",
+    name: "Revenue (INR)",
+    color: "var(--grid-red)",
+    dimOpacity: 0.5,
+    highlightLast: false,
+  },
+];
+
+const PERIOD_BAR_SCALE: Record<Period, number> = {
+  Today: 0.033,
+  "7D": 0.23,
+  "30D": 1,
+  "90D": 2.95,
+};
+
 export default function Analytics() {
   const [period, setPeriod] = React.useState<Period>("30D");
   const [notice, setNotice] = React.useState<string | null>(null);
   const { loading, error } = useAnalyticsLoad(period);
 
   const kpi = KPI_BY_PERIOD[period];
-  const revenueSeries = getRevenueSeries(period);
-  const topStations = getTopStations(period);
 
-  // Build data for @gridpower/ui LineChart
-  const lineData = revenueSeries.map((pt) => ({
-    label: pt.label,
-    revenue: pt.revenue,
-  }));
+  // Memoize derived chart data so chart prop identity is stable across
+  // unrelated re-renders (e.g. when `notice` toggles).
+  const lineData = React.useMemo(
+    () =>
+      getRevenueSeries(period).map((pt) => ({
+        label: pt.label,
+        revenue: pt.revenue,
+      })),
+    [period],
+  );
 
-  // Build data for @gridpower/ui BarChart (top 10 stations)
-  const barData = topStations.map((s) => ({
-    label: s.id,
-    revenue: Math.round(
-      (s.revenue *
-        { Today: 0.033, "7D": 0.23, "30D": 1, "90D": 2.95 }[period]) as number,
-    ),
-  }));
+  const barData = React.useMemo(
+    () =>
+      getTopStations(period).map((s) => ({
+        label: s.id,
+        revenue: Math.round(s.revenue * PERIOD_BAR_SCALE[period]),
+      })),
+    [period],
+  );
+
+  const dismissNotice = React.useCallback(() => setNotice(null), []);
 
   const hasRevenue = lineData.length > 0;
   const hasStations = barData.length > 0;
@@ -858,7 +893,7 @@ export default function Analytics() {
       </div>
 
       {notice && (
-        <InlineNotice message={notice} onDismiss={() => setNotice(null)} />
+        <InlineNotice message={notice} onDismiss={dismissNotice} />
       )}
 
       {/* KPI row */}
@@ -936,14 +971,7 @@ export default function Analytics() {
           >
             <LineChart
               data={lineData}
-              series={[
-                {
-                  dataKey: "revenue",
-                  name: "Revenue (INR)",
-                  color: "var(--grid-red)",
-                  strokeWidth: 2,
-                },
-              ]}
+              series={REVENUE_LINE_SERIES}
               xAxisKey="label"
               yUnit="INR"
               title="Revenue trend"
@@ -1013,15 +1041,7 @@ export default function Analytics() {
           >
             <BarChart
               data={barData}
-              series={[
-                {
-                  dataKey: "revenue",
-                  name: "Revenue (INR)",
-                  color: "var(--grid-red)",
-                  dimOpacity: 0.5,
-                  highlightLast: false,
-                },
-              ]}
+              series={TOP_STATIONS_BAR_SERIES}
               xAxisKey="label"
               yUnit="INR"
               title="Top 10 stations"

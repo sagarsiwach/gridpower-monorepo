@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   BarChart,
   HeatmapChart,
@@ -10,6 +9,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  type BarChartSeries,
+  type LineChartSeries,
 } from "@gridpower/ui";
 import { useTheme } from "~/lib/theme";
 import {
@@ -266,23 +267,26 @@ function RecentSessionsPanel({
 
 // ─── Top stations bar chart ────────────────────────────────────────────────────
 
-function TopStationsPanel({ isDark }: { isDark: boolean }) {
-  const top10 = STATIONS.slice(0, 10).map((s) => ({
-    name: s.name.replace("GridPower-", ""),
-    revenue: s.revenueToday,
-  }));
+// Hoisted out of render: STATIONS is a static mock, so derive once.
+const TOP10_STATIONS_DATA = STATIONS.slice(0, 10).map((s) => ({
+  name: s.name.replace("GridPower-", ""),
+  revenue: s.revenueToday,
+}));
 
+const TOP10_SERIES: BarChartSeries[] = [
+  {
+    dataKey: "revenue",
+    name: "Revenue today (₹)",
+    color: "var(--grid-red)",
+    highlightLast: false,
+  },
+];
+
+function TopStationsPanel({ isDark }: { isDark: boolean }) {
   return (
     <BarChart
-      data={top10}
-      series={[
-        {
-          dataKey: "revenue",
-          name: "Revenue today (₹)",
-          color: "var(--grid-red)",
-          highlightLast: false,
-        },
-      ]}
+      data={TOP10_STATIONS_DATA}
+      series={TOP10_SERIES}
       xAxisKey="name"
       yUnit="₹"
       title="Revenue by station"
@@ -295,15 +299,24 @@ function TopStationsPanel({ isDark }: { isDark: boolean }) {
 
 // ─── Dashboard root ───────────────────────────────────────────────────────────
 
+// Hoisted out of render: REVENUE_SERIES is a static mock.
+const REVENUE_CHART_DATA = REVENUE_SERIES.map((d) => ({
+  date: d.date,
+  revenue: d.revenue,
+}));
+
+const REVENUE_SERIES_CONFIG: LineChartSeries[] = [
+  {
+    dataKey: "revenue",
+    name: "Revenue (₹)",
+    color: "var(--grid-red)",
+    strokeWidth: 1.5,
+  },
+];
+
 export default function Dashboard() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
-
-  // Prepare revenue data for LineChart (map key to what the chart expects)
-  const revenueChartData = REVENUE_SERIES.map((d) => ({
-    date: d.date,
-    revenue: d.revenue,
-  }));
 
   return (
     <div className="flex flex-col gap-4 lg:gap-5">
@@ -364,15 +377,8 @@ export default function Dashboard() {
 
       {/* ── Row 2: Revenue chart ────────────────────────────────────────────── */}
       <LineChart
-        data={revenueChartData}
-        series={[
-          {
-            dataKey: "revenue",
-            name: "Revenue (₹)",
-            color: "var(--grid-red)",
-            strokeWidth: 1.5,
-          },
-        ]}
+        data={REVENUE_CHART_DATA}
+        series={REVENUE_SERIES_CONFIG}
         xAxisKey="date"
         yUnit="₹"
         title="Revenue, last 30 days"
