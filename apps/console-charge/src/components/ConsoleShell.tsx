@@ -1,13 +1,21 @@
 import * as React from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import {
+  AlertTriangle,
   BarChart3,
   Car,
+  CircuitBoard,
+  HelpCircle,
+  History,
   LayoutGrid,
   Menu,
   Moon,
+  Receipt,
   Settings as SettingsIcon,
   Sun,
+  Tags,
+  Users,
+  Wrench,
   X,
   Zap,
 } from "lucide-react";
@@ -15,8 +23,7 @@ import { DotGrid, Sidebar, Topbar, type SidebarSection } from "@gridpower/ui";
 import { useAuth } from "~/lib/auth";
 import { useTheme } from "~/lib/theme";
 
-// Path B nav items (5, no Energy).
-// Order: Dashboard, Stations, Analytics, Fleet, Settings.
+// Sidebar nav grouped into Operations, Money, System.
 
 interface NavDef {
   key: string;
@@ -24,15 +31,35 @@ interface NavDef {
   href: string;
   icon: React.ReactNode;
   title: string;
+  group: "operations" | "money" | "system";
 }
 
 const NAV: NavDef[] = [
-  { key: "dashboard", label: "Dashboard", href: "/dashboard", icon: <LayoutGrid size={15} />, title: "Dashboard" },
-  { key: "stations",  label: "Stations",  href: "/stations",  icon: <Zap size={15} />,        title: "Stations" },
-  { key: "analytics", label: "Analytics", href: "/analytics", icon: <BarChart3 size={15} />,  title: "Analytics" },
-  { key: "fleet",     label: "Fleet",     href: "/fleet",     icon: <Car size={15} />,        title: "Fleet" },
-  { key: "settings",  label: "Settings",  href: "/settings",  icon: <SettingsIcon size={15} />, title: "Settings" },
+  // Operations
+  { key: "dashboard",   label: "Dashboard",   href: "/dashboard",   icon: <LayoutGrid size={15} />,    title: "Dashboard",   group: "operations" },
+  { key: "stations",    label: "Stations",    href: "/stations",    icon: <Zap size={15} />,           title: "Stations",    group: "operations" },
+  { key: "sessions",    label: "Sessions",    href: "/sessions",    icon: <History size={15} />,       title: "Sessions",    group: "operations" },
+  { key: "drivers",     label: "Drivers",     href: "/drivers",     icon: <Users size={15} />,         title: "Drivers",     group: "operations" },
+  { key: "alerts",      label: "Alerts",      href: "/alerts",      icon: <AlertTriangle size={15} />, title: "Alerts",      group: "operations" },
+  { key: "maintenance", label: "Maintenance", href: "/maintenance", icon: <Wrench size={15} />,        title: "Maintenance", group: "operations" },
+
+  // Money
+  { key: "tariffs",  label: "Tariffs",  href: "/tariffs",  icon: <Tags size={15} />,    title: "Tariffs",  group: "money" },
+  { key: "payments", label: "Payments", href: "/payments", icon: <Receipt size={15} />, title: "Payments", group: "money" },
+
+  // System
+  { key: "analytics", label: "Analytics", href: "/analytics", icon: <BarChart3 size={15} />,    title: "Analytics", group: "system" },
+  { key: "fleet",     label: "Fleet",     href: "/fleet",     icon: <Car size={15} />,          title: "Fleet",     group: "system" },
+  { key: "firmware",  label: "Firmware",  href: "/firmware",  icon: <CircuitBoard size={15} />, title: "Firmware",  group: "system" },
+  { key: "settings",  label: "Settings",  href: "/settings",  icon: <SettingsIcon size={15} />, title: "Settings",  group: "system" },
+  { key: "help",      label: "Help",      href: "/help",      icon: <HelpCircle size={15} />,   title: "Help",      group: "system" },
 ];
+
+const NAV_TITLES = {
+  operations: "Operations",
+  money: "Money",
+  system: "System",
+} as const;
 
 const NAV_BY_KEY: Record<string, NavDef> = NAV.reduce(
   (acc, item) => {
@@ -106,17 +133,18 @@ export function ConsoleShell() {
   }, [drawerOpen]);
 
   const sections: SidebarSection[] = React.useMemo(
-    () => [
-      {
-        label: "Navigation",
-        items: NAV.map((item) => ({
-          key: item.key,
-          label: item.label,
-          icon: item.icon,
-          href: item.href,
-        })),
-      },
-    ],
+    () =>
+      (Object.keys(NAV_TITLES) as Array<keyof typeof NAV_TITLES>).map(
+        (group) => ({
+          label: NAV_TITLES[group],
+          items: NAV.filter((item) => item.group === group).map((item) => ({
+            key: item.key,
+            label: item.label,
+            icon: item.icon,
+            href: item.href,
+          })),
+        }),
+      ),
     [],
   );
 
