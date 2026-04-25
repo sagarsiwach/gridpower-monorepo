@@ -96,7 +96,7 @@ const NAV_ITEMS: NavItem[] = [
         items: [
           {
             title: "GridCharge App",
-            sub: "Find, charge, pay — live",
+            sub: "Find, charge, pay. Live.",
             href: "/platform/app",
           },
           {
