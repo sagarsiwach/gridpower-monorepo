@@ -8,17 +8,17 @@ import {
 } from "@gridpower/ui";
 
 export const meta: MetaFunction = () => [
-  { title: "About GridPower — Building India's open energy platform" },
+  { title: "About GridPower: Building India's open energy platform" },
   {
     name: "description",
     content:
-      "GridPower is the trading name for DeltaEV Mobility Private Limited — an Indian energy technology company designing, manufacturing, and deploying the three layers of the clean energy transition.",
+      "GridPower is the trading name for DeltaEV Mobility Private Limited, an Indian energy technology company designing, manufacturing, and deploying the three layers of the clean energy transition.",
   },
-  { property: "og:title", content: "About GridPower — Building India's open energy platform" },
+  { property: "og:title", content: "About GridPower: Building India's open energy platform" },
   {
     property: "og:description",
     content:
-      "GridPower is the trading name for DeltaEV Mobility Private Limited — an Indian energy technology company designing, manufacturing, and deploying the three layers of the clean energy transition.",
+      "GridPower is the trading name for DeltaEV Mobility Private Limited, an Indian energy technology company designing, manufacturing, and deploying the three layers of the clean energy transition.",
   },
   { property: "og:url", content: "/about" },
   { property: "og:image", content: "/og-default.svg" },
@@ -27,7 +27,7 @@ export const meta: MetaFunction = () => [
 
 const timeline = [
   { year: "2015", event: "First EV powertrain research at DeltaEV" },
-  { year: "2019", event: "Kabira Mobility partnership — first OEM deployment" },
+  { year: "2019", event: "Kabira Mobility partnership: first OEM deployment" },
   { year: "2022", event: "DeltaEV Mobility Private Limited incorporated" },
   { year: "2024", event: "GridPower platform concept initiated" },
   {
@@ -87,7 +87,7 @@ export default function AboutPage() {
             Building India's open energy infrastructure.
           </h1>
           <p className="font-body text-body-lg text-sand-11 leading-relaxed max-w-2xl">
-            GridPower is the trading name for DeltaEV Mobility Private Limited —
+            GridPower is the trading name for DeltaEV Mobility Private Limited,
             an Indian energy technology company designing, manufacturing, and
             deploying the three layers of the clean energy transition.
           </p>
@@ -101,20 +101,20 @@ export default function AboutPage() {
           <div>
             <SectionLabel className="mb-4">OUR STORY</SectionLabel>
             <p className="font-body text-body text-sand-11 leading-[1.8] mb-5">
-              We started in EV powertrains — supplying motors, controllers, and
+              We started in EV powertrains, supplying motors, controllers, and
               battery packs to two-wheeler and three-wheeler OEMs across India.
               That work taught us something important: the hardware is the easy
               part.
             </p>
             <p className="font-body text-body text-sand-11 leading-[1.8] mb-5">
-              The hard part is the software layer that connects everything —
-              that monitors your storage, manages your chargers, and tells you
+              The hard part is the software layer that connects everything:
+              the layer that monitors your storage, manages your chargers, and tells you
               what your fleet is doing at 2am. That layer didn't exist, so we
               built it.
             </p>
             <p className="font-body text-body text-sand-11 leading-[1.8]">
               GridPower is the result: a hardware + software platform for the
-              full energy stack. Storage, charging, and powertrain — on a single
+              full energy stack. Storage, charging, and powertrain, on a single
               open platform, with full specs published and zero lock-in.
             </p>
           </div>

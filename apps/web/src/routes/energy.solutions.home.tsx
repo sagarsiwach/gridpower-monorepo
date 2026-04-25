@@ -2,13 +2,13 @@ import type { MetaFunction } from "react-router";
 import { SolutionLayout } from "../components/solutions/solution-layout";
 
 export const meta: MetaFunction = () => [
-  { title: "Home battery storage — GridEnergy | GridPower" },
+  { title: "Home battery storage: GridEnergy | GridPower" },
   {
     name: "description",
     content:
       "Residential solar storage from 5 to 21 kWh. Works with any solar setup, any inverter. Launch Q2 2026.",
   },
-  { property: "og:title", content: "Home battery storage — GridEnergy | GridPower" },
+  { property: "og:title", content: "Home battery storage: GridEnergy | GridPower" },
   {
     property: "og:description",
     content:
@@ -73,7 +73,7 @@ export default function EnergyHomesSolutionPage() {
         },
         {
           label: "CHEMISTRY",
-          title: "LFP — safe, long-lasting",
+          title: "LFP: safe, long-lasting",
           description:
             "LiFePO₄ chemistry with 6,000 cycles at 80% DoD. No thermal runaway risk. Safe indoors.",
         },
@@ -134,7 +134,7 @@ export default function EnergyHomesSolutionPage() {
       platformFeatures={[
         "Real-time solar yield and consumption tracking",
         "Battery SoC, temperature, and health monitoring",
-        "Time-of-use optimisation — auto-charge during low-rate windows",
+        "Time-of-use optimisation: auto-charge during low-rate windows",
         "Remote diagnostics and firmware updates",
       ]}
       platformCtaLabel="Download the app"

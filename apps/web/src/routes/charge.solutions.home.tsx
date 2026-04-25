@@ -2,13 +2,13 @@ import type { MetaFunction } from "react-router";
 import { SolutionLayout } from "../components/solutions/solution-layout";
 
 export const meta: MetaFunction = () => [
-  { title: "Home EV charging — GridCharge | GridPower" },
+  { title: "Home EV charging: GridCharge | GridPower" },
   {
     name: "description",
     content:
       "Smart home chargers from 7.4 kW to 22 kW. Works with any EV. Scheduled charging, solar integration, app control. Launch Q2 2026.",
   },
-  { property: "og:title", content: "Home EV charging — GridCharge | GridPower" },
+  { property: "og:title", content: "Home EV charging: GridCharge | GridPower" },
   {
     property: "og:description",
     content:
@@ -56,7 +56,7 @@ export default function ChargeHomeSolutionPage() {
         },
         {
           title: "DLB load balancer",
-          sub: "Dynamic load balancing — charges fast without tripping your breaker.",
+          sub: "Dynamic load balancing. Charges fast without tripping your breaker.",
         },
         {
           title: "GridCharge App",
@@ -69,7 +69,7 @@ export default function ChargeHomeSolutionPage() {
           label: "CONVENIENCE",
           title: "Wake up to a full battery",
           description:
-            "Set your departure time in the GridCharge App. The charger does the rest — every morning, automatically.",
+            "Set your departure time in the GridCharge App. The charger does the rest, every morning, automatically.",
         },
         {
           label: "SAVINGS",
@@ -85,7 +85,7 @@ export default function ChargeHomeSolutionPage() {
         },
         {
           label: "SAFETY",
-          title: "DLB — no tripped breakers",
+          title: "DLB: no tripped breakers",
           description:
             "Dynamic load balancing monitors your home's total draw and reduces charger output if the panel is near capacity.",
         },
@@ -109,7 +109,7 @@ export default function ChargeHomeSolutionPage() {
         { label: "Phase", value: "Single-phase / 3-phase" },
         { label: "Protection", value: "IP54, IK10" },
         { label: "Load balancing", value: "DLB Box (optional)" },
-        { label: "Solar integration", value: "Yes — excess solar priority charging" },
+        { label: "Solar integration", value: "Yes (excess solar priority charging)" },
         { label: "Warranty", value: "3 years hardware" },
       ]}
       steps={[
@@ -133,7 +133,7 @@ export default function ChargeHomeSolutionPage() {
       platformLabel="GridCharge App · Home charger + session view"
       platformFeatures={[
         "Schedule charging for off-peak tariff windows",
-        "Solar surplus charging — charge when your panels are generating",
+        "Solar surplus charging: charge when your panels are generating",
         "Session history, cost tracking, and kWh consumed",
         "Share access with family members",
       ]}

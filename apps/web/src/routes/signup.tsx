@@ -10,13 +10,13 @@ import {
 } from "@gridpower/ui";
 
 export const meta: MetaFunction = () => [
-  { title: "Join the waitlist — GridPower" },
+  { title: "Join the waitlist | GridPower" },
   {
     name: "description",
     content:
       "Be among the first to access GridPower's platform when we launch Q2 2026.",
   },
-  { property: "og:title", content: "Join the waitlist — GridPower" },
+  { property: "og:title", content: "Join the waitlist | GridPower" },
   {
     property: "og:description",
     content:
@@ -95,7 +95,7 @@ export default function SignupPage() {
           </h1>
           <p className="font-body text-body text-sand-11 leading-[1.65] mb-10">
             Be among the first to access GridPower's platform when we launch Q2
-            2026. No spam — just launch updates.
+            2026. No spam, just launch updates.
           </p>
 
           {actionData?.ok ? (

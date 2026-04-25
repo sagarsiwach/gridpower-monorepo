@@ -2,13 +2,13 @@ import type { MetaFunction } from "react-router";
 import { SolutionLayout } from "../components/solutions/solution-layout";
 
 export const meta: MetaFunction = () => [
-  { title: "Destination & public charging — GridCharge | GridPower" },
+  { title: "Destination & public charging: GridCharge | GridPower" },
   {
     name: "description",
     content:
       "Fast charging for hotels, malls, restaurants, resorts. Revenue-ready from day one. Launch Q2 2026.",
   },
-  { property: "og:title", content: "Destination & public charging — GridCharge | GridPower" },
+  { property: "og:title", content: "Destination & public charging: GridCharge | GridPower" },
   {
     property: "og:description",
     content:
@@ -91,7 +91,7 @@ export default function ChargeDestinationSolutionPage() {
         },
         {
           label: "DEPLOYMENT",
-          title: "Turnkey — we handle everything",
+          title: "Turnkey: we handle everything",
           description:
             "Civil works, LT connection upgrade, charger installation, OCPP commissioning. One vendor, one contract.",
         },
@@ -135,7 +135,7 @@ export default function ChargeDestinationSolutionPage() {
         "Real-time revenue tracking per charger and per site",
         "Session logs with vehicle ID, energy, duration, and billing",
         "Remote diagnostics and charger health monitoring",
-        "Guest app integration — QR code, RFID, or direct payment",
+        "Guest app integration: QR code, RFID, or direct payment",
       ]}
       platformCtaLabel="See the console"
       platformCtaHref="/platform"

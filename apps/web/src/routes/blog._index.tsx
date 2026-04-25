@@ -10,13 +10,13 @@ import {
 } from "@gridpower/ui";
 
 export const meta: MetaFunction = () => [
-  { title: "Blog — GridPower" },
+  { title: "Blog | GridPower" },
   {
     name: "description",
     content:
       "Technical writing from the GridPower team. Specs, deployments, and open energy infrastructure.",
   },
-  { property: "og:title", content: "Blog — GridPower" },
+  { property: "og:title", content: "Blog | GridPower" },
   {
     property: "og:description",
     content:
@@ -31,7 +31,7 @@ const categories = ["All", "Energy", "Charging", "Platform", "Deployments"];
 
 type Category = (typeof categories)[number];
 
-// Placeholder post list (all "Coming soon") — kept for category scaffold parity with prototype
+// Placeholder post list (all "Coming soon"); kept for category scaffold parity with prototype
 const upcomingPosts = [
   {
     cat: "Energy",
@@ -80,7 +80,7 @@ export default function BlogIndexPage() {
             GridPower Field Notes.
           </h1>
           <p className="font-body text-body-lg text-sand-11">
-            Technical writing from the team. No fluff — specs, deployments, and
+            Technical writing from the team. No fluff. Specs, deployments, and
             open energy infrastructure.
           </p>
         </div>
@@ -110,10 +110,10 @@ export default function BlogIndexPage() {
             ))}
           </div>
 
-          {/* Empty state — no posts published yet */}
+          {/* Empty state: no posts published yet */}
           <div className="rounded-card border border-sand-6 bg-sand-2 py-24">
             <EmptyState
-              title="First post coming soon — Q2 2026"
+              title="First post coming soon. Q2 2026."
               description={`Technical writing from the GridPower team on ${
                 activeCategory === "All"
                   ? "energy storage, EV charging, and open infrastructure"
@@ -137,7 +137,7 @@ export default function BlogIndexPage() {
             />
           </div>
 
-          {/* Upcoming topics — visible teaser */}
+          {/* Upcoming topics: visible teaser */}
           {filtered.length > 0 && (
             <div className="mt-16">
               <SectionLabel variant="neutral" className="mb-6 text-sand-8">
@@ -168,7 +168,7 @@ export default function BlogIndexPage() {
                         {post.title}
                       </p>
                       <p className="font-mono text-[10px] tracking-wide text-sand-8">
-                        Coming soon · — read
+                        Coming soon · read
                       </p>
                     </div>
                   </div>
@@ -192,7 +192,7 @@ export default function BlogIndexPage() {
                 Get notified when we publish.
               </h2>
               <p className="font-body text-body text-dark-11 mb-8 max-w-md mx-auto">
-                Energy storage, EV charging, and open infrastructure — straight
+                Energy storage, EV charging, and open infrastructure, straight
                 to your inbox. No spam.
               </p>
               <Button asChild variant="secondary">

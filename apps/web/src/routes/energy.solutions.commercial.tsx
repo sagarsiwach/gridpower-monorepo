@@ -2,13 +2,13 @@ import type { MetaFunction } from "react-router";
 import { SolutionLayout } from "../components/solutions/solution-layout";
 
 export const meta: MetaFunction = () => [
-  { title: "Commercial & industrial storage — GridEnergy | GridPower" },
+  { title: "Commercial & industrial storage: GridEnergy | GridPower" },
   {
     name: "description",
     content:
       "Commercial and industrial energy storage from 30 to 500 kWh. Cut peak demand charges and replace diesel backup. Launch Q2 2026.",
   },
-  { property: "og:title", content: "Commercial & industrial storage — GridEnergy | GridPower" },
+  { property: "og:title", content: "Commercial & industrial storage: GridEnergy | GridPower" },
   {
     property: "og:description",
     content:

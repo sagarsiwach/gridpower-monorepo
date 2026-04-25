@@ -1,5 +1,5 @@
 /**
- * VerticalLayout — shared page template for /energy, /charge, /drive.
+ * VerticalLayout: shared page template for /energy, /charge, /drive.
  *
  * Each vertical passes its own data object; this component handles
  * all section structure and DS component wiring.
@@ -11,7 +11,6 @@ import {
   SectionDivider,
   SectionHeader,
   DotGrid,
-  ImgPlaceholder,
   ProcessSteps,
   CTASection,
   type ProcessStep,
@@ -129,13 +128,51 @@ function VerticalHero({
             </Button>
           </div>
         </div>
-        {/* Right: hero image placeholder */}
-        <div>
-          <ImgPlaceholder
-            label={`${brandName} · Hero lifestyle image`}
-            aspect="4/3"
-            className="w-full"
-          />
+        {/* Right: typography moment, drenched dark band with brand wordmark + spec stack */}
+        <div className="relative overflow-hidden rounded-card bg-sand-12 aspect-[4/3] flex flex-col justify-between p-10">
+          <DotGrid color="rgba(58,57,55,0.55)" />
+          <div className="relative">
+            <p className="font-mono text-label uppercase tracking-widest text-grid-red mb-2">
+              {label}
+            </p>
+            <div className="font-display text-[clamp(40px,5vw,72px)] font-semibold leading-[0.95] text-dark-12 tracking-tight">
+              {brandName}
+            </div>
+          </div>
+          <div className="relative grid grid-cols-2 gap-x-6 gap-y-4">
+            <div>
+              <p className="font-mono text-label uppercase tracking-widest text-dark-9 mb-1">
+                LAUNCH
+              </p>
+              <p className="font-heading text-body-lg font-semibold text-dark-12">
+                Q2 2026
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-label uppercase tracking-widest text-dark-9 mb-1">
+                MADE IN
+              </p>
+              <p className="font-heading text-body-lg font-semibold text-dark-12">
+                Dharwad, IN
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-label uppercase tracking-widest text-dark-9 mb-1">
+                SPECS
+              </p>
+              <p className="font-heading text-body-lg font-semibold text-dark-12">
+                Open · No NDA
+              </p>
+            </div>
+            <div>
+              <p className="font-mono text-label uppercase tracking-widest text-dark-9 mb-1">
+                PROTOCOL
+              </p>
+              <p className="font-heading text-body-lg font-semibold text-dark-12">
+                REST · MQTT
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -257,11 +294,16 @@ function FeaturedProducts({
               key={product.name}
               className="border border-border rounded-card overflow-hidden bg-sand-1"
             >
-              <ImgPlaceholder
-                label={`${product.name} · Product render`}
-                aspect="16/9"
-                className="rounded-none border-0 border-b border-border"
-              />
+              {/* Drenched dark band with category + product wordmark */}
+              <div className="relative overflow-hidden bg-sand-12 aspect-[16/9] flex flex-col justify-between p-6">
+                <DotGrid color="rgba(58,57,55,0.55)" />
+                <p className="relative font-mono text-label uppercase tracking-widest text-grid-red">
+                  {product.category}
+                </p>
+                <p className="relative font-display text-h2 font-semibold leading-[0.95] text-dark-12 tracking-tight">
+                  {product.name}
+                </p>
+              </div>
               <div className="p-5">
                 <div className="font-mono text-label text-grid-red mb-1">{product.category}</div>
                 <div className="font-heading text-h4 text-sand-12 mb-1">{product.name}</div>

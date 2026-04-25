@@ -1,5 +1,5 @@
 /**
- * SolutionLayout — shared template for all 5 solution pages.
+ * SolutionLayout: shared template for all 5 solution pages.
  *
  * Slot order:
  *  1. Hero (breadcrumb + headline + CTAs + full-bleed image)
@@ -12,7 +12,7 @@
  *  8. Platform tie-in (optional)
  *  9. CTA
  *
- * Each route passes only the data — layout and polish live here.
+ * Each route passes only the data; layout and polish live here.
  */
 
 import * as React from "react";
@@ -27,7 +27,6 @@ import {
   Breadcrumb,
   CTASection,
   DotGrid,
-  ImgPlaceholder,
   ProcessSteps,
 } from "@gridpower/ui";
 import type { SpecRow, ProcessStep } from "@gridpower/ui";
@@ -58,7 +57,7 @@ export interface BreadcrumbEntry {
 // ─── Props ────────────────────────────────────────────────────────────────────
 
 export interface SolutionLayoutProps {
-  /** Breadcrumb items — last entry is the current page (no href). */
+  /** Breadcrumb items; last entry is the current page (no href). */
   breadcrumb: BreadcrumbEntry[];
 
   /** Hero section */
@@ -227,11 +226,39 @@ export function SolutionLayout({
         <SectionDivider />
         <div className="mx-auto max-w-7xl px-6 pt-16">
           <SectionLabel>SYSTEM ARCHITECTURE</SectionLabel>
-          <ImgPlaceholder
-            label={diagramLabel}
-            aspect="16/9"
-            className="w-full"
-          />
+          <h2 className="font-heading text-h2 font-semibold text-sand-12 tracking-tight mb-10 max-w-3xl">
+            {diagramLabel}
+          </h2>
+          {/* ASCII-style stage diagram derived from diagramLabel arrows */}
+          <div className="flex flex-col gap-px overflow-hidden rounded-card border border-sand-6 md:flex-row">
+            {diagramLabel.split(/\s*→\s*/).map((stage, i, arr) => (
+              <div
+                key={`${stage}-${i}`}
+                className={[
+                  "flex-1 p-6 flex flex-col justify-between min-h-[140px]",
+                  i % 2 === 1 ? "bg-sand-12" : "bg-sand-1",
+                ].join(" ")}
+              >
+                <div
+                  className={[
+                    "font-mono text-label uppercase tracking-widest mb-3",
+                    i % 2 === 1 ? "text-grid-red" : "text-sand-9",
+                  ].join(" ")}
+                >
+                  Stage {String(i + 1).padStart(2, "0")}
+                  {i === arr.length - 1 ? " · OUT" : ""}
+                </div>
+                <p
+                  className={[
+                    "font-body text-body-sm leading-relaxed",
+                    i % 2 === 1 ? "text-dark-11" : "text-sand-11",
+                  ].join(" ")}
+                >
+                  {stage}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -327,11 +354,23 @@ export function SolutionLayout({
                 <Link to={platformCtaHref}>{platformCtaLabel}</Link>
               </Button>
             </div>
-            <ImgPlaceholder
-              label={platformLabel}
-              aspect="4/3"
-              theme="dark"
-            />
+            {/* Live API preview: matches /platform code-sample voice */}
+            <div className="bg-dark-2 border border-dark-6 rounded-card p-6 font-mono text-[12px] leading-relaxed text-dark-11">
+              <div className="flex items-center justify-between border-b border-dark-6 pb-3 mb-4">
+                <span className="text-grid-red uppercase tracking-widest text-label">
+                  GET /v1/sites/{`{id}`}/overview
+                </span>
+                <span className="text-dark-9 uppercase tracking-widest text-label">
+                  200 OK
+                </span>
+              </div>
+              <pre className="text-dark-12 m-0 p-0 whitespace-pre-wrap">{`{
+  "label": "${platformLabel}",
+  "assets": ${platformFeatures.length},
+  "uptime_pct": 99.97,
+  "live": true
+}`}</pre>
+            </div>
           </div>
         </section>
       )}

@@ -7,7 +7,7 @@ export async function loader() {
 }
 
 export const meta: MetaFunction = () => [
-  { title: "404 — Page not found | GridPower" },
+  { title: "404. Page not found | GridPower" },
   { name: "description", content: "This page does not exist. Return to GridPower." },
 ];
 
