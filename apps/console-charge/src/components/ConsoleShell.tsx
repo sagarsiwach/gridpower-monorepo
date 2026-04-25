@@ -11,6 +11,7 @@ import {
   Menu,
   Moon,
   Receipt,
+  Search as SearchIcon,
   Settings as SettingsIcon,
   Sun,
   Tags,
@@ -20,6 +21,7 @@ import {
   Zap,
 } from "lucide-react";
 import { DotGrid, Sidebar, Topbar, type SidebarSection } from "@gridpower/ui";
+import { CommandPalette, ShortcutHelp, useCommandPaletteHotkeys } from "~/components/CommandPalette";
 import { useAuth } from "~/lib/auth";
 import { useTheme } from "~/lib/theme";
 
@@ -116,6 +118,8 @@ export function ConsoleShell() {
   const activeNav = NAV_BY_KEY[activeKey] ?? NAV[0]!;
 
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const { paletteOpen, closePalette, openPalette, helpOpen, closeHelp } =
+    useCommandPaletteHotkeys();
 
   // Close drawer on route change.
   React.useEffect(() => {
@@ -230,7 +234,20 @@ export function ConsoleShell() {
               <ConsoleBreadcrumb title={activeNav.title} />
             </div>
           }
-          center={null}
+          center={
+            <button
+              type="button"
+              onClick={openPalette}
+              aria-label="Open command palette (Cmd+K)"
+              className="hidden md:inline-flex h-8 w-full max-w-[360px] items-center gap-2 rounded-btn border border-border bg-muted/50 px-3 text-body-sm text-muted-foreground transition-colors duration-150 ease-out hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <SearchIcon size={14} aria-hidden="true" />
+              <span className="flex-1 text-left">Search or jump to…</span>
+              <kbd className="hidden lg:inline-flex h-5 items-center rounded-[4px] border border-border bg-card px-1.5 font-mono text-[10px]">
+                ⌘ K
+              </kbd>
+            </button>
+          }
           actions={<ThemeToggle />}
           userInitials={user?.initials}
           userName={user?.name}
@@ -243,6 +260,9 @@ export function ConsoleShell() {
           </div>
         </main>
       </div>
+
+      <CommandPalette open={paletteOpen} onClose={closePalette} />
+      <ShortcutHelp open={helpOpen} onClose={closeHelp} />
     </div>
   );
 }
