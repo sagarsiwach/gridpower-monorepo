@@ -13,8 +13,8 @@ import { DotGrid, Sidebar, Topbar, type SidebarSection } from "@gridpower/ui";
 import { useAuth } from "~/lib/auth";
 import { useTheme } from "~/lib/theme";
 
-// ─── Path B nav items (5, NO Energy) ──────────────────────────────────────────
-// Order: Dashboard · Stations · Analytics · Fleet · Settings
+// Path B nav items (5, no Energy).
+// Order: Dashboard, Stations, Analytics, Fleet, Settings.
 
 interface NavDef {
   key: string;
@@ -41,13 +41,10 @@ const NAV_BY_KEY: Record<string, NavDef> = NAV.reduce(
 );
 
 function deriveActiveKey(pathname: string): string {
-  // Match top-level segment (e.g. /stations/abc → "stations")
   const segment = pathname.split("/").filter(Boolean)[0];
   if (segment && NAV_BY_KEY[segment]) return segment;
   return "dashboard";
 }
-
-// ─── Theme toggle button ──────────────────────────────────────────────────────
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -57,28 +54,27 @@ function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="flex items-center gap-1.5 px-2 py-1 rounded-[6px] border border-dark-6 bg-transparent text-dark-11 font-body text-[11px] hover:bg-dark-4 transition-colors cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-primary"
+      className="inline-flex h-8 items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 font-body text-body-sm text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
-      {isDark ? <Sun size={13} /> : <Moon size={13} />}
+      {isDark ? <Sun size={14} aria-hidden="true" /> : <Moon size={14} aria-hidden="true" />}
       <span>{isDark ? "Light" : "Dark"}</span>
     </button>
   );
 }
 
-// ─── Topbar breadcrumb (left slot) ────────────────────────────────────────────
-
 function ConsoleBreadcrumb({ title }: { title: string }) {
   return (
-    <div className="flex items-center gap-2">
-      <span className="font-body text-[15px] font-semibold text-dark-12">{title}</span>
-      <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary">
-        GRIDCHARGE CONSOLE
+    <div className="flex items-center gap-3">
+      <h1 className="font-body text-[15px] font-semibold text-foreground">{title}</h1>
+      <span
+        className="font-mono text-[10px] uppercase tracking-[0.1em] text-primary"
+        aria-label="GridCharge Console"
+      >
+        GridCharge Console
       </span>
     </div>
   );
 }
-
-// ─── ConsoleShell ─────────────────────────────────────────────────────────────
 
 export function ConsoleShell() {
   const navigate = useNavigate();
@@ -114,7 +110,7 @@ export function ConsoleShell() {
   );
 
   return (
-    <div className="h-screen flex bg-dark-1 overflow-hidden">
+    <div className="flex h-screen overflow-hidden bg-background">
       <Sidebar
         appName="GridCharge"
         appLabel="Console"
@@ -132,7 +128,7 @@ export function ConsoleShell() {
         }
       />
 
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col overflow-hidden">
         <Topbar
           breadcrumb={<ConsoleBreadcrumb title={activeNav.title} />}
           center={null}
@@ -141,7 +137,6 @@ export function ConsoleShell() {
           userName={user?.name}
         />
 
-        {/* Main content — dotted grid bg, holds child routes */}
         <main className="relative flex-1 overflow-y-auto bg-background">
           <DotGrid />
           <div className="relative p-6">

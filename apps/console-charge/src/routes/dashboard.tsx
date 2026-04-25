@@ -83,18 +83,16 @@ function AlertsPanel({ isDark }: { isDark: boolean }) {
         </button>
       </div>
 
-      {/* Alert rows — show first 5 */}
+      {/* Alert rows: severity dot + bold-on-unread carry meaning. */}
+      {/* No left-stripe (anti-pattern: side-tab accent border). */}
       {ALERTS.slice(0, 5).map((alert: Alert, i) => (
         <div
           key={alert.id}
           className={[
             "flex items-start gap-3 px-5 py-3",
-            i < 4 ? (isDark ? "border-b border-dark-6" : "border-b border-border") : "",
-            !alert.read ? (isDark ? "bg-dark-3" : "bg-sand-2") : "",
+            i < 4 ? "border-b border-border" : "",
+            !alert.read ? "bg-muted" : "",
           ].join(" ")}
-          style={{
-            borderLeft: `3px solid ${alert.read ? "transparent" : alertDotColor(alert.severity)}`,
-          }}
         >
           {/* Color dot */}
           <div
@@ -108,9 +106,8 @@ function AlertsPanel({ isDark }: { isDark: boolean }) {
             <div className="flex items-baseline gap-1.5 mb-0.5">
               <span
                 className={[
-                  "text-[13px]",
+                  "text-[13px] text-foreground",
                   !alert.read ? "font-medium" : "font-normal",
-                  isDark ? "text-dark-12" : "text-foreground",
                 ].join(" ")}
               >
                 {alert.station}
@@ -122,12 +119,7 @@ function AlertsPanel({ isDark }: { isDark: boolean }) {
                 />
               )}
             </div>
-            <p
-              className={[
-                "text-[12px] leading-snug",
-                isDark ? "text-dark-9" : "text-sand-9",
-              ].join(" ")}
-            >
+            <p className="text-[12px] leading-snug text-muted-foreground">
               {alert.message}
             </p>
           </div>
