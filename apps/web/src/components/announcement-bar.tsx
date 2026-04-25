@@ -26,7 +26,7 @@ export function AnnouncementBar() {
   return (
     <div className="relative flex h-9 items-center justify-center gap-2 bg-dark-1 text-dark-12 text-[13px] font-body">
       <span className="text-dark-9">
-        Launch Q2 2026 — GridPower platform opening in select regions.
+        Q2 2026: opening to early-access partners in India.
       </span>
       <span className="text-dark-7" aria-hidden>·</span>
       <Link
