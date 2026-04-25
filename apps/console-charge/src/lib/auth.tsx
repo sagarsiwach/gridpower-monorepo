@@ -1,7 +1,7 @@
 import * as React from "react";
 
 /**
- * Mock auth context — real auth wiring is deferred to a later sub-issue.
+ * Mock auth context. Real auth wiring is deferred to a later sub-issue.
  * For CON.1 the user is always authenticated by default. The login page
  * exists as a placeholder; CON.2 fills in the real flow.
  */

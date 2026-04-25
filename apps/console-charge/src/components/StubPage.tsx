@@ -10,7 +10,7 @@ export function StubPage({ title, subtitle }: { title: string; subtitle?: string
         {title.toUpperCase()}
       </p>
       <h1 className="font-heading text-h2 text-foreground">{title}</h1>
-      {subtitle && <p className="font-body text-body text-dark-11">{subtitle}</p>}
+      {subtitle && <p className="font-body text-body text-muted-foreground">{subtitle}</p>}
     </section>
   );
 }

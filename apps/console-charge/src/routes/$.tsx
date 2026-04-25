@@ -2,16 +2,24 @@ import { Link } from "react-router";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-dark-1 p-6">
-      <div className="text-center space-y-4">
-        <p className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary">
-          GRIDCHARGE CONSOLE
+    <div
+      className="flex min-h-screen items-center justify-center bg-background bg-grid-dots bg-[length:16px_16px] p-6"
+      role="main"
+    >
+      <div className="space-y-4 text-center">
+        <p
+          className="font-mono text-[10px] uppercase tracking-[0.1em] text-primary"
+          aria-label="GridCharge Console"
+        >
+          GridCharge Console
         </p>
-        <h1 className="font-heading text-h2 text-dark-12">404</h1>
-        <p className="font-body text-body text-dark-11">This route does not exist.</p>
+        <h1 className="font-heading text-h2 text-foreground">404</h1>
+        <p className="font-body text-body text-muted-foreground">
+          This route does not exist.
+        </p>
         <Link
           to="/dashboard"
-          className="inline-block px-4 py-2 rounded-btn bg-primary text-white font-body text-[14px] font-medium hover:opacity-90 transition-opacity"
+          className="inline-flex h-10 items-center rounded-btn bg-primary px-4 font-body text-body-sm font-medium text-primary-foreground transition-colors hover:bg-grid-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           Back to Dashboard
         </Link>

@@ -1,5 +1,5 @@
 /**
- * CON.3 — Station Detail (full-page view)
+ * CON.3: Station Detail (full-page view)
  * Route: /stations/:stationId
  *
  * Renders a full-page detail view for a single station.
@@ -21,17 +21,18 @@ export default function StationDetail() {
       <div className="flex flex-col gap-4">
         <Link
           to="/stations"
-          className="inline-flex items-center gap-1.5 font-body text-[13px] text-sand-9 dark:text-dark-9 hover:text-sand-12 dark:hover:text-dark-12 transition-colors w-fit"
+          className="inline-flex items-center gap-1.5 font-body text-[13px] text-muted-foreground hover:text-foreground transition-colors w-fit"
         >
-          <ArrowLeft size={14} />
+          <ArrowLeft size={14} aria-hidden="true" />
           Back to Stations
         </Link>
-        <div className="flex items-center justify-center rounded-card border border-sand-6 dark:border-dark-6 bg-sand-1 dark:bg-dark-2 p-12">
-          <p className="font-body text-body text-sand-9 dark:text-dark-9">
+        <div
+          role="alert"
+          className="flex items-center justify-center rounded-card border border-border bg-card p-12"
+        >
+          <p className="font-body text-body text-muted-foreground">
             Station{" "}
-            <span className="font-mono text-sand-12 dark:text-dark-12">
-              {stationId}
-            </span>{" "}
+            <span className="font-mono text-foreground">{stationId}</span>{" "}
             not found.
           </p>
         </div>
@@ -42,22 +43,24 @@ export default function StationDetail() {
   return (
     <div className="flex flex-col gap-4">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-2">
         <Link
           to="/stations"
-          className="inline-flex items-center gap-1.5 font-body text-[13px] text-sand-9 dark:text-dark-9 hover:text-sand-12 dark:hover:text-dark-12 transition-colors"
+          className="inline-flex items-center gap-1.5 font-body text-[13px] text-muted-foreground hover:text-foreground transition-colors"
         >
-          <ArrowLeft size={14} />
+          <ArrowLeft size={14} aria-hidden="true" />
           Stations
         </Link>
-        <span className="font-mono text-[10px] text-sand-8 dark:text-dark-8">/</span>
-        <span className="font-mono text-[11px] text-sand-11 dark:text-dark-11">
+        <span aria-hidden="true" className="font-mono text-[10px] text-muted-foreground">
+          /
+        </span>
+        <span className="font-mono text-[11px] text-foreground">
           {station.id}
         </span>
-      </div>
+      </nav>
 
-      {/* Detail panel — wider layout */}
-      <div className="max-w-lg">
+      {/* Detail panel, wider layout */}
+      <div className="w-full max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
         <StationDetailPanel station={station} />
       </div>
     </div>

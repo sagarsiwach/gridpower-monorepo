@@ -3,7 +3,7 @@ import { useAuth } from "~/lib/auth";
 
 /**
  * Wrap protected routes. Redirects to /login when unauthenticated.
- * Mock auth always returns true for now (CON.1) — real wiring lands later.
+ * Mock auth always returns true for now (CON.1). Real wiring lands later.
  */
 export function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();

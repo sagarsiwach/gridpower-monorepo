@@ -187,4 +187,8 @@ const HeatmapChart = React.forwardRef<HTMLDivElement, HeatmapChartProps>(
 );
 HeatmapChart.displayName = "HeatmapChart";
 
-export { HeatmapChart };
+// Memoized: data grid render is N×M cells, parent re-renders are common
+// (theme/state). Skip when props are referentially stable.
+const MemoHeatmapChart = React.memo(HeatmapChart) as typeof HeatmapChart;
+
+export { MemoHeatmapChart as HeatmapChart };

@@ -175,4 +175,8 @@ const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(
 );
 BarChart.displayName = "BarChart";
 
-export { BarChart };
+// Memoized: charts are expensive (recharts re-measures via ResponsiveContainer
+// on each parent render). Skip when props are referentially stable.
+const MemoBarChart = React.memo(BarChart) as typeof BarChart;
+
+export { MemoBarChart as BarChart };
