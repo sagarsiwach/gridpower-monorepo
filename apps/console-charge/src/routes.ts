@@ -10,7 +10,9 @@ export default [
   // Protected routes — wrapped in ConsoleShell layout
   layout("routes/_shell.tsx", [
     route("dashboard", "routes/dashboard.tsx"),
-    route("stations", "routes/stations.tsx"),
+    // Stations: index list + detail by ID
+    route("stations", "routes/stations._index.tsx"),
+    route("stations/:stationId", "routes/stations.$stationId.tsx"),
     route("analytics", "routes/analytics.tsx"),
     route("fleet", "routes/fleet.tsx"),
     route("settings", "routes/settings.tsx"),
