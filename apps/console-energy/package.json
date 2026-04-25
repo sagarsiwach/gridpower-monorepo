@@ -1,0 +1,43 @@
+{
+  "name": "@gridpower/console-energy",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "react-router dev",
+    "build": "react-router build",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && wrangler types && tsc --noEmit",
+    "lint": "biome check src",
+    "deploy": "react-router build && wrangler deploy",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "@gridpower/tokens": "workspace:*",
+    "@gridpower/ui": "workspace:*",
+    "@react-router/node": "^7.1.1",
+    "@react-router/serve": "^7.1.1",
+    "cmdk": "^1.1.1",
+    "isbot": "^5.1.19",
+    "lucide-react": "^0.469.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.1.1"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.0.0",
+    "@cloudflare/workers-types": "^4.20250410.0",
+    "@react-router/dev": "^7.1.1",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.0.0"
+  }
+}

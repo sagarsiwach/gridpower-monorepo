@@ -1,0 +1,271 @@
+import * as React from "react";
+import { Outlet, useLocation, useNavigate } from "react-router";
+import {
+  Activity,
+  AlertTriangle,
+  BarChart3,
+  Battery,
+  Bolt,
+  Calendar,
+  CircuitBoard,
+  HelpCircle,
+  Layers,
+  LayoutGrid,
+  Menu,
+  Moon,
+  Search as SearchIcon,
+  Settings as SettingsIcon,
+  Sun,
+  Tags,
+  Users,
+  Wrench,
+  X,
+} from "lucide-react";
+import { DotGrid, Sidebar, Topbar, type SidebarSection } from "@gridpower/ui";
+import { CommandPalette, ShortcutHelp, useCommandPaletteHotkeys } from "~/components/CommandPalette";
+import { useAuth } from "~/lib/auth";
+import { useTheme } from "~/lib/theme";
+
+// Sidebar nav grouped into Operations, Money, System.
+
+interface NavDef {
+  key: string;
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+  title: string;
+  group: "operations" | "money" | "system";
+}
+
+const NAV: NavDef[] = [
+  // Operations
+  { key: "dashboard",    label: "Dashboard",    href: "/dashboard",    icon: <LayoutGrid size={15} />,    title: "Dashboard",    group: "operations" },
+  { key: "sites",        label: "Sites",        href: "/sites",        icon: <Battery size={15} />,       title: "Sites",        group: "operations" },
+  { key: "stacks",       label: "Stacks",       href: "/stacks",       icon: <Layers size={15} />,        title: "Stacks",       group: "operations" },
+  { key: "energy-flow",  label: "Energy flow",  href: "/energy-flow",  icon: <Activity size={15} />,      title: "Energy flow",  group: "operations" },
+  { key: "schedules",    label: "Schedules",    href: "/schedules",    icon: <Calendar size={15} />,      title: "Schedules",    group: "operations" },
+  { key: "alerts",       label: "Alerts",       href: "/alerts",       icon: <AlertTriangle size={15} />, title: "Alerts",       group: "operations" },
+  { key: "maintenance",  label: "Maintenance",  href: "/maintenance",  icon: <Wrench size={15} />,        title: "Maintenance",  group: "operations" },
+  { key: "grid-events",  label: "Grid events",  href: "/grid-events",  icon: <Bolt size={15} />,          title: "Grid events",  group: "operations" },
+
+  // Money
+  { key: "tariffs",          label: "Tariffs",         href: "/tariffs",          icon: <Tags size={15} />,     title: "Tariffs",         group: "money" },
+  { key: "demand-response",  label: "Demand response", href: "/demand-response",  icon: <BarChart3 size={15} />, title: "Demand response", group: "money" },
+  { key: "customers",        label: "Customers",       href: "/customers",        icon: <Users size={15} />,    title: "Customers",       group: "money" },
+
+  // System
+  { key: "analytics", label: "Analytics", href: "/analytics", icon: <BarChart3 size={15} />,    title: "Analytics", group: "system" },
+  { key: "firmware",  label: "Firmware",  href: "/firmware",  icon: <CircuitBoard size={15} />, title: "Firmware",  group: "system" },
+  { key: "settings",  label: "Settings",  href: "/settings",  icon: <SettingsIcon size={15} />, title: "Settings",  group: "system" },
+  { key: "help",      label: "Help",      href: "/help",      icon: <HelpCircle size={15} />,   title: "Help",      group: "system" },
+];
+
+const NAV_TITLES = {
+  operations: "Operations",
+  money: "Money",
+  system: "System",
+} as const;
+
+const NAV_BY_KEY: Record<string, NavDef> = NAV.reduce(
+  (acc, item) => {
+    acc[item.key] = item;
+    return acc;
+  },
+  {} as Record<string, NavDef>,
+);
+
+function deriveActiveKey(pathname: string): string {
+  const segment = pathname.split("/").filter(Boolean)[0];
+  if (segment && NAV_BY_KEY[segment]) return segment;
+  return "dashboard";
+}
+
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="inline-flex h-8 items-center gap-1.5 rounded-btn border border-border bg-transparent px-2 sm:px-3 font-body text-body-sm text-foreground transition-[color,background-color,box-shadow] duration-150 ease-out hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+    >
+      <span className="inline-flex transition-transform duration-200 ease-out" style={{ transform: isDark ? "rotate(0deg)" : "rotate(-30deg)" }}>
+        {isDark ? <Sun size={14} aria-hidden="true" /> : <Moon size={14} aria-hidden="true" />}
+      </span>
+      <span className="hidden sm:inline">{isDark ? "Light" : "Dark"}</span>
+    </button>
+  );
+}
+
+function ConsoleBreadcrumb({ title }: { title: string }) {
+  return (
+    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+      <h1 className="font-body text-[14px] sm:text-[15px] font-semibold text-foreground truncate">{title}</h1>
+      <span
+        className="hidden md:inline font-mono text-[10px] uppercase tracking-[0.1em] text-primary"
+        aria-label="GridEnergy Console"
+      >
+        GridEnergy Console
+      </span>
+    </div>
+  );
+}
+
+export function ConsoleShell() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user } = useAuth();
+
+  const activeKey = deriveActiveKey(location.pathname);
+  const activeNav = NAV_BY_KEY[activeKey] ?? NAV[0]!;
+
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const { paletteOpen, closePalette, openPalette, helpOpen, closeHelp } =
+    useCommandPaletteHotkeys();
+
+  // Close drawer on route change.
+  React.useEffect(() => {
+    setDrawerOpen(false);
+  }, [location.pathname]);
+
+  // Close drawer on Escape key.
+  React.useEffect(() => {
+    if (!drawerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDrawerOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [drawerOpen]);
+
+  const sections: SidebarSection[] = React.useMemo(
+    () =>
+      (Object.keys(NAV_TITLES) as Array<keyof typeof NAV_TITLES>).map(
+        (group) => ({
+          label: NAV_TITLES[group],
+          items: NAV.filter((item) => item.group === group).map((item) => ({
+            key: item.key,
+            label: item.label,
+            icon: item.icon,
+            href: item.href,
+          })),
+        }),
+      ),
+    [],
+  );
+
+  const handleActiveChange = React.useCallback(
+    (key: string) => {
+      const target = NAV_BY_KEY[key];
+      if (target) {
+        navigate(target.href);
+        setDrawerOpen(false);
+      }
+    },
+    [navigate],
+  );
+
+  const sidebarUser = user
+    ? { name: user.name, role: user.role, initials: user.initials }
+    : undefined;
+
+  return (
+    <div className="flex h-screen overflow-hidden bg-background">
+      {/* Desktop sidebar, hidden below lg */}
+      <div className="hidden lg:flex">
+        <Sidebar
+          appName="GridEnergy"
+          appLabel="Console"
+          sections={sections}
+          activeKey={activeKey}
+          onActiveChange={handleActiveChange}
+          user={sidebarUser}
+        />
+      </div>
+
+      {/* Mobile drawer overlay */}
+      {drawerOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={() => setDrawerOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile drawer panel */}
+      <div
+        className={[
+          "fixed inset-y-0 left-0 z-50 flex lg:hidden",
+          "transition-transform duration-200 ease-out",
+          drawerOpen ? "translate-x-0" : "-translate-x-full",
+        ].join(" ")}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+      >
+        <Sidebar
+          appName="GridEnergy"
+          appLabel="Console"
+          sections={sections}
+          activeKey={activeKey}
+          onActiveChange={handleActiveChange}
+          user={sidebarUser}
+        />
+        <button
+          type="button"
+          onClick={() => setDrawerOpen(false)}
+          aria-label="Close menu"
+          className="absolute top-4 right-[-44px] flex h-9 w-9 items-center justify-center rounded-btn bg-card border border-border text-foreground hover:bg-muted transition-colors"
+        >
+          <X size={16} aria-hidden="true" />
+        </button>
+      </div>
+
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <Topbar
+          breadcrumb={
+            <div className="flex items-center gap-2 min-w-0">
+              <button
+                type="button"
+                onClick={() => setDrawerOpen(true)}
+                aria-label="Open menu"
+                className="lg:hidden flex h-8 w-8 items-center justify-center rounded-btn border border-border bg-transparent text-foreground hover:bg-muted transition-colors shrink-0"
+              >
+                <Menu size={16} aria-hidden="true" />
+              </button>
+              <ConsoleBreadcrumb title={activeNav.title} />
+            </div>
+          }
+          center={
+            <button
+              type="button"
+              onClick={openPalette}
+              aria-label="Open command palette (Cmd+K)"
+              className="hidden md:inline-flex h-8 w-full max-w-[360px] items-center gap-2 rounded-btn border border-border bg-muted/50 px-3 text-body-sm text-muted-foreground transition-colors duration-150 ease-out hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <SearchIcon size={14} aria-hidden="true" />
+              <span className="flex-1 text-left">Search or jump to…</span>
+              <kbd className="hidden lg:inline-flex h-5 items-center rounded-[4px] border border-border bg-card px-1.5 font-mono text-[10px]">
+                ⌘ K
+              </kbd>
+            </button>
+          }
+          actions={<ThemeToggle />}
+          userInitials={user?.initials}
+          userName={user?.name}
+        />
+
+        <main className="relative flex-1 overflow-y-auto bg-background">
+          <DotGrid />
+          <div className="relative p-3 sm:p-4 lg:p-6">
+            <Outlet />
+          </div>
+        </main>
+      </div>
+
+      <CommandPalette open={paletteOpen} onClose={closePalette} />
+      <ShortcutHelp open={helpOpen} onClose={closeHelp} />
+    </div>
+  );
+}
