@@ -140,18 +140,18 @@ import {
 } from "lucide-react";
 
 export const meta: MetaFunction = () => [
-  { title: "Design System — GridPower" },
+  { title: "Design System: GridPower" },
   { name: "robots", content: "noindex" },
 ];
 
 // ─── TOC items ────────────────────────────────────────────────────────────────
 
 const TOC_ITEMS = [
-  { id: "colors-sand", label: "Colors — Sand scale" },
-  { id: "colors-dark", label: "Colors — Dark scale" },
-  { id: "colors-brand", label: "Colors — Brand + Semantic" },
-  { id: "typography-scale", label: "Typography — Type scale" },
-  { id: "typography-specimens", label: "Typography — Specimens" },
+  { id: "colors-sand", label: "Colors: Sand scale" },
+  { id: "colors-dark", label: "Colors: Dark scale" },
+  { id: "colors-brand", label: "Colors: Brand + Semantic" },
+  { id: "typography-scale", label: "Typography: Type scale" },
+  { id: "typography-specimens", label: "Typography: Specimens" },
   { id: "spacing", label: "Spacing tokens" },
   { id: "radius-shadows", label: "Radius + Shadows" },
   { id: "grid-motif", label: "Grid motif" },
@@ -258,7 +258,7 @@ const TYPE_SCALE = [
     weight: "400",
     size: "20px / 32px",
     ls: "0",
-    sample: "Our hardware works with other software — open APIs, no lock-in.",
+    sample: "Our hardware works with other software, open APIs, no lock-in.",
     className: "font-body text-body",
     style: { fontSize: 17, lineHeight: "1.6" },
   },
@@ -386,7 +386,7 @@ const STATION_DATA = [
     location: "Whitefield, Bengaluru",
     status: "offline",
     chargers: "3",
-    utilization: "—",
+    utilization: ".",
     revenue: "₹0",
   },
 ];
@@ -615,8 +615,6 @@ export default function DesignSystemPage() {
   return (
     <>
       <Toaster />
-      {/* ── Full Navbar ──────────────────────────────────────────────── */}
-      <Navbar />
 
       <div className="relative min-h-screen bg-sand-1">
         {/* subtle dot grid on page */}
@@ -636,7 +634,7 @@ export default function DesignSystemPage() {
               className="font-body text-sand-11 max-w-2xl"
               style={{ fontSize: 20, lineHeight: "1.6" }}
             >
-              The complete visual language for the GridPower digital ecosystem —
+              The complete visual language for the GridPower digital ecosystem,
               marketing site, consoles, and mobile apps.
             </p>
           </div>
@@ -648,12 +646,12 @@ export default function DesignSystemPage() {
             <main className="min-w-0 flex-1">
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 1 — Colors: Sand scale
+                  SECTION 1: Colors: Sand scale
               ═══════════════════════════════════════════════════════════ */}
               <Section id="colors-sand">
                 <SectionHeader
                   label="01 / COLORS"
-                  heading="Sand scale — light mode"
+                  heading="Sand scale: light mode"
                   lead="12-step neutral palette derived from Radix Sand. Used for all light-mode surfaces, text, and borders."
                 />
                 <div className="mt-8 grid grid-cols-6 gap-3">
@@ -679,7 +677,7 @@ export default function DesignSystemPage() {
                 </div>
                 <div className="mt-6 rounded-card border border-border bg-sand-1 p-5">
                   <p className="font-body text-sand-11 text-[15px]">
-                    Sand 11 body text on Sand 1 background — this is the default reading surface.
+                    Sand 11 body text on Sand 1 background, this is the default reading surface.
                   </p>
                   <p className="font-mono text-[12px] text-sand-9 mt-1 uppercase tracking-widest">
                     --text-body on --bg-page
@@ -688,12 +686,12 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 2 — Colors: Dark scale
+                  SECTION 2: Colors: Dark scale
               ═══════════════════════════════════════════════════════════ */}
               <Section id="colors-dark">
                 <SectionHeader
                   label="02 / COLORS"
-                  heading="Dark scale — Console + App"
+                  heading="Dark scale: Console + App"
                   lead="12-step dark palette for the GridPower Console and mobile app. Token-swapped via data-theme=dark."
                 />
                 <div className="mt-8 grid grid-cols-6 gap-3">
@@ -721,7 +719,7 @@ export default function DesignSystemPage() {
                     className="font-body text-[15px]"
                     style={{ color: "var(--dark-11)" }}
                   >
-                    Dark 11 body text on Dark 2 card — the default Console reading surface.
+                    Dark 11 body text on Dark 2 card, the default Console reading surface.
                   </p>
                   <p
                     className="font-mono text-[12px] mt-1 uppercase tracking-widest"
@@ -733,7 +731,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 3 — Colors: Brand + Semantic
+                  SECTION 3: Colors: Brand + Semantic
               ═══════════════════════════════════════════════════════════ */}
               <Section id="colors-brand">
                 <SectionHeader
@@ -744,7 +742,7 @@ export default function DesignSystemPage() {
                   {/* GridRed brand strip */}
                   <div>
                     <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">
-                      GridRed — Brand
+                      GridRed: Brand
                     </p>
                     <div className="grid grid-cols-4 gap-3">
                       <ColorSwatch hex="#FA0016" label="--grid-red" sublabel="Default" />
@@ -790,7 +788,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 4 — Typography: Type scale
+                  SECTION 4: Typography: Type scale
               ═══════════════════════════════════════════════════════════ */}
               <Section id="typography-scale">
                 <SectionHeader
@@ -822,7 +820,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 5 — Typography: Font specimens
+                  SECTION 5: Typography: Font specimens
               ═══════════════════════════════════════════════════════════ */}
               <Section id="typography-specimens">
                 <SectionHeader
@@ -834,7 +832,7 @@ export default function DesignSystemPage() {
                   {/* Clash Grotesk */}
                   <div className="rounded-card border border-border p-8 bg-sand-2">
                     <p className="font-mono text-label text-grid-red uppercase tracking-widest mb-2">
-                      Clash Grotesk — Display / H1 / H2 / H3
+                      Clash Grotesk: Display / H1 / H2 / H3
                     </p>
                     <p
                       className="font-display font-semibold text-sand-12 mb-3"
@@ -853,7 +851,7 @@ export default function DesignSystemPage() {
                   {/* Inter */}
                   <div className="rounded-card border border-border p-8 bg-sand-2">
                     <p className="font-mono text-label text-grid-red uppercase tracking-widest mb-2">
-                      Inter — Body LG / Body / Body SM / H4
+                      Inter: Body LG / Body / Body SM / H4
                     </p>
                     <p
                       className="font-body text-sand-12 mb-3"
@@ -877,7 +875,7 @@ export default function DesignSystemPage() {
                   {/* Geist Mono */}
                   <div className="rounded-card border border-border p-8 bg-sand-2">
                     <p className="font-mono text-label text-grid-red uppercase tracking-widest mb-2">
-                      Geist Mono — Labels / Code / Specs
+                      Geist Mono: Labels / Code / Specs
                     </p>
                     <p
                       className="font-mono text-sand-12 mb-3"
@@ -899,7 +897,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 6 — Spacing tokens
+                  SECTION 6: Spacing tokens
               ═══════════════════════════════════════════════════════════ */}
               <Section id="spacing">
                 <SectionHeader
@@ -925,7 +923,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 7 — Radius + Shadows
+                  SECTION 7: Radius + Shadows
               ═══════════════════════════════════════════════════════════ */}
               <Section id="radius-shadows">
                 <SectionHeader
@@ -970,7 +968,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 8 — Grid motif
+                  SECTION 8: Grid motif
               ═══════════════════════════════════════════════════════════ */}
               <Section id="grid-motif">
                 <SectionHeader
@@ -984,7 +982,7 @@ export default function DesignSystemPage() {
                     <DotGrid style={{ "--grid-bg-size": "8px 8px" } as React.CSSProperties} />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <p className="font-mono text-label text-sand-9 uppercase tracking-widest">
-                        8px spacing — tighter
+                        8px spacing: tighter
                       </p>
                     </div>
                   </div>
@@ -994,7 +992,7 @@ export default function DesignSystemPage() {
                     <DotGrid />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <p className="font-mono text-label text-sand-9 uppercase tracking-widest">
-                        16px spacing — default
+                        16px spacing: default
                       </p>
                     </div>
                   </div>
@@ -1004,7 +1002,7 @@ export default function DesignSystemPage() {
                     <DotGrid color="var(--dark-6)" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <p className="font-mono text-label uppercase tracking-widest" style={{ color: "var(--dark-9)" }}>
-                        Dark bg variant — used in CTASection
+                        Dark bg variant, used in CTASection
                       </p>
                     </div>
                   </div>
@@ -1016,7 +1014,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 9 — Buttons
+                  SECTION 9: Buttons
               ═══════════════════════════════════════════════════════════ */}
               <Section id="buttons">
                 <SectionHeader
@@ -1125,7 +1123,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 10 — Inputs
+                  SECTION 10: Inputs
               ═══════════════════════════════════════════════════════════ */}
               <Section id="inputs">
                 <SectionHeader
@@ -1171,7 +1169,7 @@ export default function DesignSystemPage() {
                           <SelectItem value="portable">Portable (7.4 kW)</SelectItem>
                         </SelectContent>
                       </Select>
-                      <DemoLabel>Closed — placeholder</DemoLabel>
+                      <DemoLabel>Closed: placeholder</DemoLabel>
                     </div>
                     <div>
                       <label className="font-body text-[13px] text-sand-11 mb-1 block">Vertical</label>
@@ -1226,7 +1224,7 @@ export default function DesignSystemPage() {
                         <label htmlFor="r3" className="font-body text-[14px] text-sand-11">Highway fast charging (120 kW)</label>
                       </div>
                     </RadioGroup>
-                    <DemoLabel>Radio group — one selected</DemoLabel>
+                    <DemoLabel>Radio group: one selected</DemoLabel>
                   </div>
 
                   {/* Switch */}
@@ -1260,7 +1258,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 11 — Badges + Pills
+                  SECTION 11: Badges + Pills
               ═══════════════════════════════════════════════════════════ */}
               <Section id="badges-pills">
                 <SectionHeader
@@ -1271,7 +1269,7 @@ export default function DesignSystemPage() {
                 <div className="mt-8 space-y-8">
                   {/* Badges */}
                   <div>
-                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">Badge — solid</p>
+                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">Badge: solid</p>
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="solid" color="neutral">Neutral</Badge>
                       <Badge variant="solid" color="red">Brand</Badge>
@@ -1282,7 +1280,7 @@ export default function DesignSystemPage() {
                   </div>
 
                   <div>
-                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">Badge — outline</p>
+                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">Badge: outline</p>
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="outline" color="neutral">Neutral</Badge>
                       <Badge variant="outline" color="red">Brand</Badge>
@@ -1293,7 +1291,7 @@ export default function DesignSystemPage() {
                   </div>
 
                   <div>
-                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">Badge — dot</p>
+                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">Badge: dot</p>
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="dot" color="neutral">Charging</Badge>
                       <Badge variant="dot" color="red">GridRed</Badge>
@@ -1344,17 +1342,17 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 12 — Cards
+                  SECTION 12: Cards
               ═══════════════════════════════════════════════════════════ */}
               <Section id="cards">
                 <SectionHeader
                   label="12 / CARDS"
                   heading="Card system"
-                  lead="Product, Solution, Feature, Vertical, Project, Testimonial — all with real GridPower content."
+                  lead="Product, Solution, Feature, Vertical, Project, Testimonial, all with real GridPower content."
                 />
 
                 <div className="mt-8 space-y-10">
-                  {/* Row 1 — large cards */}
+                  {/* Row 1: large cards */}
                   <div>
                     <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-4">Large cards</p>
                     <div className="grid grid-cols-3 gap-4">
@@ -1385,7 +1383,7 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
 
-                  {/* Row 2 — smaller cards */}
+                  {/* Row 2: smaller cards */}
                   <div>
                     <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-4">Smaller cards</p>
                     <div className="grid grid-cols-3 gap-4">
@@ -1405,7 +1403,7 @@ export default function DesignSystemPage() {
                       />
 
                       <TestimonialCard
-                        quote="GridOS gives us real-time visibility across every charger in our fleet. Revenue reporting used to take a day — now it's live."
+                        quote="GridOS gives us real-time visibility across every charger in our fleet. Revenue reporting used to take a day, now it's live."
                         name="Rajan Mehra"
                         role="Head of Operations · Nexus Malls"
                       />
@@ -1429,7 +1427,7 @@ export default function DesignSystemPage() {
                       </Card>
                       <Card>
                         <CardHeader>
-                          <CardTitle>Home solar ROI — 5yr projection</CardTitle>
+                          <CardTitle>Home solar ROI: 5yr projection</CardTitle>
                         </CardHeader>
                         <CardContent>
                           <ImgPlaceholder aspect="4/3" icon="camera" label="Lifestyle shoot" />
@@ -1444,7 +1442,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 13 — Data display
+                  SECTION 13: Data display
               ═══════════════════════════════════════════════════════════ */}
               <Section id="data-display">
                 <SectionHeader
@@ -1467,7 +1465,7 @@ export default function DesignSystemPage() {
 
                   {/* SpecTable */}
                   <div>
-                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-4">SpecTable — DC 60kW Dual-Gun</p>
+                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-4">SpecTable: DC 60kW Dual-Gun</p>
                     <SpecTable
                       title="GridCharge DC 60kW Dual-Gun · Technical Specifications"
                       rows={[
@@ -1485,7 +1483,7 @@ export default function DesignSystemPage() {
 
                   {/* DataTable */}
                   <div>
-                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-4">DataTable — Station network</p>
+                    <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-4">DataTable: Station network</p>
                     <DataTable
                       columns={[
                         { key: "name", header: "Station" },
@@ -1543,7 +1541,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 14 — Navigation
+                  SECTION 14: Navigation
               ═══════════════════════════════════════════════════════════ */}
               <Section id="navigation">
                 <SectionHeader
@@ -1558,7 +1556,7 @@ export default function DesignSystemPage() {
                     <div className="rounded-card border border-border overflow-hidden">
                       <Navbar />
                     </div>
-                    <DemoLabel>Sticky navbar — GridPower logo + mega-menu + CTA buttons</DemoLabel>
+                    <DemoLabel>Sticky navbar: GridPower logo + mega-menu + CTA buttons</DemoLabel>
                   </div>
 
                   {/* Sidebar */}
@@ -1573,7 +1571,7 @@ export default function DesignSystemPage() {
                         user={{ name: "Sagar Siwach", role: "Admin", initials: "SS" }}
                       />
                     </div>
-                    <DemoLabel>Dark sidebar — active item has GridRed left border</DemoLabel>
+                    <DemoLabel>Dark sidebar, active item has GridRed left border</DemoLabel>
                   </div>
 
                   {/* Topbar */}
@@ -1611,7 +1609,7 @@ export default function DesignSystemPage() {
                       <TabsContent value="overview">
                         <div className="p-4 rounded-card bg-sand-2 border border-border mt-2">
                           <p className="font-body text-body text-sand-11">
-                            Station overview — 4 chargers online · 76% utilization today.
+                            Station overview, 4 chargers online · 76% utilization today.
                           </p>
                         </div>
                       </TabsContent>
@@ -1633,7 +1631,7 @@ export default function DesignSystemPage() {
                         </div>
                       </TabsContent>
                     </Tabs>
-                    <DemoLabel>Tabs — underline active state, GridRed indicator</DemoLabel>
+                    <DemoLabel>Tabs: underline active state, GridRed indicator</DemoLabel>
                   </div>
 
                   {/* Breadcrumb */}
@@ -1647,7 +1645,7 @@ export default function DesignSystemPage() {
                         { label: "Home Energy" },
                       ]}
                     />
-                    <DemoLabel>4-level breadcrumb — last item not linked</DemoLabel>
+                    <DemoLabel>4-level breadcrumb, last item not linked</DemoLabel>
                   </div>
 
                   {/* Pagination */}
@@ -1667,7 +1665,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 15 — Feedback
+                  SECTION 15: Feedback
               ═══════════════════════════════════════════════════════════ */}
               <Section id="feedback">
                 <SectionHeader
@@ -1743,7 +1741,7 @@ export default function DesignSystemPage() {
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>
-                    <DemoLabel>Dialog — confirm destructive action</DemoLabel>
+                    <DemoLabel>Dialog: confirm destructive action</DemoLabel>
                   </div>
 
                   {/* Sheet */}
@@ -1779,7 +1777,7 @@ export default function DesignSystemPage() {
                         </div>
                       </SheetContent>
                     </Sheet>
-                    <DemoLabel>Sheet — side-panel for settings / details</DemoLabel>
+                    <DemoLabel>Sheet: side-panel for settings / details</DemoLabel>
                   </div>
 
                   {/* Dropdown */}
@@ -1807,7 +1805,7 @@ export default function DesignSystemPage() {
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                    <DemoLabel>DropdownMenu — actions list with separator</DemoLabel>
+                    <DemoLabel>DropdownMenu: actions list with separator</DemoLabel>
                   </div>
 
                   {/* EmptyState */}
@@ -1821,7 +1819,7 @@ export default function DesignSystemPage() {
                         action={<Button variant="primary" size="sm"><Plus className="h-4 w-4" /> Add station</Button>}
                       />
                     </div>
-                    <DemoLabel>EmptyState — zero-data screen with CTA</DemoLabel>
+                    <DemoLabel>EmptyState: zero-data screen with CTA</DemoLabel>
                   </div>
 
                   {/* Skeleton */}
@@ -1842,7 +1840,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 16 — Utility
+                  SECTION 16: Utility
               ═══════════════════════════════════════════════════════════ */}
               <Section id="utility">
                 <SectionHeader
@@ -1870,7 +1868,7 @@ export default function DesignSystemPage() {
                       <SectionHeader
                         label="THREE VERTICALS · ONE PLATFORM"
                         heading="Every layer of the energy stack."
-                        lead="Storage, charging, and powertrain — designed to work together, built on open standards."
+                        lead="Storage, charging, and powertrain, designed to work together, built on open standards."
                       />
                     </div>
                   </div>
@@ -1927,7 +1925,7 @@ export default function DesignSystemPage() {
                     <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-3">LogoCloud</p>
                     <div className="rounded-card border border-border p-6 bg-sand-2">
                       <p className="font-mono text-label text-sand-9 uppercase tracking-widest mb-4 text-center">
-                        Placeholder — 6 partner logos (monochrome by default, reveal on hover)
+                        Placeholder: 6 partner logos (monochrome by default, reveal on hover)
                       </p>
                       <div className="grid grid-cols-6 gap-8">
                         {Array.from({ length: 6 }, (_, i) => (
@@ -1937,7 +1935,7 @@ export default function DesignSystemPage() {
                         ))}
                       </div>
                     </div>
-                    <DemoLabel>LogoCloud accepts Logo[] with src/alt/href — placeholders shown</DemoLabel>
+                    <DemoLabel>LogoCloud accepts Logo[] with src/alt/href, placeholders shown</DemoLabel>
                   </div>
 
                   {/* CTASection */}
@@ -1946,23 +1944,23 @@ export default function DesignSystemPage() {
                     <CTASection
                       variant="dark"
                       heading="Ready to power your future?"
-                      description="Energy storage, EV charging, and powertrain — one open platform."
+                      description="Energy storage, EV charging, and powertrain, one open platform."
                       primaryCta={<Button variant="primary" size="lg">Get early access</Button>}
                       secondaryCta={<Button variant="ghost" size="lg" className="border-dark-7 text-dark-12 hover:bg-dark-4">Learn more</Button>}
                     />
-                    <DemoLabel>CTASection — dark variant (sand-12 bg) with dot grid</DemoLabel>
+                    <DemoLabel>CTASection: dark variant (sand-12 bg) with dot grid</DemoLabel>
                   </div>
                 </div>
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 17 — Iconography
+                  SECTION 17: Iconography
               ═══════════════════════════════════════════════════════════ */}
               <Section id="iconography">
                 <SectionHeader
                   label="17 / ICONOGRAPHY"
                   heading="Icon library"
-                  lead="Lucide React — 2px stroke, 24px default. Sand 11 on light, Dark 11 on dark."
+                  lead="Lucide React: 2px stroke, 24px default. Sand 11 on light, Dark 11 on dark."
                 />
 
                 <div className="mt-8">
@@ -1984,13 +1982,13 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 18 — Dark mode parity
+                  SECTION 18: Dark mode parity
               ═══════════════════════════════════════════════════════════ */}
               <Section id="dark-mode">
                 <SectionHeader
                   label="18 / DARK MODE PARITY"
                   heading="Token-based dark mode"
-                  lead="All components designed for mode parity. Swap is token-based — Sand swaps to Dark automatically via data-theme='dark'."
+                  lead="All components designed for mode parity. Swap is token-based, Sand swaps to Dark automatically via data-theme='dark'."
                 />
 
                 <div className="mt-6 flex items-center gap-3 mb-8">
@@ -2107,7 +2105,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 19 — Anti-patterns
+                  SECTION 19: Anti-patterns
               ═══════════════════════════════════════════════════════════ */}
               <Section id="anti-patterns">
                 <SectionHeader
@@ -2170,7 +2168,7 @@ export default function DesignSystemPage() {
               </Section>
 
               {/* ═══════════════════════════════════════════════════════════
-                  SECTION 20 — Downloads
+                  SECTION 20: Downloads
               ═══════════════════════════════════════════════════════════ */}
               <Section id="downloads">
                 <SectionHeader
@@ -2183,7 +2181,7 @@ export default function DesignSystemPage() {
                   {[
                     {
                       title: "tokens.css",
-                      desc: "All CSS custom properties — colors, typography, spacing, radius, shadows, transitions.",
+                      desc: "All CSS custom properties: colors, typography, spacing, radius, shadows, transitions.",
                       path: "/packages/tokens/src/tokens.css",
                       icon: <Cpu size={18} />,
                     },
@@ -2213,7 +2211,7 @@ export default function DesignSystemPage() {
                     },
                     {
                       title: "Design brief",
-                      desc: "GridPower Master Brief 2026-04-24 — complete design language reference.",
+                      desc: "GridPower Master Brief 2026-04-24: complete design language reference.",
                       path: "/docs/GridPower-MASTER-BRIEF-2026-04-24.md",
                       icon: <BookOpen size={18} />,
                     },
