@@ -60,7 +60,7 @@ export default function StationDetail() {
       </nav>
 
       {/* Detail panel — wider layout */}
-      <div className="max-w-lg">
+      <div className="w-full max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
         <StationDetailPanel station={station} />
       </div>
     </div>

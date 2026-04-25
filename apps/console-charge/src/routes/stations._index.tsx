@@ -350,7 +350,7 @@ export default function StationsIndex() {
       </h2>
 
       {/* ── Top bar: filter chips + search + add ─────────────────────────── */}
-      <div className="flex items-center justify-between gap-3 flex-wrap">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 flex-wrap">
         {/* Filter chips */}
         <div
           className="flex items-center gap-1.5 flex-wrap"
@@ -366,7 +366,7 @@ export default function StationsIndex() {
                 onClick={() => setFilter(key)}
                 aria-pressed={active}
                 className={cn(
-                  "inline-flex items-center gap-1.5 rounded-btn px-3 py-1.5 font-body text-[12px] cursor-pointer transition-colors",
+                  "inline-flex items-center gap-1.5 rounded-btn px-3 py-1.5 font-body text-[12px] cursor-pointer transition-colors duration-150 ease-out",
                   active
                     ? "bg-muted border border-border text-foreground"
                     : "bg-transparent border border-transparent text-muted-foreground hover:bg-muted",
@@ -387,8 +387,8 @@ export default function StationsIndex() {
         </div>
 
         {/* Search + Add */}
-        <div className="flex items-center gap-2">
-          <div className="relative">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <div className="relative flex-1 sm:flex-none">
             <Search
               size={12}
               aria-hidden="true"
@@ -404,10 +404,11 @@ export default function StationsIndex() {
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search stations..."
               className={cn(
-                "h-8 w-48 rounded-pill pl-7 pr-3 font-body text-[12px] outline-none",
+                "h-8 w-full sm:w-48 rounded-pill pl-7 pr-3 font-body text-[12px] outline-none",
                 "bg-muted border border-border",
                 "text-foreground placeholder:text-muted-foreground",
                 "focus:border-primary focus:ring-1 focus:ring-primary/20",
+                "transition-[box-shadow,border-color] duration-150 ease-out",
               )}
             />
           </div>
@@ -438,7 +439,7 @@ export default function StationsIndex() {
           <button
             type="button"
             onClick={handleRetry}
-            className="ml-auto inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[11px] text-foreground hover:bg-muted cursor-pointer transition-colors"
+            className="ml-auto inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[11px] text-foreground hover:bg-muted cursor-pointer transition-colors duration-150 ease-out"
             aria-label="Retry loading stations"
           >
             <RefreshCw size={11} aria-hidden="true" />
@@ -450,31 +451,31 @@ export default function StationsIndex() {
       {/* ── Bulk action bar ───────────────────────────────────────────────── */}
       {bulkSelected.size > 0 && (
         <div
-          className="flex items-center gap-3 rounded-card border border-border bg-muted px-4 py-2.5"
+          className="flex flex-wrap items-center gap-3 rounded-card border border-border bg-muted px-4 py-2.5"
           role="region"
           aria-label="Bulk actions"
         >
           <span className="font-mono text-[12px] text-foreground">
             {bulkSelected.size} selected
           </span>
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex flex-wrap items-center gap-2">
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[11px] text-foreground hover:bg-muted cursor-pointer transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[11px] text-foreground hover:bg-muted cursor-pointer transition-colors duration-150 ease-out"
             >
               <RefreshCw size={11} aria-hidden="true" />
               Reboot
             </button>
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[11px] text-foreground hover:bg-muted cursor-pointer transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[11px] text-foreground hover:bg-muted cursor-pointer transition-colors duration-150 ease-out"
             >
               <Settings size={11} aria-hidden="true" />
               Update firmware
             </button>
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[11px] text-foreground hover:bg-muted cursor-pointer transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[11px] text-foreground hover:bg-muted cursor-pointer transition-colors duration-150 ease-out"
             >
               <Download size={11} aria-hidden="true" />
               Export
@@ -482,7 +483,7 @@ export default function StationsIndex() {
             <button
               type="button"
               onClick={clearBulk}
-              className="ml-1 text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
+              className="ml-1 text-muted-foreground hover:text-foreground cursor-pointer transition-colors duration-150 ease-out"
               aria-label="Clear selection"
             >
               <X size={16} aria-hidden="true" />
@@ -495,7 +496,7 @@ export default function StationsIndex() {
       <div
         className={cn(
           "grid gap-4 transition-all",
-          detailStation ? "grid-cols-[1fr_320px]" : "grid-cols-1",
+          detailStation ? "grid-cols-1 lg:grid-cols-[1fr_320px]" : "grid-cols-1",
         )}
       >
         {/* Table card */}
@@ -512,21 +513,22 @@ export default function StationsIndex() {
               <button
                 type="button"
                 aria-label="Sort options"
-                className="inline-flex items-center gap-1 rounded border border-border bg-transparent px-2.5 py-1 font-body text-[11px] text-muted-foreground hover:bg-muted cursor-pointer transition-colors"
+                className="inline-flex items-center gap-1 rounded border border-border bg-transparent px-2.5 py-1 font-body text-[11px] text-muted-foreground hover:bg-muted cursor-pointer transition-colors duration-150 ease-out"
               >
                 Sort <ChevronDown size={10} aria-hidden="true" />
               </button>
               <button
                 type="button"
                 aria-label="Export stations list"
-                className="inline-flex items-center gap-1 rounded border border-border bg-transparent px-2.5 py-1 font-body text-[11px] text-muted-foreground hover:bg-muted cursor-pointer transition-colors"
+                className="inline-flex items-center gap-1 rounded border border-border bg-transparent px-2.5 py-1 font-body text-[11px] text-muted-foreground hover:bg-muted cursor-pointer transition-colors duration-150 ease-out"
               >
                 <Download size={11} aria-hidden="true" /> Export
               </button>
             </div>
           </div>
 
-          <Table>
+          <div className="overflow-x-auto">
+          <Table className="min-w-[760px]">
             <TableHeader>
               <TableRow>
                 {/* Select all checkbox */}
@@ -648,7 +650,7 @@ export default function StationsIndex() {
                         <button
                           type="button"
                           onClick={resetFilters}
-                          className="inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[12px] text-foreground hover:bg-muted cursor-pointer transition-colors"
+                          className="inline-flex items-center gap-1.5 rounded-btn border border-border bg-transparent px-3 py-1.5 font-body text-[12px] text-foreground hover:bg-muted cursor-pointer transition-colors duration-150 ease-out"
                         >
                           <X size={11} aria-hidden="true" />
                           Clear filters
@@ -677,7 +679,7 @@ export default function StationsIndex() {
                       key={station.id}
                       onClick={() => handleRowClick(station.id)}
                       className={cn(
-                        "cursor-pointer transition-colors",
+                        "cursor-pointer transition-colors duration-150 ease-out",
                         isDetailOpen &&
                           "bg-muted hover:bg-muted",
                         isBulk &&
@@ -765,7 +767,7 @@ export default function StationsIndex() {
                           <DropdownMenuTrigger asChild>
                             <button
                               type="button"
-                              className="flex h-7 w-7 items-center justify-center rounded hover:bg-muted text-muted-foreground cursor-pointer transition-colors"
+                              className="flex h-7 w-7 items-center justify-center rounded hover:bg-muted text-muted-foreground cursor-pointer transition-colors duration-150 ease-out"
                               aria-label={`Actions for ${station.name}`}
                             >
                               <MoreHorizontal size={14} aria-hidden="true" />
@@ -790,10 +792,11 @@ export default function StationsIndex() {
                 })}
             </TableBody>
           </Table>
+          </div>
 
           {/* Pagination footer */}
           <nav
-            className="flex items-center justify-between border-t border-border bg-card px-4 py-2.5"
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-t border-border bg-card px-4 py-2.5"
             aria-label="Pagination"
           >
             <span className="font-mono text-[11px] text-muted-foreground">

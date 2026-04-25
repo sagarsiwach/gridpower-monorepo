@@ -189,7 +189,7 @@ function CompanyTab() {
         Organization
       </h2>
 
-      <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
         <Field
           id="company-name"
           label="Company name"
@@ -206,7 +206,7 @@ function CompanyTab() {
           id="company-street"
           label="Street address"
           defaultValue="Plot 14, Verna Industrial Estate"
-          className="col-span-2"
+          className="md:col-span-2"
         />
         <Field
           id="company-city"
@@ -228,7 +228,7 @@ function CompanyTab() {
       </div>
 
       <SectionDivider label="Primary contact" />
-      <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
         <Field
           id="contact-name"
           label="Name"
@@ -364,12 +364,12 @@ function TeamTab() {
         <div
           role="table"
           aria-label="Team members"
-          className="rounded-card border border-border overflow-hidden mb-4"
+          className="rounded-card border border-border overflow-x-auto mb-4"
         >
           {/* Table header */}
           <div
             role="row"
-            className={`grid grid-cols-[1fr_1fr_100px_110px_36px] ${TABLE_HEADER_BAR_CLS}`}
+            className={`grid grid-cols-[1fr_1fr_100px_110px_36px] min-w-[640px] ${TABLE_HEADER_BAR_CLS}`}
           >
             {["Member", "Email", "Role", "Last active"].map((h) => (
               <span
@@ -393,7 +393,7 @@ function TeamTab() {
               <div
                 key={m.email}
                 role="row"
-                className={`grid grid-cols-[1fr_1fr_100px_110px_36px] ${TABLE_ROW_CLS}`}
+                className={`grid grid-cols-[1fr_1fr_100px_110px_36px] min-w-[640px] ${TABLE_ROW_CLS}`}
               >
                 {/* Avatar + name */}
                 <div role="cell" className="flex items-center gap-2.5">
@@ -662,12 +662,12 @@ function BillingTab() {
         <div
           role="table"
           aria-label="Invoices"
-          className="rounded-card border border-border overflow-hidden"
+          className="rounded-card border border-border overflow-x-auto"
         >
           {/* Header */}
           <div
             role="row"
-            className={`grid grid-cols-[100px_90px_90px_1fr_80px] ${TABLE_HEADER_BAR_CLS}`}
+            className={`grid grid-cols-[100px_90px_90px_1fr_80px] min-w-[520px] ${TABLE_HEADER_BAR_CLS}`}
           >
             {["Date", "Amount", "Status", "Invoice ID"].map((h) => (
               <span
@@ -687,7 +687,7 @@ function BillingTab() {
             <div
               key={inv.id}
               role="row"
-              className={`grid grid-cols-[100px_90px_90px_1fr_80px] ${TABLE_ROW_CLS}`}
+              className={`grid grid-cols-[100px_90px_90px_1fr_80px] min-w-[520px] ${TABLE_ROW_CLS}`}
             >
               <span role="cell" className={META_TEXT_CLS}>
                 {inv.date}
@@ -761,7 +761,7 @@ function ApiKeysTab() {
       </h2>
 
       {/* Info + create */}
-      <div className="flex items-start gap-3 mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-start gap-3 mb-5">
         <div className="flex-1 rounded-card border border-border bg-muted px-4 py-3 font-body text-[12px] text-muted-foreground leading-relaxed">
           For open ecosystem integration. Full API docs at{" "}
           <a
@@ -794,12 +794,12 @@ function ApiKeysTab() {
         <div
           role="table"
           aria-label="API keys"
-          className="rounded-card border border-border overflow-hidden"
+          className="rounded-card border border-border overflow-x-auto"
         >
           {/* Header */}
           <div
             role="row"
-            className={`grid grid-cols-[1fr_100px_100px_80px_120px] ${TABLE_HEADER_BAR_CLS}`}
+            className={`grid grid-cols-[1fr_100px_100px_80px_120px] min-w-[640px] ${TABLE_HEADER_BAR_CLS}`}
           >
             {["Key", "Created", "Last used", "Scopes", "Actions"].map((h) => (
               <span
@@ -819,7 +819,7 @@ function ApiKeysTab() {
               <div
                 key={k.name}
                 role="row"
-                className={`grid grid-cols-[1fr_100px_100px_80px_120px] px-4 py-3.5 border-b border-border last:border-0 items-center`}
+                className={`grid grid-cols-[1fr_100px_100px_80px_120px] min-w-[640px] px-4 py-3.5 border-b border-border last:border-0 items-center`}
               >
                 <div role="cell">
                   <div className="font-body text-[13px] font-medium text-foreground mb-0.5">
@@ -981,14 +981,16 @@ export default function Settings() {
     <div className="max-w-3xl">
       <h1 className="sr-only">Settings</h1>
       <Tabs defaultValue="company" variant="underline">
-        <TabsList>
-          {TABS.map(({ value, label, icon: Icon }) => (
-            <TabsTrigger key={value} value={value}>
-              <Icon size={14} aria-hidden="true" className="mr-1.5" />
-              {label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0">
+          <TabsList className="min-w-max">
+            {TABS.map(({ value, label, icon: Icon }) => (
+              <TabsTrigger key={value} value={value}>
+                <Icon size={14} aria-hidden="true" className="mr-1.5" />
+                {label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
 
         <TabsContent value="company">
           <CompanyTab />

@@ -97,7 +97,7 @@ interface PeriodPickerProps {
 function PeriodPicker({ value, onChange, onCustomClick }: PeriodPickerProps) {
   return (
     <div
-      className="flex items-center gap-1.5"
+      className="flex flex-wrap items-center gap-1.5"
       role="group"
       aria-label="Date range"
     >
@@ -111,10 +111,10 @@ function PeriodPicker({ value, onChange, onCustomClick }: PeriodPickerProps) {
             aria-label={PERIOD_ARIA[p]}
             aria-pressed={active}
             className={cn(
-              "px-3 py-1.5 rounded-btn font-mono text-label cursor-pointer transition-colors border",
+              "px-3 py-1.5 rounded-btn font-mono text-label cursor-pointer transition-colors duration-150 ease-out border",
               active
                 ? "bg-grid-red text-white border-grid-red"
-                : "bg-transparent text-muted-foreground border-border hover:bg-muted",
+                : "bg-transparent text-muted-foreground border-border hover:bg-muted hover:text-foreground",
             )}
           >
             {p}
@@ -125,7 +125,7 @@ function PeriodPicker({ value, onChange, onCustomClick }: PeriodPickerProps) {
       <button
         type="button"
         aria-label="Open custom date range picker"
-        className="px-3 py-1.5 rounded-btn font-mono text-label cursor-pointer transition-colors border bg-transparent text-muted-foreground border-border hover:bg-muted"
+        className="px-3 py-1.5 rounded-btn font-mono text-label cursor-pointer transition-colors duration-150 ease-out border bg-transparent text-muted-foreground border-border hover:bg-muted hover:text-foreground"
         onClick={onCustomClick}
       >
         Custom
@@ -161,7 +161,7 @@ function ExportDropdown() {
         <button
           type="button"
           aria-label="Export analytics"
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-btn font-mono text-label cursor-pointer transition-colors border bg-transparent text-muted-foreground border-border hover:bg-muted"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-btn font-mono text-label cursor-pointer transition-colors duration-150 ease-out border bg-transparent text-muted-foreground border-border hover:bg-muted hover:text-foreground"
         >
           <Download className="h-3 w-3" aria-hidden="true" />
           Export
@@ -623,7 +623,8 @@ function StationTable({ period }: { period: Period }) {
         </button>
       </div>
 
-      <table className="w-full border-collapse">
+      <div className="overflow-x-auto">
+      <table className="w-full border-collapse min-w-[640px]">
         <thead>
           <tr
             className="bg-muted border-b border-border grid"
@@ -645,7 +646,7 @@ function StationTable({ period }: { period: Period }) {
             <tr
               key={row.id}
               className={cn(
-                "grid px-5 py-2.5 border-b border-border last:border-b-0 text-body-sm items-center",
+                "grid px-5 py-2.5 border-b border-border last:border-b-0 text-body-sm items-center transition-colors duration-100 ease-out hover:bg-muted",
                 i % 2 === 1 ? "bg-muted/40" : "",
               )}
               style={{
@@ -687,6 +688,7 @@ function StationTable({ period }: { period: Period }) {
           ))}
         </tbody>
       </table>
+      </div>
     </section>
   );
 }
@@ -739,9 +741,9 @@ function CustomerInsightsPanel({ period }: { period: Period }) {
       >
         Customer insights
       </h3>
-      <div className="grid grid-cols-4 divide-x divide-border">
+      <div className="grid grid-cols-2 gap-y-4 sm:divide-x sm:divide-border lg:grid-cols-4">
         {items.map((item, i) => (
-          <div key={i} className="px-5 first:pl-0">
+          <div key={i} className="px-3 sm:px-5 sm:first:pl-0">
             <div className="font-mono text-[9px] uppercase tracking-widest mb-1.5 text-muted-foreground">
               {item.label}
             </div>
@@ -786,7 +788,7 @@ function KpiCard({
         : "text-muted-foreground";
 
   return (
-    <div className="rounded-card border border-border bg-card p-5 flex flex-col gap-2">
+    <div className="rounded-card border border-border bg-card p-5 flex flex-col gap-2 transition-shadow duration-200 ease-out hover:shadow-md">
       <span className="font-mono text-label uppercase tracking-widest text-muted-foreground">
         {label}
       </span>
@@ -843,7 +845,7 @@ export default function Analytics() {
       <h2 className="sr-only">Analytics</h2>
 
       {/* Controls row */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <PeriodPicker
           value={period}
           onChange={setPeriod}
@@ -860,7 +862,7 @@ export default function Analytics() {
       )}
 
       {/* KPI row */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {loading ? (
           <>
             <KpiSkeleton />
@@ -869,7 +871,7 @@ export default function Analytics() {
             <KpiSkeleton />
           </>
         ) : !kpi ? (
-          <div className="col-span-4">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-4">
             <PanelMessage
               title="KPIs"
               body="No analytics data for this period yet."
@@ -910,7 +912,7 @@ export default function Analytics() {
       </div>
 
       {/* 2x2 chart grid */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {/* 1. Revenue trend */}
         {loading ? (
           <ChartSkeleton title="Revenue trend" />

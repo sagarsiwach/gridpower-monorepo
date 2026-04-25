@@ -52,17 +52,19 @@ export default function Login() {
         aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
         aria-pressed={isDark}
         className={[
-          "absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1.5 rounded-btn border border-border text-[12px] font-body",
+          "absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-1.5 px-3 py-1.5 rounded-btn border border-border text-[12px] font-body",
           "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground",
-          "cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "cursor-pointer transition-[color,background-color,box-shadow] duration-150 ease-out outline-none focus-visible:ring-2 focus-visible:ring-primary",
         ].join(" ")}
       >
-        {isDark ? <Sun size={13} /> : <Moon size={13} />}
+        <span className="inline-flex transition-transform duration-200 ease-out" style={{ transform: isDark ? "rotate(0deg)" : "rotate(-30deg)" }}>
+          {isDark ? <Sun size={13} /> : <Moon size={13} />}
+        </span>
         <span>{isDark ? "Light mode" : "Dark mode"}</span>
       </button>
 
       {/* Login card */}
-      <div className="w-full max-w-[400px] rounded-modal border border-border bg-card p-10 shadow-lg">
+      <div className="w-full max-w-[400px] mx-4 rounded-modal border border-border bg-card p-6 sm:p-8 md:p-10 shadow-lg">
         {/* Logo, doubles as the page h1 */}
         <h1 className="flex items-center gap-2.5 mb-8 m-0">
           <GridMark size={28} />
@@ -162,7 +164,10 @@ export default function Login() {
             size="lg"
             disabled={loading}
             aria-busy={loading}
-            className="w-full mt-1 cursor-pointer"
+            className={[
+              "w-full mt-1 cursor-pointer transition-transform duration-200 ease-out",
+              loading ? "scale-[0.98]" : "scale-100",
+            ].join(" ")}
           >
             {loading ? (
               <>

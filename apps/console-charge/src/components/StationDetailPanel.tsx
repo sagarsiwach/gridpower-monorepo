@@ -114,7 +114,7 @@ function PortCell({ port }: { port: Port }) {
 
 function PortGridSkeleton() {
   return (
-    <div className="grid grid-cols-3 gap-1.5" aria-hidden="true">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-6 gap-1.5" aria-hidden="true">
       {Array.from({ length: 6 }).map((_, i) => (
         <div
           key={i}
@@ -227,7 +227,7 @@ export function StationDetailPanel({
         {loading ? (
           <PortGridSkeleton />
         ) : (
-          <div className="grid grid-cols-3 gap-1.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-6 gap-1.5">
             {displayPorts.map((port) => (
               <PortCell key={port.id} port={port} />
             ))}

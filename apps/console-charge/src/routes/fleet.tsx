@@ -342,8 +342,9 @@ function FleetTable({
           description="Add your first fleet to start tracking corporate accounts."
         />
       ) : (
+        <div className="overflow-x-auto">
         <table
-          className="w-full"
+          className="w-full min-w-[760px]"
           role="table"
           aria-label="Fleet vehicles"
         >
@@ -426,6 +427,7 @@ function FleetTable({
             ))}
           </tbody>
         </table>
+        </div>
       )}
     </section>
   );
@@ -433,8 +435,8 @@ function FleetTable({
 
 function TableSkeleton() {
   return (
-    <div aria-busy="true" aria-live="polite">
-      <div className={`${GRID_COLS} px-5 py-2 bg-muted border-b border-border`}>
+    <div aria-busy="true" aria-live="polite" className="overflow-x-auto">
+      <div className={`${GRID_COLS} px-5 py-2 bg-muted border-b border-border min-w-[760px]`}>
         {COLUMNS.map((col) => (
           <span
             key={col.label || "skeleton-head"}
@@ -549,7 +551,7 @@ export default function Fleet() {
   return (
     <div className="flex flex-col gap-5">
       {/* ── Header row ── */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex items-center gap-2 flex-wrap" role="tablist" aria-label="Filter by depot">
           {depotNames.map((d) => {
             const active = activeDepot === d;
@@ -583,13 +585,13 @@ export default function Fleet() {
 
       {/* ── Depot overview strip ── */}
       {activeDepot === "all" ? (
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {DEPOTS.map((depot) => (
             <DepotOverviewCard key={depot.id} {...depot} />
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard
             label="Vehicles in fleet"
             value={
@@ -636,7 +638,7 @@ export default function Fleet() {
       />
 
       {/* ── Charge queue + route planner ── */}
-      <div className="grid grid-cols-[3fr_2fr] gap-4">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[3fr_2fr]">
         <ChargeQueueWidget queue={chargeQueue} />
         <RoutePlannerPlaceholder />
       </div>

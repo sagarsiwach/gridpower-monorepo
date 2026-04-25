@@ -79,9 +79,12 @@ function AlertsPanel({
         <button
           type="button"
           aria-label="View all alerts"
-          className="font-body text-[12px] text-grid-red bg-transparent border-none cursor-pointer p-0"
+          className="group inline-flex items-center gap-0.5 font-body text-[12px] text-grid-red bg-transparent border-none cursor-pointer p-0 transition-colors duration-150 ease-out hover:opacity-80"
         >
-          View all →
+          View all
+          <span className="inline-block transition-transform duration-150 ease-out group-hover:translate-x-0.5">
+            →
+          </span>
         </button>
       </div>
 
@@ -153,7 +156,7 @@ function AlertsPanel({
               <button
                 type="button"
                 aria-label={`Acknowledge alert from ${alert.station}`}
-                className="font-body text-[11px] rounded-[4px] border border-border text-muted-foreground px-2 py-0.5 cursor-pointer bg-transparent transition-colors hover:bg-muted"
+                className="font-body text-[11px] rounded-[4px] border border-border text-muted-foreground px-2 py-0.5 cursor-pointer bg-transparent transition-colors duration-150 ease-out hover:bg-muted hover:text-foreground"
               >
                 Ack
               </button>
@@ -231,7 +234,7 @@ function RecentSessionsPanel({
               {RECENT_SESSIONS.map((s) => (
                 <TableRow
                   key={s.id}
-                  className="border-border hover:bg-muted"
+                  className="border-border hover:bg-muted transition-colors duration-100 ease-out"
                 >
                   <TableCell className="font-mono text-[11px] text-muted-foreground">
                     {s.time}
@@ -303,52 +306,60 @@ export default function Dashboard() {
   }));
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4 lg:gap-5">
       {/* ── Row 1: StatCards ───────────────────────────────────────────────── */}
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <StatCard
-          theme={isDark ? "dark" : "light"}
-          label="Revenue today"
-          value={
-            <span className="font-mono text-grid-red">
-              {STATS.revenueToday}
-            </span>
-          }
-          trend={`▲ ${STATS.revenueTrend}`}
-          trendDir="up"
-        />
-        <StatCard
-          theme={isDark ? "dark" : "light"}
-          label="Stations online"
-          value={
-            <span className="font-mono">
-              {STATS.stationsOnline}
-              <span className="font-mono text-h4 text-muted-foreground">
-                /{STATS.stationsTotal}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+        <div className="rounded-card transition-shadow duration-200 ease-out hover:shadow-md">
+          <StatCard
+            theme={isDark ? "dark" : "light"}
+            label="Revenue today"
+            value={
+              <span className="font-mono text-grid-red">
+                {STATS.revenueToday}
               </span>
-            </span>
-          }
-          trend={STATS.stationsTrend}
-          trendDir="neutral"
-        />
-        <StatCard
-          theme={isDark ? "dark" : "light"}
-          label="Sessions today"
-          value={
-            <span className="font-mono">{STATS.sessionsToday}</span>
-          }
-          trend={`▲ ${STATS.sessionsTrend}`}
-          trendDir="up"
-        />
-        <StatCard
-          theme={isDark ? "dark" : "light"}
-          label="Energy delivered"
-          value={
-            <span className="font-mono">{STATS.energyDelivered}</span>
-          }
-          trend={`▲ ${STATS.energyTrend}`}
-          trendDir="up"
-        />
+            }
+            trend={`▲ ${STATS.revenueTrend}`}
+            trendDir="up"
+          />
+        </div>
+        <div className="rounded-card transition-shadow duration-200 ease-out hover:shadow-md">
+          <StatCard
+            theme={isDark ? "dark" : "light"}
+            label="Stations online"
+            value={
+              <span className="font-mono">
+                {STATS.stationsOnline}
+                <span className="font-mono text-h4 text-muted-foreground">
+                  /{STATS.stationsTotal}
+                </span>
+              </span>
+            }
+            trend={STATS.stationsTrend}
+            trendDir="neutral"
+          />
+        </div>
+        <div className="rounded-card transition-shadow duration-200 ease-out hover:shadow-md">
+          <StatCard
+            theme={isDark ? "dark" : "light"}
+            label="Sessions today"
+            value={
+              <span className="font-mono">{STATS.sessionsToday}</span>
+            }
+            trend={`▲ ${STATS.sessionsTrend}`}
+            trendDir="up"
+          />
+        </div>
+        <div className="rounded-card transition-shadow duration-200 ease-out hover:shadow-md">
+          <StatCard
+            theme={isDark ? "dark" : "light"}
+            label="Energy delivered"
+            value={
+              <span className="font-mono">{STATS.energyDelivered}</span>
+            }
+            trend={`▲ ${STATS.energyTrend}`}
+            trendDir="up"
+          />
+        </div>
       </div>
 
       {/* ── Row 2: Revenue chart ────────────────────────────────────────────── */}
@@ -374,7 +385,7 @@ export default function Dashboard() {
       <AlertsPanel />
 
       {/* ── Row 4: Heatmap + Top stations ──────────────────────────────────── */}
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-5">
         <HeatmapChart
           data={HEATMAP_DATA}
           rowLabels={HEATMAP_ROW_LABELS}
