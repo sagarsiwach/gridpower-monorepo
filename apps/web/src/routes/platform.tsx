@@ -7,19 +7,18 @@ import {
   SectionLabel,
   SectionDivider,
   FeatureCard,
-  ImgPlaceholder,
   CTASection,
 } from "@gridpower/ui";
 import { Globe, Lock, Database, Zap, Plug, Server } from "lucide-react";
 
 export const meta: MetaFunction = () => [
-  { title: "The GridPower platform — Open APIs, OEM partnerships | GridPower" },
+  { title: "The GridPower platform: Open APIs, OEM partnerships | GridPower" },
   {
     name: "description",
     content:
       "GridOS connects your storage, chargers, and powertrain BMS. One API. Zero fragmentation.",
   },
-  { property: "og:title", content: "The GridPower platform — Open APIs, OEM partnerships | GridPower" },
+  { property: "og:title", content: "The GridPower platform: Open APIs, OEM partnerships | GridPower" },
   {
     property: "og:description",
     content:
@@ -35,7 +34,7 @@ export const meta: MetaFunction = () => [
 export default function PlatformPage() {
   return (
     <div>
-      {/* Hero — dark bg matching prototype */}
+      {/* Hero: dark bg matching prototype */}
       <section className="relative overflow-hidden bg-sand-12 py-24 min-h-[80vh] flex items-center">
         <DotGrid color="rgba(58,57,55,0.7)" />
         <div className="relative mx-auto max-w-7xl px-10 w-full grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20 items-center">
@@ -61,21 +60,47 @@ export default function PlatformPage() {
             </div>
           </div>
 
-          {/* Visual — architecture diagram placeholder */}
+          {/* Visual: live console preview rendered as code + layer cards */}
           <div className="hidden lg:flex flex-col gap-4">
-            <ImgPlaceholder
-              theme="dark"
-              aspect="16/9"
-              label="GridPower Console · Dashboard · Energy + Charge"
-            />
+            <div className="bg-dark-2 border border-dark-6 rounded-card p-6 font-mono text-[12px] leading-relaxed text-dark-11">
+              <div className="flex items-center justify-between border-b border-dark-6 pb-3 mb-4">
+                <span className="text-grid-red uppercase tracking-widest text-label">
+                  GET /v1/sites/site_abc/overview
+                </span>
+                <span className="text-dark-9 uppercase tracking-widest text-label">
+                  200 OK · 47ms
+                </span>
+              </div>
+              <pre className="text-dark-12 m-0 p-0 whitespace-pre-wrap">{`{
+  "fleet": {
+    "sites":     12,
+    "chargers":  87,
+    "batteries": 24,
+    "vehicles":  340
+  },
+  "live": {
+    "kwh_today":   1842,
+    "soc_percent": 72,
+    "sessions":    18,
+    "uptime":      "99.97%"
+  }
+}`}</pre>
+            </div>
             <div className="grid grid-cols-3 gap-3">
-              {["Storage", "Charging", "Powertrain"].map((layer) => (
+              {[
+                { label: "Storage", count: "24" },
+                { label: "Charging", count: "87" },
+                { label: "Powertrain", count: "340" },
+              ].map((layer) => (
                 <div
-                  key={layer}
-                  className="bg-dark-3 border border-dark-6 rounded-card p-4 flex items-center justify-center"
+                  key={layer.label}
+                  className="bg-dark-3 border border-dark-6 rounded-card p-4 flex flex-col items-center justify-center"
                 >
-                  <span className="font-mono text-label text-dark-9 uppercase tracking-widest text-center">
-                    {layer}
+                  <span className="font-display text-h3 font-semibold text-dark-12">
+                    {layer.count}
+                  </span>
+                  <span className="font-mono text-label text-dark-9 uppercase tracking-widest text-center mt-1">
+                    {layer.label}
                   </span>
                 </div>
               ))}
@@ -84,7 +109,7 @@ export default function PlatformPage() {
         </div>
       </section>
 
-      {/* Three pillars — Open APIs / OEM partnerships / Data sovereignty */}
+      {/* Three pillars: Open APIs / OEM partnerships / Data sovereignty */}
       <section className="bg-sand-1 py-24">
         <SectionDivider />
         <div className="mx-auto max-w-7xl px-10 pt-16">
@@ -201,12 +226,22 @@ export default function PlatformPage() {
             ))}
           </div>
 
-          {/* Architecture image placeholder */}
-          <div className="mt-10">
-            <ImgPlaceholder
-              aspect="16/9"
-              label="GridOS architecture diagram — Hardware → GridOS → Apps"
-            />
+          {/* Drenched red band: single concrete fact about openness */}
+          <div className="mt-10 relative overflow-hidden rounded-card bg-grid-red px-10 py-14">
+            <DotGrid color="rgba(255,255,255,0.15)" />
+            <div className="relative grid grid-cols-1 gap-10 md:grid-cols-[auto_1fr] md:items-center">
+              <div className="font-display text-[clamp(48px,7vw,96px)] font-semibold leading-none text-white">
+                0
+              </div>
+              <div>
+                <p className="font-mono text-label uppercase tracking-widest text-white/85 mb-2">
+                  NDAS · CERTIFICATION GATES · BLACK BOXES
+                </p>
+                <p className="font-heading text-h3 font-semibold leading-tight text-white max-w-xl">
+                  Every protocol published. Every endpoint documented. Switch hardware tomorrow without losing a single kWh of history.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -315,13 +350,13 @@ console.log(session.id); // session_456def
             <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-sand-2 border border-sand-6 rounded-btn">
               <Server className="h-4 w-4 text-sand-9" />
               <span className="font-mono text-label text-sand-11 uppercase tracking-widest">
-                Full API docs — Q2 2026
+                Full API docs · Q2 2026
               </span>
             </div>
             <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-sand-2 border border-sand-6 rounded-btn">
               <Database className="h-4 w-4 text-sand-9" />
               <span className="font-mono text-label text-sand-11 uppercase tracking-widest">
-                MQTT reference — Q2 2026
+                MQTT reference · Q2 2026
               </span>
             </div>
           </div>

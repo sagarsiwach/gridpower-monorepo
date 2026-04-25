@@ -3,17 +3,17 @@ import { VerticalLayout } from "~/components/verticals/vertical-layout";
 import type { VerticalData } from "~/components/verticals/vertical-layout";
 
 export const meta: MetaFunction = () => [
-  { title: "GridDrive — Open EV powertrain platform for OEMs | GridPower" },
+  { title: "GridDrive: Open EV powertrain platform for OEMs | GridPower" },
   {
     name: "description",
     content:
-      "GridDrive delivers complete powertrain platforms for 2W, 3W, and 4W OEMs — motors, controllers, battery packs. Full specs, no NDA. Launching Q2 2026.",
+      "GridDrive delivers complete powertrain platforms for 2W, 3W, and 4W OEMs (motors, controllers, battery packs). Full specs, no NDA. Launching Q2 2026.",
   },
-  { property: "og:title", content: "GridDrive — Open EV powertrain platform for OEMs | GridPower" },
+  { property: "og:title", content: "GridDrive: Open EV powertrain platform for OEMs | GridPower" },
   {
     property: "og:description",
     content:
-      "GridDrive delivers complete powertrain platforms for 2W, 3W, and 4W OEMs — motors, controllers, battery packs. Full specs, no NDA. Launching Q2 2026.",
+      "GridDrive delivers complete powertrain platforms for 2W, 3W, and 4W OEMs (motors, controllers, battery packs). Full specs, no NDA. Launching Q2 2026.",
   },
   { property: "og:url", content: "/drive" },
   { property: "og:image", content: "/og-default.svg" },
@@ -26,7 +26,7 @@ const data: VerticalData = {
   heroLabel: "POWERTRAIN · PLATFORM",
   heroHeadline: "Electrify any vehicle.",
   heroSub:
-    "Complete powertrain platforms for 2W, 3W, and 4W OEMs. Motors, controllers, battery packs — full specs published.",
+    "Complete powertrain platforms for 2W, 3W, and 4W OEMs. Motors, controllers, battery packs. Full specs published.",
   heroCta1: "Explore platforms",
   heroCta1Href: "/drive/solutions/vehicles",
   heroCta2: "View products",

@@ -14,13 +14,13 @@ import {
 import { Plug } from "lucide-react";
 
 export const meta: MetaFunction = () => [
-  { title: "GridCharge products — EV chargers | GridPower" },
+  { title: "GridCharge products: EV chargers | GridPower" },
   {
     name: "description",
     content:
       "AC wallboxes to ultra-fast DC highway chargers. OCPP 2.0.1 native. Full specs published.",
   },
-  { property: "og:title", content: "GridCharge products — EV chargers | GridPower" },
+  { property: "og:title", content: "GridCharge products: EV chargers | GridPower" },
   {
     property: "og:description",
     content:

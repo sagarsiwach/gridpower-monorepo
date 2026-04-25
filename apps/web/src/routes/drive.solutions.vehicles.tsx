@@ -10,7 +10,6 @@ import {
   Breadcrumb,
   CTASection,
   DotGrid,
-  ImgPlaceholder,
   ProcessSteps,
   Tabs,
   TabsList,
@@ -19,13 +18,13 @@ import {
 } from "@gridpower/ui";
 
 export const meta: MetaFunction = () => [
-  { title: "OEM powertrain integration — GridDrive | GridPower" },
+  { title: "OEM powertrain integration: GridDrive | GridPower" },
   {
     name: "description",
     content:
       "Complete powertrain platforms for OEMs. 2W, 3W, 4W. Full specs published. Launch Q2 2026.",
   },
-  { property: "og:title", content: "OEM powertrain integration — GridDrive | GridPower" },
+  { property: "og:title", content: "OEM powertrain integration: GridDrive | GridPower" },
   {
     property: "og:description",
     content:
@@ -82,7 +81,7 @@ const platforms = {
         label: "DOCUMENTATION",
         title: "Full specs, no NDA required",
         description:
-          "CAD models, BMS API, CAN protocol, wiring diagrams — all delivered before contract signing.",
+          "CAD models, BMS API, CAN protocol, wiring diagrams. All delivered before contract signing.",
       },
       {
         label: "RELIABILITY",
@@ -129,7 +128,7 @@ const platforms = {
         label: "DURABILITY",
         title: "Rated for cargo duty cycles",
         description:
-          "3 kW continuous, 6 kW peak — designed for fully loaded cargo three-wheelers on Indian roads.",
+          "3 kW continuous, 6 kW peak. Designed for fully loaded cargo three-wheelers on Indian roads.",
       },
       {
         label: "THERMAL",
@@ -327,11 +326,38 @@ export default function DriveVehiclesSolutionPage() {
                 <SectionDivider />
                 <div className="mx-auto max-w-7xl px-6 pt-16">
                   <SectionLabel>SYSTEM ARCHITECTURE</SectionLabel>
-                  <ImgPlaceholder
-                    label={p.diagramLabel}
-                    aspect="16/9"
-                    className="w-full"
-                  />
+                  <h2 className="font-heading text-h2 font-semibold text-sand-12 tracking-tight mb-10">
+                    {p.diagramLabel.replace(/→/g, "→")}
+                  </h2>
+                  <div className="flex flex-col gap-px overflow-hidden rounded-card border border-sand-6 md:flex-row">
+                    {p.diagramLabel.split(" → ").map((stage, i, arr) => (
+                      <div
+                        key={`${stage}-${i}`}
+                        className={[
+                          "flex-1 p-6 flex flex-col justify-between min-h-[140px]",
+                          i % 2 === 1 ? "bg-sand-12" : "bg-sand-1",
+                        ].join(" ")}
+                      >
+                        <div
+                          className={[
+                            "font-mono text-label uppercase tracking-widest mb-3",
+                            i % 2 === 1 ? "text-grid-red" : "text-sand-9",
+                          ].join(" ")}
+                        >
+                          Stage {String(i + 1).padStart(2, "0")}
+                          {i === arr.length - 1 ? " · OUT" : ""}
+                        </div>
+                        <p
+                          className={[
+                            "font-body text-body-sm leading-relaxed",
+                            i % 2 === 1 ? "text-dark-11" : "text-sand-11",
+                          ].join(" ")}
+                        >
+                          {stage}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </section>
 

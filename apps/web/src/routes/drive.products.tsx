@@ -14,13 +14,13 @@ import {
 import { Cpu } from "lucide-react";
 
 export const meta: MetaFunction = () => [
-  { title: "GridDrive products — OEM powertrains | GridPower" },
+  { title: "GridDrive products: OEM powertrains | GridPower" },
   {
     name: "description",
     content:
       "Motors, controllers, and battery packs for 2W, 3W, and 4W OEM platforms. No NDA required.",
   },
-  { property: "og:title", content: "GridDrive products — OEM powertrains | GridPower" },
+  { property: "og:title", content: "GridDrive products: OEM powertrains | GridPower" },
   {
     property: "og:description",
     content:

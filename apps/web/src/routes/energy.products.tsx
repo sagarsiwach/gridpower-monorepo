@@ -14,17 +14,17 @@ import {
 import { Package } from "lucide-react";
 
 export const meta: MetaFunction = () => [
-  { title: "GridEnergy products — Battery storage systems | GridPower" },
+  { title: "GridEnergy products: Battery storage systems | GridPower" },
   {
     name: "description",
     content:
-      "Batteries, inverters, and ESS from 5 kWh to 1 MWh. Full specs published — no NDA required.",
+      "Batteries, inverters, and ESS from 5 kWh to 1 MWh. Full specs published. No NDA required.",
   },
-  { property: "og:title", content: "GridEnergy products — Battery storage systems | GridPower" },
+  { property: "og:title", content: "GridEnergy products: Battery storage systems | GridPower" },
   {
     property: "og:description",
     content:
-      "Batteries, inverters, and ESS from 5 kWh to 1 MWh. Full specs published — no NDA required.",
+      "Batteries, inverters, and ESS from 5 kWh to 1 MWh. Full specs published. No NDA required.",
   },
   { property: "og:url", content: "/energy/products" },
   { property: "og:image", content: "/og-default.svg" },
@@ -159,7 +159,7 @@ export default function EnergyProductsPage() {
           </h1>
           <p className="font-body text-body-lg text-sand-11 max-w-xl leading-relaxed">
             Batteries, inverters, and ESS from 5 kWh to 1 MWh. Full specs
-            published — no NDA required.
+            published. No NDA required.
           </p>
         </div>
       </section>

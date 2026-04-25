@@ -11,13 +11,13 @@ import {
 } from "@gridpower/ui";
 
 export const meta: MetaFunction = () => [
-  { title: "Contact us — GridPower" },
+  { title: "Contact us | GridPower" },
   {
     name: "description",
     content:
       "Tell us about your project and we'll come back within one working day.",
   },
-  { property: "og:title", content: "Contact us — GridPower" },
+  { property: "og:title", content: "Contact us | GridPower" },
   {
     property: "og:description",
     content:
@@ -31,7 +31,7 @@ export const meta: MetaFunction = () => [
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
   console.log("contact submission:", Object.fromEntries(form));
-  return { ok: true, message: "Thanks — we'll be in touch." };
+  return { ok: true, message: "Thanks. We'll be in touch." };
 }
 
 type ActionData = { ok: boolean; message: string };
@@ -228,7 +228,7 @@ export default function ContactPage() {
               <p className="font-body text-body-sm text-sand-11 leading-[1.8]">
                 DeltaEV Mobility Private Limited
                 <br />
-                GIDC Verna, Goa — 403 722
+                GIDC Verna, Goa, 403 722
                 <br />
                 India
               </p>

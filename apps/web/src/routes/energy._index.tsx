@@ -3,13 +3,13 @@ import { VerticalLayout } from "~/components/verticals/vertical-layout";
 import type { VerticalData } from "~/components/verticals/vertical-layout";
 
 export const meta: MetaFunction = () => [
-  { title: "GridEnergy — Battery storage for India | GridPower" },
+  { title: "GridEnergy: Battery storage for India | GridPower" },
   {
     name: "description",
     content:
       "GridEnergy delivers scalable battery energy storage systems for homes, commercial sites, and utility-scale projects across India. Launching Q2 2026.",
   },
-  { property: "og:title", content: "GridEnergy — Battery storage for India | GridPower" },
+  { property: "og:title", content: "GridEnergy: Battery storage for India | GridPower" },
   {
     property: "og:description",
     content:
@@ -26,7 +26,7 @@ const data: VerticalData = {
   heroLabel: "ENERGY STORAGE · THE OPEN GRID",
   heroHeadline: "Energy that works for you, not against you.",
   heroSub:
-    "Residential to grid-scale storage — 5 kWh to 1 MWh. Hybrid inverters, solar integration, open protocols.",
+    "Residential to grid-scale storage. 5 kWh to 1 MWh. Hybrid inverters, solar integration, open protocols.",
   heroCta1: "Explore solutions",
   heroCta1Href: "/energy/solutions/home",
   heroCta2: "View products",
@@ -41,7 +41,7 @@ const data: VerticalData = {
     },
     {
       title: "Products",
-      hook: "COMO, ATLAS, ROSA — full specs published.",
+      hook: "COMO, ATLAS, ROSA. Full specs published.",
       href: "/energy/products",
     },
     {
