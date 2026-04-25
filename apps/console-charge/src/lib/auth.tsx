@@ -32,9 +32,11 @@ const DEFAULT_USER: AuthUser = {
 const AuthContext = React.createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  // CON.2: Start unauthenticated so the login page is visible on first load.
-  // signIn() sets the mock user; signOut() clears it.
-  const [user, setUser] = React.useState<AuthUser | null>(null);
+  // Default authed so SSR renders protected routes directly without a
+  // client-side bounce through /login (which triggers a lazy-route discovery
+  // fetch that intermittently fails on Workers with HTTP/2 protocol errors).
+  // Real auth wiring (loader-based redirect from a session cookie) lands later.
+  const [user, setUser] = React.useState<AuthUser | null>(DEFAULT_USER);
 
   const signIn = React.useCallback((override?: Partial<AuthUser>) => {
     setUser({ ...DEFAULT_USER, ...override });
