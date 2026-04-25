@@ -43,219 +43,221 @@ function alertDotColor(severity: AlertSeverity): string {
 
 // ─── Alerts panel ─────────────────────────────────────────────────────────────
 
-function AlertsPanel({ isDark }: { isDark: boolean }) {
+function AlertsPanel({
+  loading = false,
+  error = false,
+}: {
+  loading?: boolean;
+  error?: boolean;
+}) {
   const unreadCount = ALERTS.filter((a) => !a.read).length;
+  const isEmpty = !loading && !error && ALERTS.length === 0;
 
   return (
-    <div
-      className={[
-        "rounded-card border overflow-hidden",
-        isDark ? "bg-dark-2 border-dark-6" : "bg-card border-border",
-      ].join(" ")}
+    <section
+      aria-labelledby="alerts-heading"
+      className="rounded-card border border-border bg-card overflow-hidden"
     >
       {/* Header */}
-      <div
-        className={[
-          "flex items-center justify-between px-5 py-3.5 border-b",
-          isDark ? "border-dark-6" : "border-border",
-        ].join(" ")}
-      >
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-border">
         <div className="flex items-center gap-2">
-          <span
-            className={[
-              "font-body text-body-sm font-semibold",
-              isDark ? "text-dark-12" : "text-foreground",
-            ].join(" ")}
+          <h2
+            id="alerts-heading"
+            className="font-body text-body-sm font-semibold text-foreground"
           >
             Alerts
-          </span>
+          </h2>
           {unreadCount > 0 && (
-            <span className="font-mono text-[10px] bg-primary text-white rounded-full px-1.5 py-0.5 leading-none">
+            <span
+              className="font-mono text-[10px] bg-primary text-white rounded-full px-1.5 py-0.5 leading-none"
+              aria-label={`${unreadCount} unread`}
+            >
               {unreadCount}
             </span>
           )}
         </div>
         <button
           type="button"
+          aria-label="View all alerts"
           className="font-body text-[12px] text-grid-red bg-transparent border-none cursor-pointer p-0"
         >
           View all →
         </button>
       </div>
 
-      {/* Alert rows: severity dot + bold-on-unread carry meaning. */}
-      {/* No left-stripe (anti-pattern: side-tab accent border). */}
-      {ALERTS.slice(0, 5).map((alert: Alert, i) => (
-        <div
-          key={alert.id}
-          className={[
-            "flex items-start gap-3 px-5 py-3",
-            i < 4 ? "border-b border-border" : "",
-            !alert.read ? "bg-muted" : "",
-          ].join(" ")}
-        >
-          {/* Color dot */}
-          <div
-            className="mt-1 shrink-0 w-2 h-2 rounded-full"
-            style={{ background: alertDotColor(alert.severity) }}
-            aria-hidden="true"
-          />
-
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-baseline gap-1.5 mb-0.5">
-              <span
-                className={[
-                  "text-[13px] text-foreground",
-                  !alert.read ? "font-medium" : "font-normal",
-                ].join(" ")}
-              >
-                {alert.station}
-              </span>
-              {!alert.read && (
-                <span
-                  className="inline-block w-1.5 h-1.5 rounded-full bg-primary shrink-0"
-                  aria-label="unread"
-                />
-              )}
-            </div>
-            <p className="text-[12px] leading-snug text-muted-foreground">
-              {alert.message}
-            </p>
-          </div>
-
-          {/* Time + ack */}
-          <div className="flex flex-col items-end gap-1.5 shrink-0">
-            <span
-              className={[
-                "font-mono text-[10px] whitespace-nowrap",
-                isDark ? "text-dark-9" : "text-sand-9",
-              ].join(" ")}
-            >
-              {alert.timeAgo} ago
-            </span>
-            <button
-              type="button"
-              className={[
-                "font-body text-[11px] rounded-[4px] border px-2 py-0.5 cursor-pointer bg-transparent transition-colors",
-                isDark
-                  ? "border-dark-6 text-dark-9 hover:bg-dark-3"
-                  : "border-sand-6 text-sand-9 hover:bg-sand-3",
-              ].join(" ")}
-            >
-              Ack
-            </button>
-          </div>
+      {/* States */}
+      {loading && (
+        <div className="px-5 py-6 text-center text-[12px] text-muted-foreground">
+          Loading alerts…
         </div>
-      ))}
-    </div>
+      )}
+      {error && !loading && (
+        <div className="px-5 py-6 text-center text-[12px] text-error">
+          Couldn’t load alerts. Try again.
+        </div>
+      )}
+      {isEmpty && (
+        <div className="px-5 py-6 text-center text-[12px] text-muted-foreground">
+          All clear ✓
+        </div>
+      )}
+
+      {/* Alert rows: severity dot + bold-on-unread carry meaning. */}
+      {!loading &&
+        !error &&
+        !isEmpty &&
+        ALERTS.slice(0, 5).map((alert: Alert, i, arr) => (
+          <div
+            key={alert.id}
+            className={[
+              "flex items-start gap-3 px-5 py-3",
+              i < arr.length - 1 ? "border-b border-border" : "",
+              !alert.read ? "bg-muted" : "",
+            ].join(" ")}
+          >
+            {/* Color dot */}
+            <div
+              className="mt-1 shrink-0 w-2 h-2 rounded-full"
+              style={{ background: alertDotColor(alert.severity) }}
+              aria-hidden="true"
+            />
+
+            {/* Content */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-baseline gap-1.5 mb-0.5">
+                <span
+                  className={[
+                    "text-[13px] text-foreground",
+                    !alert.read ? "font-medium" : "font-normal",
+                  ].join(" ")}
+                >
+                  {alert.station}
+                </span>
+                {!alert.read && (
+                  <span
+                    className="inline-block w-1.5 h-1.5 rounded-full bg-primary shrink-0"
+                    aria-label="unread"
+                  />
+                )}
+              </div>
+              <p className="text-[12px] leading-snug text-muted-foreground">
+                {alert.message}
+              </p>
+            </div>
+
+            {/* Time + ack */}
+            <div className="flex flex-col items-end gap-1.5 shrink-0">
+              <span className="font-mono text-[10px] whitespace-nowrap text-muted-foreground">
+                {alert.timeAgo} ago
+              </span>
+              <button
+                type="button"
+                aria-label={`Acknowledge alert from ${alert.station}`}
+                className="font-body text-[11px] rounded-[4px] border border-border text-muted-foreground px-2 py-0.5 cursor-pointer bg-transparent transition-colors hover:bg-muted"
+              >
+                Ack
+              </button>
+            </div>
+          </div>
+        ))}
+    </section>
   );
 }
 
 // ─── Recent sessions table ─────────────────────────────────────────────────────
 
-function RecentSessionsPanel({ isDark }: { isDark: boolean }) {
+function RecentSessionsPanel({
+  loading = false,
+  error = false,
+}: {
+  loading?: boolean;
+  error?: boolean;
+}) {
+  const isEmpty = !loading && !error && RECENT_SESSIONS.length === 0;
+
   return (
-    <div
-      className={[
-        "rounded-card border overflow-hidden",
-        isDark ? "bg-dark-2 border-dark-6" : "bg-card border-border",
-      ].join(" ")}
+    <section
+      aria-labelledby="recent-sessions-heading"
+      className="rounded-card border border-border bg-card overflow-hidden"
     >
       {/* Header */}
-      <div
-        className={[
-          "flex items-center justify-between px-5 py-3.5 border-b",
-          isDark ? "border-dark-6" : "border-border",
-        ].join(" ")}
-      >
-        <span
-          className={[
-            "font-body text-body-sm font-semibold",
-            isDark ? "text-dark-12" : "text-foreground",
-          ].join(" ")}
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-border">
+        <h2
+          id="recent-sessions-heading"
+          className="font-body text-body-sm font-semibold text-foreground"
         >
           Recent sessions
-        </span>
-        <span className="font-mono text-[10px] tracking-[0.06em] text-success">
+        </h2>
+        <span
+          className="font-mono text-[10px] tracking-[0.06em] text-success"
+          aria-label="Live data"
+        >
           LIVE
         </span>
       </div>
 
-      <div className="overflow-x-auto">
-        <Table>
-          <TableHeader>
-            <TableRow
-              className={isDark ? "border-dark-6 bg-dark-3" : "border-border bg-sand-2"}
-            >
-              {["Time", "ID", "Station", "User", "kWh", "Amount"].map((h) => (
-                <TableHead
-                  key={h}
-                  className={[
-                    "font-mono text-[9px] tracking-[0.08em] uppercase",
-                    isDark ? "text-dark-9" : "text-sand-9",
-                  ].join(" ")}
-                >
-                  {h}
-                </TableHead>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {RECENT_SESSIONS.map((s) => (
-              <TableRow
-                key={s.id}
-                className={isDark ? "border-dark-6 hover:bg-dark-3" : "border-border hover:bg-sand-2"}
-              >
-                <TableCell
-                  className={[
-                    "font-mono text-[11px]",
-                    isDark ? "text-dark-9" : "text-sand-9",
-                  ].join(" ")}
-                >
-                  {s.time}
-                </TableCell>
-                <TableCell
-                  className={[
-                    "font-mono text-[11px]",
-                    isDark ? "text-dark-9" : "text-sand-9",
-                  ].join(" ")}
-                >
-                  {s.sessionId}
-                </TableCell>
-                <TableCell
-                  className={[
-                    "text-[12px]",
-                    isDark ? "text-dark-12" : "text-foreground",
-                  ].join(" ")}
-                >
-                  {s.station}
-                </TableCell>
-                <TableCell
-                  className={[
-                    "text-[12px]",
-                    isDark ? "text-dark-9" : "text-sand-9",
-                  ].join(" ")}
-                >
-                  {s.user}
-                </TableCell>
-                <TableCell
-                  className={[
-                    "font-mono text-[12px]",
-                    isDark ? "text-dark-12" : "text-foreground",
-                  ].join(" ")}
-                >
-                  {s.kwh}
-                </TableCell>
-                <TableCell className="font-mono text-[12px] font-medium text-grid-red">
-                  ₹{s.amount.toLocaleString("en-IN")}
-                </TableCell>
+      {loading && (
+        <div className="px-5 py-6 text-center text-[12px] text-muted-foreground">
+          Loading sessions…
+        </div>
+      )}
+      {error && !loading && (
+        <div className="px-5 py-6 text-center text-[12px] text-error">
+          Couldn’t load sessions. Try again.
+        </div>
+      )}
+      {isEmpty && (
+        <div className="px-5 py-6 text-center text-[12px] text-muted-foreground">
+          No sessions today yet
+        </div>
+      )}
+
+      {!loading && !error && !isEmpty && (
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="border-border bg-muted">
+                {["Time", "ID", "Station", "User", "kWh", "Amount"].map((h) => (
+                  <TableHead
+                    key={h}
+                    className="font-mono text-[9px] tracking-[0.08em] uppercase text-muted-foreground"
+                  >
+                    {h}
+                  </TableHead>
+                ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    </div>
+            </TableHeader>
+            <TableBody>
+              {RECENT_SESSIONS.map((s) => (
+                <TableRow
+                  key={s.id}
+                  className="border-border hover:bg-muted"
+                >
+                  <TableCell className="font-mono text-[11px] text-muted-foreground">
+                    {s.time}
+                  </TableCell>
+                  <TableCell className="font-mono text-[11px] text-muted-foreground">
+                    {s.sessionId}
+                  </TableCell>
+                  <TableCell className="text-[12px] text-foreground">
+                    {s.station}
+                  </TableCell>
+                  <TableCell className="text-[12px] text-muted-foreground">
+                    {s.user}
+                  </TableCell>
+                  <TableCell className="font-mono text-[12px] text-foreground">
+                    {s.kwh}
+                  </TableCell>
+                  <TableCell className="font-mono text-[12px] font-medium text-grid-red">
+                    ₹{s.amount.toLocaleString("en-IN")}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -321,12 +323,7 @@ export default function Dashboard() {
           value={
             <span className="font-mono">
               {STATS.stationsOnline}
-              <span
-                className={[
-                  "font-mono text-h4",
-                  isDark ? "text-dark-9" : "text-sand-9",
-                ].join(" ")}
-              >
+              <span className="font-mono text-h4 text-muted-foreground">
                 /{STATS.stationsTotal}
               </span>
             </span>
@@ -367,14 +364,14 @@ export default function Dashboard() {
         ]}
         xAxisKey="date"
         yUnit="₹"
-        title="Revenue — Last 30 days"
+        title="Revenue, last 30 days"
         subtitle="₹9.8L total · 4,281 sessions"
         chartHeight={160}
         theme={isDark ? "dark" : "light"}
       />
 
       {/* ── Row 3: Alerts ──────────────────────────────────────────────────── */}
-      <AlertsPanel isDark={isDark} />
+      <AlertsPanel />
 
       {/* ── Row 4: Heatmap + Top stations ──────────────────────────────────── */}
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
@@ -382,7 +379,7 @@ export default function Dashboard() {
           data={HEATMAP_DATA}
           rowLabels={HEATMAP_ROW_LABELS}
           colLabels={HEATMAP_COL_LABELS}
-          title="Utilisation heatmap — this week"
+          title="Utilisation heatmap · this week"
           subtitle="% port activity by hour"
           theme={isDark ? "dark" : "light"}
           cellSize={14}
@@ -392,7 +389,7 @@ export default function Dashboard() {
       </div>
 
       {/* ── Row 5: Recent sessions ──────────────────────────────────────────── */}
-      <RecentSessionsPanel isDark={isDark} />
+      <RecentSessionsPanel />
     </div>
   );
 }
