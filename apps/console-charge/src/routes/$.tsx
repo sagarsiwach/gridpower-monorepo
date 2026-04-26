@@ -19,7 +19,7 @@ export default function NotFound() {
         </p>
         <Link
           to="/dashboard"
-          className="inline-flex h-10 items-center rounded-btn bg-primary px-4 font-body text-body-sm font-medium text-primary-foreground transition-colors hover:bg-grid-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="inline-flex h-10 items-center rounded-btn bg-primary px-4 font-body text-body-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           Back to Dashboard
         </Link>

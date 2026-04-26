@@ -115,7 +115,7 @@ function PeriodPicker({ value, onChange, onCustomClick }: PeriodPickerProps) {
             className={cn(
               "px-3 py-1.5 rounded-btn font-mono text-label cursor-pointer transition-colors duration-150 ease-out border",
               active
-                ? "bg-grid-red text-white border-grid-red"
+                ? "bg-primary text-primary-foreground border-primary"
                 : "bg-transparent text-muted-foreground border-border hover:bg-muted hover:text-foreground",
             )}
           >
@@ -668,7 +668,7 @@ function StationTable({ period }: { period: Period }) {
               <td className="font-mono text-label text-muted-foreground p-0">
                 {row.avgDuration}
               </td>
-              <td className="font-mono text-label text-grid-red font-semibold p-0">
+              <td className="font-mono text-label text-primary font-semibold p-0">
                 {row.revenue}
               </td>
               <td className="font-mono text-label text-foreground p-0">

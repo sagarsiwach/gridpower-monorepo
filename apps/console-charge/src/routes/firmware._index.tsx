@@ -14,7 +14,6 @@ import * as React from "react";
 import { Link } from "react-router";
 import { AlertTriangle, ArrowRight, ChevronRight, RefreshCw } from "lucide-react";
 import { BarChart, cn, type BarChartSeries } from "@gridpower/ui";
-import { useTheme } from "~/lib/theme";
 import {
   ROLLOUTS,
   VERSION_DISTRIBUTION,
@@ -152,9 +151,6 @@ const ACTIVE_ROLLOUTS = ROLLOUTS.filter(
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function FirmwareOverview() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   // Chart data: each bar is a version, colored by channel
   // We can't pass per-bar colors directly to BarChart so we use a single
   // neutral color for the chart and show version/channel in a legend below.
@@ -261,7 +257,7 @@ export default function FirmwareOverview() {
             title="Stations per firmware version"
             subtitle={`${TOTAL_STATIONS} total stations`}
             chartHeight={180}
-            theme={isDark ? "dark" : "light"}
+            theme="light"
           />
           {/* Channel legend */}
           <div className="flex flex-wrap items-center gap-4 border-t border-border px-5 py-3">

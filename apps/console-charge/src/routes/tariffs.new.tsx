@@ -1099,7 +1099,7 @@ export default function TariffNew() {
 
       {/* ── Sticky save bar ───────────────────────────────────────────────── */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-10 border-t border-border bg-card/95 backdrop-blur-sm px-6 py-3"
+        className="fixed bottom-0 left-0 right-0 z-10 border-t border-border bg-card px-6 py-3"
         role="region"
         aria-label="Save actions"
       >

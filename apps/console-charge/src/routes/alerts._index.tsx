@@ -775,7 +775,7 @@ export default function AlertsIndex() {
         <div className="overflow-x-auto">
           <Table className="min-w-[820px]" aria-label="Alerts">
             <caption className="sr-only">
-              Alert center — {filtered.length} alert{filtered.length !== 1 ? "s" : ""}
+              Alert center: {filtered.length} alert{filtered.length !== 1 ? "s" : ""}
             </caption>
             <TableHeader>
               <TableRow>
@@ -885,7 +885,7 @@ export default function AlertsIndex() {
                             aria-hidden
                           />
                           <p className="font-body text-[13px] text-foreground">
-                            All clear — no open alerts
+                            All clear: no open alerts
                           </p>
                         </>
                       )}

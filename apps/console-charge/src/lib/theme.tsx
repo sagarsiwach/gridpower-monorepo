@@ -1,6 +1,11 @@
 import * as React from "react";
 
-export type Theme = "light" | "dark";
+// Light-only theme. Dark mode has been removed per user override.
+// ThemeProvider always forces "light"; toggleTheme is a no-op.
+// Semantic tokens (bg-background, text-foreground, etc.) resolve
+// to light values when no data-theme attribute is set on <html>.
+
+export type Theme = "light";
 
 interface ThemeContextValue {
   theme: Theme;
@@ -10,68 +15,36 @@ interface ThemeContextValue {
 
 const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 
-const STORAGE_KEY = "gridcharge-theme";
-
-function applyTheme(theme: Theme) {
-  if (typeof document === "undefined") return;
-  const root = document.documentElement;
-  if (theme === "dark") {
-    root.setAttribute("data-theme", "dark");
-  } else {
-    root.removeAttribute("data-theme");
-  }
-}
-
 export function ThemeProvider({
   children,
-  defaultTheme = "dark",
+  defaultTheme: _defaultTheme = "light",
 }: {
   children: React.ReactNode;
   defaultTheme?: Theme;
 }) {
-  const [theme, setThemeState] = React.useState<Theme>(defaultTheme);
-
-  // Hydrate from localStorage on mount (client-only).
+  // Ensure no stale dark theme lingers in localStorage or on <html>.
   React.useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
-      if (stored === "light" || stored === "dark") {
-        setThemeState(stored);
-        applyTheme(stored);
-        return;
-      }
-    } catch {
-      // ignore: localStorage may be unavailable
+    if (typeof document !== "undefined") {
+      document.documentElement.removeAttribute("data-theme");
     }
-    applyTheme(defaultTheme);
-  }, [defaultTheme]);
-
-  const setTheme = React.useCallback((next: Theme) => {
-    setThemeState(next);
-    applyTheme(next);
     try {
-      window.localStorage.setItem(STORAGE_KEY, next);
+      window.localStorage.removeItem("gridcharge-theme");
     } catch {
       // ignore
     }
   }, []);
 
+  const setTheme = React.useCallback((_: Theme) => {
+    // no-op: light only
+  }, []);
+
   const toggleTheme = React.useCallback(() => {
-    setThemeState((current) => {
-      const next = current === "dark" ? "light" : "dark";
-      applyTheme(next);
-      try {
-        window.localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        // ignore
-      }
-      return next;
-    });
+    // no-op: light only
   }, []);
 
   const value = React.useMemo<ThemeContextValue>(
-    () => ({ theme, setTheme, toggleTheme }),
-    [theme, setTheme, toggleTheme],
+    () => ({ theme: "light", setTheme, toggleTheme }),
+    [setTheme, toggleTheme],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

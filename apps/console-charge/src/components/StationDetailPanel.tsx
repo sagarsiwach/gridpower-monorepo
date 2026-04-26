@@ -55,10 +55,10 @@ const STATUS_LABEL: Record<string, string> = {
 // ─── Port status colors (semantic tokens only, no raw hex) ───────────────
 
 const PORT_COLORS: Record<PortStatus, string> = {
-  available: "border-success bg-success/10 dark:bg-success/20",
-  charging: "border-primary bg-primary/10 dark:bg-primary/20",
+  available: "border-success bg-success/10",
+  charging: "border-primary bg-primary/10",
   offline: "border-border bg-muted",
-  error: "border-error bg-error/10 dark:bg-error/20",
+  error: "border-error bg-error/10",
 };
 
 const PORT_ICON_COLOR: Record<PortStatus, string> = {
@@ -301,7 +301,7 @@ export function StationDetailPanel({
       <div className="mt-auto flex flex-col gap-2 px-4 py-3">
         <button
           type="button"
-          className="w-full rounded-btn bg-primary px-4 py-2 font-body text-[12px] font-medium text-white hover:bg-grid-red-hover active:bg-grid-red-active cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+          className="w-full rounded-btn bg-primary px-4 py-2 font-body text-[12px] font-medium text-primary-foreground hover:opacity-90 active:opacity-80 cursor-pointer transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
         >
           Manage station
         </button>

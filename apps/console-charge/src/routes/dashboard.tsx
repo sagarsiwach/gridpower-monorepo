@@ -12,7 +12,6 @@ import {
   type BarChartSeries,
   type LineChartSeries,
 } from "@gridpower/ui";
-import { useTheme } from "~/lib/theme";
 import {
   ALERTS,
   HEATMAP_COL_LABELS,
@@ -80,7 +79,7 @@ function AlertsPanel({
         <button
           type="button"
           aria-label="View all alerts"
-          className="group inline-flex items-center gap-0.5 font-body text-[12px] text-grid-red bg-transparent border-none cursor-pointer p-0 transition-colors duration-150 ease-out hover:opacity-80"
+          className="group inline-flex items-center gap-0.5 font-body text-[12px] text-primary bg-transparent border-none cursor-pointer p-0 transition-colors duration-150 ease-out hover:opacity-80"
         >
           View all
           <span className="inline-block transition-transform duration-150 ease-out group-hover:translate-x-0.5">
@@ -252,7 +251,7 @@ function RecentSessionsPanel({
                   <TableCell className="font-mono text-[12px] text-foreground">
                     {s.kwh}
                   </TableCell>
-                  <TableCell className="font-mono text-[12px] font-medium text-grid-red">
+                  <TableCell className="font-mono text-[12px] font-medium text-primary">
                     ₹{s.amount.toLocaleString("en-IN")}
                   </TableCell>
                 </TableRow>
@@ -282,7 +281,7 @@ const TOP10_SERIES: BarChartSeries[] = [
   },
 ];
 
-function TopStationsPanel({ isDark }: { isDark: boolean }) {
+function TopStationsPanel() {
   return (
     <BarChart
       data={TOP10_STATIONS_DATA}
@@ -292,7 +291,7 @@ function TopStationsPanel({ isDark }: { isDark: boolean }) {
       title="Revenue by station"
       subtitle="Top 10 · Today"
       chartHeight={200}
-      theme={isDark ? "dark" : "light"}
+      theme="light"
     />
   );
 }
@@ -315,19 +314,16 @@ const REVENUE_SERIES_CONFIG: LineChartSeries[] = [
 ];
 
 export default function Dashboard() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   return (
     <div className="flex flex-col gap-4 lg:gap-5">
       {/* ── Row 1: StatCards ───────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
         <div className="rounded-card transition-shadow duration-200 ease-out hover:shadow-md">
           <StatCard
-            theme={isDark ? "dark" : "light"}
+            theme="light"
             label="Revenue today"
             value={
-              <span className="font-mono text-grid-red">
+              <span className="font-mono text-primary">
                 {STATS.revenueToday}
               </span>
             }
@@ -337,7 +333,7 @@ export default function Dashboard() {
         </div>
         <div className="rounded-card transition-shadow duration-200 ease-out hover:shadow-md">
           <StatCard
-            theme={isDark ? "dark" : "light"}
+            theme="light"
             label="Stations online"
             value={
               <span className="font-mono">
@@ -353,7 +349,7 @@ export default function Dashboard() {
         </div>
         <div className="rounded-card transition-shadow duration-200 ease-out hover:shadow-md">
           <StatCard
-            theme={isDark ? "dark" : "light"}
+            theme="light"
             label="Sessions today"
             value={
               <span className="font-mono">{STATS.sessionsToday}</span>
@@ -364,7 +360,7 @@ export default function Dashboard() {
         </div>
         <div className="rounded-card transition-shadow duration-200 ease-out hover:shadow-md">
           <StatCard
-            theme={isDark ? "dark" : "light"}
+            theme="light"
             label="Energy delivered"
             value={
               <span className="font-mono">{STATS.energyDelivered}</span>
@@ -384,7 +380,7 @@ export default function Dashboard() {
         title="Revenue, last 30 days"
         subtitle="₹9.8L total · 4,281 sessions"
         chartHeight={160}
-        theme={isDark ? "dark" : "light"}
+        theme="light"
       />
 
       {/* ── Row 3: Alerts ──────────────────────────────────────────────────── */}
@@ -398,11 +394,11 @@ export default function Dashboard() {
           colLabels={HEATMAP_COL_LABELS}
           title="Utilisation heatmap · this week"
           subtitle="% port activity by hour"
-          theme={isDark ? "dark" : "light"}
+          theme="light"
           cellSize={14}
           cellGap={2}
         />
-        <TopStationsPanel isDark={isDark} />
+        <TopStationsPanel />
       </div>
 
       {/* ── Row 5: Recent sessions ──────────────────────────────────────────── */}

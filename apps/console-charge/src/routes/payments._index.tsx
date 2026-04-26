@@ -28,7 +28,6 @@ import {
   cn,
   type LineChartSeries,
 } from "@gridpower/ui";
-import { useTheme } from "~/lib/theme";
 import {
   TRANSACTIONS,
   failedToday,
@@ -167,9 +166,6 @@ function QuickLink({
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function PaymentsOverview() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   const monthRevenue = monthRevenuePaise();
   const pending = pendingRefunds();
   const next = nextPayout();
@@ -227,7 +223,7 @@ export default function PaymentsOverview() {
         title="Revenue, last 30 days"
         subtitle={`${formatINR(monthRevenue)} this month`}
         chartHeight={180}
-        theme={isDark ? "dark" : "light"}
+        theme="light"
       />
 
       {/* Recent transactions */}

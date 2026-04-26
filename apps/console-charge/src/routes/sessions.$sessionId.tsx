@@ -28,7 +28,6 @@ import {
   Zap,
 } from "lucide-react";
 import { LineChart, type LineChartSeries, cn } from "@gridpower/ui";
-import { useTheme } from "~/lib/theme";
 
 import {
   getSession,
@@ -256,8 +255,6 @@ function NotFound({ id }: { id: string }) {
 
 export default function SessionDetail() {
   const { sessionId } = useParams<{ sessionId: string }>();
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
 
   const session: Session | undefined = sessionId ? getSession(sessionId) : undefined;
 
@@ -409,7 +406,7 @@ export default function SessionDetail() {
               title="Power profile"
               subtitle={`${formatDuration(session.durationMinutes)} total · peak ${session.peakKw} kW · avg ${session.avgKw} kW`}
               chartHeight={160}
-              theme={isDark ? "dark" : "light"}
+              theme="light"
               aria-labelledby="power-profile-heading"
             />
             {/* Hidden accessible data table for screen readers */}
