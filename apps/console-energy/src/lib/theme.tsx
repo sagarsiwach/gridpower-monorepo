@@ -12,61 +12,38 @@ const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 
 const STORAGE_KEY = "gridenergy-theme";
 
-function applyTheme(theme: Theme) {
+function applyTheme(_theme: Theme) {
   if (typeof document === "undefined") return;
-  const root = document.documentElement;
-  if (theme === "dark") {
-    root.setAttribute("data-theme", "dark");
-  } else {
-    root.removeAttribute("data-theme");
-  }
+  // Light-only: never set data-theme="dark". Remove any existing attribute.
+  document.documentElement.removeAttribute("data-theme");
 }
 
 export function ThemeProvider({
   children,
-  defaultTheme = "dark",
+  defaultTheme = "light",
 }: {
   children: React.ReactNode;
   defaultTheme?: Theme;
 }) {
-  const [theme, setThemeState] = React.useState<Theme>(defaultTheme);
+  // Always light — ignore stored preference.
+  const [theme] = React.useState<Theme>("light");
 
-  // Hydrate from localStorage on mount (client-only).
   React.useEffect(() => {
+    applyTheme("light");
+    // Clear any previously stored dark preference so refreshes stay light.
     try {
-      const stored = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
-      if (stored === "light" || stored === "dark") {
-        setThemeState(stored);
-        applyTheme(stored);
-        return;
-      }
-    } catch {
-      // ignore: localStorage may be unavailable
-    }
-    applyTheme(defaultTheme);
-  }, [defaultTheme]);
-
-  const setTheme = React.useCallback((next: Theme) => {
-    setThemeState(next);
-    applyTheme(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
+      window.localStorage.removeItem(STORAGE_KEY);
     } catch {
       // ignore
     }
   }, []);
 
+  const setTheme = React.useCallback((_next: Theme) => {
+    // No-op: light only.
+  }, []);
+
   const toggleTheme = React.useCallback(() => {
-    setThemeState((current) => {
-      const next = current === "dark" ? "light" : "dark";
-      applyTheme(next);
-      try {
-        window.localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        // ignore
-      }
-      return next;
-    });
+    // No-op: light only.
   }, []);
 
   const value = React.useMemo<ThemeContextValue>(

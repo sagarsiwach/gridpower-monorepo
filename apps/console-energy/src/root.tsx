@@ -8,7 +8,7 @@ import { ThemeProvider } from "~/lib/theme";
 // flash on first paint for the most common (dark) case.
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,7 +29,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <AuthProvider>
-      <ThemeProvider defaultTheme="dark">
+      <ThemeProvider defaultTheme="light">
         <Outlet />
       </ThemeProvider>
     </AuthProvider>

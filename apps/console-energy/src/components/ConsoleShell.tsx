@@ -12,10 +12,8 @@ import {
   Layers,
   LayoutGrid,
   Menu,
-  Moon,
   Search as SearchIcon,
   Settings as SettingsIcon,
-  Sun,
   Tags,
   Users,
   Wrench,
@@ -24,7 +22,6 @@ import {
 import { DotGrid, Sidebar, Topbar, type SidebarSection } from "@gridpower/ui";
 import { CommandPalette, ShortcutHelp, useCommandPaletteHotkeys } from "~/components/CommandPalette";
 import { useAuth } from "~/lib/auth";
-import { useTheme } from "~/lib/theme";
 
 // Sidebar nav grouped into Operations, Money, System.
 
@@ -80,23 +77,6 @@ function deriveActiveKey(pathname: string): string {
   return "dashboard";
 }
 
-function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
-  const isDark = theme === "dark";
-  return (
-    <button
-      type="button"
-      onClick={toggleTheme}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="inline-flex h-8 items-center gap-1.5 rounded-btn border border-border bg-transparent px-2 sm:px-3 font-body text-body-sm text-foreground transition-[color,background-color,box-shadow] duration-150 ease-out hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-    >
-      <span className="inline-flex transition-transform duration-200 ease-out" style={{ transform: isDark ? "rotate(0deg)" : "rotate(-30deg)" }}>
-        {isDark ? <Sun size={14} aria-hidden="true" /> : <Moon size={14} aria-hidden="true" />}
-      </span>
-      <span className="hidden sm:inline">{isDark ? "Light" : "Dark"}</span>
-    </button>
-  );
-}
 
 function ConsoleBreadcrumb({ title }: { title: string }) {
   return (
@@ -251,7 +231,7 @@ export function ConsoleShell() {
               </kbd>
             </button>
           }
-          actions={<ThemeToggle />}
+          actions={null}
           userInitials={user?.initials}
           userName={user?.name}
         />

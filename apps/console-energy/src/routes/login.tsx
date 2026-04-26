@@ -1,9 +1,8 @@
 import * as React from "react";
 import { useNavigate } from "react-router";
-import { Eye, EyeOff, Moon, Sun } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { Button, GridMark, Input } from "@gridpower/ui";
 import { useAuth } from "~/lib/auth";
-import { useTheme } from "~/lib/theme";
 
 // Login screen. Public route, NOT wrapped in ConsoleShell.
 // Uses semantic tokens from @gridpower/tokens so light/dark flip happens
@@ -13,15 +12,12 @@ import { useTheme } from "~/lib/theme";
 export default function Login() {
   const navigate = useNavigate();
   const { signIn } = useAuth();
-  const { theme, toggleTheme } = useTheme();
 
-  const [email, setEmail] = React.useState("sagar@gridpower.co.in");
+  const [email, setEmail] = React.useState("ops@gridenergy.co.in");
   const [password, setPassword] = React.useState("");
   const [showPass, setShowPass] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-
-  const isDark = theme === "dark";
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -45,24 +41,6 @@ export default function Login() {
         backgroundSize: "16px 16px",
       }}
     >
-      {/* Theme toggle, top-right */}
-      <button
-        type="button"
-        onClick={toggleTheme}
-        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-        aria-pressed={isDark}
-        className={[
-          "absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-1.5 px-3 py-1.5 rounded-btn border border-border text-[12px] font-body",
-          "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground",
-          "cursor-pointer transition-[color,background-color,box-shadow] duration-150 ease-out outline-none focus-visible:ring-2 focus-visible:ring-primary",
-        ].join(" ")}
-      >
-        <span className="inline-flex transition-transform duration-200 ease-out" style={{ transform: isDark ? "rotate(0deg)" : "rotate(-30deg)" }}>
-          {isDark ? <Sun size={13} /> : <Moon size={13} />}
-        </span>
-        <span>{isDark ? "Light mode" : "Dark mode"}</span>
-      </button>
-
       {/* Login card */}
       <div className="w-full max-w-[400px] mx-4 rounded-modal border border-border bg-card p-6 sm:p-8 md:p-10 shadow-lg">
         {/* Logo, doubles as the page h1 */}

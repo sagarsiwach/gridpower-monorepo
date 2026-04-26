@@ -1,3 +1,12 @@
-export default function Stub() {
-  return <div className="p-6 text-muted-foreground">Stub route</div>;
+/**
+ * Settings index — /settings (redirects to organisation)
+ */
+import { redirect } from "react-router";
+
+export function loader() {
+  return redirect("/settings/organisation");
+}
+
+export default function SettingsIndex() {
+  return null;
 }
