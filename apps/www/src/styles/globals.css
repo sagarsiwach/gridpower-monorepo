@@ -1,0 +1,404 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+  GridPower token system.
+  Every value sourced from DESIGN.md. Do not guess or approximate.
+  All colors in OKLCH. No #000 or #fff anywhere.
+*/
+
+@theme {
+  /* ------------------------------------------------------------------ */
+  /* Brand color */
+  /* ------------------------------------------------------------------ */
+  --color-gp-red: oklch(0.58 0.245 27);
+  --color-gp-red-hover: oklch(0.53 0.245 27);
+  --color-gp-red-muted: oklch(0.58 0.15 27);
+  --color-gp-red-tinted: oklch(0.96 0.04 27);
+
+  /* ------------------------------------------------------------------ */
+  /* Neutral scale — Whisper warm (hue 27, chroma curves through mids) */
+  /* ------------------------------------------------------------------ */
+  --color-neutral-50: oklch(0.991 0.003 27);
+  --color-neutral-100: oklch(0.972 0.004 27);
+  --color-neutral-200: oklch(0.946 0.005 27);
+  --color-neutral-300: oklch(0.910 0.006 27);
+  --color-neutral-400: oklch(0.846 0.007 27);
+  --color-neutral-500: oklch(0.732 0.008 27);
+  --color-neutral-600: oklch(0.595 0.008 27);
+  --color-neutral-700: oklch(0.467 0.007 27);
+  --color-neutral-800: oklch(0.341 0.006 27);
+  --color-neutral-900: oklch(0.224 0.005 27);
+  --color-neutral-950: oklch(0.151 0.004 27);
+
+  /* ------------------------------------------------------------------ */
+  /* Semantic colors */
+  /* ------------------------------------------------------------------ */
+  --color-form-error: oklch(0.52 0.15 25);
+  --color-form-success: oklch(0.65 0.13 145);
+
+  /* ------------------------------------------------------------------ */
+  /* Surface semantic assignments (CSS-level references) */
+  /* ------------------------------------------------------------------ */
+  --color-page-bg: var(--color-neutral-50);
+  --color-section-alt: var(--color-neutral-100);
+  --color-card-on-page: var(--color-neutral-100);
+  --color-card-on-section: var(--color-neutral-50);
+  --color-border: var(--color-neutral-300);
+  --color-border-strong: var(--color-neutral-400);
+  --color-text-body: var(--color-neutral-700);
+  --color-text-heading: var(--color-neutral-900);
+  --color-text-muted: var(--color-neutral-500);
+  --color-hero-committed: var(--color-gp-red);
+  --color-inverted-bg: var(--color-neutral-900);
+
+  /* ------------------------------------------------------------------ */
+  /* Typography — families */
+  /* ------------------------------------------------------------------ */
+  --font-display: "Clash Grotesk", "Syne", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Fira Code", "Menlo", monospace;
+
+  /* ------------------------------------------------------------------ */
+  /* Type scale — 1.333 ratio (Perfect Fourth) */
+  /* ------------------------------------------------------------------ */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.333rem;
+  --text-2xl: 1.777rem;
+  --text-3xl: 2.369rem;
+  --text-4xl: 3.157rem;
+  --text-5xl: 4.209rem;
+  --text-6xl: 5.610rem;
+  --text-7xl: 7.478rem;
+
+  /* ------------------------------------------------------------------ */
+  /* Line heights */
+  /* ------------------------------------------------------------------ */
+  --leading-display: 1.05;
+  --leading-section: 1.15;
+  --leading-body: 1.625;
+  --leading-ui: 1.2;
+  --leading-mono: 1.4;
+
+  /* ------------------------------------------------------------------ */
+  /* Letter spacing */
+  /* ------------------------------------------------------------------ */
+  --tracking-display: -0.03em;
+  --tracking-heading: -0.02em;
+  --tracking-body: 0em;
+  --tracking-mono-label: 0.08em;
+  --tracking-button: -0.01em;
+
+  /* ------------------------------------------------------------------ */
+  /* Spacing scale — base 4px */
+  /* ------------------------------------------------------------------ */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+  --space-48: 12rem;
+  --space-64: 16rem;
+
+  /* ------------------------------------------------------------------ */
+  /* Radii — sharp, never pillowy */
+  /* ------------------------------------------------------------------ */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ------------------------------------------------------------------ */
+  /* Container widths */
+  /* ------------------------------------------------------------------ */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1440px;
+  --container-3xl: 1600px;
+
+  /* ------------------------------------------------------------------ */
+  /* Breakpoints (Tailwind v4 defaults kept) */
+  /* ------------------------------------------------------------------ */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+
+  /* ------------------------------------------------------------------ */
+  /* Motion — Expressive-Professional (marketing register) */
+  /* ------------------------------------------------------------------ */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-hover: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --duration-hover: 200ms;
+  --duration-page: 400ms;
+  --duration-reveal: 600ms;
+  --duration-hero: 800ms;
+  --duration-stagger: 40ms;
+  --duration-nav: 180ms;
+  --duration-image: 800ms;
+}
+
+/*
+  Day / Night image pair infrastructure.
+  data-theme="day" is default for v1 (light-primary only).
+  data-theme="night" wired for future use when dark mode lands.
+*/
+[data-theme="day"] {
+  color-scheme: light;
+}
+[data-theme="night"] {
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base resets and global defaults */
+/* ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-neutral-50);
+  color: var(--color-neutral-700);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  margin: 0;
+  padding: 0;
+}
+
+/* Cap prose line length */
+p,
+li,
+blockquote {
+  max-width: 72ch;
+}
+
+/* Heading resets — apply Clash Grotesk to all headings */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+  color: var(--color-neutral-900);
+  margin: 0;
+}
+
+h4,
+h5,
+h6 {
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-section);
+  color: var(--color-neutral-900);
+  margin: 0;
+}
+
+h2,
+h3 {
+  line-height: var(--leading-section);
+}
+
+/* Mono elements */
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  line-height: var(--leading-mono);
+}
+
+/* Focus ring — GridRed at 50% opacity */
+:focus-visible {
+  outline: 2px solid oklch(0.58 0.245 27 / 0.5);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* Anchor reset */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Image defaults */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ------------------------------------------------------------------ */
+/* Font-face declarations — locally hosted */
+/* ------------------------------------------------------------------ */
+
+/* Clash Grotesk — Semibold and Bold (display) */
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("/fonts/ClashGrotesk-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("/fonts/ClashGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter — variable font */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Mono — Regular and Medium */
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+  ---break---
+*/
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Geist Variable', sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+  ---break---
+*/
+
+/*
+  shadcn/ui surface aliases — remapped to GridPower tokens.
+  shadcn primitives reference unprefixed vars (--background, --primary, etc.).
+  These point at our @theme tokens above so primitives inherit the brand.
+  Light-only for v1. Dark mode wiring deferred (DESIGN.md).
+*/
+:root {
+  --background: var(--color-neutral-50);
+  --foreground: var(--color-neutral-900);
+  --card: var(--color-neutral-50);
+  --card-foreground: var(--color-neutral-900);
+  --popover: var(--color-neutral-50);
+  --popover-foreground: var(--color-neutral-900);
+  --primary: var(--color-gp-red);
+  --primary-foreground: var(--color-neutral-50);
+  --secondary: var(--color-neutral-100);
+  --secondary-foreground: var(--color-neutral-900);
+  --muted: var(--color-neutral-100);
+  --muted-foreground: var(--color-neutral-500);
+  --accent: var(--color-neutral-100);
+  --accent-foreground: var(--color-neutral-900);
+  --destructive: var(--color-form-error);
+  --border: var(--color-neutral-300);
+  --input: var(--color-neutral-300);
+  --ring: var(--color-gp-red);
+  --radius: var(--radius-sm);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
