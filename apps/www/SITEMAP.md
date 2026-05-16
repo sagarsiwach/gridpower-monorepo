@@ -46,15 +46,12 @@
   /enterprises/
     /enterprises/[slug]
 
-/platform                        Single well-crafted page
-                                  (Console + App + APIs + Open standards)
+/platform                        Single page — Console + App showcase + APIs + Open standards
+                                  (No separate /app route; the customer/driver app
+                                   product showcase lives as a section inside /platform)
 
-/app                             Product page for customer/driver app
-                                  (App Store + Play Store badges, screenshots,
-                                   feature deep-dive, driver waitlist form
-                                   for GridCharge OR storage app form for GridEnergy)
-
-/economics                       CFO page — ROI + payback + financing + comparison
+/* /economics is NOT a standalone route — economics math folds inline
+   into each solution page (ROI teaser + cost stack + payback timeline) */
 
 /resources/                      Resources hub (4 category cards)
   /resources/case-studies/
@@ -99,15 +96,15 @@
 
 ## Solution leaves per site
 
-### GridEnergy.co.in (18 leaves)
+### GridEnergy.co.in (revised 2026-05-16 per Figma)
 
-| Group | Slugs |
-|---|---|
-| /homes/ | apartment · small-home · large-home · solar-storage-combo |
-| /offices/ | small-office · mid-office · large-campus |
-| /industrial/ | factory-backup · demand-management · solar-self-consumption · container-power-park |
-| /hospitality/ | hotels · resorts · restaurants |
-| /enterprises/ | data-centers · telecom-towers · hospitals · multi-site |
+| Group | Route | Slugs |
+|---|---|---|
+| /homes/ | /solutions/homes/ | apartment · small-home · large-home · solar-storage-combo |
+| /offices/ (merged with industrial) | /solutions/offices/ | small-office · mid-office · large-campus · factory-backup |
+| /institute/ (new — education vertical) | /solutions/institute/ | school · college · universite |
+| /enterprises/ | /solutions/enterprises/ | data-centers · telecom-towers · hospitals · multi-site |
+| /hospitality/ | /solutions/hospitality/ | hotels · resorts · restaurants · malls |
 
 ### GridCharge.co.in (17 leaves)
 
@@ -145,17 +142,21 @@
 
 ## Navigation reference
 
-### Two-bar nav (both sites)
+### Two-bar nav (both sites) — locked 2026-05-16
 
 **TopUtilityBar** (small, hidden on mobile)
-- About · Partners · Support · **Sign in**
+- About · Partners · **Platform** · **Resources** · Support · **Contact** · **Sign in**
 
 The Sign in link is an external redirect:
 - On gridenergy.co.in → `https://console.gridenergy.co.in/sign-in`
 - On gridcharge.co.in → `https://console.gridcharge.co.in/sign-in`
 
-**MainNav** (sticky, with mega-menu on Solutions)
-- Solutions ▼ · Platform · App · Economics · Resources · **Contact** (+ "Get early access" CTA on the right)
+**MainNav** (sticky) — 5 audience groups, each opens its own mega-menu
+- gridenergy.co.in: Homes · Offices & Industrial · Institute · Enterprises · Hospitality
+- gridcharge.co.in: Homes · Hospitality · Offices · Enterprises · Industrial
+- Right side: "Talk to sales" (ghost) + "Get early access" (red pill CTA)
+
+There is no longer a "Solutions ▾" parent item. Each audience IS the nav item.
 
 ### Footer
 

@@ -9,20 +9,15 @@ import SystemForms from "./routes/_system/forms";
 import SystemCards from "./routes/_system/cards";
 import SystemMenus from "./routes/_system/menus";
 
-/*
-  App router.
+import PreviewIndex from "./routes/_preview/index";
+import FullNavPreview from "./routes/_preview/full-nav";
+import VariantPreview from "./routes/_preview/variant";
+import V2MenuRoute from "./routes/_preview/v2-menu";
+import V3Elements from "./routes/_preview/v3-elements";
+import V3Website from "./routes/_preview/v3-website";
+import V3Megamenu from "./routes/_preview/v3-megamenu";
+import V3Mobile from "./routes/_preview/v3-mobile";
 
-  Owned by Agent A.
-
-  Routes:
-    /                  — foundation smoke test (kept from initial scaffold)
-    /system            — index for the /system/* catalogue
-    /system/tokens     — color, type, spacing, radii, motion
-    /system/buttons    — variants, sizes, states, composition
-    /system/forms      — inputs, labels, helpers, states
-    /system/cards      — surfaces, slots, bento, hover, anti-patterns
-    /system/menus      — placeholder owned by Agent B
-*/
 export default function App() {
   return (
     <Routes>
@@ -34,6 +29,15 @@ export default function App() {
       <Route path="/system/forms" element={<SystemForms />} />
       <Route path="/system/cards" element={<SystemCards />} />
       <Route path="/system/menus" element={<SystemMenus />} />
+
+      <Route path="/preview" element={<PreviewIndex />} />
+      <Route path="/preview/full-nav" element={<FullNavPreview />} />
+      <Route path="/preview/v2-menu" element={<V2MenuRoute />} />
+      <Route path="/preview/v3-elements" element={<V3Elements />} />
+      <Route path="/preview/v3-website" element={<V3Website />} />
+      <Route path="/preview/v3-megamenu" element={<V3Megamenu />} />
+      <Route path="/preview/v3-mobile" element={<V3Mobile />} />
+      <Route path="/preview/:slug" element={<VariantPreview />} />
     </Routes>
   );
 }
