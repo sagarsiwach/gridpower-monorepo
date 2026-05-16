@@ -170,6 +170,7 @@ export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
   items?: NavItem[];
   sticky?: boolean;
   logoHref?: string;
+  logoSrc?: string;
   ctaLabel?: string;
   ctaHref?: string;
   onCtaClick?: () => void;
@@ -283,6 +284,7 @@ export function Navbar({
   items = DEFAULT_NAV_ITEMS,
   sticky = true,
   logoHref = "/",
+  logoSrc,
   ctaLabel = "Get early access",
   ctaHref = "/signup",
   onCtaClick,
@@ -311,10 +313,16 @@ export function Navbar({
             className="flex items-center gap-2.5 no-underline"
             aria-label="GridPower home"
           >
-            <GridMark size={28} />
-            <span className="font-display font-semibold text-[15px] tracking-[-0.02em] text-sand-12">
-              GRIDPOWER
-            </span>
+            {logoSrc ? (
+              <img src={logoSrc} alt="GridPower" height={32} width={32} className="object-contain" />
+            ) : (
+              <>
+                <GridMark size={28} />
+                <span className="font-display font-semibold text-[15px] tracking-[-0.02em] text-sand-12">
+                  GRIDPOWER
+                </span>
+              </>
+            )}
           </a>
 
           {/* Desktop nav */}
