@@ -71,5 +71,7 @@ function DevAgentation() {
     };
   }, []);
 
-  return Tool ? <Tool /> : null;
+  // endpoint is REQUIRED for the annotations to sync to the agentation MCP
+  // server — without it the toolbar only writes to localStorage.
+  return Tool ? <Tool endpoint="http://localhost:4747" /> : null;
 }
