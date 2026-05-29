@@ -1,3 +1,4 @@
+import { useEffect, useState, type ComponentType } from "react";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from "react-router";
 
 import "./styles/globals.css";
@@ -48,6 +49,27 @@ export default function App() {
       )}
       <Outlet />
       {!isInternal && <FooterUltraRich />}
+      <DevAgentation />
     </>
   );
+}
+
+// Agentation visual-feedback overlay — dev-only, client-only. Loaded via dynamic
+// import inside an effect so it never runs during SSR/prerender. The annotations
+// it captures are read by the agentation MCP server (default :4747).
+function DevAgentation() {
+  const [Tool, setTool] = useState<ComponentType<Record<string, unknown>> | null>(null);
+
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    let alive = true;
+    import("agentation").then((m) => {
+      if (alive) setTool(() => m.Agentation as ComponentType<Record<string, unknown>>);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  return Tool ? <Tool /> : null;
 }
