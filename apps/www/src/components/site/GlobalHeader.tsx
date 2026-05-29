@@ -557,16 +557,19 @@ function MegaPanel({
     <div className="mx-auto max-w-[1280px] px-8">
       <div ref={innerRef} style={{ filter: "drop-shadow(0 24px 48px oklch(15.3% 0.006 107.1 / 0.18))" }}>
         <Rect fill={tokens.card} stroke={tokens.hairline} cornerRadius={20} style={{ overflow: "hidden" }}>
-          <AnimatePresence initial={false}>
-            {/* Smooth audience cross-fade: exit goes absolute so the outgoing
-                panel overlays the incoming one instead of shoving layout. */}
-            <motion.div
-              key={audience.key}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4, position: "absolute", left: 0, right: 0 }}
-              transition={{ duration: shouldReduceMotion ? 0 : 0.16, ease: [0.22, 1, 0.36, 1] }}
-            >
+          {/* Fixed-size cross-fade: outgoing + incoming panels share ONE CSS
+              grid cell, so the card sizes to the (identical) panel content and
+              never collapses or vanishes during the swap. */}
+          <div style={{ display: "grid" }}>
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={audience.key}
+                style={{ gridArea: "1 / 1 / 2 / 2" }}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.16, ease: [0.22, 1, 0.36, 1] }}
+              >
               {/* Header strip */}
               <motion.div
                 initial={shouldReduceMotion ? {} : { opacity: 0, y: -4 }}
@@ -692,8 +695,9 @@ function MegaPanel({
                   </Rect>
                 </motion.div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
           {/* Footer strip */}
           <div className="flex items-center justify-between px-3 py-2.5" style={{ borderTop: `1px solid ${tokens.hairline}`, background: tokens.pageBgDeep }}>
