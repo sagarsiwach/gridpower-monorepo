@@ -27,4 +27,7 @@ export default [
 
   // Solution template (all mega-menu solution links point here for now)
   route("solutions/homes", "routes/solutions/homes.tsx"),
+
+  // Catch-all — not-yet-built routes render header + a small title, never a 404
+  route("*", "routes/$.tsx"),
 ] satisfies RouteConfig;

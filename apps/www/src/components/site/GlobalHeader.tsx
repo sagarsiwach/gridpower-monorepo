@@ -1,4 +1,4 @@
-import { useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
@@ -251,15 +251,8 @@ const AUDIENCES: Audience[] = [
 
 export function GlobalHeader() {
   const [open, setOpen] = useState<string | null>(null);
-  const prevIndexRef = useRef<number>(0);
-  const currentIndex = AUDIENCES.findIndex((a) => a.key === open);
   const shouldReduceMotion = useReducedMotion();
-
-  const handleHover = (key: string) => {
-    const nextIndex = AUDIENCES.findIndex((a) => a.key === key);
-    prevIndexRef.current = currentIndex >= 0 ? currentIndex : nextIndex;
-    setOpen(key);
-  };
+  const handleHover = (key: string) => setOpen(key);
 
   return (
     <header style={{ position: "sticky", top: 0, zIndex: 50 }}>
@@ -289,8 +282,6 @@ export function GlobalHeader() {
             >
               <MegaPanel
                 audience={AUDIENCES.find((a) => a.key === open)!}
-                currentIndex={currentIndex}
-                prevIndex={prevIndexRef.current}
                 shouldReduceMotion={shouldReduceMotion ?? false}
               />
             </motion.div>
@@ -308,6 +299,8 @@ export function GlobalHeader() {
 const UTILITY_LINKS = [
   { label: "About", href: "/about" },
   { label: "Partners", href: "/partners" },
+  { label: "Platform", href: "/platform" },
+  { label: "Resources", href: "/resources" },
   { label: "Support", href: "/support" },
   { label: "Contact", href: "/contact" },
 ];
@@ -318,51 +311,54 @@ function TopBar() {
       style={{
         background: tokens.pageBgDeep,
         borderBottom: `1px solid ${tokens.hairline}`,
-        boxShadow: "0 1px 0 0 oklch(15.3% 0.006 107.1 / 0.04)",
         position: "relative",
         zIndex: 31,
       }}
     >
-      <div className="mx-auto max-w-[1280px] px-8 flex items-center justify-between" style={{ height: 38 }}>
-        <p
-          className="font-mono text-[11px] uppercase tracking-[0.1em]"
-          style={{ color: tokens.muted }}
-        >
-          Energy storage, made open {/* PLACEHOLDER tagline — confirm copy */}
-        </p>
+      <div className="mx-auto max-w-[1280px] px-8 flex items-center justify-between py-2">
+        <div className="flex items-center gap-2">
+          <span style={{ width: 6, height: 6, borderRadius: 999, background: tokens.accentLine }} />
+          <span
+            className="text-[11px] uppercase tracking-[0.14em]"
+            style={{ color: tokens.inkMuted, fontWeight: 600 }}
+          >
+            All systems operational
+          </span>
+        </div>
         <nav className="flex items-center gap-1" aria-label="Utility">
           {UTILITY_LINKS.map((l) => (
             <Link
               key={l.href}
               to={l.href}
-              className="text-[12px] font-medium px-2.5 py-1 transition-colors"
-              style={{ color: tokens.inkMuted, borderRadius: 8 }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = tokens.ink)}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = tokens.inkMuted)}
+              className="text-[12px] transition-colors"
+              style={{ color: tokens.inkMuted, fontWeight: 500, padding: "5px 10px", borderRadius: 8 }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = tokens.card;
+                (e.currentTarget as HTMLElement).style.color = tokens.ink;
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = "transparent";
+                (e.currentTarget as HTMLElement).style.color = tokens.inkMuted;
+              }}
             >
               {l.label}
             </Link>
           ))}
-          <span style={{ width: 1, height: 16, background: tokens.hairlineStrong, margin: "0 6px" }} />
+          <span style={{ width: 6 }} />
           <Link
             to="/sign-in"
-            className="flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 transition-colors"
+            className="flex items-center gap-1.5 text-[12px] font-semibold transition-colors"
             style={{
-              color: tokens.ink,
+              color: tokens.brand,
               background: tokens.card,
+              padding: "5px 12px 5px 10px",
+              borderRadius: 999,
               border: `1px solid ${tokens.hairline}`,
-              borderRadius: 10,
             }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = tokens.hairlineStrong;
-              (e.currentTarget as HTMLElement).style.color = tokens.brand;
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = tokens.hairline;
-              (e.currentTarget as HTMLElement).style.color = tokens.ink;
-            }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.borderColor = tokens.brand)}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.borderColor = tokens.hairline)}
           >
-            <SignIn size={13} weight="bold" />
+            <SignIn size={13} weight="bold" color={tokens.brand} />
             Sign in
           </Link>
         </nav>
@@ -478,17 +474,11 @@ function MainNav({
 
 function MegaPanel({
   audience,
-  currentIndex,
-  prevIndex,
   shouldReduceMotion,
 }: {
   audience: Audience;
-  currentIndex: number;
-  prevIndex: number;
   shouldReduceMotion: boolean;
 }) {
-  const direction = currentIndex >= prevIndex ? 1 : -1;
-  const xOffset = shouldReduceMotion ? 0 : direction * 12;
   const staggerDelay = shouldReduceMotion ? 0 : 0.035;
 
   return (
@@ -496,12 +486,14 @@ function MegaPanel({
       <div style={{ filter: "drop-shadow(0 24px 48px oklch(15.3% 0.006 107.1 / 0.18))" }}>
         <Rect fill={tokens.card} stroke={tokens.hairline} cornerRadius={20} style={{ overflow: "hidden" }}>
           <AnimatePresence initial={false}>
+            {/* Smooth audience cross-fade: exit goes absolute so the outgoing
+                panel overlays the incoming one instead of shoving layout. */}
             <motion.div
               key={audience.key}
-              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: xOffset }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -xOffset }}
-              transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4, position: "absolute", left: 0, right: 0 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.16, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Header strip */}
               <motion.div
