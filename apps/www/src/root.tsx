@@ -1,6 +1,7 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from "react-router";
 
 import "./styles/globals.css";
+import { GlobalHeader } from "./components/site/GlobalHeader";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,9 +24,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-// Global app shell. The two-tier GridEnergy header (top bar + mega menu) will
-// live here so it wraps every route. Kept bare for the framework migration —
-// header lands in the next slice.
+// Global app shell. The two-tier GridEnergy header (top bar + mega menu) wraps
+// every public marketing route. Internal showcases (/preview, /system) keep
+// their own chrome, so the global header is suppressed there.
 export default function App() {
-  return <Outlet />;
+  const { pathname } = useLocation();
+  const isInternal =
+    pathname.startsWith("/preview") || pathname.startsWith("/system");
+
+  return (
+    <>
+      {!isInternal && <GlobalHeader />}
+      <Outlet />
+    </>
+  );
 }

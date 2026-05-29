@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { setMegamenuTheme, useMegamenuTheme } from "../_preview/_v3-tokens";
-import SiteHeader from "../../components/site/SiteHeader";
-import MobileSiteNav from "../../components/site/MobileSiteNav";
 import HeroB from "../../components/solutions/hero/HeroB";
 import OutcomeTiles from "../../components/solutions/homes/OutcomeTiles";
 import Configurator from "../../components/solutions/homes/Configurator";
@@ -39,13 +37,7 @@ export default function SolutionsHomes() {
         }
       `}</style>
 
-      <div className="hidden lg:block">
-        <SiteHeader />
-      </div>
-      <div className="lg:hidden">
-        <MobileSiteNav currentRoute="solutions" />
-      </div>
-
+      {/* Header comes from the global header in root.tsx */}
       <main>
         <HeroB />
         <OutcomeTiles />
