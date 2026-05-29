@@ -187,6 +187,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
   font-optical-sizing: auto;
   scroll-behavior: smooth;
+  /* The condensing header changes the in-flow height of the sticky bar near the
+     scroll origin. With scroll anchoring on, the browser bumps scrollTop to
+     compensate, stranding you a few px below the top so the top bar never
+     re-shows. Disabling anchoring lets the page reach a true 0. */
+  overflow-anchor: none;
 }
 
 body {

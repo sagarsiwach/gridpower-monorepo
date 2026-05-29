@@ -257,6 +257,8 @@ export function GlobalHeader() {
   const handleHover = (key: string) => setOpen(key);
   const navWrapRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const hoveredRef = useRef(false);
 
   // Two independent tiers:
   //  - Top utility bar: tied to SCROLL only. Visible at the very top, hidden the
@@ -273,6 +275,37 @@ export function GlobalHeader() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Hover tracking by RECT, not mouseenter/leave. Enter/leave events get missed
+  // (fast exits, leaving the window, layout shifts under a stationary cursor),
+  // which left the main bar stuck expanded. A continuous mousemove check against
+  // the header rect (plus the open panel, which sits below the header box) is
+  // reliable; a document-level leave handler covers the cursor leaving entirely.
+  useEffect(() => {
+    const within = (r: DOMRect | undefined, x: number, y: number, pad: number) =>
+      !!r && x >= r.left - pad && x <= r.right + pad && y >= r.top - pad && y <= r.bottom + pad;
+    const set = (v: boolean) => {
+      if (v !== hoveredRef.current) {
+        hoveredRef.current = v;
+        setHovered(v);
+      }
+    };
+    const onMove = (e: MouseEvent) => {
+      const h = headerRef.current?.getBoundingClientRect();
+      const p = panelRef.current?.getBoundingClientRect();
+      // pad bridges the 4px rail→panel gap so hover doesn't flicker across it
+      set(within(h, e.clientX, e.clientY, 4) || within(p, e.clientX, e.clientY, 8));
+    };
+    const onLeave = () => set(false);
+    document.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseleave", onLeave);
+    window.addEventListener("blur", onLeave);
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseleave", onLeave);
+      window.removeEventListener("blur", onLeave);
+    };
   }, []);
 
   // Robust open/close (hover-intent). The panel stays open while the cursor is
@@ -318,8 +351,7 @@ export function GlobalHeader() {
 
   return (
     <header
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      ref={headerRef}
       style={{
         position: "sticky",
         top: 0,
