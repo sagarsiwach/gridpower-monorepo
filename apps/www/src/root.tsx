@@ -39,7 +39,10 @@ export default function App() {
     <>
       {!isInternal && (
         <>
-          <div className="hidden lg:block">
+          {/* lg:contents (not lg:block) so the wrapper forms no box — otherwise it
+              constrains the sticky header to its own height and the header scrolls
+              away instead of sticking. */}
+          <div className="hidden lg:contents">
             <GlobalHeader />
           </div>
           <div className="lg:hidden">
