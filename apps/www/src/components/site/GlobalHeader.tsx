@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type Ref, type ReactNode } from "react";
 import { Link } from "react-router";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
@@ -254,6 +254,8 @@ export function GlobalHeader() {
   const [scrolled, setScrolled] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const handleHover = (key: string) => setOpen(key);
+  const navWrapRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   // Condense on scroll: the top utility bar collapses and a soft shadow lifts
   // the nav off the page — the standard polished sticky-header behavior.
@@ -263,6 +265,47 @@ export function GlobalHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Robust open/close (hover-intent). The panel stays open while the cursor is
+  // over the nav OR the panel card, and closes the moment it leaves BOTH — in any
+  // direction (left/right/top/bottom). A short grace timer covers diagonal travel
+  // across the small nav→card gap. Esc also closes.
+  useEffect(() => {
+    if (!open) return;
+    let closeTimer: number | undefined;
+    const cancelClose = () => {
+      if (closeTimer !== undefined) {
+        window.clearTimeout(closeTimer);
+        closeTimer = undefined;
+      }
+    };
+    const scheduleClose = () => {
+      if (closeTimer === undefined) {
+        closeTimer = window.setTimeout(() => {
+          setOpen(null);
+          closeTimer = undefined;
+        }, 150);
+      }
+    };
+    const inside = (r: DOMRect | undefined, x: number, y: number) =>
+      !!r && x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    const onMove = (e: MouseEvent) => {
+      const n = navWrapRef.current?.getBoundingClientRect();
+      const p = panelRef.current?.getBoundingClientRect();
+      if (inside(n, e.clientX, e.clientY) || inside(p, e.clientX, e.clientY)) cancelClose();
+      else scheduleClose();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(null);
+    };
+    document.addEventListener("mousemove", onMove);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      window.removeEventListener("keydown", onKey);
+      cancelClose();
+    };
+  }, [open]);
 
   return (
     <header
@@ -282,7 +325,7 @@ export function GlobalHeader() {
 
       <TopBar collapsed={scrolled} />
 
-      <div style={{ position: "relative" }} onMouseLeave={() => setOpen(null)}>
+      <div ref={navWrapRef} style={{ position: "relative" }}>
         <MainNav
           active={open}
           onHover={handleHover}
@@ -303,6 +346,7 @@ export function GlobalHeader() {
               <MegaPanel
                 audience={AUDIENCES.find((a) => a.key === open)!}
                 shouldReduceMotion={shouldReduceMotion ?? false}
+                innerRef={panelRef}
               />
             </motion.div>
           )}
@@ -501,15 +545,17 @@ function MainNav({
 function MegaPanel({
   audience,
   shouldReduceMotion,
+  innerRef,
 }: {
   audience: Audience;
   shouldReduceMotion: boolean;
+  innerRef?: Ref<HTMLDivElement>;
 }) {
   const staggerDelay = shouldReduceMotion ? 0 : 0.035;
 
   return (
     <div className="mx-auto max-w-[1280px] px-8">
-      <div style={{ filter: "drop-shadow(0 24px 48px oklch(15.3% 0.006 107.1 / 0.18))" }}>
+      <div ref={innerRef} style={{ filter: "drop-shadow(0 24px 48px oklch(15.3% 0.006 107.1 / 0.18))" }}>
         <Rect fill={tokens.card} stroke={tokens.hairline} cornerRadius={20} style={{ overflow: "hidden" }}>
           <AnimatePresence initial={false}>
             {/* Smooth audience cross-fade: exit goes absolute so the outgoing
