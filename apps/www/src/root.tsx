@@ -2,6 +2,8 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from "re
 
 import "./styles/globals.css";
 import { GlobalHeader } from "./components/site/GlobalHeader";
+import MobileSiteNav from "./components/site/MobileSiteNav";
+import { FooterUltraRich } from "./components/menus/footer/FooterUltraRich";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -34,8 +36,18 @@ export default function App() {
 
   return (
     <>
-      {!isInternal && <GlobalHeader />}
+      {!isInternal && (
+        <>
+          <div className="hidden lg:block">
+            <GlobalHeader />
+          </div>
+          <div className="lg:hidden">
+            <MobileSiteNav />
+          </div>
+        </>
+      )}
       <Outlet />
+      {!isInternal && <FooterUltraRich />}
     </>
   );
 }
