@@ -258,11 +258,13 @@ export function GlobalHeader() {
   const navWrapRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Condensed = scrolled away from the top, not being hovered, and no mega panel
-  // open. In that state the top utility bar collapses and the nav shrinks. Hover
-  // (or opening a panel) re-expands to full size; scrolling back to the top does
-  // the same. The top bar carries extra routes, so it returns whenever expanded.
-  const condensed = scrolled && !hovered && !open;
+  // Two independent tiers:
+  //  - Top utility bar: tied to SCROLL only. Visible at the very top, hidden the
+  //    moment you scroll down, returns when you scroll back up. Hover never shows it.
+  //  - Main bar: compact by default (even at the top); grows back to its original
+  //    size only while hovered (or while a mega panel is open).
+  const topBarCollapsed = scrolled;
+  const mainCompact = !hovered && !open;
 
   // Condense on scroll: the top utility bar collapses and a soft shadow lifts
   // the nav off the page — the standard polished sticky-header behavior.
@@ -332,13 +334,13 @@ export function GlobalHeader() {
         .gh-featured-row:hover { background: ${tokens.pageBgDeep}; }
       `}</style>
 
-      <TopBar collapsed={condensed} shouldReduceMotion={shouldReduceMotion ?? false} />
+      <TopBar collapsed={topBarCollapsed} shouldReduceMotion={shouldReduceMotion ?? false} />
 
       <div ref={navWrapRef} style={{ position: "relative" }}>
         <MainNav
           active={open}
           onHover={handleHover}
-          condensed={condensed}
+          condensed={mainCompact}
           shouldReduceMotion={shouldReduceMotion ?? false}
         />
 
