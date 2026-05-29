@@ -1,22 +1,30 @@
 import { Link } from "react-router";
-import { ArrowRight } from "@phosphor-icons/react";
+import { ArrowRight, ArrowUpRight, MapPin } from "@phosphor-icons/react";
 import { Logo } from "../Logo";
 import { tokens } from "../../routes/_preview/_v3-tokens";
 
 /*
-  SiteFooter — tokens.* (olive substrate + GridRed brand).
-  Matches the GlobalHeader mega-panel visual language:
-  rounded Rect tiles, hairline borders, uppercase micro-labels,
-  GridRed accents, dark spotlight treatment for brand block.
+  SiteFooter — tokens.* (olive substrate + GridRed spark).
+  Mirrors the GlobalHeader mega-panel language: dark spotlight brand tile,
+  hairline-separated link columns, uppercase micro-labels, GridRed only on the
+  conversion CTA. Operator-grade, type-led, honest (PRODUCT.md / DESIGN.md).
 
-  Layout (desktop): brand block | four link columns
-  Bottom bar: copyright + legal links + "Also from GridPower → GridCharge" chip
+  Layout
+  - mobile  : brand tile, then 2-col link grid, then stacked bottom bar
+  - desktop : 340px brand tile | four link columns; single-row bottom bar
+
+  Identity is locked, so this is alignment + polish, not a redesign:
+  hover/focus live in one scoped CSS block (keyboard-accessible, reduced-motion
+  aware); all text passes AA on the light substrate.
+
+  NOTE (verify before launch): the sister-site chip points at gridcharge.co.in;
+  confirm that domain is live, else swap to an internal placeholder route.
 */
 
 const SOLUTIONS_LINKS = [
   { label: "Homes", href: "/solutions/homes" },
-  { label: "Hospitality", href: "/solutions/homes" },
   { label: "Offices & Industrial", href: "/solutions/homes" },
+  { label: "Hospitality", href: "/solutions/homes" },
   { label: "Enterprises", href: "/solutions/homes" },
   { label: "Educational Institutes", href: "/solutions/homes" },
 ] as const;
@@ -45,98 +53,97 @@ const LEGAL_LINKS = [
 ] as const;
 
 export function SiteFooter() {
+  const year = new Date().getFullYear();
+
   return (
     <footer
-      style={{
-        background: tokens.pageBgDeep,
-        borderTop: `1px solid ${tokens.hairline}`,
-        fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-      }}
+      className="ge-footer"
+      style={
+        {
+          background: tokens.pageBgDeep,
+          borderTop: `1px solid ${tokens.hairline}`,
+          fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+          // Tokens surfaced as CSS vars so hover/focus can live in the scoped
+          // <style> block below instead of per-element JS handlers.
+          "--ge-link": tokens.body,
+          "--ge-link-hover": tokens.ink,
+          "--ge-brand": tokens.brand,
+          "--ge-brand-hover": tokens.brandHover,
+          "--ge-chip-border": tokens.hairline,
+          "--ge-chip-border-hover": tokens.hairlineStrong,
+          "--ge-chip-bg": tokens.card,
+        } as React.CSSProperties
+      }
     >
-      {/* Main grid */}
-      <div className="mx-auto max-w-[1280px] px-8">
-        <div
-          className="grid py-16"
-          style={{ gridTemplateColumns: "1fr auto", gap: 48 }}
-        >
-          {/* Brand block — dark tile with GridRed accent */}
-          <div style={{ maxWidth: 340 }}>
-            <div
+      <style>{FOOTER_CSS}</style>
+
+      <div className="mx-auto max-w-[1280px] px-6 sm:px-8">
+        {/* Main region: brand tile + link columns */}
+        <div className="grid gap-12 py-14 lg:grid-cols-[340px_1fr] lg:gap-16 lg:py-16">
+          {/* Brand block — dark spotlight tile, mirrors the mega-panel */}
+          <div
+            style={{
+              background: tokens.ink,
+              borderRadius: 20,
+              padding: "28px 28px 24px",
+            }}
+          >
+            <Link
+              to="/"
+              className="ge-brandmark flex items-center gap-2.5 mb-5"
+              aria-label="GridEnergy home"
+            >
+              <Logo variant="gridenergy" size={28} fill="#ffffff" />
+              <span
+                className="text-[15px] font-semibold tracking-[-0.02em]"
+                style={{ color: "#ffffff" }}
+              >
+                GridEnergy
+              </span>
+            </Link>
+
+            <p
+              className="text-[13.5px] leading-[1.65] mb-5"
+              style={{ color: "rgba(255,255,255,0.68)", maxWidth: "36ch" }}
+            >
+              Battery storage for Indian homes, offices, campuses, and enterprises. GridOS
+              runs every stack from the cloud: meter reads, payback math, open standards,
+              no lock-in.
+            </p>
+
+            {/* HQ location — an honest fact, not a fabricated status indicator */}
+            <div className="flex items-center gap-2 mb-6">
+              <MapPin
+                size={13}
+                weight="fill"
+                style={{ color: tokens.accentLine, flexShrink: 0 }}
+              />
+              <span
+                className="text-[11px] uppercase tracking-[0.14em]"
+                style={{ color: "rgba(255,255,255,0.55)", fontWeight: 600 }}
+              >
+                Verna, Goa · India
+              </span>
+            </div>
+
+            <Link
+              to="/contact"
+              className="ge-cta inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.08em] font-semibold"
               style={{
-                background: tokens.ink,
-                borderRadius: 20,
-                padding: "28px 28px 24px",
-                display: "inline-block",
-                width: "100%",
+                background: tokens.brand,
+                color: "#ffffff",
+                padding: "9px 16px",
+                borderRadius: 12,
+                textDecoration: "none",
               }}
             >
-              {/* Logo + wordmark */}
-              <Link
-                to="/"
-                className="flex items-center gap-2.5 mb-5"
-                aria-label="GridEnergy home"
-              >
-                <Logo variant="gridenergy" size={28} fill="#ffffff" />
-                <span
-                  className="text-[15px] font-semibold tracking-[-0.02em]"
-                  style={{ color: "#ffffff" }}
-                >
-                  GridEnergy
-                </span>
-              </Link>
-
-              <p
-                className="text-[13.5px] leading-[1.65] mb-5"
-                style={{ color: "rgba(255,255,255,0.65)", maxWidth: "34ch" }}
-              >
-                Energy storage for India — homes, offices, campuses, and enterprises. Software-first. Open standards. GridOS in the cloud.
-              </p>
-
-              {/* Status chip */}
-              <div className="flex items-center gap-2 mb-5">
-                <span
-                  style={{
-                    width: 6,
-                    height: 6,
-                    borderRadius: 999,
-                    background: tokens.accentLine,
-                    flexShrink: 0,
-                  }}
-                />
-                <span
-                  className="text-[11px] uppercase tracking-[0.14em]"
-                  style={{ color: "rgba(255,255,255,0.45)", fontWeight: 600 }}
-                >
-                  All systems operational
-                </span>
-              </div>
-
-              {/* CTA */}
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.08em] font-semibold transition-colors"
-                style={{
-                  background: tokens.brand,
-                  color: "#ffffff",
-                  padding: "9px 16px",
-                  borderRadius: 12,
-                  textDecoration: "none",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = tokens.brandHover;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.background = tokens.brand;
-                }}
-              >
-                <span>Get early access</span>
-                <ArrowRight size={12} weight="bold" />
-              </Link>
-            </div>
+              <span>Get early access</span>
+              <ArrowRight size={12} weight="bold" />
+            </Link>
           </div>
 
           {/* Link columns */}
-          <div className="grid grid-cols-4 gap-12 pt-2">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10 pt-1 sm:grid-cols-4 sm:gap-12 lg:pt-2">
             <FooterColumn title="Solutions" links={SOLUTIONS_LINKS} />
             <FooterColumn title="Platform" links={PLATFORM_LINKS} />
             <FooterColumn title="Company" links={COMPANY_LINKS} />
@@ -147,48 +154,25 @@ export function SiteFooter() {
         {/* Hairline divider */}
         <div style={{ height: 1, background: tokens.hairline }} />
 
-        {/* Bottom bar */}
-        <div
-          className="flex items-center justify-between py-4 flex-wrap gap-3"
-        >
-          <div className="flex items-center gap-4 flex-wrap">
-            <span
-              className="text-[12px]"
-              style={{ color: tokens.muted }}
-            >
-              {/* placeholder — replace year and entity before launch */}
-              &copy; {new Date().getFullYear()} GridEnergy. All rights reserved. [Placeholder — legal entity name pending.]
-            </span>
-            <span style={{ width: 1, height: 12, background: tokens.hairlineStrong, display: "inline-block" }} />
-            {LEGAL_LINKS.map((l) => (
-              <Link
-                key={l.href}
-                to={l.href}
-                className="text-[12px] transition-colors"
-                style={{ color: tokens.muted, textDecoration: "none" }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = tokens.body;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = tokens.muted;
-                }}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
+        {/* Bottom bar — extra bottom padding below lg clears the fixed
+            MobileSiteNav tab bar (64px, rendered only on lg:hidden). */}
+        <div className="flex flex-col gap-4 pt-5 pb-28 sm:flex-row sm:items-center sm:justify-between lg:pb-5">
+          <p className="text-[12px] leading-[1.5]" style={{ color: tokens.body }}>
+            © {year} DeltaEV Mobility Private Limited.{" "}
+            <span style={{ color: tokens.muted }}>GridEnergy is a DeltaEV brand.</span>
+          </p>
 
-          {/* "Also from GridPower → GridCharge" chip — mirrors mega-panel footer */}
-          <div className="flex items-center gap-2">
+          {/* Sister site — GridCharge is co-equal, not a parent/child of GridPower */}
+          <div className="flex items-center gap-2.5">
             <span
               className="text-[10px] uppercase tracking-[0.12em]"
-              style={{ color: tokens.muted, fontWeight: 600 }}
+              style={{ color: tokens.inkMuted, fontWeight: 700, flexShrink: 0 }}
             >
-              Also from GridPower
+              Sister site
             </span>
-            <Link
-              to="/solutions/homes"
-              className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.12em] font-semibold transition-colors"
+            <a
+              href="https://gridcharge.co.in"
+              className="ge-chip flex items-center gap-1.5 text-[11px] uppercase tracking-[0.1em] font-semibold"
               style={{
                 color: tokens.ink,
                 background: tokens.card,
@@ -197,17 +181,11 @@ export function SiteFooter() {
                 border: `1px solid ${tokens.hairline}`,
                 textDecoration: "none",
               }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = tokens.hairlineStrong;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = tokens.hairline;
-              }}
             >
               <Logo variant="gridcharge" size={16} />
               GridCharge
-              <ArrowRight size={12} weight="bold" />
-            </Link>
+              <ArrowUpRight size={12} weight="bold" />
+            </a>
           </div>
         </div>
       </div>
@@ -227,7 +205,7 @@ function FooterColumn({
   links: readonly { label: string; href: string }[];
 }) {
   return (
-    <div>
+    <nav aria-label={title}>
       <p
         className="text-[10px] uppercase tracking-[0.16em] mb-4"
         style={{ color: tokens.inkMuted, fontWeight: 700 }}
@@ -236,23 +214,74 @@ function FooterColumn({
       </p>
       <ul className="flex flex-col gap-2.5">
         {links.map((l) => (
-          <li key={l.href}>
-            <Link
-              to={l.href}
-              className="text-[13px] transition-colors"
-              style={{ color: tokens.body, textDecoration: "none" }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.color = tokens.ink;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.color = tokens.body;
-              }}
-            >
+          <li key={l.label}>
+            <Link to={l.href} className="ge-col-link text-[13px]">
               {l.label}
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </nav>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/*  Scoped interaction styles — hover + keyboard focus + reduced motion */
+/* ------------------------------------------------------------------ */
+
+const FOOTER_CSS = `
+.ge-footer .ge-col-link {
+  color: var(--ge-link);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.ge-footer .ge-col-link:hover,
+.ge-footer .ge-col-link:focus-visible {
+  color: var(--ge-link-hover);
+}
+.ge-footer .ge-cta {
+  transition: background 0.15s ease;
+}
+.ge-footer .ge-cta:hover,
+.ge-footer .ge-cta:focus-visible {
+  background: var(--ge-brand-hover);
+}
+.ge-footer .ge-cta svg {
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ge-footer .ge-cta:hover svg,
+.ge-footer .ge-cta:focus-visible svg {
+  transform: translateX(2px);
+}
+.ge-footer .ge-chip {
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.ge-footer .ge-chip:hover,
+.ge-footer .ge-chip:focus-visible {
+  border-color: var(--ge-chip-border-hover);
+}
+.ge-footer .ge-brandmark {
+  text-decoration: none;
+  border-radius: 6px;
+}
+.ge-footer a:focus-visible {
+  outline: 2px solid var(--ge-brand);
+  outline-offset: 3px;
+}
+.ge-footer .ge-cta:focus-visible,
+.ge-footer .ge-chip:focus-visible {
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ge-footer .ge-col-link,
+  .ge-footer .ge-cta,
+  .ge-footer .ge-cta svg,
+  .ge-footer .ge-chip {
+    transition: none;
+  }
+  .ge-footer .ge-cta:hover svg,
+  .ge-footer .ge-cta:focus-visible svg {
+    transform: none;
+  }
+}
+`;
