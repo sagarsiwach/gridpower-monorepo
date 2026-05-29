@@ -252,20 +252,40 @@ const AUDIENCES: Audience[] = [
 export function GlobalHeader() {
   const [open, setOpen] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [showTopBar, setShowTopBar] = useState(true);
   const shouldReduceMotion = useReducedMotion();
   const handleHover = (key: string) => setOpen(key);
   const navWrapRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const lastYRef = useRef(0);
 
   // The main bar stays at its compact size always — that's the default look.
-  // Only the top utility bar reacts to scroll: visible at the very top, hidden
-  // once scrolled, back on scroll-up.
-  const topBarCollapsed = scrolled;
+  // The top utility bar shows at the very top AND whenever you scroll up; it
+  // hides when you scroll down.
+  const topBarCollapsed = !showTopBar;
 
   // Condense on scroll: the top utility bar collapses and a soft shadow lifts
   // the nav off the page — the standard polished sticky-header behavior.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    lastYRef.current = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 8);
+      if (y <= 8) {
+        setShowTopBar(true); // at the very top
+        lastYRef.current = y;
+        return;
+      }
+      const delta = y - lastYRef.current;
+      if (delta < -6) {
+        setShowTopBar(true); // scrolling up → reveal the top bar
+        lastYRef.current = y;
+      } else if (delta > 6) {
+        setShowTopBar(false); // scrolling down → hide it
+        lastYRef.current = y;
+      }
+      // within the 6px threshold: leave lastYRef so slow scrolls still accumulate
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -595,7 +615,7 @@ function MegaPanel({
   return (
     <div className="mx-auto max-w-[1280px] px-8">
       <div ref={innerRef} style={{ filter: "drop-shadow(0 24px 48px oklch(15.3% 0.006 107.1 / 0.18))" }}>
-        <Rect fill={tokens.card} stroke={tokens.hairline} cornerRadius={20} style={{ overflow: "hidden" }}>
+        <Rect fill={tokens.card} stroke={tokens.hairline} cornerRadius={8} style={{ overflow: "hidden" }}>
           {/* Fixed-size cross-fade: outgoing + incoming panels share ONE CSS
               grid cell, so the card sizes to the (identical) panel content and
               never collapses or vanishes during the swap. */}
