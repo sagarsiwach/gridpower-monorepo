@@ -135,17 +135,31 @@ function UtilityBar() {
             All systems operational
           </span>
         </div>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-1">
           {["About", "Partners", "Platform", "Resources", "Support", "Contact"].map((item) => (
             <a
               key={item}
               href="#"
-              className="text-[12px]"
-              style={{ color: tokens.inkMuted, fontWeight: 500 }}
+              className="text-[12px] transition-colors"
+              style={{
+                color: tokens.inkMuted,
+                fontWeight: 500,
+                padding: "5px 10px",
+                borderRadius: 8,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = tokens.card;
+                (e.currentTarget as HTMLElement).style.color = tokens.ink;
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = "transparent";
+                (e.currentTarget as HTMLElement).style.color = tokens.inkMuted;
+              }}
             >
               {item}
             </a>
           ))}
+          <span style={{ width: 6 }} />
           <a
             href="#"
             className="flex items-center gap-1.5 text-[12px] font-semibold transition-colors"

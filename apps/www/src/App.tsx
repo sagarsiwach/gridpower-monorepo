@@ -17,6 +17,10 @@ import V3Elements from "./routes/_preview/v3-elements";
 import V3Website from "./routes/_preview/v3-website";
 import V3Megamenu from "./routes/_preview/v3-megamenu";
 import V3Mobile from "./routes/_preview/v3-mobile";
+import V3MegamenuImpeccable from "./routes/_preview/v3-megamenu-impeccable";
+import V3SolutionsComponents from "./routes/_preview/v3-solutions-components";
+import V3SolutionsHero from "./routes/_preview/v3-solutions-hero";
+import SolutionsHomes from "./routes/solutions/homes";
 
 export default function App() {
   return (
@@ -37,7 +41,12 @@ export default function App() {
       <Route path="/preview/v3-website" element={<V3Website />} />
       <Route path="/preview/v3-megamenu" element={<V3Megamenu />} />
       <Route path="/preview/v3-mobile" element={<V3Mobile />} />
+      <Route path="/preview/v3-megamenu-impeccable" element={<V3MegamenuImpeccable />} />
+      <Route path="/preview/v3-solutions-components" element={<V3SolutionsComponents />} />
+      <Route path="/preview/v3-solutions-hero" element={<V3SolutionsHero />} />
       <Route path="/preview/:slug" element={<VariantPreview />} />
+
+      <Route path="/solutions/homes" element={<SolutionsHomes />} />
     </Routes>
   );
 }
