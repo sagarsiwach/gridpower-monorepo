@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Bell, CalendarBlank, CaretRight, Lightning } from "@phosphor-icons/react";
 
 import { Squircle } from "../../components/Squircle";

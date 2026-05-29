@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import HeroA from "../../components/solutions/hero/HeroA";
 import HeroB from "../../components/solutions/hero/HeroB";

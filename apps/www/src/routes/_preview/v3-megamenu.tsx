@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Moon, Sun } from "@phosphor-icons/react";
 
 import { useMegamenuTheme } from "./_v3-tokens";

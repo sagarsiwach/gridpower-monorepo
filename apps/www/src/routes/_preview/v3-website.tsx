@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { ArrowRight, Check, Lightning, SignIn } from "@phosphor-icons/react";
 
 import { Logo } from "../../components/Logo";

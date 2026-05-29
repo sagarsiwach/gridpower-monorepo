@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { AnimatePresence, motion } from "motion/react";
 

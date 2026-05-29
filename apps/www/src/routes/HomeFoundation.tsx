@@ -1,7 +1,7 @@
 import { TopUtilityBar } from "@/components/nav/TopUtilityBar";
 import { MainNav } from "@/components/nav/MainNav";
 import { Footer } from "@/components/footer/Footer";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 /*
   Foundation smoke test (kept).

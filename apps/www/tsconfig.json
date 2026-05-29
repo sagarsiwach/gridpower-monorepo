@@ -8,13 +8,19 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "rootDirs": [".", ".react-router/types"],
+    "types": ["vite/client"],
     "paths": {
       "@/*": ["./src/*"]
     },
-    "outDir": "dist",
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": ["src", "vite.config.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    ".react-router/types/**/*",
+    "src/**/*",
+    "vite.config.ts",
+    "react-router.config.ts"
+  ],
+  "exclude": ["node_modules", "dist", "build"]
 }

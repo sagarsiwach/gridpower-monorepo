@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { BrandMark } from "../_shared/BrandMark";
 import { PRIMARY_LINKS } from "../_shared/content";

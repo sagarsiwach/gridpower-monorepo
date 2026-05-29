@@ -87,7 +87,7 @@ export const darkTokens = {
 */
 export const tokens = lightTokens;
 
-export type Tokens = typeof lightTokens;
+export type Tokens = Record<keyof typeof lightTokens, string>;
 export type Theme = "light" | "dark";
 
 /*

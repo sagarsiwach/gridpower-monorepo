@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { UtilityMinimalMono } from "../../components/menus/utility/UtilityMinimalMono";
 import { MegaAudienceGrid } from "../../components/menus/mega/MegaAudienceGrid";

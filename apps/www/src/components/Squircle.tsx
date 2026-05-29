@@ -36,7 +36,8 @@ export function Squircle({
     setSize({ w: Math.ceil(el.offsetWidth), h: Math.ceil(el.offsetHeight) });
 
     const observer = new ResizeObserver((entries) => {
-      const rect = entries[0].contentRect;
+      const rect = entries[0]?.contentRect;
+      if (!rect) return;
       setSize({ w: Math.ceil(rect.width), h: Math.ceil(rect.height) });
     });
     observer.observe(el);

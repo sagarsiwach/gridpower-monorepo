@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import type { Placement } from "./manifest";
 
