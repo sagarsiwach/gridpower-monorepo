@@ -252,10 +252,17 @@ const AUDIENCES: Audience[] = [
 export function GlobalHeader() {
   const [open, setOpen] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const handleHover = (key: string) => setOpen(key);
   const navWrapRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+
+  // Condensed = scrolled away from the top, not being hovered, and no mega panel
+  // open. In that state the top utility bar collapses and the nav shrinks. Hover
+  // (or opening a panel) re-expands to full size; scrolling back to the top does
+  // the same. The top bar carries extra routes, so it returns whenever expanded.
+  const condensed = scrolled && !hovered && !open;
 
   // Condense on scroll: the top utility bar collapses and a soft shadow lifts
   // the nav off the page — the standard polished sticky-header behavior.
@@ -309,6 +316,8 @@ export function GlobalHeader() {
 
   return (
     <header
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         position: "sticky",
         top: 0,
@@ -323,12 +332,13 @@ export function GlobalHeader() {
         .gh-featured-row:hover { background: ${tokens.pageBgDeep}; }
       `}</style>
 
-      <TopBar collapsed={scrolled} />
+      <TopBar collapsed={condensed} shouldReduceMotion={shouldReduceMotion ?? false} />
 
       <div ref={navWrapRef} style={{ position: "relative" }}>
         <MainNav
           active={open}
           onHover={handleHover}
+          condensed={condensed}
           shouldReduceMotion={shouldReduceMotion ?? false}
         />
 
@@ -341,7 +351,8 @@ export function GlobalHeader() {
               exit={shouldReduceMotion ? { opacity: 0, y: 0 } : { opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="absolute left-0 right-0"
-              style={{ top: "100%", zIndex: 40, paddingBottom: 24 }}
+              // 4px gap below the rail so the panel reads as a separate floating card
+              style={{ top: "calc(100% + 4px)", zIndex: 40, paddingBottom: 24 }}
             >
               <MegaPanel
                 audience={AUDIENCES.find((a) => a.key === open)!}
@@ -369,7 +380,13 @@ const UTILITY_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-function TopBar({ collapsed }: { collapsed: boolean }) {
+function TopBar({
+  collapsed,
+  shouldReduceMotion,
+}: {
+  collapsed: boolean;
+  shouldReduceMotion: boolean;
+}) {
   return (
     <div
       style={{
@@ -381,8 +398,9 @@ function TopBar({ collapsed }: { collapsed: boolean }) {
         opacity: collapsed ? 0 : 1,
         overflow: "hidden",
         pointerEvents: collapsed ? "none" : "auto",
-        transition:
-          "max-height 0.28s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease, border-color 0.2s ease",
+        transition: shouldReduceMotion
+          ? "none"
+          : "max-height 0.28s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease, border-color 0.2s ease",
       }}
     >
       <div className="mx-auto max-w-[1280px] px-8 flex items-center justify-between py-2">
@@ -444,12 +462,17 @@ function TopBar({ collapsed }: { collapsed: boolean }) {
 function MainNav({
   active,
   onHover,
+  condensed,
   shouldReduceMotion,
 }: {
   active: string | null;
   onHover: (key: string) => void;
+  condensed: boolean;
   shouldReduceMotion: boolean;
 }) {
+  const padTransition = shouldReduceMotion
+    ? "none"
+    : "padding 0.28s cubic-bezier(0.22,1,0.36,1)";
   return (
     <div
       style={{
@@ -460,10 +483,25 @@ function MainNav({
         zIndex: 30,
       }}
     >
-      <div className="mx-auto max-w-[1280px] px-8 grid grid-cols-[1fr_auto_1fr] items-center py-4">
+      <div
+        className="mx-auto max-w-[1280px] px-8 grid grid-cols-[1fr_auto_1fr] items-center"
+        style={{
+          paddingTop: condensed ? 8 : 16,
+          paddingBottom: condensed ? 8 : 16,
+          transition: padTransition,
+        }}
+      >
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 justify-self-start" aria-label="GridEnergy home">
-          <Logo variant="gridenergy" size={30} />
+          <Logo
+            variant="gridenergy"
+            size={30}
+            style={{
+              transform: condensed ? "scale(0.86)" : "scale(1)",
+              transformOrigin: "left center",
+              transition: shouldReduceMotion ? "none" : "transform 0.28s cubic-bezier(0.22,1,0.36,1)",
+            }}
+          />
           <span className="text-[15px] font-semibold tracking-[-0.02em]" style={{ color: tokens.ink }}>
             GridEnergy
           </span>
@@ -518,13 +556,18 @@ function MainNav({
         <div className="flex items-center justify-self-end">
           <button
             type="button"
-            className="flex items-center gap-2 px-5 py-3 text-[13px] uppercase tracking-[0.07em] font-semibold transition-colors"
+            className="flex items-center gap-2 px-5 text-[13px] uppercase tracking-[0.07em] font-semibold"
             style={{
               background: tokens.brand,
               color: "white",
               border: "none",
               borderRadius: 14,
               cursor: "pointer",
+              paddingTop: condensed ? 9 : 12,
+              paddingBottom: condensed ? 9 : 12,
+              transition: shouldReduceMotion
+                ? "background 0.15s ease"
+                : "background 0.15s ease, padding 0.28s cubic-bezier(0.22,1,0.36,1)",
             }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = tokens.brandHover)}
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = tokens.brand)}
