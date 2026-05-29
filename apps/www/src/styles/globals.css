@@ -55,7 +55,7 @@
   /* ------------------------------------------------------------------ */
   /* Typography — families */
   /* ------------------------------------------------------------------ */
-  --font-display: "Clash Grotesk", "Syne", system-ui, sans-serif;
+  --font-display: "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "Geist Mono", "Fira Code", "Menlo", monospace;
 
@@ -207,11 +207,12 @@ blockquote {
   max-width: 72ch;
 }
 
-/* Heading resets — apply Clash Grotesk to all headings */
+/* Heading resets — Inter (display optical size) for all headings */
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-weight: 600;
   letter-spacing: var(--tracking-display);
   line-height: var(--leading-display);

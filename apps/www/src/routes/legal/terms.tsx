@@ -4,7 +4,6 @@ import {
   LegalSection,
   LegalP,
   LegalList,
-  PlaceholderTag,
   type TocItem,
 } from "../../components/legal/LegalLayout";
 
@@ -36,7 +35,6 @@ export default function TermsPage() {
       <LegalSection id="acceptance" number="01" title="Acceptance of terms">
         <LegalP>
           By accessing or using GridEnergy products, websites, or services, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, do not use our services.
-          <PlaceholderTag />
         </LegalP>
         <LegalP>
           [Placeholder — specify entity name, registration number, and registered address once legal entity is confirmed. These terms are not finalised and are pending legal review.]
@@ -46,7 +44,6 @@ export default function TermsPage() {
       <LegalSection id="services" number="02" title="Description of services">
         <LegalP>
           GridEnergy provides energy storage systems, hardware, associated software (GridOS), and related professional services.
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -64,7 +61,6 @@ export default function TermsPage() {
       <LegalSection id="accounts" number="03" title="Accounts and access">
         <LegalP>
           Certain features of our services require you to create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account.
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -79,7 +75,6 @@ export default function TermsPage() {
       <LegalSection id="payment" number="04" title="Payment and billing">
         <LegalP>
           Pricing for our products and services is set out in the applicable order form or quotation. All prices are exclusive of applicable taxes unless stated otherwise.
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -94,7 +89,6 @@ export default function TermsPage() {
       <LegalSection id="intellectual-property" number="05" title="Intellectual property">
         <LegalP>
           All intellectual property rights in the GridEnergy products, software, and content belong to GridEnergy or its licensors. Nothing in these terms grants you any ownership rights.
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -109,7 +103,6 @@ export default function TermsPage() {
       <LegalSection id="liability" number="06" title="Limitation of liability">
         <LegalP>
           To the maximum extent permitted by applicable law, GridEnergy shall not be liable for indirect, incidental, consequential, or punitive damages arising out of your use of our services.
-          <PlaceholderTag />
         </LegalP>
         <LegalP>
           [Placeholder — liability cap, indemnification, and warranty disclaimer language pending legal drafting. This section is entirely placeholder and must not be relied upon.]
@@ -119,7 +112,6 @@ export default function TermsPage() {
       <LegalSection id="termination" number="07" title="Termination">
         <LegalP>
           Either party may terminate the service agreement in accordance with the terms set out in the applicable order form or service agreement.
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -139,7 +131,6 @@ export default function TermsPage() {
       <LegalSection id="contact" number="09" title="Contact">
         <LegalP>
           For questions about these terms, contact us at:
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[

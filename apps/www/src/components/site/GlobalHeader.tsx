@@ -1,4 +1,4 @@
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
@@ -251,16 +251,36 @@ const AUDIENCES: Audience[] = [
 
 export function GlobalHeader() {
   const [open, setOpen] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const handleHover = (key: string) => setOpen(key);
 
+  // Condense on scroll: the top utility bar collapses and a soft shadow lifts
+  // the nav off the page — the standard polished sticky-header behavior.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header style={{ position: "sticky", top: 0, zIndex: 50 }}>
+    <header
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        boxShadow: scrolled
+          ? "0 1px 0 oklch(15.3% 0.006 107.1 / 0.05), 0 10px 30px -18px oklch(15.3% 0.006 107.1 / 0.3)"
+          : "none",
+        transition: "box-shadow 0.25s ease",
+      }}
+    >
       <style>{`
         .gh-featured-row:hover { background: ${tokens.pageBgDeep}; }
       `}</style>
 
-      <TopBar />
+      <TopBar collapsed={scrolled} />
 
       <div style={{ position: "relative" }} onMouseLeave={() => setOpen(null)}>
         <MainNav
@@ -305,14 +325,20 @@ const UTILITY_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-function TopBar() {
+function TopBar({ collapsed }: { collapsed: boolean }) {
   return (
     <div
       style={{
         background: tokens.pageBgDeep,
-        borderBottom: `1px solid ${tokens.hairline}`,
+        borderBottom: collapsed ? "1px solid transparent" : `1px solid ${tokens.hairline}`,
         position: "relative",
         zIndex: 31,
+        maxHeight: collapsed ? 0 : 48,
+        opacity: collapsed ? 0 : 1,
+        overflow: "hidden",
+        pointerEvents: collapsed ? "none" : "auto",
+        transition:
+          "max-height 0.28s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease, border-color 0.2s ease",
       }}
     >
       <div className="mx-auto max-w-[1280px] px-8 flex items-center justify-between py-2">

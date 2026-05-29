@@ -4,7 +4,6 @@ import {
   LegalSection,
   LegalP,
   LegalList,
-  PlaceholderTag,
   type TocItem,
 } from "../../components/legal/LegalLayout";
 
@@ -35,7 +34,6 @@ export default function PrivacyPage() {
       <LegalSection id="information-we-collect" number="01" title="Information we collect">
         <LegalP>
           We collect information you provide directly to us when you use our services, request a quote, sign up for early access, or contact our team.
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -47,14 +45,12 @@ export default function PrivacyPage() {
         />
         <LegalP>
           We also collect information automatically when you interact with our website, including IP address, browser type, pages visited, and referring URLs.
-          <PlaceholderTag />
         </LegalP>
       </LegalSection>
 
       <LegalSection id="how-we-use" number="02" title="How we use information">
         <LegalP>
           We use the information we collect to provide, maintain, and improve our services. Specific uses include:
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -74,7 +70,6 @@ export default function PrivacyPage() {
             Cookie Policy
           </a>{" "}
           for full details on what we set and how to control them.
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -88,7 +83,6 @@ export default function PrivacyPage() {
       <LegalSection id="sharing" number="04" title="Sharing with third parties">
         <LegalP>
           We do not sell your personal data. We may share information with trusted service providers who assist us in operating our business.
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -103,7 +97,6 @@ export default function PrivacyPage() {
       <LegalSection id="your-rights" number="05" title="Your rights">
         <LegalP>
           Depending on your location, you may have certain rights regarding your personal data. These rights may include:
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -117,14 +110,12 @@ export default function PrivacyPage() {
         />
         <LegalP>
           To exercise any of these rights, contact us using the details in Section 8 below. We will respond within the timeframe required by applicable law.
-          <PlaceholderTag />
         </LegalP>
       </LegalSection>
 
       <LegalSection id="data-retention" number="06" title="Data retention">
         <LegalP>
           We retain personal data for as long as necessary to provide our services and comply with our legal obligations. The specific retention period depends on the type of data and the purpose for which it was collected.
-          <PlaceholderTag />
         </LegalP>
         <LegalP>
           [Placeholder — insert specific retention schedule per data category pending legal review. Do not treat the above as a commitment.]
@@ -134,7 +125,6 @@ export default function PrivacyPage() {
       <LegalSection id="security" number="07" title="Security">
         <LegalP>
           We implement technical and organisational measures to protect your personal data against unauthorised access, loss, destruction, or alteration.
-          <PlaceholderTag />
         </LegalP>
         <LegalP>
           [Placeholder — describe specific security measures after security audit. Do not list specific tools or certifications without verification.]
@@ -144,7 +134,6 @@ export default function PrivacyPage() {
       <LegalSection id="contact" number="08" title="Contact us">
         <LegalP>
           If you have questions about this policy or want to exercise your rights, contact us at:
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[

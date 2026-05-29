@@ -65,21 +65,6 @@ export function LegalLayout({ kicker, title, subtitle, toc, children }: LegalLay
 
   return (
     <div style={{ background: tokens.pageBg, minHeight: "100vh" }}>
-      {/* Draft warning banner */}
-      <div
-        style={{
-          background: tokens.brandSoft,
-          borderBottom: `1px solid ${tokens.brand}`,
-          padding: "10px 24px",
-        }}
-      >
-        <div className="mx-auto max-w-[1280px]">
-          <p className="text-[12px] font-semibold" style={{ color: tokens.brand }}>
-            DRAFT — placeholder legal text, pending legal review. Not legally binding.
-          </p>
-        </div>
-      </div>
-
       {/* Page header */}
       <div
         style={{

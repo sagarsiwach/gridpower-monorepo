@@ -4,7 +4,6 @@ import {
   LegalSection,
   LegalP,
   LegalList,
-  PlaceholderTag,
   type TocItem,
 } from "../../components/legal/LegalLayout";
 
@@ -33,7 +32,6 @@ export default function CookiesPage() {
       <LegalSection id="what-are-cookies" number="01" title="What are cookies">
         <LegalP>
           Cookies are small text files placed on your device when you visit a website. They are widely used to make websites work efficiently and to provide information to site owners.
-          <PlaceholderTag />
         </LegalP>
         <LegalP>
           Similar technologies such as web beacons, pixel tags, and local storage may also be used in ways described in this policy.
@@ -43,7 +41,6 @@ export default function CookiesPage() {
       <LegalSection id="cookies-we-use" number="02" title="Cookies we use">
         <LegalP>
           We use cookies in the following categories:
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -61,7 +58,6 @@ export default function CookiesPage() {
       <LegalSection id="third-party-cookies" number="03" title="Third-party cookies">
         <LegalP>
           Some cookies on our website are set by third-party services embedded in our pages. We do not control these cookies; they are governed by the privacy policies of the respective providers.
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -74,7 +70,6 @@ export default function CookiesPage() {
       <LegalSection id="managing-cookies" number="04" title="Managing cookies">
         <LegalP>
           You can control and manage cookies in several ways:
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
@@ -91,7 +86,6 @@ export default function CookiesPage() {
       <LegalSection id="your-choices" number="05" title="Your choices">
         <LegalP>
           Depending on your location, you may have the right to consent to or withdraw consent from non-essential cookies. Where required by law, we will obtain your consent before setting non-essential cookies.
-          <PlaceholderTag />
         </LegalP>
         <LegalP>
           [Placeholder — describe the consent banner / CMP implementation once decided. State which legal framework governs: GDPR, India DPDP Act 2023, or other. This section is entirely placeholder pending legal review.]
@@ -101,7 +95,6 @@ export default function CookiesPage() {
       <LegalSection id="contact" number="06" title="Contact">
         <LegalP>
           If you have questions about our use of cookies, contact us at:
-          <PlaceholderTag />
         </LegalP>
         <LegalList
           items={[
