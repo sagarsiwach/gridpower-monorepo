@@ -23,7 +23,6 @@ export default [
   route("preview/v3-megamenu-impeccable", "routes/_preview/v3-megamenu-impeccable.tsx"),
   route("preview/v3-solutions-components", "routes/_preview/v3-solutions-components.tsx"),
   route("preview/v3-solutions-hero", "routes/_preview/v3-solutions-hero.tsx"),
-  route("preview/footer-variants", "routes/_preview/footer-variants.tsx"),
   route("preview/:slug", "routes/_preview/variant.tsx"),
 
   // Solution template (all mega-menu solution links point here for now)
