@@ -4,7 +4,7 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from "re
 import "./styles/globals.css";
 import { GlobalHeader } from "./components/site/GlobalHeader";
 import MobileSiteNav from "./components/site/MobileSiteNav";
-import { FooterUltraRich } from "./components/menus/footer/FooterUltraRich";
+import { SiteFooter } from "./components/site/SiteFooter";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -48,7 +48,7 @@ export default function App() {
         </>
       )}
       <Outlet />
-      {!isInternal && <FooterUltraRich />}
+      {!isInternal && <SiteFooter />}
       <DevAgentation />
     </>
   );
