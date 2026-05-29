@@ -252,21 +252,15 @@ const AUDIENCES: Audience[] = [
 export function GlobalHeader() {
   const [open, setOpen] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [hovered, setHovered] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const handleHover = (key: string) => setOpen(key);
   const navWrapRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLElement>(null);
-  const hoveredRef = useRef(false);
 
-  // Two independent tiers:
-  //  - Top utility bar: tied to SCROLL only. Visible at the very top, hidden the
-  //    moment you scroll down, returns when you scroll back up. Hover never shows it.
-  //  - Main bar: compact by default (even at the top); grows back to its original
-  //    size only while hovered (or while a mega panel is open).
+  // The main bar stays at its compact size always — that's the default look.
+  // Only the top utility bar reacts to scroll: visible at the very top, hidden
+  // once scrolled, back on scroll-up.
   const topBarCollapsed = scrolled;
-  const mainCompact = !hovered && !open;
 
   // Condense on scroll: the top utility bar collapses and a soft shadow lifts
   // the nav off the page — the standard polished sticky-header behavior.
@@ -275,37 +269,6 @@ export function GlobalHeader() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Hover tracking by RECT, not mouseenter/leave. Enter/leave events get missed
-  // (fast exits, leaving the window, layout shifts under a stationary cursor),
-  // which left the main bar stuck expanded. A continuous mousemove check against
-  // the header rect (plus the open panel, which sits below the header box) is
-  // reliable; a document-level leave handler covers the cursor leaving entirely.
-  useEffect(() => {
-    const within = (r: DOMRect | undefined, x: number, y: number, pad: number) =>
-      !!r && x >= r.left - pad && x <= r.right + pad && y >= r.top - pad && y <= r.bottom + pad;
-    const set = (v: boolean) => {
-      if (v !== hoveredRef.current) {
-        hoveredRef.current = v;
-        setHovered(v);
-      }
-    };
-    const onMove = (e: MouseEvent) => {
-      const h = headerRef.current?.getBoundingClientRect();
-      const p = panelRef.current?.getBoundingClientRect();
-      // pad bridges the 4px rail→panel gap so hover doesn't flicker across it
-      set(within(h, e.clientX, e.clientY, 4) || within(p, e.clientX, e.clientY, 8));
-    };
-    const onLeave = () => set(false);
-    document.addEventListener("mousemove", onMove, { passive: true });
-    document.addEventListener("mouseleave", onLeave);
-    window.addEventListener("blur", onLeave);
-    return () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseleave", onLeave);
-      window.removeEventListener("blur", onLeave);
-    };
   }, []);
 
   // Robust open/close (hover-intent). The panel stays open while the cursor is
@@ -351,7 +314,6 @@ export function GlobalHeader() {
 
   return (
     <header
-      ref={headerRef}
       style={{
         position: "sticky",
         top: 0,
@@ -372,7 +334,7 @@ export function GlobalHeader() {
         <MainNav
           active={open}
           onHover={handleHover}
-          condensed={mainCompact}
+          condensed
           shouldReduceMotion={shouldReduceMotion ?? false}
         />
 
