@@ -25,6 +25,10 @@ import { ArrowRight, type Icon } from "@phosphor-icons/react";
 import { tokens } from "../../routes/_preview/_v3-tokens";
 
 const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
+// Clash Grotesk is the display face (loaded via @font-face), reserved for
+// marquee headlines only — hero h1 + CTA-banner h2 — per DESIGN.md. Section h2s
+// stay Inter. Falls back to Inter if Clash fails to load.
+const DISPLAY = '"Clash Grotesk", Inter, ui-sans-serif, system-ui, sans-serif';
 const MONO = '"Geist Mono", ui-monospace, SFMono-Regular, monospace';
 const EASE = [0.22, 1, 0.36, 1] as const;
 const MAXW = 1280;
@@ -411,7 +415,7 @@ export function PageHero({
           <Reveal delay={0.05}>
             <h1
               style={{
-                fontFamily: FONT,
+                fontFamily: DISPLAY,
                 color: tokens.ink,
                 fontSize: "clamp(38px, 6vw, 66px)",
                 fontWeight: 600,
@@ -732,7 +736,7 @@ export function CTASection({
           <Reveal>
             <h2
               style={{
-                fontFamily: FONT,
+                fontFamily: DISPLAY,
                 color: dark ? "#ffffff" : tokens.ink,
                 fontSize: "clamp(28px, 4vw, 44px)",
                 fontWeight: 600,

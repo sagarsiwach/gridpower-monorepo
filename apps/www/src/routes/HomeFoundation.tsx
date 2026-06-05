@@ -80,7 +80,7 @@ export default function HomeFoundation() {
                   Energy storage & management
                 </span>
               </motion.div>
-              <motion.h1 {...intro(1)} style={{ color: "#fff", fontSize: "clamp(40px,6.5vw,78px)", fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 0.98, maxWidth: "16ch", textWrap: "balance" }}>
+              <motion.h1 {...intro(1)} style={{ fontFamily: '"Clash Grotesk", Inter, ui-sans-serif, system-ui, sans-serif', color: "#fff", fontSize: "clamp(40px,6.5vw,78px)", fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 0.98, maxWidth: "16ch", textWrap: "balance" }}>
                 Store your power. Run it on software.
               </motion.h1>
               <motion.p {...intro(2)} style={{ color: "rgba(255,255,255,0.82)", fontSize: "clamp(17px,2vw,21px)", lineHeight: 1.5, marginTop: 22, maxWidth: "46ch" }}>

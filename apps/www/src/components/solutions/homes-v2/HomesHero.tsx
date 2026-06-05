@@ -96,6 +96,7 @@ export default function HomesHero() {
         <motion.h1
           {...entrance(1)}
           style={{
+            fontFamily: '"Clash Grotesk", Inter, ui-sans-serif, system-ui, sans-serif',
             color: "#ffffff",
             fontSize: "clamp(40px, 7vw, 82px)",
             fontWeight: 600,
