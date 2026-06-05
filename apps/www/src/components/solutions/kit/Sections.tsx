@@ -244,6 +244,7 @@ export function UseCaseSwitcher({
   id,
 }: BaseProps & { kicker?: string; title?: ReactNode; intro?: ReactNode; cases: UseCase[] }) {
   const [active, setActive] = useState(cases[0]?.key);
+  const [hovered, setHovered] = useState<string | null>(null);
   const current = cases.find((c) => c.key === active) ?? cases[0];
 
   return (
@@ -252,10 +253,13 @@ export function UseCaseSwitcher({
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}>
         {cases.map((c) => {
           const on = c.key === active;
+          const hot = !on && hovered === c.key;
           return (
             <button
               key={c.key}
               onClick={() => setActive(c.key)}
+              onMouseEnter={() => setHovered(c.key)}
+              onMouseLeave={() => setHovered(null)}
               style={{
                 fontFamily: FONT,
                 fontSize: 13.5,
@@ -263,8 +267,8 @@ export function UseCaseSwitcher({
                 padding: "9px 16px",
                 borderRadius: 999,
                 cursor: "pointer",
-                border: `1px solid ${on ? tokens.brand : tokens.hairlineStrong}`,
-                background: on ? tokens.brand : tokens.card,
+                border: `1px solid ${on ? tokens.brand : hot ? tokens.inkMuted : tokens.hairlineStrong}`,
+                background: on ? tokens.brand : hot ? tokens.pageBgDeep : tokens.card,
                 color: on ? "#fff" : tokens.body,
                 transition: "all 0.15s ease",
               }}
@@ -524,6 +528,7 @@ export function Faq({
   id,
 }: BaseProps & { kicker?: string; title?: ReactNode; items: { q: string; a: ReactNode }[] }) {
   const [open, setOpen] = useState<number | null>(0);
+  const [hover, setHover] = useState<number | null>(null);
   return (
     <Section alt={alt} id={id}>
       <div style={{ maxWidth: 760, marginInline: "auto" }}>
@@ -535,7 +540,9 @@ export function Faq({
               <div key={i} style={{ borderTop: i === 0 ? "none" : `1px solid ${tokens.hairline}` }}>
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "20px 24px", background: "transparent", border: "none", cursor: "pointer", textAlign: "left" }}
+                  onMouseEnter={() => setHover(i)}
+                  onMouseLeave={() => setHover(null)}
+                  style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "20px 24px", background: hover === i ? tokens.pageBgDeep : "transparent", border: "none", cursor: "pointer", textAlign: "left", transition: "background 0.15s ease" }}
                 >
                   <span style={{ fontFamily: FONT, fontSize: 16, fontWeight: 600, color: tokens.ink }}>{it.q}</span>
                   <CaretDown size={16} weight="bold" color={tokens.muted} style={{ flexShrink: 0, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s ease" }} />

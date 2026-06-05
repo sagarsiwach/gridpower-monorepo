@@ -71,7 +71,7 @@ const HEROES: Entry[] = [
         eyebrow="GridEnergy for Homes"
         title="The last inverter your home will ever need."
         subtitle="Silent, safe home storage that backs up your whole home and finally makes your solar worth it."
-        chips={["Silent — no genset", "Runs your ACs", "Works with your solar", "Lifetime LFP"]}
+        chips={["Silent, no genset", "Runs your ACs", "Works with your solar", "Lifetime LFP"]}
         primary={{ label: "Book a free site survey", to: "/contact", icon: Lightning }}
         secondary={{ label: "Explore the range", to: "/products" }}
         images={[HOME_IMG, "/images/solutions/homes-small.png", "/images/solutions/homes-solar.png"]}
@@ -124,7 +124,7 @@ const SECTIONS: Entry[] = [
       <BentoGrid
         kicker="The system"
         title="Everything works as one."
-        intro="Battery, solar, and grid managed by a single platform — not a drawer of disconnected boxes."
+        intro="Battery, solar, and grid managed by a single platform, not a drawer of disconnected boxes."
         items={[
           { span: 2, label: "Storage", title: "Whole-home backup that switches over before you notice", body: "LFP storage sized to your load, with seamless changeover when the grid drops." },
           { label: "Solar", title: "Make your panels finally pay off", body: "Store the midday surplus instead of exporting it for pennies." },
@@ -159,7 +159,7 @@ const SECTIONS: Entry[] = [
         kicker="By home type"
         title="Sized for how you actually live."
         cases={[
-          { key: "flat", label: "Apartment", title: "Compact backup for a flat", body: "A wall-mounted Nano keeps your essentials running through a cut — silent, no genset on the balcony.", bullets: ["Wall-mounted, no plant room", "Silent and fume-free", "Runs from your phone"] },
+          { key: "flat", label: "Apartment", title: "Compact backup for a flat", body: "A wall-mounted Nano keeps your essentials running through a cut. Silent, with no genset on the balcony.", bullets: ["Wall-mounted, no plant room", "Silent and fume-free", "Runs from your phone"] },
           { key: "villa", label: "Large home", title: "Whole-home backup for a villa", body: "Cover every circuit, including the ACs, and stack capacity as your load grows.", bullets: ["Whole-home changeover", "Scales with your load", "Pairs with rooftop solar"] },
           { key: "solar", label: "Solar home", title: "Make your existing solar pay", body: "Store your daytime surplus instead of exporting it cheap, and draw it down after dark.", bullets: ["Self-consumption first", "Works with most inverters", "Outage-ready"] },
         ]}
@@ -173,7 +173,7 @@ const SECTIONS: Entry[] = [
     node: (
       <WhatItPowers
         title="Your essentials, through the cut."
-        intro="Exactly what runs and for how long depends on the size you pick — confirmed at survey."
+        intro="Exactly what runs and for how long depends on the size you pick, confirmed at survey."
         items={[
           { icon: Lightbulb, label: "Lights & fans" },
           { icon: WifiHigh, label: "Wi-Fi" },
@@ -182,7 +182,7 @@ const SECTIONS: Entry[] = [
           { icon: Plug, label: "Fridge" },
           { icon: DeviceMobile, label: "Devices" },
         ]}
-        note='Run-time example (e.g. "essentials for ~X hours") — TBD'
+        note='Run-time example (e.g. "essentials for ~X hours"): TBD'
       />
     ),
   },
@@ -213,7 +213,7 @@ const SECTIONS: Entry[] = [
       <StepFlow
         title="From enquiry to energised."
         steps={[
-          { title: "Site survey", body: "We assess your load, roof, and backup needs — free, no obligation." },
+          { title: "Site survey", body: "We assess your load, roof, and backup needs. Free, no obligation." },
           { title: "Proposal", body: "A sized system with the economics laid out clearly." },
           { title: "Install", body: "Authorised install and commissioning, usually in a day." },
           { title: "Onboarding", body: "GridOS app setup and a walkthrough of your new system." },
@@ -241,8 +241,8 @@ const SECTIONS: Entry[] = [
     ref: "Stripe (OpenAI card) — dark testimonial",
     node: (
       <QuoteBand
-        quote="The power cuts used to mean the genset and the noise. Now nothing happens — the house just keeps running."
-        author="Placeholder — real customer TBD"
+        quote="The power cuts used to mean the genset and the noise. Now nothing happens, the house just keeps running."
+        author="Placeholder: real customer TBD"
         role="Homeowner, Goa"
         logo="GridEnergy"
       />
@@ -276,9 +276,9 @@ const SECTIONS: Entry[] = [
       <Faq
         items={[
           { q: "Will it run my air conditioners?", a: "Depends on the size you pick and how many at once. We confirm exactly what runs at the site survey." },
-          { q: "Does it work with my existing solar?", a: "In most cases, yes — through partners. We check your inverter at survey." },
+          { q: "Does it work with my existing solar?", a: "In most cases, yes, through partners. We check your inverter at survey." },
           { q: "How long does install take?", a: "Usually a day for a home, after the survey and proposal are signed off." },
-          { q: "What's the warranty?", a: "Covered — exact years and cycles confirmed on your proposal." },
+          { q: "What's the warranty?", a: "Covered. Exact years and cycles confirmed on your proposal." },
         ]}
       />
     ),
@@ -290,7 +290,7 @@ const SECTIONS: Entry[] = [
     node: (
       <AppShowcase
         title="Your whole system, in your pocket."
-        body="GridOS shows live state, sends outage alerts, and tracks what you're saving — no dashboards to learn."
+        body="GridOS shows live state, sends outage alerts, and tracks what you're saving, with no dashboards to learn."
         features={[
           { icon: ChartLine, label: "Live production, storage, and load" },
           { icon: Bell, label: "Outage and fault alerts" },
@@ -309,9 +309,9 @@ const SECTIONS: Entry[] = [
         kicker="In the field"
         title="Installed and running."
         images={[
-          { src: "/images/solutions/homes-large.png", caption: "Placeholder — real install photo TBD" },
-          { src: "/images/solutions/homes-small.png", caption: "Placeholder — real install photo TBD" },
-          { src: "/images/solutions/homes-solar.png", caption: "Placeholder — real install photo TBD" },
+          { src: "/images/solutions/homes-large.png", caption: "Placeholder: real install photo TBD" },
+          { src: "/images/solutions/homes-small.png", caption: "Placeholder: real install photo TBD" },
+          { src: "/images/solutions/homes-solar.png", caption: "Placeholder: real install photo TBD" },
         ]}
       />
     ),
@@ -369,7 +369,7 @@ export default function SectionKit() {
           </h1>
           <p style={{ color: "rgba(255,255,255,0.66)", fontSize: 16, lineHeight: 1.6, marginTop: 16, maxWidth: 620 }}>
             {HEROES.length} hero variants and {SECTIONS.length} body blocks, all in the V3 design system. Import from{" "}
-            <code style={{ fontFamily: MONO, fontSize: 14, color: "#fff" }}>components/solutions/kit</code>. Everything below is sample content for layout only — numbers, logos, and quotes are placeholders.
+            <code style={{ fontFamily: MONO, fontSize: 14, color: "#fff" }}>components/solutions/kit</code>. Everything below is sample content for layout only; numbers, logos, and quotes are placeholders.
           </p>
           <nav style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 28 }}>
             {all.map((e) => (
