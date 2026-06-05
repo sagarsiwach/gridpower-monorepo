@@ -48,6 +48,17 @@ import { tokens } from "../../routes/_preview/_v3-tokens";
 
 const SOLUTION_HREF = "/solutions/homes";
 
+// Per-audience solution routes. The mega-menu links now point at the real
+// per-audience pages instead of all funnelling to /solutions/homes.
+const AUDIENCE_HREF: Record<string, string> = {
+  homes: "/solutions/homes",
+  offices: "/solutions/offices-industrial",
+  institute: "/solutions/institutes",
+  enterprises: "/solutions/enterprises",
+  hospitality: "/solutions/hospitality",
+};
+const hrefFor = (key: string) => AUDIENCE_HREF[key] ?? SOLUTION_HREF;
+
 /* ------------------------------------------------------------------ */
 /*  Rect — rounded rectangle wrapper                                   */
 /* ------------------------------------------------------------------ */
@@ -570,8 +581,8 @@ function MainNav({
 
         {/* Right: CTA only (Sign in moved to top bar). Radius corners, sized up. */}
         <div className="flex items-center justify-self-end">
-          <button
-            type="button"
+          <Link
+            to="/contact"
             className="flex items-center gap-2 px-5 text-[13px] uppercase tracking-[0.07em] font-semibold"
             style={{
               background: tokens.brand,
@@ -579,6 +590,7 @@ function MainNav({
               border: "none",
               borderRadius: 14,
               cursor: "pointer",
+              textDecoration: "none",
               paddingTop: condensed ? 9 : 12,
               paddingBottom: condensed ? 9 : 12,
               transition: shouldReduceMotion
@@ -589,8 +601,8 @@ function MainNav({
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = tokens.brand)}
           >
             <Lightning size={14} weight="fill" color="white" />
-            Get early access
-          </button>
+            Book a site survey
+          </Link>
         </div>
       </div>
     </div>
@@ -647,7 +659,7 @@ function MegaPanel({
                   </span>
                 </div>
                 <Link
-                  to={SOLUTION_HREF}
+                  to={hrefFor(audience.key)}
                   className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.12em] font-semibold transition-opacity hover:opacity-70"
                   style={{ color: tokens.ink }}
                 >
@@ -670,7 +682,7 @@ function MegaPanel({
                   </p>
                   <div className="grid grid-cols-2 gap-2">
                     {audience.solutions.map((s) => (
-                      <SolutionTile key={s.name} solution={s} />
+                      <SolutionTile key={s.name} solution={s} href={hrefFor(audience.key)} />
                     ))}
                   </div>
                 </motion.div>
@@ -689,7 +701,7 @@ function MegaPanel({
                   <ul className="flex flex-col">
                     {audience.featured.map((f) => (
                       <li key={f.label}>
-                        <Link to={SOLUTION_HREF} className="gh-featured-row block px-4 py-2.5 transition-colors" style={{ borderRadius: 10 }}>
+                        <Link to={hrefFor(audience.key)} className="gh-featured-row block px-4 py-2.5 transition-colors" style={{ borderRadius: 10 }}>
                           <p className="text-[13px] font-semibold leading-tight" style={{ color: tokens.ink }}>
                             {f.label}
                           </p>
@@ -728,7 +740,7 @@ function MegaPanel({
                           </li>
                         ))}
                       </ul>
-                      <Link to={SOLUTION_HREF} className="flex items-center gap-1 mt-auto text-[10px] uppercase tracking-[0.12em] font-semibold transition-opacity hover:opacity-70" style={{ color: tokens.brand }}>
+                      <Link to={hrefFor(audience.key)} className="flex items-center gap-1 mt-auto text-[10px] uppercase tracking-[0.12em] font-semibold transition-opacity hover:opacity-70" style={{ color: tokens.brand }}>
                         {audience.spotlight.cta}
                         <ArrowRight size={10} weight="bold" color={tokens.brand} />
                       </Link>
@@ -746,7 +758,7 @@ function MegaPanel({
                       <p className="text-[11px] leading-snug" style={{ color: tokens.muted }}>
                         {audience.spotlight.platformSub}
                       </p>
-                      <Link to={SOLUTION_HREF} className="flex items-center gap-1 text-[10px] uppercase tracking-[0.12em] font-semibold transition-opacity hover:opacity-70" style={{ color: tokens.inkMuted }}>
+                      <Link to="/platform" className="flex items-center gap-1 text-[10px] uppercase tracking-[0.12em] font-semibold transition-opacity hover:opacity-70" style={{ color: tokens.inkMuted }}>
                         {audience.spotlight.platformCta}
                         <ArrowRight size={10} weight="bold" />
                       </Link>
@@ -770,7 +782,7 @@ function MegaPanel({
             </div>
             <div className="flex items-center gap-2">
               <span className="text-[10px] uppercase tracking-[0.12em]" style={{ color: tokens.muted, fontWeight: 600 }}>
-                Also from GridPower
+                Sister site
               </span>
               <Link
                 to={SOLUTION_HREF}
@@ -821,13 +833,13 @@ function FooterPill({ children, emphasis }: { children: ReactNode; emphasis?: bo
 /*  SolutionTile                                                       */
 /* ------------------------------------------------------------------ */
 
-function SolutionTile({ solution }: { solution: Audience["solutions"][number] }) {
+function SolutionTile({ solution, href }: { solution: Audience["solutions"][number]; href: string }) {
   const { Icon, name, sub, image } = solution;
   const [hovered, setHovered] = useState(false);
 
   return (
     <Link
-      to={SOLUTION_HREF}
+      to={href}
       className="block overflow-hidden"
       style={{
         background: tokens.card,

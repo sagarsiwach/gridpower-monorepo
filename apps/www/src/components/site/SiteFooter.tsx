@@ -111,7 +111,7 @@ export function SiteFooter() {
                 maxWidth: "18ch",
               }}
             >
-              Enter your load and tariff. Get a sized stack and payback in 48 hours.
+              Tell us your load and tariff. Get a sized stack and a clear payback estimate.
             </h2>
           </div>
 
@@ -126,7 +126,7 @@ export function SiteFooter() {
               textDecoration: "none",
             }}
           >
-            <span>Get early access</span>
+            <span>Book a free site survey</span>
             <ArrowRight size={16} weight="bold" />
           </Link>
         </div>

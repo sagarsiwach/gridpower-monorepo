@@ -1,7 +1,7 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
-  // Homepage (goes blank in the next slice — header only)
+  // Homepage
   index("routes/HomeFoundation.tsx"),
 
   // Design-system showcase
@@ -25,13 +25,34 @@ export default [
   route("preview/v3-solutions-hero", "routes/_preview/v3-solutions-hero.tsx"),
   route("preview/:slug", "routes/_preview/variant.tsx"),
 
-  // Solution template (all mega-menu solution links point here for now)
+  // Solution pages (per audience)
   route("solutions/homes", "routes/solutions/homes.tsx"),
+  route("solutions/homes/apartment", "routes/solutions/apartment.tsx"),
+  route("solutions/offices-industrial", "routes/solutions/offices-industrial.tsx"),
+  route("solutions/institutes", "routes/solutions/institutes.tsx"),
+  route("solutions/enterprises", "routes/solutions/enterprises.tsx"),
+  route("solutions/hospitality", "routes/solutions/hospitality.tsx"),
+
+  // Products
+  route("products", "routes/products/index.tsx"),
+  route("products/nano", "routes/products/nano.tsx"),
+
+  // Platform
+  route("platform", "routes/platform.tsx"),
+
+  // Company
+  route("about", "routes/about.tsx"),
+  route("partners", "routes/partners.tsx"),
+  route("support", "routes/support.tsx"),
+  route("contact", "routes/contact.tsx"),
+  route("sign-in", "routes/sign-in.tsx"),
 
   // Legal pages
   route("privacy", "routes/legal/privacy.tsx"),
   route("terms", "routes/legal/terms.tsx"),
   route("cookies", "routes/legal/cookies.tsx"),
+  route("disclaimer", "routes/legal/disclaimer.tsx"),
+  route("warranty", "routes/legal/warranty.tsx"),
 
   // Catch-all — not-yet-built routes render header + a small title, never a 404
   route("*", "routes/$.tsx"),
