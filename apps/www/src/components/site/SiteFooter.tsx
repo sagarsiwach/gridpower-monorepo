@@ -57,7 +57,8 @@ const COLUMNS = [
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Service", href: "/terms" },
       { label: "Cookie Policy", href: "/cookies" },
-      { label: "Compliance", href: "/compliance" },
+      { label: "Disclaimer", href: "/disclaimer" },
+      { label: "Warranty", href: "/warranty" },
     ],
   },
 ] as const;
