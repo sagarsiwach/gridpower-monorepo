@@ -27,6 +27,7 @@ export default [
   route("preview/solution-samples", "routes/_preview/solution-samples.tsx"),
   route("preview/modules", "routes/_preview/modules.tsx"),
   route("preview/stripe-evolve", "routes/_preview/stripe-evolve.tsx"),
+  route("preview/solution-homes", "routes/_preview/solution-homes.tsx"),
   route("preview/:slug", "routes/_preview/variant.tsx"),
 
   // Solution pages (per audience)
