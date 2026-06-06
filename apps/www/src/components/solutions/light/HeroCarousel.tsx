@@ -69,107 +69,81 @@ export function HeroCarousel({ slides, autoMs = 6500 }: { slides: HeroSlide[]; a
         `linear-gradient(90deg, oklch(15.3% 0.006 107.1 / 0.6) 0%, oklch(15.3% 0.006 107.1 / 0.18) 42%, transparent 66%),` +
         `linear-gradient(0deg, oklch(15.3% 0.006 107.1 / 0.5) 0%, transparent 38%)` }} />
 
-      {/* content: bottom-left — the stacked card pair */}
+      {/* content: bottom-left — gray tab card + white content card, one progress bar */}
       <div style={{ position: "relative", height: "100%", maxWidth: 1280, marginInline: "auto", paddingInline: 32, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
         <div style={{ width: "100%", maxWidth: 452, paddingBottom: 54 }}>
 
-          {/* back card — recessed, peeks out the top, holds the tabs */}
+          {/* gray tab card — current category, straight sides down behind the white card */}
           <div style={{
             position: "relative", zIndex: 1,
             background: tokens.pageBgDeep,
             border: `1px solid ${tokens.hairline}`,
-            borderRadius: RADIUS,
-            padding: "13px 13px 32px",
-            boxShadow: "0 18px 44px -30px oklch(15.3% 0.006 107.1 / 0.55)",
+            borderBottom: "none",
+            borderRadius: `${RADIUS}px ${RADIUS}px 0 0`,
+            padding: "13px 22px 26px",
           }}>
-            <div role="tablist" aria-label="Home types" style={{ display: "flex", gap: 4, overflowX: "auto" }}>
-              {slides.map((sl, k) => {
-                const on = k === i;
-                return (
-                  <button
-                    key={sl.tab}
-                    role="tab"
-                    type="button"
-                    onClick={() => setI(k)}
-                    aria-selected={on}
-                    style={{
-                      position: "relative", flex: "1 1 0", minWidth: 88, cursor: "pointer",
-                      border: "none", background: "transparent", padding: "7px 10px 8px", borderRadius: 11,
-                      display: "flex", flexDirection: "column", gap: 8, textAlign: "left",
-                    }}
-                  >
-                    {on && (
-                      <motion.span layoutId="hero-tab-pill" aria-hidden
-                        transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 32 }}
-                        style={{ position: "absolute", inset: 0, borderRadius: 11, background: tokens.card, border: `1px solid ${tokens.hairline}`, boxShadow: "0 1px 2px oklch(15.3% 0.006 107.1 / 0.05)", zIndex: 0 }} />
-                    )}
-                    <span style={{
-                      position: "relative", zIndex: 1, fontFamily: FONT, fontSize: 12.5, fontWeight: 600,
-                      letterSpacing: "-0.01em", lineHeight: 1.15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
-                      color: on ? tokens.ink : tokens.inkMuted, transition: "color .2s ease",
-                    }}>{sl.tab}</span>
-                    {/* story-style progress track */}
-                    <span aria-hidden style={{ position: "relative", zIndex: 1, height: 3, borderRadius: 999, background: tokens.hairlineStrong, overflow: "hidden" }}>
-                      {on && !reduce && !paused && (
-                        <motion.span key={`p${i}`}
-                          initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: autoMs / 1000, ease: "linear" }}
-                          style={{ position: "absolute", inset: 0, transformOrigin: "left", background: tokens.brand }} />
-                      )}
-                      {on && (reduce || paused) && (
-                        <span style={{ position: "absolute", inset: 0, background: tokens.brand }} />
-                      )}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={i}
+                initial={reduce ? false : { opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
+                transition={{ duration: reduce ? 0 : 0.32, ease: EASE }}
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 8, fontFamily: FONT,
+                  fontSize: 12.5, fontWeight: 600, letterSpacing: "0.01em", color: tokens.inkMuted,
+                }}
+              >
+                <span aria-hidden style={{ position: "relative", display: "inline-flex", width: 7, height: 7 }}>
+                  <span style={{ position: "absolute", inset: 0, borderRadius: 999, background: tokens.brand }} />
+                  {!reduce && (
+                    <motion.span aria-hidden
+                      animate={{ scale: [1, 2.2], opacity: [0.55, 0] }}
+                      transition={{ duration: 1.8, ease: "easeOut", repeat: Infinity }}
+                      style={{ position: "absolute", inset: 0, borderRadius: 999, background: tokens.brand }} />
+                  )}
+                </span>
+                {s.eyebrow}
+              </motion.span>
+            </AnimatePresence>
           </div>
 
-          {/* front card — overlaps the back card, holds the copy */}
+          {/* white content card — overlaps the gray card seamlessly, one progress bar at its foot */}
           <div style={{
-            position: "relative", zIndex: 2, marginTop: -22,
+            position: "relative", zIndex: 2, marginTop: -14,
             background: tokens.card,
             border: `1px solid ${tokens.hairline}`,
             borderRadius: RADIUS,
-            padding: "24px 26px 26px",
+            overflow: "hidden",
             boxShadow: "0 2px 4px oklch(15.3% 0.006 107.1 / 0.06), 0 34px 80px -38px oklch(15.3% 0.006 107.1 / 0.72)",
           }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={i}
-                initial={reduce ? false : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
-                transition={{ duration: reduce ? 0 : 0.4, ease: EASE }}
-              >
-                {/* eyebrow tag */}
-                <span style={{
-                  display: "inline-flex", alignItems: "center", gap: 7, fontFamily: FONT,
-                  fontSize: 11.5, fontWeight: 600, letterSpacing: "0.01em", color: tokens.inkMuted,
-                  background: tokens.pageBgDeep, border: `1px solid ${tokens.hairline}`,
-                  borderRadius: 999, padding: "5px 11px 5px 9px",
-                }}>
-                  <span aria-hidden style={{ position: "relative", display: "inline-flex", width: 7, height: 7 }}>
-                    <span style={{ position: "absolute", inset: 0, borderRadius: 999, background: tokens.brand }} />
-                    {!reduce && (
-                      <motion.span aria-hidden
-                        animate={{ scale: [1, 2.2], opacity: [0.55, 0] }}
-                        transition={{ duration: 1.8, ease: "easeOut", repeat: Infinity }}
-                        style={{ position: "absolute", inset: 0, borderRadius: 999, background: tokens.brand }} />
-                    )}
-                  </span>
-                  {s.eyebrow}
-                </span>
+            <div style={{ padding: "22px 26px 24px" }}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={i}
+                  initial={reduce ? false : { opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
+                  transition={{ duration: reduce ? 0 : 0.4, ease: EASE }}
+                >
+                  <h1 style={{ fontFamily: FONT, color: tokens.ink, fontSize: "clamp(27px, 3.3vw, 39px)", fontWeight: 600, letterSpacing: "-0.032em", lineHeight: 1.04, textWrap: "balance" }}>{s.title}</h1>
+                  <p style={{ color: tokens.body, fontSize: 15.5, lineHeight: 1.52, marginTop: 12, maxWidth: "40ch" }}>{s.sub}</p>
 
-                <h1 style={{ fontFamily: FONT, color: tokens.ink, fontSize: "clamp(27px, 3.3vw, 39px)", fontWeight: 600, letterSpacing: "-0.032em", lineHeight: 1.04, marginTop: 13, textWrap: "balance" }}>{s.title}</h1>
-                <p style={{ color: tokens.body, fontSize: 15.5, lineHeight: 1.52, marginTop: 12, maxWidth: "40ch" }}>{s.sub}</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 22 }}>
+                    <CardBtn to={s.primary.to} primary>{s.primary.label}</CardBtn>
+                    {s.secondary && <CardBtn to={s.secondary.to}>{s.secondary.label}</CardBtn>}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 22 }}>
-                  <CardBtn to={s.primary.to} primary>{s.primary.label}</CardBtn>
-                  {s.secondary && <CardBtn to={s.secondary.to}>{s.secondary.label}</CardBtn>}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+            {/* single progress bar — the card advancing to the next slide */}
+            <div aria-hidden style={{ height: 3, background: tokens.hairline }}>
+              {!reduce && !paused
+                ? <motion.div key={`p${i}`} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: autoMs / 1000, ease: "linear" }}
+                    style={{ height: "100%", transformOrigin: "left", background: tokens.brand }} />
+                : <div style={{ height: "100%", width: "100%", background: tokens.brand, opacity: 0.85 }} />}
+            </div>
           </div>
 
         </div>

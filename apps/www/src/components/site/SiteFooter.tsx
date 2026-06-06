@@ -159,9 +159,8 @@ export function SiteFooter() {
 
         <div style={{ height: 1, background: tokens.hairline }} />
 
-        {/* Legal bar — extra bottom padding below lg clears the fixed
-            MobileSiteNav tab bar (64px, rendered only on lg:hidden). */}
-        <div className="flex flex-col gap-4 pt-5 pb-28 sm:flex-row sm:items-center sm:justify-between lg:pb-6">
+        {/* Legal bar */}
+        <div className="flex flex-col gap-4 pt-5 pb-8 sm:flex-row sm:items-center sm:justify-between lg:pb-6">
           <p className="text-[12px] leading-[1.5]" style={{ color: tokens.body }}>
             © {year} DeltaEV Mobility Private Limited.{" "}
             <span style={{ color: tokens.muted }}>

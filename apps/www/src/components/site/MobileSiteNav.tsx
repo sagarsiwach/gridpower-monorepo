@@ -225,23 +225,13 @@ const COMPANY_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-type TabKey = "home" | "solutions" | "platform" | "about" | "contact";
-
-const BOTTOM_TABS: { key: TabKey; label: string; href: string }[] = [
-  { key: "home", label: "Home", href: "/" },
-  { key: "solutions", label: "Solutions", href: SOLUTION_HREF },
-  { key: "platform", label: "Platform", href: "/platform" },
-  { key: "about", label: "About", href: "/about" },
-  { key: "contact", label: "Contact", href: "/contact" },
-];
-
 type View = "closed" | "root" | string;
 
 /* ------------------------------------------------------------------ */
 /*  Root export                                                         */
 /* ------------------------------------------------------------------ */
 
-export default function MobileSiteNav({ currentRoute = "home" }: { currentRoute?: string }) {
+export default function MobileSiteNav(_props: { currentRoute?: string } = {}) {
   const [view, setView] = useState<View>("closed");
   const audience = AUDIENCES.find((a) => a.key === view);
   const reduce = useReducedMotion();
@@ -308,8 +298,6 @@ export default function MobileSiteNav({ currentRoute = "home" }: { currentRoute?
           </motion.div>
         )}
       </AnimatePresence>
-
-      <MobileBottomTabBar currentRoute={currentRoute} onOpenSolutions={() => setView("root")} />
     </div>
   );
 }
@@ -349,99 +337,6 @@ function MobileNavBar({ onOpenMenu }: { onOpenMenu: () => void }) {
           <List size={18} weight="bold" />
         </button>
       </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Bottom tab bar                                                      */
-/* ------------------------------------------------------------------ */
-
-function MobileBottomTabBar({
-  currentRoute,
-  onOpenSolutions,
-}: {
-  currentRoute: string;
-  onOpenSolutions: () => void;
-}) {
-  return (
-    <div
-      className="fixed bottom-0 left-0 right-0 flex items-center justify-around"
-      style={{
-        height: 64,
-        background: tokens.pageBgDeep,
-        borderTop: `1px solid ${tokens.hairline}`,
-        zIndex: 50,
-        paddingBottom: "env(safe-area-inset-bottom, 0px)",
-      }}
-    >
-      {BOTTOM_TABS.map((tab) => {
-        const isActive = currentRoute === tab.key;
-        return tab.key === "solutions" ? (
-          <button
-            key={tab.key}
-            type="button"
-            onClick={onOpenSolutions}
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 3,
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "8px 0",
-            }}
-          >
-            <span
-              style={{
-                width: 28,
-                height: 3,
-                borderRadius: 999,
-                background: isActive ? tokens.brand : "transparent",
-                marginBottom: 2,
-              }}
-            />
-            <span
-              className="text-[11px] font-semibold"
-              style={{ color: isActive ? tokens.brand : tokens.muted }}
-            >
-              {tab.label}
-            </span>
-          </button>
-        ) : (
-          <Link
-            key={tab.key}
-            to={tab.href}
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 3,
-              padding: "8px 0",
-              textDecoration: "none",
-            }}
-          >
-            <span
-              style={{
-                width: 28,
-                height: 3,
-                borderRadius: 999,
-                background: isActive ? tokens.brand : "transparent",
-                marginBottom: 2,
-              }}
-            />
-            <span
-              className="text-[11px] font-semibold"
-              style={{ color: isActive ? tokens.brand : tokens.muted }}
-            >
-              {tab.label}
-            </span>
-          </Link>
-        );
-      })}
     </div>
   );
 }
