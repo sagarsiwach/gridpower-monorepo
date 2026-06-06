@@ -13,6 +13,7 @@ import { GlobalHeader } from "../../components/site/GlobalHeader";
 import { SiteFooter } from "../../components/site/SiteFooter";
 import { tokens } from "./_v3-tokens";
 import { SamplePage } from "../../components/solutions/light/SamplePage";
+import { SolutionDock, type DockLink } from "../../components/solutions/light/SolutionDock";
 import { DIRECTION_LIST, type DirectionKey, DIRECTIONS, FONT, MONO } from "../../components/solutions/light/directions";
 import { SAMPLE_CONTENT, type SampleRouteKey } from "./_sample-data";
 
@@ -25,6 +26,20 @@ const ROUTES: { key: SampleRouteKey; label: string }[] = [
   { key: "homes", label: "Homes" },
   { key: "offices", label: "Offices & Industrial" },
 ];
+
+const DOCK_LINKS: DockLink[] = [
+  { id: "range", label: "Range" },
+  { id: "what", label: "System" },
+  { id: "outcomes", label: "Outcomes" },
+  { id: "compare", label: "Compare" },
+  { id: "money", label: "Economics" },
+  { id: "faq", label: "FAQ" },
+];
+
+const DOCK_META: Record<SampleRouteKey, { label: string; cta: { label: string; to: string } }> = {
+  homes: { label: "Home storage", cta: { label: "Book a survey", to: "/contact" } },
+  offices: { label: "Offices & Industrial", cta: { label: "Get a quote", to: "/contact" } },
+};
 
 export default function SolutionSamples() {
   const [route, setRoute] = useState<SampleRouteKey>("homes");
@@ -57,6 +72,9 @@ export default function SolutionSamples() {
 
       {/* the sample page, re-keyed so motion re-runs on switch */}
       <SamplePage key={`${route}-${dir}`} d={direction} content={content} />
+
+      {/* floating bottom section-nav (Rivian-style, our language) */}
+      <SolutionDock key={`dock-${route}`} label={DOCK_META[route].label} links={DOCK_LINKS} cta={DOCK_META[route].cta} />
 
       <SiteFooter />
     </div>
