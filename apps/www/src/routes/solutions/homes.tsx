@@ -9,14 +9,14 @@
 
 import type { MetaFunction } from "react-router";
 import {
-  HouseLine, House, Buildings, Sun, BatteryChargingVertical, CurrencyInr,
-  SpeakerSimpleX, DeviceMobile, ShieldCheck, Leaf,
+  BatteryChargingVertical, CurrencyInr, SpeakerSimpleX, DeviceMobile, ShieldCheck, Leaf,
 } from "@phosphor-icons/react";
 import { tokens } from "../_preview/_v3-tokens";
 import { FONT } from "../../components/solutions/light/atoms";
 import {
-  SolutionHero, TrustBar, RangeGrid, SystemRows, OutcomeGrid, Comparison, AppShowcase, FramedCTA,
+  TrustBar, SystemRows, OutcomeGrid, Comparison, AppShowcase, FramedCTA,
 } from "../../components/solutions/light/Blocks";
+import { HeroCarousel, type HeroSlide } from "../../components/solutions/light/HeroCarousel";
 import { HowItWorks, StatBand, CustomerSwitcher, FaqResources, Gated } from "../../components/solutions/light/Modules";
 import { SolutionDock, type DockLink } from "../../components/solutions/light/SolutionDock";
 
@@ -26,7 +26,6 @@ export const meta: MetaFunction = () => [
 ];
 
 const DOCK_LINKS: DockLink[] = [
-  { id: "range", label: "Range" },
   { id: "what", label: "System" },
   { id: "outcomes", label: "Outcomes" },
   { id: "compare", label: "Compare" },
@@ -34,33 +33,20 @@ const DOCK_LINKS: DockLink[] = [
   { id: "faq", label: "FAQ" },
 ];
 
+const HERO_SLIDES: HeroSlide[] = [
+  { tab: "Apartment", image: "/images/solutions/homes-apartment.png", eyebrow: "Apartments & flats", title: "Silent backup for your flat.", sub: "Compact, wall-mounted storage that keeps your essentials, and a room cool, running through every cut.", primary: { label: "Explore apartment storage", to: "/solutions/homes/apartment" }, secondary: { label: "Book a survey", to: "/contact" } },
+  { tab: "Small home", image: "/images/solutions/homes-small.png", eyebrow: "Small homes", title: "Whole-home essentials, ACs included.", sub: "Backup and bill savings for a small home, silent and seamless the moment the grid drops.", primary: { label: "Explore small-home storage", to: "/solutions/homes/small-home" }, secondary: { label: "Book a survey", to: "/contact" } },
+  { tab: "Large home / villa", image: "/images/solutions/homes-large.png", eyebrow: "Large homes & villas", title: "Whole-villa power, on autopilot.", sub: "Three-phase backup and tariff-smart savings for a large home, run entirely from your phone.", primary: { label: "Explore villa storage", to: "/solutions/homes/large-home" }, secondary: { label: "Book a survey", to: "/contact" } },
+  { tab: "Solar + storage", image: "/images/solutions/homes-solar.png", eyebrow: "Solar + storage", title: "Bank your solar. Run on it after dark.", sub: "Stop exporting cheap by day and buying back dear at night. Store your solar and live on it through the peak.", primary: { label: "Explore solar + storage", to: "/solutions/homes/solar-storage" }, secondary: { label: "Book a survey", to: "/contact" } },
+];
+
 export default function SolutionsHomes() {
   return (
     <div style={{ fontFamily: FONT, background: tokens.pageBg }}>
       <main>
-        <SolutionHero
-          eyebrow="Home energy storage"
-          title="Silent, lifetime power for your whole home."
-          sub="One sealed system replaces your inverter, battery, and genset. Backs up your home, cuts your bill, and finally makes your solar worth it."
-          chips={["Runs your ACs", "Seamless switchover", "Managed from your phone"]}
-          primary={{ label: "Book a free site survey", to: "/contact" }}
-          secondary={{ label: "Explore the range", to: "/products" }}
-          visual="GridOS app + Nano unit"
-        />
+        <HeroCarousel slides={HERO_SLIDES} />
 
         <TrustBar lead="Built on LFP chemistry and open standards" items={["Safer LFP cells", "Sealed, maintenance-free", "GridOS app control", "No vendor lock-in"]} />
-
-        <RangeGrid
-          label="Range"
-          title="Storage sized to your home."
-          intro="Pick the home that looks like yours. Each is powered by the right GridEnergy product and the same GridOS software."
-          items={[
-            { icon: HouseLine, name: "Apartment / flat", sub: "Compact storage for essential-load backup.", to: "/solutions/homes/apartment" },
-            { icon: House, name: "Small home", sub: "Whole-home essentials and a couple of ACs.", to: "/solutions/homes/small-home" },
-            { icon: Buildings, name: "Large home / villa", sub: "Whole-villa backup, often 3-phase.", to: "/solutions/homes/large-home" },
-            { icon: Sun, name: "Solar + storage", sub: "Bank your solar, run on it after dark.", to: "/solutions/homes/solar-storage" },
-          ]}
-        />
 
         <SystemRows
           label="What it is"
