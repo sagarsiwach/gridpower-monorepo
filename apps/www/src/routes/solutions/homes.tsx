@@ -16,13 +16,20 @@ import { FONT } from "../../components/solutions/light/atoms";
 import {
   TrustBar, SystemRows, OutcomeGrid, Comparison, AppShowcase, FramedCTA,
 } from "../../components/solutions/light/Blocks";
-import { HomesHeroPanel } from "../../components/solutions/light/HomesHeroPanel";
+import { HeroCarousel, type HeroSlide } from "../../components/solutions/light/HeroCarousel";
 import { HowItWorks, StatBand, CustomerSwitcher, FaqResources, Gated } from "../../components/solutions/light/Modules";
 import { SolutionDock, type DockLink } from "../../components/solutions/light/SolutionDock";
 
 export const meta: MetaFunction = () => [
   { title: "Home energy storage — GridEnergy" },
   { name: "description", content: "Silent, lifetime home storage that backs up your whole home, cuts your bill, and makes your solar worth it. Managed by GridOS." },
+];
+
+const HERO_SLIDES: HeroSlide[] = [
+  { tab: "Apartment", image: "/images/solutions/homes-apartment.png", eyebrow: "Apartments & flats", title: "Silent backup for your flat.", sub: "Compact, wall-mounted storage that keeps your essentials, and a room cool, running through every cut.", primary: { label: "Explore", to: "/solutions/homes/apartment" }, secondary: { label: "Book a survey", to: "/contact" } },
+  { tab: "Small home", image: "/images/solutions/homes-small.png", eyebrow: "Small homes", title: "Whole-home essentials, ACs included.", sub: "Backup and bill savings for a small home, silent and seamless the moment the grid drops.", primary: { label: "Explore", to: "/solutions/homes/small-home" }, secondary: { label: "Book a survey", to: "/contact" } },
+  { tab: "Large home / villa", image: "/images/solutions/homes-large.png", eyebrow: "Large homes & villas", title: "Whole-villa power, on autopilot.", sub: "Three-phase backup and tariff-smart savings for a large home, run entirely from your phone.", primary: { label: "Explore", to: "/solutions/homes/large-home" }, secondary: { label: "Book a survey", to: "/contact" } },
+  { tab: "Solar + storage", image: "/images/solutions/homes-solar.png", eyebrow: "Solar + storage", title: "Bank your solar. Run on it after dark.", sub: "Stop exporting cheap by day and buying back dear at night. Store your solar and live on it through the peak.", primary: { label: "Explore", to: "/solutions/homes/solar-storage" }, secondary: { label: "Book a survey", to: "/contact" } },
 ];
 
 const DOCK_LINKS: DockLink[] = [
@@ -37,7 +44,7 @@ export default function SolutionsHomes() {
   return (
     <div style={{ fontFamily: FONT, background: tokens.pageBg }}>
       <main>
-        <HomesHeroPanel />
+        <HeroCarousel slides={HERO_SLIDES} />
 
         <TrustBar lead="Built on LFP chemistry and open standards" items={["Safer LFP cells", "Sealed, maintenance-free", "GridOS app control", "No vendor lock-in"]} />
 

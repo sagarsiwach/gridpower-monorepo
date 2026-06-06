@@ -1,11 +1,10 @@
 /*
-  HeroCarousel — full-screen (100svh) cinematic hero with a tab-driven image
-  slider. Tabs at the top switch the slide and crossfade the left-aligned copy,
-  so one hero presents several solutions. Auto-advances with a progress bar on
-  the active tab; pauses on hover. Tab pill is a framer layoutId shared element
-  (same fluid motion as the mega-menu tab and the dock). Reduced-motion safe.
+  HeroCarousel — full-screen image slider for the Homes hero.
 
-  Dark stage with a left-weighted gradient so the copy stays legible over imagery.
+  A 100vh-available image slider. Scrolling tabs with a progress bar sit at the
+  top-left and switch the slide; below them, a small contained card holds the
+  title, description, and two CTAs, crossfading per slide. Auto-advances, pauses
+  on hover. Tab pill is a framer layoutId shared element. Reduced-motion safe.
 */
 
 import { useEffect, useState, type CSSProperties } from "react";
@@ -46,9 +45,9 @@ export function HeroCarousel({ slides, autoMs = 6500 }: { slides: HeroSlide[]; a
     <section
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      style={{ position: "relative", height: "100svh", minHeight: 600, overflow: "hidden", background: INK, color: "#fff" }}
+      style={{ position: "relative", height: "calc(100svh - 108px)", minHeight: 560, overflow: "hidden", background: INK }}
     >
-      {/* image layers */}
+      {/* image slider */}
       <AnimatePresence initial={false}>
         <motion.div
           key={i}
@@ -62,16 +61,16 @@ export function HeroCarousel({ slides, autoMs = 6500 }: { slides: HeroSlide[]; a
         </motion.div>
       </AnimatePresence>
 
-      {/* legibility gradient — left-weighted + bottom */}
+      {/* legibility wash (left + bottom) */}
       <div aria-hidden style={{ position: "absolute", inset: 0, background:
-        `linear-gradient(90deg, oklch(15.3% 0.006 107.1 / 0.80) 0%, oklch(15.3% 0.006 107.1 / 0.45) 42%, oklch(15.3% 0.006 107.1 / 0) 72%),` +
-        `linear-gradient(0deg, oklch(15.3% 0.006 107.1 / 0.55) 0%, transparent 38%)` }} />
+        `linear-gradient(90deg, oklch(15.3% 0.006 107.1 / 0.55) 0%, oklch(15.3% 0.006 107.1 / 0.15) 40%, transparent 64%),` +
+        `linear-gradient(0deg, oklch(15.3% 0.006 107.1 / 0.45) 0%, transparent 36%)` }} />
 
-      {/* content */}
-      <div style={{ position: "relative", height: "100%", maxWidth: 1280, marginInline: "auto", paddingInline: 32, display: "flex", flexDirection: "column" }}>
-        {/* tabs at the top (cleared below the sticky header) */}
-        <div style={{ paddingTop: 128 }}>
-          <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+      {/* content: bottom-left column — tabs above a small card */}
+      <div style={{ position: "relative", height: "100%", maxWidth: 1280, marginInline: "auto", paddingInline: 32, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+        <div style={{ maxWidth: 480, paddingBottom: 52 }}>
+          {/* scrolling tabs with progress bar */}
+          <div style={{ display: "flex", gap: 4, marginBottom: 18, overflowX: "auto", paddingBottom: 2 }}>
             {slides.map((sl, k) => {
               const on = k === i;
               return (
@@ -82,18 +81,17 @@ export function HeroCarousel({ slides, autoMs = 6500 }: { slides: HeroSlide[]; a
                   aria-current={on ? "true" : undefined}
                   style={{
                     position: "relative", overflow: "hidden", cursor: "pointer", border: "none", background: "transparent",
-                    padding: "11px 18px", borderRadius: 11, fontFamily: FONT, fontSize: 14, fontWeight: 600, letterSpacing: "-0.01em",
-                    color: on ? "#fff" : "rgba(255,255,255,0.62)", transition: "color .2s ease",
+                    padding: "9px 15px", borderRadius: 10, fontFamily: FONT, fontSize: 13, fontWeight: 600, letterSpacing: "-0.01em",
+                    color: on ? "#fff" : "rgba(255,255,255,0.66)", whiteSpace: "nowrap", flexShrink: 0, transition: "color .2s ease",
                   }}
-                  onMouseEnter={(e) => { if (!on) e.currentTarget.style.color = "rgba(255,255,255,0.9)"; }}
-                  onMouseLeave={(e) => { if (!on) e.currentTarget.style.color = "rgba(255,255,255,0.62)"; }}
+                  onMouseEnter={(e) => { if (!on) e.currentTarget.style.color = "rgba(255,255,255,0.92)"; }}
+                  onMouseLeave={(e) => { if (!on) e.currentTarget.style.color = "rgba(255,255,255,0.66)"; }}
                 >
                   {on && (
                     <motion.span layoutId="hero-tab-pill" aria-hidden
                       transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 32 }}
-                      style={{ position: "absolute", inset: 0, borderRadius: 11, background: "rgba(255,255,255,0.14)", border: "1px solid rgba(255,255,255,0.18)", zIndex: 0 }} />
+                      style={{ position: "absolute", inset: 0, borderRadius: 10, background: "rgba(255,255,255,0.16)", border: "1px solid rgba(255,255,255,0.20)", zIndex: 0 }} />
                   )}
-                  {/* auto-advance progress on active tab */}
                   {on && !reduce && !paused && (
                     <motion.span key={`p${i}`} aria-hidden
                       initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: autoMs / 1000, ease: "linear" }}
@@ -104,50 +102,50 @@ export function HeroCarousel({ slides, autoMs = 6500 }: { slides: HeroSlide[]; a
               );
             })}
           </div>
-        </div>
 
-        {/* left-aligned hero copy, lower third, crossfading per slide */}
-        <div style={{ marginTop: "auto", paddingBottom: 72, maxWidth: 620 }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={i}
-              initial={reduce ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
-              transition={{ duration: reduce ? 0 : 0.45, ease: EASE }}
-            >
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: FONT, fontSize: 13, fontWeight: 600, letterSpacing: "0.04em", color: "rgba(255,255,255,0.82)" }}>
-                <span aria-hidden style={{ width: 7, height: 7, borderRadius: 999, background: tokens.brand }} />{s.eyebrow}
-              </span>
-              <h1 style={{ fontFamily: FONT, fontSize: "clamp(38px, 5.6vw, 72px)", fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.0, marginTop: 16, textWrap: "balance" }}>{s.title}</h1>
-              <p style={{ color: "rgba(255,255,255,0.78)", fontSize: 19, lineHeight: 1.5, marginTop: 20, maxWidth: 500 }}>{s.sub}</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 30 }}>
-                <DarkBtn to={s.primary.to} primary>{s.primary.label}</DarkBtn>
-                {s.secondary && <DarkBtn to={s.secondary.to}>{s.secondary.label}</DarkBtn>}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          {/* the small card */}
+          <div style={{ background: tokens.card, border: `1px solid ${tokens.hairline}`, borderRadius: 20, padding: "26px 28px", boxShadow: "0 28px 70px -36px oklch(15.3% 0.006 107.1 / 0.7)" }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={i}
+                initial={reduce ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
+                transition={{ duration: reduce ? 0 : 0.4, ease: EASE }}
+              >
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: FONT, fontSize: 12.5, fontWeight: 600, color: tokens.inkMuted }}>
+                  <span aria-hidden style={{ width: 7, height: 7, borderRadius: 999, background: tokens.brand }} />{s.eyebrow}
+                </span>
+                <h1 style={{ fontFamily: FONT, color: tokens.ink, fontSize: "clamp(26px, 3.2vw, 38px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.04, marginTop: 12, textWrap: "balance" }}>{s.title}</h1>
+                <p style={{ color: tokens.muted, fontSize: 16, lineHeight: 1.5, marginTop: 12 }}>{s.sub}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 22 }}>
+                  <CardBtn to={s.primary.to} primary>{s.primary.label}</CardBtn>
+                  {s.secondary && <CardBtn to={s.secondary.to}>{s.secondary.label}</CardBtn>}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function DarkBtn({ to, children, primary }: { to: string; children: React.ReactNode; primary?: boolean }) {
+function CardBtn({ to, children, primary }: { to: string; children: React.ReactNode; primary?: boolean }) {
   const [h, setH] = useState(false);
   const base: CSSProperties = {
-    display: "inline-flex", alignItems: "center", gap: 8, fontFamily: FONT, fontSize: 14.5, fontWeight: 600,
-    borderRadius: 12, padding: "14px 24px", textDecoration: "none", cursor: "pointer", transition: "all .16s ease",
-    transform: h ? "translateY(-1px)" : "none",
+    display: "inline-flex", alignItems: "center", gap: 8, fontFamily: FONT, fontSize: 13.5, fontWeight: 600,
+    borderRadius: 11, padding: "11px 18px", textDecoration: "none", cursor: "pointer", border: "1px solid transparent",
+    transition: "all .16s ease", transform: h ? "translateY(-1px)" : "none",
   };
   const style: CSSProperties = primary
     ? { ...base, background: h ? tokens.brandHover : tokens.brand, color: "#fff" }
-    : { ...base, background: h ? "rgba(255,255,255,0.14)" : "rgba(255,255,255,0.08)", color: "#fff", border: "1px solid rgba(255,255,255,0.28)" };
+    : { ...base, background: tokens.card, color: tokens.ink, borderColor: tokens.hairlineStrong };
   return (
     <Link to={to} style={style} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
-      {primary && <Lightning size={14} weight="fill" />}
+      {primary && <Lightning size={13} weight="fill" />}
       {children}
-      <ArrowRight size={13} weight="bold" style={{ transform: h ? "translateX(2px)" : "none", transition: "transform .16s ease" }} />
+      <ArrowRight size={12} weight="bold" style={{ transform: h ? "translateX(2px)" : "none", transition: "transform .16s ease" }} />
     </Link>
   );
 }
