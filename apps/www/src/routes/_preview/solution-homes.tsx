@@ -40,13 +40,6 @@ const DOCK_LINKS: DockLink[] = [
 export default function SolutionHomes() {
   return (
     <div style={{ fontFamily: FONT, background: tokens.pageBg }}>
-      <div style={{ position: "sticky", top: 0, zIndex: 60, background: "oklch(98.8% 0.003 106.5 / 0.85)", backdropFilter: "saturate(180%) blur(12px)", borderBottom: `1px solid ${tokens.hairline}` }}>
-        <div style={{ maxWidth: 1180, marginInline: "auto", paddingInline: 28, paddingBlock: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ fontSize: 13, fontWeight: 600, color: tokens.ink }}>Assembled solution page · Homes · 13 blocks</span>
-          <span style={{ fontFamily: "monospace", fontSize: 11, color: tokens.muted }}>restrained · sample content</span>
-        </div>
-      </div>
-
       <div className="hidden lg:contents"><GlobalHeader /></div>
 
       {/* 1 */}

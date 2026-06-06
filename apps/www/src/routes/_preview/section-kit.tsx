@@ -364,7 +364,7 @@ export default function SectionKit() {
       <header style={{ background: tokens.ink, color: "#fff", padding: "56px 32px 40px" }}>
         <div style={{ maxWidth: 1280, marginInline: "auto" }}>
           <span style={{ fontFamily: MONO, fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: tokens.brand }}>Internal · section kit</span>
-          <h1 style={{ fontFamily: '"Clash Grotesk", Inter, sans-serif', fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.02, marginTop: 14, maxWidth: 720 }}>
+          <h1 style={{ fontFamily: 'Inter, sans-serif', fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.02, marginTop: 14, maxWidth: 720 }}>
             Pick a hero, stack the sections, build a solution page.
           </h1>
           <p style={{ color: "rgba(255,255,255,0.66)", fontSize: 16, lineHeight: 1.6, marginTop: 16, maxWidth: 620 }}>

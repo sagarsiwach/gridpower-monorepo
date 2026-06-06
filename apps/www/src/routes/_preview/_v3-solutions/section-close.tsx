@@ -165,7 +165,7 @@ export default function SectionClose() {
       {/* ── Global v3 CSS vars ── */}
       <style>{`
         .v3-display {
-          font-family: var(--font-display, "Clash Grotesk", ui-sans-serif, system-ui, sans-serif);
+          font-family: var(--font-display, ui-sans-serif, system-ui, sans-serif);
           font-weight: 600;
         }
       `}</style>

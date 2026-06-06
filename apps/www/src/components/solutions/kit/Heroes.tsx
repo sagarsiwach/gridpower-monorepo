@@ -29,7 +29,7 @@ import { MediaSlot } from "../../marketing/Primitives";
 import { BlueprintGrid, GradientWash } from "./Backdrops";
 
 const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
-const DISPLAY = '"Clash Grotesk", Inter, ui-sans-serif, system-ui, sans-serif';
+const DISPLAY = 'Inter, ui-sans-serif, system-ui, sans-serif';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 export type HeroLink = { label: string; to: string; icon?: Icon };

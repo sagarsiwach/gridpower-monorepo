@@ -14,7 +14,7 @@
 import { tokens } from "../../../routes/_preview/_v3-tokens";
 
 export const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
-export const DISPLAY = '"Clash Grotesk", Inter, ui-sans-serif, system-ui, sans-serif';
+export const DISPLAY = 'Inter, ui-sans-serif, system-ui, sans-serif';
 export const MONO = '"Geist Mono", ui-monospace, SFMono-Regular, monospace';
 export const EASE = [0.22, 1, 0.36, 1] as const;
 

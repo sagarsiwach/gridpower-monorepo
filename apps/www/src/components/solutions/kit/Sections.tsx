@@ -42,7 +42,7 @@ import {
 import { BlueprintGrid, RegistrationCorners } from "./Backdrops";
 
 const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
-const DISPLAY = '"Clash Grotesk", Inter, ui-sans-serif, system-ui, sans-serif';
+const DISPLAY = 'Inter, ui-sans-serif, system-ui, sans-serif';
 const MONO = '"Geist Mono", ui-monospace, SFMono-Regular, monospace';
 
 type BaseProps = { id?: string; alt?: boolean; dark?: boolean };

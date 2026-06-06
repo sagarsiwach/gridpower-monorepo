@@ -171,10 +171,7 @@ export function SolutionDock({
                   letterSpacing: "-0.012em",
                   whiteSpace: "nowrap",
                   color: on ? tokens.ink : tokens.inkMuted,
-                  background: on ? tokens.card : "transparent",
-                  border: `1px solid ${on ? tokens.hairline : "transparent"}`,
-                  boxShadow: on ? "0 1px 2px oklch(15.3% 0.006 107.1 / 0.05)" : "none",
-                  transition: "color .15s ease, background .15s ease, border-color .15s ease",
+                  transition: "color .18s ease",
                 }}
                 onMouseEnter={(e) => {
                   if (!on) e.currentTarget.style.color = tokens.ink;
@@ -183,7 +180,24 @@ export function SolutionDock({
                   if (!on) e.currentTarget.style.color = tokens.inkMuted;
                 }}
               >
-                {l.label}
+                {/* shared-element pill — slides between links like the mega-menu tab */}
+                {on && (
+                  <motion.span
+                    layoutId="gx-dock-active-pill"
+                    aria-hidden
+                    transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 32 }}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      borderRadius: 999,
+                      background: tokens.card,
+                      border: `1px solid ${tokens.hairline}`,
+                      boxShadow: "0 1px 2px oklch(15.3% 0.006 107.1 / 0.05)",
+                      zIndex: 0,
+                    }}
+                  />
+                )}
+                <span style={{ position: "relative", zIndex: 1 }}>{l.label}</span>
               </a>
             );
           })}

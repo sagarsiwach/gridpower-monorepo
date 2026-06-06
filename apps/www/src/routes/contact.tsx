@@ -38,7 +38,7 @@ export default function ContactPage() {
         <Container>
           <div style={{ maxWidth: 720 }}>
             <Kicker>Contact</Kicker>
-            <h1 style={{ fontFamily: '"Clash Grotesk", Inter, ui-sans-serif, system-ui, sans-serif', color: tokens.ink, fontSize: "clamp(34px,5vw,56px)", fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.02, marginTop: 18 }}>
+            <h1 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif', color: tokens.ink, fontSize: "clamp(34px,5vw,56px)", fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.02, marginTop: 18 }}>
               Tell us about your site. We'll size the rest.
             </h1>
             <p style={{ color: tokens.muted, fontSize: 18, lineHeight: 1.55, marginTop: 18, maxWidth: 560 }}>
