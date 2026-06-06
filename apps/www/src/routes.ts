@@ -24,6 +24,7 @@ export default [
   route("preview/v3-solutions-components", "routes/_preview/v3-solutions-components.tsx"),
   route("preview/v3-solutions-hero", "routes/_preview/v3-solutions-hero.tsx"),
   route("preview/section-kit", "routes/_preview/section-kit.tsx"),
+  route("preview/solution-samples", "routes/_preview/solution-samples.tsx"),
   route("preview/:slug", "routes/_preview/variant.tsx"),
 
   // Solution pages (per audience)
