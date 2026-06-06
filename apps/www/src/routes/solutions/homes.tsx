@@ -55,10 +55,10 @@ export default function SolutionsHomes() {
           title="Storage sized to your home."
           intro="Pick the home that looks like yours. Each is powered by the right GridEnergy product and the same GridOS software."
           items={[
-            { icon: HouseLine, name: "Apartment / flat", sub: "Compact storage for essential-load backup." },
-            { icon: House, name: "Small home", sub: "Whole-home essentials and a couple of ACs." },
-            { icon: Buildings, name: "Large home / villa", sub: "Whole-villa backup, often 3-phase." },
-            { icon: Sun, name: "Solar + storage", sub: "Bank your solar, run on it after dark." },
+            { icon: HouseLine, name: "Apartment / flat", sub: "Compact storage for essential-load backup.", to: "/solutions/homes/apartment" },
+            { icon: House, name: "Small home", sub: "Whole-home essentials and a couple of ACs.", to: "/solutions/homes/small-home" },
+            { icon: Buildings, name: "Large home / villa", sub: "Whole-villa backup, often 3-phase.", to: "/solutions/homes/large-home" },
+            { icon: Sun, name: "Solar + storage", sub: "Bank your solar, run on it after dark.", to: "/solutions/homes/solar-storage" },
           ]}
         />
 

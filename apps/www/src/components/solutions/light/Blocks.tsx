@@ -6,7 +6,8 @@
 */
 
 import { type ReactNode, type CSSProperties, useState } from "react";
-import { Check, Minus, type Icon } from "@phosphor-icons/react";
+import { Link } from "react-router";
+import { Check, Minus, ArrowLeft, type Icon } from "@phosphor-icons/react";
 import { Gated } from "../../marketing/Primitives";
 import { Band, Wrap, Rise, Eyebrow, H2, Lead, Btn, Media, FONT, MONO, tokens } from "./atoms";
 
@@ -17,9 +18,10 @@ const autoGrid = (min: number, gap: number): CSSProperties => ({
 });
 
 /* ---- 1 · Hero (split) ---- */
-export function SolutionHero({ eyebrow, title, sub, chips, primary, secondary, visual }: {
+export function SolutionHero({ eyebrow, title, sub, chips, primary, secondary, visual, back }: {
   eyebrow: string; title: string; sub: string; chips: string[];
   primary: { label: string; to: string }; secondary: { label: string; to: string }; visual: string;
+  back?: { label: string; to: string };
 }) {
   return (
     <section style={{ background: tokens.pageBg, paddingTop: 80, paddingBottom: 92, borderBottom: `1px solid ${tokens.hairline}` }}>
@@ -27,6 +29,11 @@ export function SolutionHero({ eyebrow, title, sub, chips, primary, secondary, v
         <div style={{ ...autoGrid(380, 56), alignItems: "center" }}>
           <Rise>
             <div>
+              {back && (
+                <Link to={back.to} style={{ display: "inline-flex", alignItems: "center", gap: 6, marginBottom: 16, fontFamily: FONT, fontSize: 13, fontWeight: 600, color: tokens.inkMuted, textDecoration: "none" }}>
+                  <ArrowLeft size={13} weight="bold" />{back.label}
+                </Link>
+              )}
               <span style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 14px", borderRadius: 999, background: tokens.card, border: `1px solid ${tokens.hairline}`, fontSize: 13, fontWeight: 600, color: tokens.body }}>
                 <span aria-hidden style={{ width: 7, height: 7, borderRadius: 999, background: tokens.brand }} />{eyebrow}
               </span>
@@ -70,7 +77,7 @@ export function TrustBar({ lead, items }: { lead: string; items: string[] }) {
 
 /* ---- 3 · Range grid ---- */
 export function RangeGrid({ label, title, intro, items }: {
-  label?: string; title: string; intro?: string; items: { icon: Icon; name: string; sub: string }[];
+  label?: string; title: string; intro?: string; items: { icon: Icon; name: string; sub: string; to?: string }[];
 }) {
   const [hover, setHover] = useState<string | null>(null);
   return (
@@ -81,7 +88,7 @@ export function RangeGrid({ label, title, intro, items }: {
           const Ico = it.icon; const on = hover === it.name;
           return (
             <Rise key={it.name} delay={i * 0.04}>
-              <a href="/contact" onMouseEnter={() => setHover(it.name)} onMouseLeave={() => setHover(null)}
+              <a href={it.to ?? "/contact"} onMouseEnter={() => setHover(it.name)} onMouseLeave={() => setHover(null)}
                 style={{ display: "block", height: "100%", textDecoration: "none", background: tokens.card, border: `1px solid ${on ? tokens.hairlineStrong : tokens.hairline}`, borderRadius: 16, overflow: "hidden", transform: on ? "translateY(-2px)" : "none", boxShadow: on ? "0 18px 40px -28px oklch(15.3% 0.006 107.1 / 0.3)" : "none", transition: "all .2s ease" }}>
                 <div style={{ aspectRatio: "4 / 3", background: tokens.pageBgDeep, display: "grid", placeItems: "center", borderBottom: `1px solid ${tokens.hairline}` }}>
                   <Ico size={34} weight="duotone" color={tokens.inkMuted} />
@@ -238,6 +245,60 @@ export function FramedCTA({ title, sub, primary, secondary }: {
         </Rise>
       </Wrap>
     </section>
+  );
+}
+
+/* ---- 9 · Spec strip (recommended product + key specs, gated) ---- */
+export function SpecStrip({ label, title, product, specs }: {
+  label?: string; title: string; product: string; specs: { label: string; value: ReactNode }[];
+}) {
+  return (
+    <Band tone="deep" id="spec">
+      <Head label={label} title={title} />
+      <Rise>
+        <div style={{ background: tokens.card, border: `1px solid ${tokens.hairline}`, borderRadius: 18, overflow: "hidden", maxWidth: 920 }}>
+          <div style={{ padding: "18px 24px", borderBottom: `1px solid ${tokens.hairline}`, display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ fontFamily: MONO, fontSize: 10.5, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: tokens.brand }}>Recommended</span>
+            <span style={{ fontFamily: FONT, fontSize: 17, fontWeight: 600, color: tokens.ink }}>{product}</span>
+          </div>
+          <div style={autoGrid(200, 0)}>
+            {specs.map((s, i) => (
+              <div key={i} style={{ padding: "20px 24px", borderTop: i >= 0 ? `1px solid ${tokens.hairline}` : undefined, borderLeft: i % 2 ? `1px solid ${tokens.hairline}` : undefined }}>
+                <div style={{ fontFamily: FONT, fontSize: 18, fontWeight: 600, color: tokens.ink, display: "flex" }}>{s.value}</div>
+                <p style={{ color: tokens.muted, fontSize: 13, marginTop: 8, fontWeight: 500 }}>{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Rise>
+    </Band>
+  );
+}
+
+/* ---- 10 · Powers grid (what it runs — appliance tiles) ---- */
+export function PowersGrid({ label, title, intro, items, note }: {
+  label?: string; title: string; intro?: string; items: { icon: Icon; label: string }[]; note?: ReactNode;
+}) {
+  return (
+    <Band id="powers">
+      <Head label={label} title={title} intro={intro} />
+      <div style={autoGrid(170, 14)}>
+        {items.map((it, i) => {
+          const Ico = it.icon;
+          return (
+            <Rise key={it.label} delay={i * 0.03}>
+              <div style={{ display: "flex", alignItems: "center", gap: 13, padding: "18px 18px", background: tokens.card, border: `1px solid ${tokens.hairline}`, borderRadius: 14 }}>
+                <span style={{ display: "grid", placeItems: "center", width: 40, height: 40, borderRadius: 11, background: tokens.pageBgDeep, border: `1px solid ${tokens.hairline}`, flexShrink: 0 }}>
+                  <Ico size={20} weight="duotone" color={tokens.ink} />
+                </span>
+                <span style={{ fontFamily: FONT, fontSize: 14.5, fontWeight: 600, color: tokens.ink, letterSpacing: "-0.01em" }}>{it.label}</span>
+              </div>
+            </Rise>
+          );
+        })}
+      </div>
+      {note && <Rise delay={0.1}><p style={{ color: tokens.muted, fontSize: 13.5, marginTop: 20, maxWidth: 560 }}>{note}</p></Rise>}
+    </Band>
   );
 }
 
