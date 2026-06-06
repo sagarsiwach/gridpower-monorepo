@@ -48,8 +48,9 @@ export default function StickyActionBar() {
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           style={{
             position: "fixed",
-            left: "50%",
-            transform: "translateX(-50%)",
+            left: 0,
+            right: 0,
+            marginInline: "auto",
             bottom: 20,
             zIndex: 45,
             width: "min(1100px, calc(100% - 24px))",
