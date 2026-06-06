@@ -12,16 +12,17 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { ArrowRight, Lightning } from "@phosphor-icons/react";
+import { ArrowRight, Lightning, Check } from "@phosphor-icons/react";
 import { tokens } from "../../../routes/_preview/_v3-tokens";
-import { FONT, EASE } from "./directions";
+import { FONT, MONO, EASE } from "./directions";
 
 export type HeroSlide = {
-  tab: string;
   image: string;
   eyebrow: string;
+  kicker: string;
   title: string;
   sub: string;
+  points: string[];
   primary: { label: string; to: string };
   secondary?: { label: string; to: string };
 };
@@ -69,26 +70,29 @@ export function HeroCarousel({ slides, autoMs = 6500 }: { slides: HeroSlide[]; a
         `linear-gradient(90deg, oklch(15.3% 0.006 107.1 / 0.6) 0%, oklch(15.3% 0.006 107.1 / 0.18) 42%, transparent 66%),` +
         `linear-gradient(0deg, oklch(15.3% 0.006 107.1 / 0.5) 0%, transparent 38%)` }} />
 
-      {/* content: bottom-left — gray tab card + white content card, one progress bar */}
+      {/* content: bottom-left — one seamless card: gray header + dense white body */}
       <div style={{ position: "relative", height: "100%", maxWidth: 1280, marginInline: "auto", paddingInline: 32, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
-        <div style={{ width: "100%", maxWidth: 452, paddingBottom: 54 }}>
+        <div style={{
+          width: "100%", maxWidth: 468, marginBottom: 52,
+          borderRadius: RADIUS,
+          boxShadow: "0 2px 4px oklch(15.3% 0.006 107.1 / 0.06), 0 34px 80px -38px oklch(15.3% 0.006 107.1 / 0.72)",
+        }}>
 
-          {/* gray tab card — current category, straight sides down behind the white card */}
+          {/* gray header — current category */}
           <div style={{
-            position: "relative", zIndex: 1,
             background: tokens.pageBgDeep,
             border: `1px solid ${tokens.hairline}`,
-            borderBottom: "none",
+            borderBottom: `1px solid ${tokens.hairline}`,
             borderRadius: `${RADIUS}px ${RADIUS}px 0 0`,
-            padding: "13px 22px 26px",
+            padding: "12px 24px",
           }}>
             <AnimatePresence mode="wait">
               <motion.span
                 key={i}
-                initial={reduce ? false : { opacity: 0, y: 6 }}
+                initial={reduce ? false : { opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
-                transition={{ duration: reduce ? 0 : 0.32, ease: EASE }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -5 }}
+                transition={{ duration: reduce ? 0 : 0.3, ease: EASE }}
                 style={{
                   display: "inline-flex", alignItems: "center", gap: 8, fontFamily: FONT,
                   fontSize: 12.5, fontWeight: 600, letterSpacing: "0.01em", color: tokens.inkMuted,
@@ -108,42 +112,46 @@ export function HeroCarousel({ slides, autoMs = 6500 }: { slides: HeroSlide[]; a
             </AnimatePresence>
           </div>
 
-          {/* white content card — overlaps the gray card seamlessly, one progress bar at its foot */}
+          {/* white body — dense */}
           <div style={{
-            position: "relative", zIndex: 2, marginTop: -14,
             background: tokens.card,
-            border: `1px solid ${tokens.hairline}`,
-            borderRadius: RADIUS,
-            overflow: "hidden",
-            boxShadow: "0 2px 4px oklch(15.3% 0.006 107.1 / 0.06), 0 34px 80px -38px oklch(15.3% 0.006 107.1 / 0.72)",
+            borderLeft: `1px solid ${tokens.hairline}`,
+            borderRight: `1px solid ${tokens.hairline}`,
+            borderBottom: `1px solid ${tokens.hairline}`,
+            borderRadius: `0 0 ${RADIUS}px ${RADIUS}px`,
+            padding: "20px 24px 24px",
           }}>
-            <div style={{ padding: "22px 26px 24px" }}>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={i}
-                  initial={reduce ? false : { opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
-                  transition={{ duration: reduce ? 0 : 0.4, ease: EASE }}
-                >
-                  <h1 style={{ fontFamily: FONT, color: tokens.ink, fontSize: "clamp(27px, 3.3vw, 39px)", fontWeight: 600, letterSpacing: "-0.032em", lineHeight: 1.04, textWrap: "balance" }}>{s.title}</h1>
-                  <p style={{ color: tokens.body, fontSize: 15.5, lineHeight: 1.52, marginTop: 12, maxWidth: "40ch" }}>{s.sub}</p>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={i}
+                initial={reduce ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
+                transition={{ duration: reduce ? 0 : 0.4, ease: EASE }}
+              >
+                <span style={{ fontFamily: MONO, fontSize: 11, fontWeight: 500, letterSpacing: "0.04em", textTransform: "uppercase", color: tokens.muted }}>{s.kicker}</span>
+                <h1 style={{ fontFamily: FONT, color: tokens.ink, fontSize: "clamp(26px, 3.1vw, 36px)", fontWeight: 600, letterSpacing: "-0.032em", lineHeight: 1.05, marginTop: 9, textWrap: "balance" }}>{s.title}</h1>
+                <p style={{ color: tokens.body, fontSize: 15, lineHeight: 1.52, marginTop: 11, maxWidth: "42ch" }}>{s.sub}</p>
 
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 22 }}>
-                    <CardBtn to={s.primary.to} primary>{s.primary.label}</CardBtn>
-                    {s.secondary && <CardBtn to={s.secondary.to}>{s.secondary.label}</CardBtn>}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                <div style={{ height: 1, background: tokens.hairline, margin: "18px 0" }} />
 
-            {/* single progress bar — the card advancing to the next slide */}
-            <div aria-hidden style={{ height: 3, background: tokens.hairline }}>
-              {!reduce && !paused
-                ? <motion.div key={`p${i}`} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: autoMs / 1000, ease: "linear" }}
-                    style={{ height: "100%", transformOrigin: "left", background: tokens.brand }} />
-                : <div style={{ height: "100%", width: "100%", background: tokens.brand, opacity: 0.85 }} />}
-            </div>
+                <ul style={{ display: "flex", flexDirection: "column", gap: 9, listStyle: "none", margin: 0, padding: 0 }}>
+                  {s.points.map((p) => (
+                    <li key={p} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                      <span aria-hidden style={{ flexShrink: 0, display: "grid", placeItems: "center", width: 18, height: 18, borderRadius: 999, background: tokens.brandSoft, marginTop: 1 }}>
+                        <Check size={11} weight="bold" color={tokens.brand} />
+                      </span>
+                      <span style={{ fontFamily: FONT, fontSize: 13.5, lineHeight: 1.4, color: tokens.body }}>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 22 }}>
+                  <CardBtn to={s.primary.to} primary>{s.primary.label}</CardBtn>
+                  {s.secondary && <CardBtn to={s.secondary.to}>{s.secondary.label}</CardBtn>}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
         </div>

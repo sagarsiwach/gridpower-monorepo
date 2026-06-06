@@ -26,10 +26,18 @@ export const meta: MetaFunction = () => [
 ];
 
 const HERO_SLIDES: HeroSlide[] = [
-  { tab: "Apartment", image: "/images/solutions/homes-apartment.png", eyebrow: "Apartments & flats", title: "Silent backup for your flat.", sub: "Compact, wall-mounted storage that keeps your essentials, and a room cool, running through every cut.", primary: { label: "Book a site survey", to: "/contact" }, secondary: { label: "Explore apartments", to: "/solutions/homes/apartment" } },
-  { tab: "Small home", image: "/images/solutions/homes-small.png", eyebrow: "Small homes", title: "Whole-home essentials, ACs included.", sub: "Backup and bill savings for a small home, silent and seamless the moment the grid drops.", primary: { label: "Book a site survey", to: "/contact" }, secondary: { label: "Explore small homes", to: "/solutions/homes/small-home" } },
-  { tab: "Large home / villa", image: "/images/solutions/homes-large.png", eyebrow: "Large homes & villas", title: "Whole-villa power, on autopilot.", sub: "Three-phase backup and tariff-smart savings for a large home, run entirely from your phone.", primary: { label: "Book a site survey", to: "/contact" }, secondary: { label: "Explore villas", to: "/solutions/homes/large-home" } },
-  { tab: "Solar + storage", image: "/images/solutions/homes-solar.png", eyebrow: "Solar + storage", title: "Bank your solar. Run on it after dark.", sub: "Stop exporting cheap by day and buying back dear at night. Store your solar and live on it through the peak.", primary: { label: "Book a site survey", to: "/contact" }, secondary: { label: "Explore solar storage", to: "/solutions/homes/solar-storage" } },
+  { image: "/images/solutions/homes-apartment.png", eyebrow: "Apartments & flats", kicker: "Apartment energy storage", title: "Silent backup for your flat.", sub: "Compact, wall-mounted storage that keeps your essentials, and a room cool, running through every cut.",
+    points: ["Wall-mounted, fits a utility nook", "Silent LFP, no genset or fumes", "Backup and bill savings, run from your phone"],
+    primary: { label: "Book a site survey", to: "/contact" }, secondary: { label: "Explore apartments", to: "/solutions/homes/apartment" } },
+  { image: "/images/solutions/homes-small.png", eyebrow: "Small homes", kicker: "Whole-home energy storage", title: "Whole-home essentials, ACs included.", sub: "Backup and bill savings for a small home, silent and seamless the moment the grid drops.",
+    points: ["Backs up essentials, ACs included", "Seamless switchover the moment grid drops", "Tariff-smart charging via GridOS"],
+    primary: { label: "Book a site survey", to: "/contact" }, secondary: { label: "Explore small homes", to: "/solutions/homes/small-home" } },
+  { image: "/images/solutions/homes-large.png", eyebrow: "Large homes & villas", kicker: "Three-phase home storage", title: "Whole-villa power, on autopilot.", sub: "Three-phase backup and tariff-smart savings for a large home, run entirely from your phone.",
+    points: ["Whole-villa, three-phase backup", "Tariff-smart savings on autopilot", "Run entirely from the GridOS app"],
+    primary: { label: "Book a site survey", to: "/contact" }, secondary: { label: "Explore villas", to: "/solutions/homes/large-home" } },
+  { image: "/images/solutions/homes-solar.png", eyebrow: "Solar + storage", kicker: "Solar plus storage", title: "Bank your solar. Run on it after dark.", sub: "Stop exporting cheap by day and buying back dear at night. Store your solar and live on it through the peak.",
+    points: ["Store your solar, use it after dark", "Stop exporting cheap, buying back dear", "Backup and self-use, managed by GridOS"],
+    primary: { label: "Book a site survey", to: "/contact" }, secondary: { label: "Explore solar storage", to: "/solutions/homes/solar-storage" } },
 ];
 
 const DOCK_LINKS: DockLink[] = [
