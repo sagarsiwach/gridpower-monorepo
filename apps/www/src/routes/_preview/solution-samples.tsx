@@ -36,9 +36,9 @@ const DOCK_LINKS: DockLink[] = [
   { id: "faq", label: "FAQ" },
 ];
 
-const DOCK_META: Record<SampleRouteKey, { label: string; cta: { label: string; to: string } }> = {
-  homes: { label: "Home storage", cta: { label: "Book a survey", to: "/contact" } },
-  offices: { label: "Offices & Industrial", cta: { label: "Get a quote", to: "/contact" } },
+const DOCK_META: Record<SampleRouteKey, { label: string }> = {
+  homes: { label: "Home storage" },
+  offices: { label: "Offices & Industrial" },
 };
 
 export default function SolutionSamples() {
@@ -74,7 +74,7 @@ export default function SolutionSamples() {
       <SamplePage key={`${route}-${dir}`} d={direction} content={content} />
 
       {/* floating bottom section-nav (Rivian-style, our language) */}
-      <SolutionDock key={`dock-${route}`} label={DOCK_META[route].label} links={DOCK_LINKS} cta={DOCK_META[route].cta} />
+      <SolutionDock key={`dock-${route}`} label={DOCK_META[route].label} links={DOCK_LINKS} secondary={{ label: "Catalog", to: "/products" }} primary={{ label: "Get a quote", to: "/contact" }} />
 
       <SiteFooter />
     </div>

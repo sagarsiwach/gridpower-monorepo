@@ -181,7 +181,7 @@ export default function AllBlocks() {
 
       <SiteFooter />
 
-      <SolutionDock label="All blocks" links={DOCK_LINKS} cta={{ label: "Book a survey", to: "/contact" }} />
+      <SolutionDock label="All blocks" links={DOCK_LINKS} secondary={{ label: "Catalog", to: "/products" }} primary={{ label: "Get a quote", to: "/contact" }} />
     </div>
   );
 }
