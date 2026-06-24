@@ -1,5 +1,5 @@
 /**
- * Station mock data — used by CON.3 (Stations) and CON.4 (Analytics).
+ * Station mock data, used by CON.3 (Stations) and CON.4 (Analytics).
  * 15 realistic stations across 7 Indian cities with GPWR-{City}-{NN} naming.
  */
 
@@ -533,7 +533,7 @@ export const ALL_STATIONS: Station[] = [
   },
 ];
 
-/** Lookup a station by ID — O(n) but fine for 15 records */
+/** Lookup a station by ID. O(n) but fine for 15 records */
 export function getStation(id: string): Station | undefined {
   return ALL_STATIONS.find((s) => s.id === id);
 }

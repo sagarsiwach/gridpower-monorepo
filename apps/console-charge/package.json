@@ -17,6 +17,7 @@
     "@gridpower/ui": "workspace:*",
     "@react-router/node": "^7.1.1",
     "@react-router/serve": "^7.1.1",
+    "cmdk": "^1.1.1",
     "isbot": "^5.1.19",
     "lucide-react": "^0.469.0",
     "react": "^19.0.0",

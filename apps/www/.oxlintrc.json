@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "react-perf", "jsx-a11y", "import"],
+  "categories": {
+    "correctness": "error",
+    "perf": "warn",
+    "style": "off",
+    "nursery": "off"
+  },
+  "env": {
+    "browser": true,
+    "es2024": true
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-debugger": "error",
+    "no-unused-vars": "warn",
+    "react/jsx-key": "error",
+    "react/no-array-index-key": "warn",
+    "react-perf/jsx-no-jsx-as-prop": "off",
+    "react-perf/jsx-no-new-array-as-prop": "off",
+    "react-perf/jsx-no-new-object-as-prop": "off",
+    "jsx-a11y/heading-has-content": "warn"
+  },
+  "ignorePatterns": [
+    "dist",
+    "node_modules",
+    "public/fonts",
+    ".vite",
+    "vite.config.ts"
+  ]
+}

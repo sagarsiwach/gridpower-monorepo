@@ -4,6 +4,10 @@
   "main": "./workers/app.ts",
   "compatibility_date": "2025-04-01",
   "compatibility_flags": ["nodejs_compat"],
+  "routes": [
+    { "pattern": "gridpower.co.in/*", "zone_id": "21fea377876784dbb8214c886f01276d" },
+    { "pattern": "www.gridpower.co.in/*", "zone_id": "21fea377876784dbb8214c886f01276d" }
+  ],
   "assets": {
     "binding": "ASSETS",
     "directory": "./build/client"

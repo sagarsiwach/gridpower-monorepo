@@ -1,8 +1,6 @@
 import { Navbar } from "@gridpower/ui";
 import type { NavItem } from "@gridpower/ui";
-import { Link } from "react-router";
 
-// Nav items port from _prototype/website/Nav.jsx megaMenus + topLinks
 const NAV_ITEMS: NavItem[] = [
   {
     label: "GridEnergy",
@@ -15,12 +13,12 @@ const NAV_ITEMS: NavItem[] = [
           {
             title: "Home storage",
             sub: "5–21 kWh residential",
-            href: "/energy/home-storage",
+            href: "/energy/solutions/home",
           },
           {
             title: "Commercial storage",
             sub: "30–500 kWh for offices & industry",
-            href: "/energy/commercial",
+            href: "/energy/solutions/commercial",
           },
         ],
       },
@@ -35,7 +33,7 @@ const NAV_ITEMS: NavItem[] = [
           {
             title: "ESS & containerized",
             sub: "FlexCube 500SL, grid-scale",
-            href: "/energy/ess",
+            href: "/energy/products",
           },
         ],
       },
@@ -50,7 +48,7 @@ const NAV_ITEMS: NavItem[] = [
           {
             title: "Open standards",
             sub: "Modbus, REST API, MQTT",
-            href: "/platform/open",
+            href: "/platform",
           },
         ],
       },
@@ -67,12 +65,12 @@ const NAV_ITEMS: NavItem[] = [
           {
             title: "Home charging",
             sub: "7.4–22 kW smart wallboxes",
-            href: "/charge/home",
+            href: "/charge/solutions/home",
           },
           {
             title: "Destination charging",
             sub: "Hotels, malls, resorts",
-            href: "/charge/destination",
+            href: "/charge/solutions/destination",
           },
         ],
       },
@@ -82,12 +80,12 @@ const NAV_ITEMS: NavItem[] = [
           {
             title: "AC chargers",
             sub: "3.3 kW to 22 kW",
-            href: "/charge/ac",
+            href: "/charge/products",
           },
           {
             title: "DC fast chargers",
             sub: "20 kW to 240 kW ultra-fast",
-            href: "/charge/dc",
+            href: "/charge/products",
           },
         ],
       },
@@ -97,12 +95,12 @@ const NAV_ITEMS: NavItem[] = [
           {
             title: "GridCharge App",
             sub: "Find, charge, pay. Live.",
-            href: "/platform/app",
+            href: "/platform",
           },
           {
             title: "GridCharge Console",
             sub: "Fleet & network management",
-            href: "/platform/console",
+            href: "/platform",
           },
         ],
       },
@@ -119,7 +117,7 @@ const NAV_ITEMS: NavItem[] = [
           {
             title: "Vehicle platforms",
             sub: "2W, 3W, 4W OEM kits",
-            href: "/drive/vehicles",
+            href: "/drive/solutions/vehicles",
           },
         ],
       },
@@ -134,7 +132,7 @@ const NAV_ITEMS: NavItem[] = [
           {
             title: "Battery packs",
             sub: "48V to 400V systems",
-            href: "/drive/batteries",
+            href: "/drive/products",
           },
         ],
       },
@@ -144,7 +142,7 @@ const NAV_ITEMS: NavItem[] = [
           {
             title: "BMS software",
             sub: "Open API, full diagnostics",
-            href: "/platform/bms",
+            href: "/platform",
           },
         ],
       },
@@ -157,16 +155,14 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-// SiteHeader wraps @gridpower/ui Navbar with GridPower-specific nav items.
-// The Navbar component handles its own mobile hamburger + Sheet drawer internally.
-// We pass items, logoHref, ctaLabel, and ctaHref.
 export function SiteHeader() {
   return (
     <Navbar
       items={NAV_ITEMS}
       logoHref="/"
+      logoSrc="/logos/gridpower-logo-square.png"
       ctaLabel="Get early access"
-      ctaHref="/waitlist"
+      ctaHref="/signup"
       sticky
     />
   );

@@ -1,5 +1,5 @@
 /**
- * Analytics mock data — CON.4
+ * Analytics mock data: CON.4
  * Station IDs follow GPWR-{City}-{NN} convention.
  */
 
@@ -90,7 +90,7 @@ export interface RevenueTrendPoint {
 
 function makeRevenueSeries(period: Period): RevenueTrendPoint[] {
   if (period === "Today") {
-    // Hourly — 24 data points
+    // Hourly: 24 data points
     const hours = Array.from({ length: 24 }, (_, i) => i);
     return hours.map((h) => ({
       label: `${String(h).padStart(2, "0")}:00`,
@@ -122,7 +122,7 @@ function makeRevenueSeries(period: Period): RevenueTrendPoint[] {
     }));
   }
 
-  // 90D — weekly aggregates
+  // 90D: weekly aggregates
   return Array.from({ length: 13 }, (_, i) => ({
     label: `W${i + 1}`,
     revenue: Math.round(220000 + i * 15000 + Math.random() * 40000),
@@ -139,7 +139,7 @@ export function getRevenueSeries(period: Period): RevenueTrendPoint[] {
 }
 
 // ─── Sessions heatmap (7×24) ─────────────────────────────────────────────────
-// Fixed data — doesn't change with period picker (always shows typical week pattern)
+// Fixed data: doesn't change with period picker (always shows typical week pattern)
 
 import type { HeatmapValue } from "@gridpower/ui";
 
