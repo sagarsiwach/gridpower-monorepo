@@ -78,7 +78,7 @@ export default function HomesConfigurator() {
         boxShadow: "0 40px 80px -50px oklch(15.3% 0.006 107.1 / 0.5)",
       }}
     >
-      <div className="lg:grid-cols-2" style={{ display: "grid", gridTemplateColumns: "1fr" }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Visual side (cinematic-ready slot) */}
         <div style={{ position: "relative", minHeight: 340, background: tokens.ink, overflow: "hidden" }}>
           <AnimatePresence initial={false}>

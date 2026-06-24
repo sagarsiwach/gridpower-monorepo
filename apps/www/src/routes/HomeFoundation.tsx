@@ -25,7 +25,6 @@ import {
   FeatureRow,
   CTASection,
   Container,
-  Kicker,
   Gated,
   Reveal,
   MediaSlot,
@@ -114,7 +113,7 @@ export default function HomeFoundation() {
       {/* Audiences */}
       <Section alt>
         <SectionHeading kicker="Who it's for" title="One platform, every kind of site." intro="From a single home to utility infrastructure — the same storage platform and the same GridOS software." />
-        <div className="sm:grid-cols-2 lg:grid-cols-3" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 18 }}>
+        <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
           {AUDIENCES.map((a) => (
             <FeatureCard key={a.name} icon={a.icon} title={a.name} body={a.sub} to={a.to} />
           ))}
@@ -147,7 +146,7 @@ export default function HomeFoundation() {
       {/* Economics — gated */}
       <Section>
         <SectionHeading kicker="The economics" title="Storage that pays for itself." intro="We size to your tariff and load and show real numbers — never generic ones. Figures populate as the models are verified." />
-        <div className="sm:grid-cols-3" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 18 }}>
+        <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-3">
           {[
             { label: "Typical payback", note: "publish only after payback model is calculated + sourced" },
             { label: "Demand-charge reduction", note: "verify commercial peak-shaving savings" },
@@ -166,7 +165,7 @@ export default function HomeFoundation() {
       {/* Install / survey flow */}
       <Section alt>
         <SectionHeading kicker="How it works" title="From enquiry to commissioned, with GridOS from day one." />
-        <div className="sm:grid-cols-4" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 14 }}>
+        <div className="grid grid-cols-1 gap-[14px] sm:grid-cols-4">
           {[
             { t: "Free site survey", b: "We assess your load, tariff, and backup needs." },
             { t: "Custom proposal", b: "A sized system and the real economics." },
@@ -187,7 +186,7 @@ export default function HomeFoundation() {
       {/* Partner solar + trust strip */}
       <Section>
         <Container>
-          <div className="sm:grid-cols-3" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20 }}>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
             <Trust icon={PlugsConnected} title="Works with your solar" body="Pair storage with existing solar, or add solar through partners." />
             <Trust icon={ShieldCheck} title="LFP & open" body="Safe LFP chemistry, open protocols, no vendor lock-in." />
             <Trust icon={CurrencyInr} title="Honest economics" body="Real numbers sized to your site — never generic payback math." />

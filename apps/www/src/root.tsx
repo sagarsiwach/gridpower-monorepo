@@ -1,7 +1,7 @@
-import { useEffect, useState, type ComponentType } from "react";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from "react-router";
 
 import "./styles/globals.css";
+import { AgentationWidget } from "./components/AgentationWidget";
 import { GlobalHeader } from "./components/site/GlobalHeader";
 import MobileSiteNav from "./components/site/MobileSiteNav";
 import { SiteFooter } from "./components/site/SiteFooter";
@@ -21,6 +21,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <ScrollRestoration />
+        <AgentationWidget />
         <Scripts />
       </body>
     </html>
@@ -52,29 +53,6 @@ export default function App() {
       )}
       <Outlet />
       {!isInternal && <SiteFooter />}
-      <DevAgentation />
     </>
   );
-}
-
-// Agentation visual-feedback overlay — dev-only, client-only. Loaded via dynamic
-// import inside an effect so it never runs during SSR/prerender. The annotations
-// it captures are read by the agentation MCP server (default :4747).
-function DevAgentation() {
-  const [Tool, setTool] = useState<ComponentType<Record<string, unknown>> | null>(null);
-
-  useEffect(() => {
-    if (!import.meta.env.DEV) return;
-    let alive = true;
-    import("agentation").then((m) => {
-      if (alive) setTool(() => m.Agentation as ComponentType<Record<string, unknown>>);
-    });
-    return () => {
-      alive = false;
-    };
-  }, []);
-
-  // endpoint is REQUIRED for the annotations to sync to the agentation MCP
-  // server — without it the toolbar only writes to localStorage.
-  return Tool ? <Tool endpoint="http://localhost:4747" /> : null;
 }
