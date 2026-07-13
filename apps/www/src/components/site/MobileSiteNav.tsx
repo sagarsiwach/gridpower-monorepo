@@ -113,7 +113,7 @@ const AUDIENCES: Audience[] = [
     featured: [
       { label: "Apartment RWA case study", meta: "Placeholder · verify" },
       { label: "Home ROI calculator", meta: "Run your numbers" },
-      { label: "Datasheet · Atlas-01", meta: "Placeholder · verify" },
+      { label: "Datasheet · Nano class", meta: "Placeholder · verify" },
     ],
     spotlight: {
       kicker: "POPULAR",
@@ -124,31 +124,54 @@ const AUDIENCES: Audience[] = [
   },
   {
     key: "offices",
-    label: "Offices & Industrial",
+    label: "Offices",
     kicker: "02",
-    blurb: "Mid-office UPS to factory backup at 1MW.",
+    blurb: "Workplace UPS and tariff-managed backup, single site to campus.",
     solutions: [
-      { Icon: Briefcase, name: "Small office", sub: "30–80 kWh · UPS" },
-      { Icon: BuildingOffice, name: "Mid-office UPS", sub: "100–250 kWh" },
-      { Icon: Buildings, name: "Large campus", sub: "500 kWh+ · multi-feeder" },
-      { Icon: Factory, name: "Factory backup", sub: "1MW+ · OCPP" },
+      { Icon: Briefcase, name: "Small office", sub: "Single-phase backup" },
+      { Icon: BuildingOffice, name: "Mid-size office", sub: "Three-phase UPS" },
+      { Icon: Buildings, name: "Office campus", sub: "Multi-floor storage" },
+      { Icon: Network, name: "Co-working / IT park", sub: "Metered per tenant" },
     ],
     featured: [
-      { label: "Factory case study", meta: "Placeholder · verify" },
-      { label: "Office ROI calculator", meta: "Run your tariff" },
-      { label: "FlexCube 500SL datasheet", meta: "Placeholder · verify" },
+      { label: "Office backup guide", meta: "How sizing works" },
+      { label: "Tariff & ROI calculator", meta: "Run your bill" },
+      { label: "Workplace datasheet", meta: "Micro class" },
     ],
     spotlight: {
-      kicker: "MOST DEPLOYED",
-      title: "FlexCube 500SL",
-      bullet: "500 kWh containerised · drop-in factory backup · placeholder",
-      cta: "Schedule a site survey",
+      kicker: "TYPICAL",
+      title: "Micro class",
+      bullet: "Three-phase ready · tariff-aware charging · sized at survey",
+      cta: "Book a site survey",
+    },
+  },
+  {
+    key: "industrial",
+    label: "Industrial",
+    kicker: "03",
+    blurb: "Factory backup, peak shaving, and diesel offset for plants and logistics.",
+    solutions: [
+      { Icon: Factory, name: "Factory backup", sub: "Three-phase, high load" },
+      { Icon: Buildings, name: "Manufacturing campus", sub: "Multi-feeder storage" },
+      { Icon: HardDrives, name: "Cold storage", sub: "Continuous critical load" },
+      { Icon: Broadcast, name: "Warehouse & logistics", sub: "Peak shaving" },
+    ],
+    featured: [
+      { label: "Factory case study", meta: "Internal pilot" },
+      { label: "Peak-shaving explainer", meta: "Cut demand charges" },
+      { label: "Industrial datasheet", meta: "Mega class" },
+    ],
+    spotlight: {
+      kicker: "TYPICAL",
+      title: "Mega class",
+      bullet: "Site-installed enclosure · drop-in factory backup · sized per site",
+      cta: "Book a site survey",
     },
   },
   {
     key: "institute",
     label: "Institute",
-    kicker: "03",
+    kicker: "04",
     blurb: "Schools, colleges, university campuses.",
     solutions: [
       { Icon: BookOpen, name: "School microgrid", sub: "Backup + roof solar" },
@@ -171,7 +194,7 @@ const AUDIENCES: Audience[] = [
   {
     key: "enterprises",
     label: "Enterprises",
-    kicker: "04",
+    kicker: "05",
     blurb: "Data centers, telecom, hospitals, multi-site.",
     solutions: [
       { Icon: HardDrives, name: "Data centers", sub: "Rack UPS + grid storage" },
@@ -194,7 +217,7 @@ const AUDIENCES: Audience[] = [
   {
     key: "hospitality",
     label: "Hospitality",
-    kicker: "05",
+    kicker: "06",
     blurb: "Hotels, resorts, restaurants, malls.",
     solutions: [
       { Icon: Bed, name: "Hotels", sub: "200–800 kWh per property" },

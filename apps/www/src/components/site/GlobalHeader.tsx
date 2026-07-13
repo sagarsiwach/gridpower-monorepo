@@ -53,6 +53,7 @@ const SOLUTION_HREF = "/solutions/homes";
 const AUDIENCE_HREF: Record<string, string> = {
   homes: "/solutions/homes",
   offices: "/solutions/offices-industrial",
+  industrial: "/solutions/offices-industrial",
   institute: "/solutions/institutes",
   enterprises: "/solutions/enterprises",
   hospitality: "/solutions/hospitality",
@@ -133,7 +134,7 @@ const AUDIENCES: Audience[] = [
     featured: [
       { label: "Apartment RWA case study", meta: "Placeholder · verify" },
       { label: "Home ROI calculator", meta: "Run your numbers" },
-      { label: "Datasheet · Atlas-01", meta: "Placeholder · verify" },
+      { label: "Datasheet · Nano class", meta: "Placeholder · verify" },
     ],
     spotlight: {
       kicker: "POPULAR",
@@ -148,35 +149,62 @@ const AUDIENCES: Audience[] = [
   },
   {
     key: "offices",
-    label: "Offices & Industrial",
+    label: "Offices",
     kicker: "02",
-    blurb: "Mid-office UPS to factory backup.",
+    blurb: "Workplace UPS and tariff-managed backup, single site to campus.",
     solutions: [
-      { Icon: Briefcase, name: "Small office", sub: "30–80 kWh · UPS" },
-      { Icon: BuildingOffice, name: "Mid-office UPS", sub: "100–250 kWh · arbitrage" },
-      { Icon: Buildings, name: "Large campus", sub: "500 kWh+ · multi-feeder" },
-      { Icon: Factory, name: "Factory backup", sub: "1MW+ · OCPP integrated" },
+      { Icon: Briefcase, name: "Small office", sub: "Single-phase backup" },
+      { Icon: BuildingOffice, name: "Mid-size office", sub: "Three-phase UPS" },
+      { Icon: Buildings, name: "Office campus", sub: "Multi-floor storage" },
+      { Icon: Network, name: "Co-working / IT park", sub: "Metered per tenant" },
     ],
     featured: [
-      { label: "Factory case study", meta: "Placeholder · verify" },
-      { label: "Office ROI calculator", meta: "Run your tariff" },
-      { label: "FlexCube 500SL datasheet", meta: "Placeholder · verify" },
+      { label: "Office backup guide", meta: "How sizing works" },
+      { label: "Tariff & ROI calculator", meta: "Run your bill" },
+      { label: "Workplace datasheet", meta: "Micro class" },
     ],
     spotlight: {
-      kicker: "MOST DEPLOYED",
-      title: "FlexCube 500SL",
-      bullets: ["500 kWh containerised", "Drop-in factory backup", "Placeholder copy"],
-      cta: "Schedule a site survey",
+      kicker: "TYPICAL",
+      title: "Micro class",
+      bullets: ["Three-phase ready", "Tariff-aware charging", "Sized at survey"],
+      cta: "Book a site survey",
       platformKicker: "PLATFORM",
       platformTitle: "GridOS Operator Console",
-      platformSub: "Tariff-arbitrage scheduler. Fault flags. OCPP 2.0.1 native.",
+      platformSub: "Tariff scheduler, fault flags, one dashboard.",
+      platformCta: "See GridOS",
+    },
+  },
+  {
+    key: "industrial",
+    label: "Industrial",
+    kicker: "03",
+    blurb: "Factory backup, peak shaving, and diesel offset for plants and logistics.",
+    solutions: [
+      { Icon: Factory, name: "Factory backup", sub: "Three-phase, high load" },
+      { Icon: Buildings, name: "Manufacturing campus", sub: "Multi-feeder storage" },
+      { Icon: HardDrives, name: "Cold storage", sub: "Continuous critical load" },
+      { Icon: Broadcast, name: "Warehouse & logistics", sub: "Peak shaving" },
+    ],
+    featured: [
+      { label: "Factory case study", meta: "Internal pilot" },
+      { label: "Peak-shaving explainer", meta: "Cut demand charges" },
+      { label: "Industrial datasheet", meta: "Mega class" },
+    ],
+    spotlight: {
+      kicker: "TYPICAL",
+      title: "Mega class",
+      bullets: ["Site-installed enclosure", "Drop-in factory backup", "Sized per site"],
+      cta: "Book a site survey",
+      platformKicker: "PLATFORM",
+      platformTitle: "GridOS Operator Console",
+      platformSub: "Peak-shaving scheduler, fault flags, one dashboard.",
       platformCta: "See GridOS",
     },
   },
   {
     key: "institute",
     label: "Institute",
-    kicker: "03",
+    kicker: "04",
     blurb: "Schools, colleges, university campuses with bursty load patterns.",
     solutions: [
       { Icon: BookOpen, name: "School microgrid", sub: "Backup + roof solar" },
@@ -203,7 +231,7 @@ const AUDIENCES: Audience[] = [
   {
     key: "enterprises",
     label: "Enterprises",
-    kicker: "04",
+    kicker: "05",
     blurb: "Data centers, telecom, hospitals — load-critical with multi-site rollup.",
     solutions: [
       { Icon: HardDrives, name: "Data centers", sub: "Rack UPS + grid storage" },
@@ -230,7 +258,7 @@ const AUDIENCES: Audience[] = [
   {
     key: "hospitality",
     label: "Hospitality",
-    kicker: "05",
+    kicker: "06",
     blurb: "Hotels, resorts, restaurants, malls — round-the-clock load with high peak surges.",
     solutions: [
       { Icon: Bed, name: "Hotels", sub: "200–800 kWh · property" },
@@ -519,17 +547,17 @@ function MainNav({
         }}
       >
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 justify-self-start" aria-label="GridEnergy home">
+        <Link to="/" className="flex items-center gap-1 justify-self-start" aria-label="GridEnergy home">
           <Logo
             variant="gridenergy"
-            size={30}
+            size={40}
             style={{
               transform: condensed ? "scale(0.86)" : "scale(1)",
               transformOrigin: "left center",
               transition: shouldReduceMotion ? "none" : "transform 0.28s cubic-bezier(0.22,1,0.36,1)",
             }}
           />
-          <span className="text-[15px] font-semibold tracking-[-0.02em]" style={{ color: tokens.ink }}>
+          <span className="text-[18px] font-semibold tracking-[-0.02em]" style={{ color: tokens.ink }}>
             GridEnergy
           </span>
         </Link>
@@ -601,7 +629,7 @@ function MainNav({
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = tokens.brand)}
           >
             <Lightning size={14} weight="fill" color="white" />
-            Book a site survey
+            Get Quote
           </Link>
         </div>
       </div>
@@ -672,7 +700,7 @@ function MegaPanel({
               <div className="grid grid-cols-12 gap-0 p-3">
                 {/* Solutions */}
                 <motion.div
-                  className="col-span-7 pr-3"
+                  className="col-span-9 pr-4"
                   initial={shouldReduceMotion ? {} : { opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.22, delay: staggerDelay * 1, ease: [0.22, 1, 0.36, 1] }}
@@ -687,7 +715,7 @@ function MegaPanel({
                   </div>
                 </motion.div>
 
-                {/* Featured */}
+                {/* Featured (right column) */}
                 <motion.div
                   className="col-span-3"
                   initial={shouldReduceMotion ? {} : { opacity: 0, y: 6 }}
@@ -713,58 +741,6 @@ function MegaPanel({
                     ))}
                   </ul>
                 </motion.div>
-
-                {/* Spotlight */}
-                <motion.div
-                  className="col-span-2 pl-3 flex flex-col gap-2"
-                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.22, delay: staggerDelay * 3, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <Rect fill={tokens.ink} cornerRadius={14} style={{ flex: "1 1 0" }}>
-                    <div className="p-4 flex flex-col h-full">
-                      <div className="flex items-center gap-1.5 mb-2.5">
-                        <span style={{ width: 5, height: 5, borderRadius: 999, background: tokens.brand, flexShrink: 0 }} />
-                        <span className="text-[9px] uppercase tracking-[0.16em]" style={{ color: tokens.brand, fontWeight: 700 }}>
-                          {audience.spotlight.kicker}
-                        </span>
-                      </div>
-                      <p className="text-[14px] font-semibold tracking-[-0.015em] leading-tight mb-2" style={{ color: "#ffffff" }}>
-                        {audience.spotlight.title}
-                      </p>
-                      <ul className="flex flex-col gap-1 mb-3">
-                        {audience.spotlight.bullets.map((b) => (
-                          <li key={b} className="text-[11px] leading-snug flex items-start gap-1.5" style={{ color: "rgba(255,255,255,0.78)" }}>
-                            <span style={{ width: 3, height: 3, borderRadius: 999, background: "rgba(255,255,255,0.4)", flexShrink: 0, marginTop: 5 }} />
-                            {b}
-                          </li>
-                        ))}
-                      </ul>
-                      <Link to={hrefFor(audience.key)} className="flex items-center gap-1 mt-auto text-[10px] uppercase tracking-[0.12em] font-semibold transition-opacity hover:opacity-70" style={{ color: tokens.brand }}>
-                        {audience.spotlight.cta}
-                        <ArrowRight size={10} weight="bold" color={tokens.brand} />
-                      </Link>
-                    </div>
-                  </Rect>
-
-                  <Rect fill={tokens.pageBgDeep} stroke={tokens.hairline} cornerRadius={14} style={{ flex: "0 0 auto" }}>
-                    <div className="p-3.5 flex flex-col gap-2">
-                      <span className="text-[9px] uppercase tracking-[0.14em]" style={{ color: tokens.inkMuted, fontWeight: 700 }}>
-                        {audience.spotlight.platformKicker}
-                      </span>
-                      <p className="text-[12px] font-semibold leading-tight tracking-[-0.01em]" style={{ color: tokens.ink }}>
-                        {audience.spotlight.platformTitle}
-                      </p>
-                      <p className="text-[11px] leading-snug" style={{ color: tokens.muted }}>
-                        {audience.spotlight.platformSub}
-                      </p>
-                      <Link to="/platform" className="flex items-center gap-1 text-[10px] uppercase tracking-[0.12em] font-semibold transition-opacity hover:opacity-70" style={{ color: tokens.inkMuted }}>
-                        {audience.spotlight.platformCta}
-                        <ArrowRight size={10} weight="bold" />
-                      </Link>
-                    </div>
-                  </Rect>
-                </motion.div>
               </div>
               </motion.div>
             </AnimatePresence>
@@ -773,7 +749,7 @@ function MegaPanel({
           {/* Footer strip */}
           <div className="flex items-center justify-between px-3 py-2.5" style={{ borderTop: `1px solid ${tokens.hairline}`, background: tokens.pageBgDeep }}>
             <div className="flex items-center gap-1.5 flex-wrap">
-              <FooterPill emphasis>Compare all 5 audiences</FooterPill>
+              <FooterPill emphasis>Compare all 6 audiences</FooterPill>
               <FooterPill>ROI calculator</FooterPill>
               <FooterPill>Datasheets</FooterPill>
               <FooterPill>About</FooterPill>

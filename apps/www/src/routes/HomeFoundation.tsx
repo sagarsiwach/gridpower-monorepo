@@ -1,15 +1,9 @@
 import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
   Lightning,
   ArrowRight,
-  House,
-  BuildingOffice,
-  GraduationCap,
-  Network,
-  Bed,
   Cube,
   PlugsConnected,
   ShieldCheck,
@@ -30,6 +24,9 @@ import {
   Reveal,
   MediaSlot,
 } from "../components/marketing/Primitives";
+import { CobeGlobe } from "../components/marketing/CobeGlobe";
+import { StoryFlow } from "../components/marketing/StoryFlow";
+import { PlatformAudiences } from "../components/marketing/PlatformAudiences";
 
 export const meta: MetaFunction = () => [
   { title: "GridEnergy — Energy storage & management for India" },
@@ -39,87 +36,70 @@ export const meta: MetaFunction = () => [
 const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const AUDIENCES: { icon: Icon; name: string; sub: string; to: string }[] = [
-  { icon: House, name: "Homes", sub: "Backup, savings, and silence for your home.", to: "/solutions/homes" },
-  { icon: BuildingOffice, name: "Offices & Industrial", sub: "UPS, peak shaving, diesel offset.", to: "/solutions/offices-industrial" },
-  { icon: GraduationCap, name: "Institutes", sub: "Reliable power for schools and campuses.", to: "/solutions/institutes" },
-  { icon: Network, name: "Enterprises", sub: "Load-critical storage, multi-site.", to: "/solutions/enterprises" },
-  { icon: Bed, name: "Hospitality", sub: "Round-the-clock backup for properties.", to: "/solutions/hospitality" },
-];
-
-const PROBLEMS = [
-  { title: "The storage gap", body: "India generates and even over-builds power, but can't store it. Solar floods the day; the grid strains at night. Storage is the missing layer." },
-  { title: "No real control", body: "Most buyers get a black-box battery and a phone number. No data, no scheduling, no proof it's working." },
-  { title: "Vendor lock-in", body: "Closed systems trap you with one supplier. We build on open protocols so you're never hostage to us." },
-];
-
 export default function HomeFoundation() {
   const reduce = useReducedMotion() ?? false;
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
 
+  // Transform-only entrance: content is never hidden by opacity, so it stays
+  // visible even if the animation frame loop is throttled (background tab).
   const intro = (i: number) =>
     reduce
       ? { initial: false as const }
-      : { initial: { opacity: 0, y: 16 }, animate: mounted ? { opacity: 1, y: 0 } : {}, transition: { duration: 0.7, ease: EASE, delay: 0.12 + i * 0.08 } };
+      : { initial: { y: 14 }, animate: { y: 0 }, transition: { duration: 0.6, ease: EASE, delay: 0.08 + i * 0.07 } };
 
   return (
     <div style={{ fontFamily: FONT, background: tokens.pageBg, color: tokens.body }}>
-      {/* Hero — corporate, infra-first */}
-      <section style={{ position: "relative", minHeight: "92vh", overflow: "hidden", background: tokens.ink }}>
-        <div aria-hidden style={{ position: "absolute", inset: 0 }}>
-          <img src="/images/solutions/homes-large.png" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 50%" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(100deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.3) 100%)" }} />
+      {/* Hero — copy on top, one gigantic interactive globe rising from the
+          bottom (lower ~40% clipped by the fold). Distinct olive-wash bg so
+          it reads as its own section. */}
+      <section style={{ position: "relative", height: "100svh", minHeight: 640, overflow: "hidden", background: `linear-gradient(180deg, ${tokens.pageBgDeep} 0%, ${tokens.pageBg} 58%)`, borderBottom: `1px solid ${tokens.hairline}` }}>
+        {/* Soft brand glow behind the globe's upper dome. */}
+        <div aria-hidden style={{ position: "absolute", bottom: "-6%", left: "50%", width: "78vw", height: "78vw", maxWidth: 900, maxHeight: 900, transform: "translateX(-50%)", background: `radial-gradient(circle at center, ${tokens.brand}12 0%, transparent 60%)`, pointerEvents: "none" }} />
+
+        {/* Giant globe — bottom-anchored and pushed down 40% of its own height,
+            so exactly 60% shows and 40% is clipped, independent of its size or
+            the viewport. Width drives the size; the 60/40 stays fixed. */}
+        <div
+          className="ge-hero-globe"
+          aria-hidden
+          style={{ position: "absolute", left: "50%", bottom: 0, transform: "translate(-50%, 53%)", width: "clamp(1000px, 104vw, 1500px)", aspectRatio: "1", zIndex: 1 }}
+        >
+          <CobeGlobe />
         </div>
-        <div style={{ position: "relative", zIndex: 2, minHeight: "92vh", display: "flex", alignItems: "center" }}>
-          <Container>
-            <div style={{ maxWidth: 760 }}>
-              <motion.div {...intro(0)} style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 22 }}>
-                <span style={{ width: 6, height: 6, borderRadius: 999, background: tokens.brand, boxShadow: `0 0 12px ${tokens.brand}` }} />
-                <span style={{ color: "rgba(255,255,255,0.9)", fontSize: 12, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" }}>
-                  Energy storage & management
-                </span>
-              </motion.div>
-              <motion.h1 {...intro(1)} style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif', color: "#fff", fontSize: "clamp(40px,6.5vw,78px)", fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 0.98, maxWidth: "16ch", textWrap: "balance" }}>
-                Store your power. Run it on software.
-              </motion.h1>
-              <motion.p {...intro(2)} style={{ color: "rgba(255,255,255,0.82)", fontSize: "clamp(17px,2vw,21px)", lineHeight: 1.5, marginTop: 22, maxWidth: "46ch" }}>
-                GridEnergy builds the storage hardware and the GridOS platform that runs it — for homes, businesses, and infrastructure across India. LFP, modular, open, India-built.
-              </motion.p>
-              <motion.div {...intro(3)} style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 34 }}>
-                <Link to="/solutions/homes" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: tokens.brand, color: "#fff", fontSize: 15, fontWeight: 600, padding: "15px 28px", borderRadius: 14, textDecoration: "none" }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = tokens.brandHover)}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = tokens.brand)}>
-                  <Lightning size={16} weight="fill" /> Explore Homes
-                </Link>
-                <Link to="/platform" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.1)", color: "#fff", fontSize: 15, fontWeight: 600, padding: "15px 24px", borderRadius: 14, textDecoration: "none", border: "1px solid rgba(255,255,255,0.28)" }}>
-                  View GridOS <ArrowRight size={14} weight="bold" />
-                </Link>
-              </motion.div>
-            </div>
-          </Container>
+
+        {/* Copy — stacked at the top, above the globe. */}
+        <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 820, margin: "0 auto", padding: "clamp(28px, 4.5vh, 56px) 24px 0", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+          <motion.h1 {...intro(0)} style={{ fontFamily: FONT, color: tokens.ink, fontSize: "clamp(32px,4.6vw,54px)", fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.02, maxWidth: "17ch", textWrap: "balance" }}>
+            Power, stored and controlled.
+          </motion.h1>
+
+          <motion.p {...intro(1)} style={{ color: tokens.body, fontSize: "clamp(15px,1.7vw,18px)", lineHeight: 1.5, marginTop: 14, maxWidth: "62ch" }}>
+            Storage hardware and the GridOS platform that runs it — built for India.
+          </motion.p>
+
+          <motion.div {...intro(2)} style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center", marginTop: 20 }}>
+            <Link to="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: tokens.brand, color: "#fff", fontSize: 15, fontWeight: 600, padding: "15px 28px", borderRadius: 14, textDecoration: "none" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = tokens.brandHover)}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = tokens.brand)}>
+              <Lightning size={16} weight="fill" /> Get a quote
+            </Link>
+            <Link to="/platform" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: tokens.card, color: tokens.ink, fontSize: 15, fontWeight: 600, padding: "15px 24px", borderRadius: 14, textDecoration: "none", border: `1px solid ${tokens.hairlineStrong}` }}>
+              View GridOS <ArrowRight size={14} weight="bold" />
+            </Link>
+          </motion.div>
         </div>
+
+        <style>{`
+          @media (max-width: 640px) {
+            .ge-hero-globe { width: 140vw !important; }
+          }
+        `}</style>
       </section>
 
-      {/* Problem */}
-      <Section>
-        <SectionHeading kicker="Why storage, why now" title="Power isn't the problem. Storing and controlling it is." intro="India's energy challenge has shifted from generation to storage, control, and independence. That's the layer GridEnergy builds." />
-        <CardGrid cols={3}>
-          {PROBLEMS.map((p) => (
-            <FeatureCard key={p.title} title={p.title} body={p.body} />
-          ))}
-        </CardGrid>
-      </Section>
+      {/* Problem — scroll-scrubbed wire story (StoryFlow engine + harness) */}
+      <StoryFlow />
 
-      {/* Audiences */}
-      <Section alt>
-        <SectionHeading kicker="Who it's for" title="One platform, every kind of site." intro="From a single home to utility infrastructure — the same storage platform and the same GridOS software." />
-        <div className="sm:grid-cols-2 lg:grid-cols-3" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 18 }}>
-          {AUDIENCES.map((a) => (
-            <FeatureCard key={a.name} icon={a.icon} title={a.name} body={a.sub} to={a.to} />
-          ))}
-        </div>
-      </Section>
+      {/* Audiences — six segments, each with its four solution spokes */}
+      <PlatformAudiences />
 
       {/* Products */}
       <Section>

@@ -33,6 +33,7 @@ import {
   TrustBar, SystemRows, OutcomeGrid, Comparison, FramedCTA,
 } from "../../components/solutions/light/Blocks";
 import { HeroCarousel, type HeroSlide } from "../../components/solutions/light/HeroCarousel";
+import { VideoShowcase, type VideoSlide } from "../../components/solutions/light/VideoShowcase";
 import { HowItWorks, StatBand, FaqResources, Gated } from "../../components/solutions/light/Modules";
 import { SolutionDock, type DockLink } from "../../components/solutions/light/SolutionDock";
 
@@ -58,6 +59,44 @@ const HERO_SLIDES: HeroSlide[] = [
   { image: "/images/solutions/homes-solar.png", eyebrow: "Solar + storage", kicker: "Solar plus storage", title: "Bank your solar. Run on it after dark.", sub: "Stop exporting cheap by day and buying back dear at night. Store your solar and live on it through the peak.",
     points: ["Store your solar, use it after dark", "Stop exporting cheap, buying back dear", "Backup and self-use, managed by GridOS"],
     primary: CONFIGURE, secondary: { label: "Explore solar storage", to: "/solutions/homes/solar-storage" } },
+];
+
+/* Section 2 — "See it work": a video carousel of what the system does.
+
+   NOTE: the four clips + copy below are Enphase IQ EV Charger reference assets
+   (from enphase.com/homeowners/iq-ev-charger-2), pulled in to preview the design
+   with real footage. They are EV-charger content on a home-storage page and are
+   NOT production-ready — swap for GridEnergy footage + home-storage copy before
+   ship. Files live in /public/videos/. */
+const HOME_VIDEOS: VideoSlide[] = [
+  {
+    kicker: "Solar charging",
+    title: "Smarter solar, more savings.",
+    body: "Automatically adapts to sunlight and home energy use to charge with solar power, saving energy and reducing costs.",
+    src: "/videos/enphase-solar.mp4",
+    poster: "/videos/enphase-solar.jpg",
+  },
+  {
+    kicker: "Load balancing",
+    title: "Skip the electrical panel upgrade.",
+    body: "Most homes need an upgrade for EV charging, but built-in load balancing adjusts power draw in real time, so you can plug in without expensive rewiring.",
+    src: "/videos/enphase-load-balancing.mp4",
+    poster: "/videos/enphase-load-balancing.jpg",
+  },
+  {
+    kicker: "Secure access",
+    title: "Secure, private access.",
+    body: "Prevents unauthorized use with app-based or RFID based access control.",
+    src: "/videos/enphase-access.mp4",
+    poster: "/videos/enphase-access.jpg",
+  },
+  {
+    kicker: "Storm ready",
+    title: "Powered, even in storms.",
+    body: "Fully charges the EV ahead of severe weather to stay powered through any storm.",
+    src: "/videos/enphase-storm.mp4",
+    poster: "/videos/enphase-storm.jpg",
+  },
 ];
 
 /* The router: the four home-type spokes the hub points to. */
@@ -215,7 +254,16 @@ export default function SolutionsHomes() {
 
         <TrustBar lead="Built on LFP chemistry and open standards" items={["Safer LFP cells", "Sealed, maintenance-free", "GridOS app control", "No vendor lock-in"]} />
 
-        {/* 2 · What home storage is — lives on the hub so spokes don't repeat it. */}
+        {/* 2 · See it work — a video carousel of what the system does day to day. */}
+        <VideoShowcase
+          id="see-it-work"
+          eyebrow="See it work"
+          title="Your storage, doing its job."
+          intro="Four things your system does on its own, every day and through every cut. Pick one and watch it work."
+          slides={HOME_VIDEOS}
+        />
+
+        {/* 3 · What home storage is — lives on the hub so spokes don't repeat it. */}
         <SystemRows
           label="What it is"
           title="A battery, an inverter, solar-ready, run by software."
