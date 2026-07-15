@@ -28,11 +28,7 @@
   SSR-clean (useGSAP is client-only; Dial Kit ships a server snapshot).
 */
 
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { DialRoot, useDialKit } from "dialkit";
 import "dialkit/styles.css";
@@ -40,8 +36,6 @@ import "dialkit/styles.css";
 import { Wire } from "./Wire";
 import { NodeSlot } from "./NodeSlot";
 import { DIALS, NODES, SCENES, STAGE, COLORS } from "./story.config";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger, MotionPathPlugin);
 
 const FONT = "Inter, ui-sans-serif, system-ui, sans-serif";
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -57,11 +51,27 @@ export function StoryFlow() {
   // Live tuning values (Dial Kit in dev; config defaults everywhere else).
   const d = useDialKit("StoryFlow", DIALS);
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
+  // gsap is loaded dynamically on the client only: its ticker arms a timer at
+  // import time, which the Cloudflare Workers runtime forbids at global scope
+  // (Error 1101 on every SSR request if bundled into the server build).
+  useEffect(() => {
+    let cancelled = false;
+    let mm: { revert: () => void } | undefined;
 
-      mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+    (async () => {
+      const [{ gsap }, { ScrollTrigger }, { MotionPathPlugin }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+        import("gsap/MotionPathPlugin"),
+      ]);
+      if (cancelled) return;
+      gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+      // Scoped to the stage so the ".sf-*" selector text stays local.
+      const media = gsap.matchMedia(stageRef);
+      mm = media;
+
+      media.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
         // Hidden start state (only on capable desktop; static fallback keeps
         // the fully-drawn diagram everywhere else).
         gsap.set(".sf-main", { strokeDashoffset: 1 });
@@ -98,15 +108,13 @@ export function StoryFlow() {
           tl.to(`.sf-node-${n.key}`, { autoAlpha: 1, y: 0, duration: 0.08 }, n.reveal);
         });
       });
+    })();
 
-      return () => mm.revert();
-    },
-    {
-      scope: stageRef,
-      dependencies: [d.scrub, d.sceneVh, d.wireWidth, d.pulseR, d.wasteEndOpacity, d.markers, d.wireColor],
-      revertOnUpdate: true,
-    },
-  );
+    return () => {
+      cancelled = true;
+      mm?.revert();
+    };
+  }, [d.scrub, d.sceneVh, d.wireWidth, d.pulseR, d.wasteEndOpacity, d.markers, d.wireColor]);
 
   return (
     <section
