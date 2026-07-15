@@ -7,7 +7,5 @@ apps/console-charge/
 packages/config/
 packages/tokens/
 packages/ui/
-pnpm-lock.yaml
-pnpm-workspace.yaml
 _evidence/
 packages/db/migrations/meta/
