@@ -15,87 +15,90 @@ import {
 } from "lucide-react";
 import "./styles.css";
 const points = [18, 24, 21, 32, 46, 58, 71, 88, 103, 119, 128, 121, 110, 96, 82, 67, 51, 39, 28];
+
 function App() {
   return (
     <div className="page">
       <header>
-        <div className="logo">
+        <a className="logo" href="#overview" aria-label="GridEnergy GridOS home">
           GRID<span>ENERGY</span>
           <small>GridOS</small>
-        </div>
-        <nav>
-          <button className="on">
+        </a>
+        <nav aria-label="Primary navigation">
+          <button type="button" className="on" aria-current="page">
             <Home />
             Overview
           </button>
-          <button>
+          <button type="button">
             <Zap />
             Energy
           </button>
-          <button>
+          <button type="button">
             <FileText />
             Reports
           </button>
-          <button>
+          <button type="button">
             <Bell />
-            Alerts <i>1</i>
+            Alerts <i aria-label="1 unread alert">1</i>
           </button>
         </nav>
         <div className="user">
-          <button>
+          <button type="button" aria-label="Choose site, currently Porvorim Residence">
             Porvorim Residence <ChevronDown />
           </button>
-          <span>SS</span>
+          <span aria-label="Sagar Siwach profile">SS</span>
         </div>
       </header>
-      <main>
-        <div className="mock">DEMONSTRATION DATA · NOT CONNECTED TO A LIVE SYSTEM</div>
+      <main id="overview">
+        <div className="mock" role="status">
+          Demo data only <span>Not connected to a live energy system</span>
+        </div>
         <section className="welcome">
           <div>
-            <p>SUNDAY · 13 JULY</p>
+            <p>Demo snapshot · Sunday, 13 July</p>
             <h1>
               Your home is running
               <br />
               <em>mostly on sunlight.</em>
             </h1>
-            <span>Last reading 2 minutes ago · Mock freshness</span>
+            <span>Illustrative reading from 2 minutes ago</span>
           </div>
-          <div className="health">
+          <div className="health" role="status" aria-label="System health: Everything looks good">
             <ShieldCheck />
             <div>
-              <small>SYSTEM HEALTH</small>
+              <small>System health</small>
               <b>Everything looks good</b>
             </div>
           </div>
         </section>
-        <section className="flow">
+        <section className="flow" aria-label="Current energy flow">
           <div className="source solar">
             <Sun />
-            <small>SOLAR NOW</small>
+            <small>Solar now</small>
             <b>
               8.2 <em>kW</em>
             </b>
             <span>Generating</span>
           </div>
-          <div className="rail">
+          <div className="rail" aria-hidden="true">
             <span />
             <i>→</i>
           </div>
           <div className="home">
             <Home />
-            <small>HOME LOAD</small>
+            <small>Home load</small>
             <b>
               5.7 <em>kW</em>
             </b>
             <span>69% from solar</span>
           </div>
-          <div className="rail">
+          <div className="rail" aria-hidden="true">
             <span />
             <i>→</i>
           </div>
           <div className="source battery">
             <BatteryMedium />
-            <small>BATTERY</small>
+            <small>Battery</small>
             <b>
               78<em>%</em>
             </b>
@@ -106,7 +109,7 @@ function App() {
           <article className="chart">
             <div className="head">
               <div>
-                <small>TODAY'S GENERATION</small>
+                <small>Today's generation</small>
                 <h2>
                   31.8 <em>kWh</em>
                 </h2>
@@ -120,9 +123,18 @@ function App() {
                 </span>
               </div>
             </div>
-            <div className="bars">
+            <div
+              className="bars"
+              role="img"
+              aria-label="Solar generation rises from 6 AM, peaks near noon, and declines toward 6 PM"
+            >
               {points.map((p, i) => (
-                <i key={i} style={{ height: `${p}px` }} className={i === 10 ? "peak" : ""} />
+                <i
+                  key={`${p}-${i}`}
+                  aria-hidden="true"
+                  style={{ height: `${p}px` }}
+                  className={i === 10 ? "peak" : ""}
+                />
               ))}
             </div>
             <div className="axis">
@@ -133,9 +145,15 @@ function App() {
           </article>
           <article className="impact">
             <Leaf />
-            <small>ENERGY INDEPENDENCE</small>
+            <small>Energy independence</small>
             <strong>86%</strong>
-            <div>
+            <div
+              role="progressbar"
+              aria-label="Energy independence"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={86}
+            >
               <span style={{ width: "86%" }} />
             </div>
             <p>Most of today's consumption came from your solar and battery system.</p>
@@ -154,20 +172,20 @@ function App() {
               </div>
             </dl>
           </article>
-          <article className="alert">
+          <article className="alert" aria-labelledby="reserve-alert-title">
             <Bell />
             <div>
-              <small>ONE ITEM NEEDS ATTENTION</small>
-              <h3>Battery reserve is set to 20%</h3>
+              <small>Needs attention</small>
+              <h3 id="reserve-alert-title">Battery reserve is set to 20%</h3>
               <p>Your evening reserve is lower than the suggested mock profile.</p>
-              <button>Review setting →</button>
+              <button type="button">Review setting <span aria-hidden="true">→</span></button>
             </div>
           </article>
         </section>
       </main>
       <footer>
         <span>GridOS customer portal · isolated from internal operations</span>
-        <button>
+        <button type="button">
           <Settings />
           Preferences
         </button>
