@@ -11,7 +11,7 @@
   },
   "files": ["src", "tailwind.config.ts"],
   "scripts": {
-    "lint": "biome check src",
+    "lint": "oxlint src",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

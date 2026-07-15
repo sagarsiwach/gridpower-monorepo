@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>GridEnergy Website — Technical & Strategic Audit</title>
+<style>
+  :root{
+    --red:#DD0026;            /* GridRed */
+    --red-deep:#A8001D;
+    --red-soft:#FBE9EC;
+    --ink:#1B1C17;            /* olive-black */
+    --ink-2:#3C3E34;
+    --body:#4A4C40;
+    --muted:#7C7E70;
+    --faint:#9D9E92;
+    --page:#F6F6F1;           /* faint-olive off-white, not cream */
+    --card:#FFFFFF;
+    --hair:#E4E4DA;
+    --hair-2:#D2D3C6;
+    --olive:#6B6E4E;
+    --olive-soft:#EEEFE4;
+    --amber:#9A6400;
+    --amber-soft:#FBF0DB;
+    --slate:#4C5560;
+    --slate-soft:#EBEEF1;
+    --green:#3E6B43;
+    --green-soft:#E7F0E6;
+    --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Inter",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;font-family:var(--sans);color:var(--ink);background:var(--page);
+    font-size:10.5pt;line-height:1.5;font-feature-settings:"ss01","cv05";
+    -webkit-font-smoothing:antialiased;
+  }
+  @page{ size:A4; margin:16mm 0 16mm 0; }
+  .sheet{ max-width:184mm; margin:0 auto; padding:0 14mm; }
+  h1,h2,h3,h4{margin:0;letter-spacing:-0.02em;text-wrap:balance;line-height:1.12;}
+  p{margin:0 0 9px;}
+  .mono{font-family:var(--mono);}
+  .up{text-transform:uppercase;letter-spacing:0.10em;}
+
+  /* ---------- cover ---------- */
+  .cover{
+    height:265mm;display:flex;flex-direction:column;justify-content:space-between;
+    padding:22mm 14mm 18mm;page-break-after:always;position:relative;
+    background:
+      radial-gradient(120% 80% at 100% 0%, #fff 0%, var(--page) 55%),
+      linear-gradient(180deg, #fff, var(--page));
+    border-top:5px solid var(--red);
+  }
+  .cover .mark{display:flex;align-items:center;gap:9px;}
+  .cover .dot{width:13px;height:13px;border-radius:3px;background:var(--red);transform:rotate(45deg);}
+  .cover .brand{font-weight:700;font-size:13.5pt;letter-spacing:-0.02em;}
+  .cover .brand span{color:var(--red);}
+  .cover h1{font-size:38pt;font-weight:700;letter-spacing:-0.035em;margin-top:6px;max-width:15ch;}
+  .cover .sub{font-size:13pt;color:var(--body);max-width:46ch;margin-top:14px;line-height:1.45;}
+  .verdict{
+    margin-top:26px;display:inline-flex;flex-direction:column;gap:2px;
+    border:1px solid var(--hair-2);background:var(--card);border-radius:14px;padding:16px 20px;max-width:62%;
+  }
+  .verdict .k{font-family:var(--mono);font-size:8pt;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+  .verdict .v{font-size:20pt;font-weight:700;letter-spacing:-0.02em;}
+  .verdict .v b{color:var(--red);}
+  .meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--hair);}
+  .meta-grid div{padding:11px 0;border-bottom:1px solid var(--hair);}
+  .meta-grid .k{font-family:var(--mono);font-size:7.6pt;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+  .meta-grid .val{font-size:10pt;color:var(--ink);margin-top:2px;}
+
+  /* ---------- section chrome ---------- */
+  .sec{padding-top:13mm;}
+  .kic{font-family:var(--mono);font-size:8pt;color:var(--red);text-transform:uppercase;letter-spacing:0.12em;font-weight:600;}
+  h2.title{font-size:20pt;font-weight:700;margin-top:5px;letter-spacing:-0.03em;}
+  .lede{font-size:11pt;color:var(--body);max-width:64ch;margin-top:8px;}
+  h3.sub{font-size:12.5pt;font-weight:650;margin-top:20px;letter-spacing:-0.02em;}
+  .rule{height:1px;background:var(--hair);margin:9px 0 0;}
+
+  /* ---------- scorecard ---------- */
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:9.6pt;}
+  th{font-family:var(--mono);font-size:7.6pt;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);text-align:left;font-weight:600;padding:7px 9px;border-bottom:1.5px solid var(--hair-2);}
+  td{padding:8px 9px;border-bottom:1px solid var(--hair);vertical-align:top;}
+  tr{break-inside:avoid;}
+  td.dim{font-weight:600;color:var(--ink);white-space:nowrap;}
+  .bar{display:inline-block;height:7px;border-radius:4px;background:var(--red);vertical-align:middle;}
+  .bartrack{display:inline-block;width:74px;height:7px;border-radius:4px;background:var(--hair);vertical-align:middle;margin-right:7px;overflow:hidden;}
+  .score{font-family:var(--mono);font-weight:600;font-size:9pt;}
+
+  /* ---------- pills ---------- */
+  .pill{display:inline-block;font-family:var(--mono);font-size:7.4pt;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;padding:2.5px 7px;border-radius:999px;white-space:nowrap;}
+  .p0{background:var(--red-soft);color:var(--red-deep);}
+  .p1{background:var(--amber-soft);color:var(--amber);}
+  .p2{background:var(--slate-soft);color:var(--slate);}
+  .ok{background:var(--green-soft);color:var(--green);}
+
+  /* ---------- finding card ---------- */
+  .find{background:var(--card);border:1px solid var(--hair);border-radius:13px;padding:15px 17px;margin-top:12px;break-inside:avoid;}
+  .find .top{display:flex;align-items:center;gap:9px;margin-bottom:6px;}
+  .find .id{font-family:var(--mono);font-size:8.5pt;color:var(--muted);font-weight:600;}
+  .find h4{font-size:11.5pt;font-weight:650;letter-spacing:-0.015em;flex:1;}
+  .find p{font-size:9.8pt;color:var(--body);margin:5px 0;}
+  .find .lbl{font-family:var(--mono);font-size:7.6pt;text-transform:uppercase;letter-spacing:0.07em;color:var(--olive);font-weight:600;margin-top:9px;}
+  .ev{font-family:var(--mono);font-size:8.4pt;background:#FAFAF6;border:1px solid var(--hair);border-radius:8px;padding:8px 10px;margin-top:5px;color:var(--ink-2);white-space:pre-wrap;line-height:1.5;}
+  .ev b{color:var(--red-deep);}
+  .fix{font-size:9.8pt;color:var(--ink-2);margin-top:7px;border-left:0;}
+  .fix b{color:var(--ink);}
+
+  ul.clean{margin:6px 0 0;padding-left:18px;}
+  ul.clean li{margin:3px 0;font-size:9.8pt;color:var(--body);}
+  .callout{background:var(--olive-soft);border:1px solid #DADCC6;border-radius:12px;padding:14px 16px;margin-top:14px;break-inside:avoid;}
+  .callout .k{font-family:var(--mono);font-size:7.8pt;text-transform:uppercase;letter-spacing:0.08em;color:var(--olive);font-weight:700;}
+  .callout p{font-size:10pt;color:var(--ink-2);margin:6px 0 0;}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px;}
+  .box{background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:13px 15px;break-inside:avoid;}
+  .box h4{font-size:10.5pt;font-weight:650;}
+  .box p{font-size:9.6pt;color:var(--body);margin-top:5px;}
+
+  .road{counter-reset:step;margin-top:12px;}
+  .step{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--hair);break-inside:avoid;}
+  .step .n{font-family:var(--mono);font-weight:700;font-size:12pt;color:var(--red);}
+  .step h4{font-size:11pt;font-weight:650;}
+  .step p{font-size:9.6pt;color:var(--body);margin-top:3px;}
+  .step .tag{font-family:var(--mono);font-size:7.4pt;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;}
+
+  .foot{margin-top:16mm;padding-top:8px;border-top:1px solid var(--hair);font-family:var(--mono);font-size:7.6pt;color:var(--faint);display:flex;justify-content:space-between;}
+  .pb{page-break-before:always;}
+  .avoid{break-inside:avoid;}
+  small.note{color:var(--muted);font-size:8.6pt;}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div>
+    <div class="mark"><span class="dot"></span><span class="brand">Grid<span>Energy</span></span></div>
+    <div class="kic" style="margin-top:30px;">Internal · Engineering &amp; Strategy</div>
+    <h1>Website Audit &amp; Readiness Review</h1>
+    <p class="sub">A ground-truth audit of the GridEnergy standalone marketing site: build stage, content integrity, code health, and whether the current architecture serves an enterprise energy-storage buyer.</p>
+
+    <div class="verdict">
+      <span class="k">Headline verdict</span>
+      <span class="v">Strong foundation, <b>not shippable</b></span>
+      <span class="k" style="margin-top:6px;">Shippable completion ≈ 30% · 3 launch-blockers open</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="meta-grid">
+      <div><div class="k">Subject</div><div class="val">gridenergy.co.in · apps/www</div></div>
+      <div><div class="k">Stack</div><div class="val">React Router 7 · Bun · Cloudflare SSG</div></div>
+      <div><div class="k">Branch</div><div class="val mono">sagar/gridenergy-standalone-site</div></div>
+      <div><div class="k">Head commit</div><div class="val mono">fa6b2ec</div></div>
+      <div><div class="k">Routes registered</div><div class="val">48 public · 26 internal</div></div>
+      <div><div class="k">Date</div><div class="val">09 June 2026</div></div>
+    </div>
+    <div class="foot">
+      <span>GridEnergy — a brand of DeltaEV Mobility Private Limited</span>
+      <span>Audit · v1</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXEC SUMMARY ============ -->
+<div class="sheet">
+<section class="sec">
+  <div class="kic">01 · Executive summary</div>
+  <h2 class="title">Where the site actually stands</h2>
+  <p class="lede">The engineering scaffold is real and the honesty discipline on page bodies is genuinely good. But the site renders unverified specs in its own navigation, ships 22 blank pages as live routes, and has no working lead capture. By route count it reads ~54% done; by shippable reality it is closer to <b>30%</b>.</p>
+
+  <div class="two">
+    <div class="box">
+      <h4 style="color:var(--green)">What is solid</h4>
+      <ul class="clean">
+        <li>Two reference-grade templates locked: <span class="mono">/solutions/homes/apartment</span> and <span class="mono">/products/nano</span>.</li>
+        <li>Type-check passes clean (<span class="mono">tsc --noEmit</span>, exit 0).</li>
+        <li>Strong gating discipline in page bodies: <b>129</b> <span class="mono">&lt;Gated&gt;</span> guards across 25 files. No fabricated numbers ship as fact in content.</li>
+        <li>Configurator is honest by construction: never outputs price, payback, or kWh.</li>
+        <li>Active footer is correct: legal entity <b>DeltaEV Mobility Private Limited</b>, no public GridPower leak.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4 style="color:var(--red-deep)">What is broken</h4>
+      <ul class="clean">
+        <li><b>The active nav fabricates.</b> GlobalHeader + MobileSiteNav render unverified kWh bands and dead SKU names (Atlas-01, FlexCube 500SL) as plain menu copy on every page.</li>
+        <li><b>22 live routes are blank stubs</b> (<span class="mono">return null</span>) that 200 under a fabricated-spec header. Worse than a 404.</li>
+        <li><b>No lead capture.</b> Contact, sign-in, configure all theatre. Backend 0%.</li>
+        <li><b>Copy discipline breached site-wide</b> (em dashes in titles, descriptions, body).</li>
+        <li><b>No robots.txt, no sitemap.xml, zero OG tags.</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="k">The one thing to internalise</span>
+    <p>Route count is the wrong progress metric here. 19 of the 22 missing pages are clones of an <em>as-yet-unvalidated</em> template, and the highest-severity defect (fabricated nav) sits in two files that touch every page. Fix the cross-cutting defects and validate one enterprise spoke before mass-producing the rest.</p>
+  </div>
+</section>
+
+<!-- ============ SCORECARD ============ -->
+<section class="sec avoid">
+  <div class="kic">02 · Scorecard</div>
+  <h2 class="title">Readiness by dimension</h2>
+  <p class="lede">Eleven dimensions, scored against what an enterprise energy-storage buyer expects to land on, not against a personal-project bar.</p>
+
+  <table>
+    <thead><tr><th>Dimension</th><th style="width:130px">Score</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Information architecture</td><td><span class="bartrack"><span class="bar" style="width:44px"></span></span><span class="score">6.0</span></td><td>Locked hub-and-spoke, but segmented for retail, not enterprise procurement.</td></tr>
+      <tr><td class="dim">Design system / kit</td><td><span class="bartrack"><span class="bar" style="width:52px"></span></span><span class="score">7.0</span></td><td>Coherent token system, two gold templates, disciplined inline-style house style.</td></tr>
+      <tr><td class="dim">Route completeness</td><td><span class="bartrack"><span class="bar" style="width:26px"></span></span><span class="score">3.5</span></td><td>2 gold + ~19 unlocked drafts + 22 blank stubs + 4 superseded.</td></tr>
+      <tr><td class="dim">Content integrity — bodies</td><td><span class="bartrack"><span class="bar" style="width:60px"></span></span><span class="score">8.0</span></td><td>Gating is real and consistent. This is the project's strongest asset.</td></tr>
+      <tr><td class="dim">Content integrity — chrome</td><td><span class="bartrack"><span class="bar" style="width:15px"></span></span><span class="score">2.0</span></td><td>Nav renders unverified specs + dead SKUs ungated, on every page.</td></tr>
+      <tr><td class="dim">Copy discipline</td><td><span class="bartrack"><span class="bar" style="width:30px"></span></span><span class="score">4.0</span></td><td>Em-dash ban breached systemically; "container" phrasing creeps in.</td></tr>
+      <tr><td class="dim">Code health / build</td><td><span class="bartrack"><span class="bar" style="width:60px"></span></span><span class="score">8.0</span></td><td>tsc clean, dev server green, prerender model sound.</td></tr>
+      <tr><td class="dim">Component hygiene</td><td><span class="bartrack"><span class="bar" style="width:22px"></span></span><span class="score">3.0</span></td><td>3 competing headers, 4 footers, multiple menu systems; legacy ones leak GridPower.</td></tr>
+      <tr><td class="dim">Backend / lead capture</td><td><span class="bartrack"><span class="bar" style="width:4px"></span></span><span class="score">0.5</span></td><td>Nothing persists. The site's entire purpose is unfulfilled.</td></tr>
+      <tr><td class="dim">SEO / crawl / share</td><td><span class="bartrack"><span class="bar" style="width:22px"></span></span><span class="score">3.0</span></td><td>No robots, no sitemap, no OG; partial meta-description coverage.</td></tr>
+      <tr><td class="dim">Enterprise-readiness</td><td><span class="bartrack"><span class="bar" style="width:22px"></span></span><span class="score">3.0</span></td><td>No proof, no procurement surface (warranty/O&amp;M/financing/case studies).</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:10px;font-size:9.4pt;color:var(--muted)">Weighted overall: <b style="color:var(--ink)">≈ 4.2 / 10</b>. The spread is the story: craft and honesty are high, but the surfaces a buyer actually transacts on (nav, lead capture, proof) are the lowest-scoring.</p>
+</section>
+
+<!-- ============ METHOD ============ -->
+<section class="sec avoid">
+  <div class="kic">03 · Method &amp; evidence base</div>
+  <h2 class="title">How this was verified</h2>
+  <p class="lede">Findings below are grounded in the codebase as of commit <span class="mono">fa6b2ec</span>, not in the project's own status docs. Every claim cites a file and line.</p>
+  <ul class="clean">
+    <li><b>Static scan</b> of all 74 route files + component tree for banned terms, fabricated specs, and dead SKU names.</li>
+    <li><b>Chrome trace</b> of <span class="mono">root.tsx</span> to confirm which header/footer/nav are actually wired site-wide (vs the legacy variants that only appear in previews).</li>
+    <li><b>Build verification</b>: <span class="mono">bunx tsc --noEmit</span> → exit 0, zero errors. Dev server live on :5180, all routes 200.</li>
+    <li><b>Live render check</b> of a stub route to confirm blank-body-under-header behaviour.</li>
+    <li><b>Asset existence</b> check on mega-menu image references; <b>SEO</b> file presence (robots/sitemap/OG).</li>
+  </ul>
+</section>
+
+<!-- ============ P0 FINDINGS ============ -->
+<section class="sec pb">
+  <div class="kic">04 · Findings — launch blockers</div>
+  <h2 class="title">P0 · must fix before any public exposure</h2>
+
+  <div class="find">
+    <div class="top"><span class="pill p0">P0</span><span class="id">F-01</span><h4>The site fabricates specs in its own navigation</h4></div>
+    <p>The wired desktop header (<span class="mono">GlobalHeader.tsx</span>) and mobile nav (<span class="mono">MobileSiteNav.tsx</span>) render unverified capacity bands and discontinued product names as plain mega-menu copy. The file's own header comment admits the numbers are not verified. The <span class="mono">&lt;Gated&gt;</span> guard that protects page bodies was never applied to the chrome, so these appear on <em>every</em> public page.</p>
+    <div class="lbl">Evidence — components/site/GlobalHeader.tsx</div>
+    <div class="ev">42:  (payback months, kWh, deployment counts). These are <b>NOT verified</b>...
+128: name: "Apartment ESS", sub: "<b>3–7 kWh · single phase</b>"
+157: name: "Large campus", sub: "<b>500 kWh+ · multi-feeder</b>"
+136: label: "Datasheet · <b>Atlas-01</b>", meta: "Placeholder · verify"
+167: title: "<b>FlexCube 500SL</b>", bullets: ["500 kWh containerised", ...]</div>
+    <p class="fix"><b>Fix:</b> Replace all sub-labels with audience names only (no kWh), delete Atlas-01 / FlexCube SKUs, map every tile to the canonical Nano / Micro / Mega / Giga classes. Mirror the same data object in MobileSiteNav. No number enters the nav unless it is sourced.</p>
+  </div>
+
+  <div class="find">
+    <div class="top"><span class="pill p0">P0</span><span class="id">F-02</span><h4>22 live routes are blank pages under a fabricated header</h4></div>
+    <p>Every spoke and the micro/mega/giga product pages are 3-line stubs (<span class="mono">return null</span>) that the router serves as 200. A buyer who clicks a mega-menu tile lands on an empty body beneath a nav full of unverified specs. This is worse than a 404, which at least signals "not here yet".</p>
+    <div class="lbl">Evidence — live render of a registered route</div>
+    <div class="ev">$ curl localhost:5180/solutions/homes/<b>small-home</b>  → 200, empty &lt;main&gt;
+src/routes/solutions/small-home.tsx  → 3 lines, <b>return null</b>
+(+ 21 more: large-home, factory, data-center, hospital, hotel, micro, mega, giga, …)</div>
+    <p class="fix"><b>Fix:</b> Either (a) build the pages, or (b) until built, remove their links from nav and route them through the catch-all so they render an honest "coming soon" rather than a blank 200. Do not ship a menu that links to nothing.</p>
+  </div>
+
+  <div class="find">
+    <div class="top"><span class="pill p0">P0</span><span class="id">F-03</span><h4>No lead capture — the site cannot do its one job</h4></div>
+    <p>Contact, sign-in, and configure validate client-side and show honest pending states, but nothing is persisted. A storage brand whose "book a free site survey" goes nowhere is a brochure, not a funnel. Backend is at 0%.</p>
+    <div class="lbl">Evidence</div>
+    <div class="ev">configure.tsx:5  "this NEVER fabricates price... collects qualitative answers" — but has nowhere to send them
+No POST handler / action / persistence in contact.tsx, sign-in.tsx, configure.tsx
+Tracked: Linear SAG-3350</div>
+    <p class="fix"><b>Fix:</b> Wire a minimal submission path (Cloudflare Worker + form action → email/DB) for the survey/contact form. This is the highest-ROI single task on the project; everything else markets toward a dead end without it.</p>
+  </div>
+</section>
+
+<!-- ============ P1 FINDINGS ============ -->
+<section class="sec">
+  <h2 class="title" style="margin-top:6px">P1 · fix before launch, not blocking internal review</h2>
+
+  <div class="find">
+    <div class="top"><span class="pill p1">P1</span><span class="id">F-04</span><h4>Em-dash ban breached across titles, descriptions, and body copy</h4></div>
+    <p>The house rule forbids em dashes (and <span class="mono">--</span>). The <span class="mono">--</span> rule holds (0 hits), but em dashes appear in page titles, meta descriptions, and prose site-wide — the exact user-facing surfaces the rule targets.</p>
+    <div class="lbl">Evidence — representative, not exhaustive</div>
+    <div class="ev">platform.tsx:42  title: "GridOS <b>—</b> the software layer <b>—</b> GridEnergy"
+HomeFoundation.tsx:36  description: "...the GridOS software that runs it <b>—</b> for homes..."
+contact.tsx:221  "No call required to qualify <b>—</b> share your details..."
+support.tsx:85  "...the issue is app-side <b>—</b> try reinstalling."
+Scan: 786 occurrences across 132 files (incl. comments; copy leakage confirmed in spot-check)</div>
+    <p class="fix"><b>Fix:</b> Either enforce the rule with a lint/codemod pass over JSX text + meta strings (replace with comma/colon/period/parens), or formally relax the rule. As written, it is being violated wholesale, which means it is effectively not a rule. Decide one way.</p>
+  </div>
+
+  <div class="find">
+    <div class="top"><span class="pill p1">P1</span><span class="id">F-05</span><h4>Component sprawl: 3 headers, 4 footers, legacy GridPower leaks</h4></div>
+    <p>The active chrome is clean-ish, but the tree carries multiple superseded headers/footers/menus. They are only referenced by <span class="mono">/preview</span> and <span class="mono">/system</span> today, so they do not ship — but they still contain "© 2026 GridPower" and dead SKUs, and any accidental rewire re-leaks the dropped brand.</p>
+    <div class="lbl">Evidence</div>
+    <div class="ev">ACTIVE: GlobalHeader + MobileSiteNav + SiteFooter (root.tsx)
+LEGACY (preview-only): SiteHeader.tsx ("Also from GridPower"), MainNav.tsx,
+  footer/Footer.tsx, menus/footer/FooterFourCol.tsx ("(c) 2026 GridPower"), FooterUltraRich.tsx
+45 GridPower mentions total; public-surface leaks are confined to legacy + /system showcases</div>
+    <p class="fix"><b>Fix:</b> Pick the canonical header/footer/menu set, move the rest to an explicit <span class="mono">_legacy/</span> or delete. Reduces leak surface and the "which footer is real?" tax on every future change.</p>
+  </div>
+
+  <div class="find">
+    <div class="top"><span class="pill p1">P1</span><span class="id">F-06</span><h4>No crawl or share infrastructure</h4></div>
+    <p>No <span class="mono">robots.txt</span>, no <span class="mono">sitemap.xml</span>, and zero Open Graph / Twitter tags across the site. Meta descriptions exist on ~38 surfaces but several "covered" routes are blank stubs. For a marketing site, share previews and crawlability are table stakes.</p>
+    <div class="lbl">Evidence</div>
+    <div class="ev">public/robots.txt  → absent
+public/sitemap.xml → absent
+grep og:image|og:title across src → <b>0</b> hits
+description meta: 38 files of 49 page routes (some are 3-line stubs)</div>
+    <p class="fix"><b>Fix:</b> Generate sitemap at build (route manifest already exists), add robots, add a default OG image + per-route og:title/description in root meta. One afternoon of work.</p>
+  </div>
+
+  <div class="find">
+    <div class="top"><span class="pill p1">P1</span><span class="id">F-07</span><h4>"Container" phrasing creeps toward the banned product name</h4></div>
+    <p>Product names are locked to Nano / Micro / Mega / Giga, never "Container". The class pages use "containerised" / "multi-container" as descriptors. Defensible as form-factor language, but it sits one careless edit away from the banned noun and muddies the naming system.</p>
+    <div class="lbl">Evidence — routes/products/index.tsx</div>
+    <div class="ev">76: "A <b>containerised</b> or room-scale system for factories..."
+87: "A <b>multi-container</b> grid-scale system for power parks..."</div>
+    <p class="fix"><b>Fix:</b> Keep if intentional, but add a copy note so it is a deliberate descriptor, not drift. Never let "Container" become a tile label or product title.</p>
+  </div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="sec avoid">
+  <h2 class="title" style="margin-top:6px">P2 · quality &amp; polish</h2>
+  <div class="two">
+    <div class="box"><h4>Superseded audience pages</h4><p>4 hubs (offices-industrial, institutes, enterprises, hospitality) predate the locked hub/spoke model and need rebuilding from the template. Currently live and inconsistent with /solutions/homes.</p></div>
+    <div class="box"><h4>Homepage is a foundation, not a page</h4><p><span class="mono">/</span> renders chrome + section scaffolding only. For an enterprise buyer this is the first and sometimes only surface; it needs a real narrative and proof.</p></div>
+    <div class="box"><h4>Legal pages inherited, unreviewed</h4><p>privacy / terms / cookies / disclaimer / warranty are short and unverified. A warranty page that states terms you cannot honour is a liability, not a placeholder.</p></div>
+    <div class="box"><h4>Gating has no source-of-truth backlog</h4><p>129 gates is good discipline, but there is no owned list of <em>what number fills each gate and where it comes from</em>. Gates with no plan to resolve become permanent vaporware.</p></div>
+  </div>
+</section>
+
+<!-- ============ STRATEGIC DEBATE ============ -->
+<section class="sec pb">
+  <div class="kic">05 · The strategic question</div>
+  <h2 class="title">"Enterprise grid website" — is the architecture even right?</h2>
+  <p class="lede">You framed this as an enterprise grid site. That reframe matters, because the current IA is built for a retail reader, and three things would change if enterprise is the real primary buyer.</p>
+
+  <div class="callout">
+    <span class="k">The core tension</span>
+    <p>The IA is segmented by <em>who you are</em> — homes, offices, institutes, enterprises, hospitality: 5 audiences, 20 spokes. That is a retail map. An enterprise/industrial storage buyer navigates by <em>load profile, product class, and procurement risk</em> — uptime, warranty, financing, O&amp;M, references. Today there are 20 consumer-shaped spokes and only 4 product pages. For enterprise, that ratio is backwards.</p>
+  </div>
+
+  <h3 class="sub">Three consequences if enterprise is primary</h3>
+  <table>
+    <thead><tr><th style="width:34%">Decision point</th><th>Retail build (current)</th><th>Enterprise build (if you pivot)</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Primary nav axis</td><td>Audience segment (apartment vs hostel vs hotel)</td><td>Load / product class (Micro · Mega · Giga) + use-case</td></tr>
+      <tr><td class="dim">Depth investment</td><td>20 thin audience spokes</td><td>3–4 deep product pages with real datasheets</td></tr>
+      <tr><td class="dim">Proof surface</td><td>Outcome cards, gated numbers</td><td>Case studies, warranty terms, O&amp;M SLAs, financing, references</td></tr>
+      <tr><td class="dim">Conversion</td><td>Book a free site survey</td><td>Request a proposal / RFP response / talk to engineering</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub">My read</h3>
+  <ul class="clean">
+    <li><b>Don't mass-produce yet.</b> 19 of the 22 pending pages clone an unvalidated template. If the audience axis is wrong for enterprise, you'd be cloning the wrong page 19 times.</li>
+    <li><b>Validate one enterprise spoke end-to-end first</b> — <span class="mono">factory</span> or <span class="mono">data-center</span> — with real objection handling, before any clone run. Prove the convincer, then assembly-line it.</li>
+    <li><b>The gating discipline becomes a liability at enterprise scale.</b> A buyer evaluating a 500 kWh+ purchase will not accept an all-placeholder spec sheet. Gates are honest, but enterprise needs them <em>filled with sourced numbers</em> — which is a content/ops problem nobody currently owns.</li>
+    <li><b>If you stay retail/SMB</b>, the current IA is fine and the move is simply: fix F-01/F-02/F-03, then fill the stubs. The decision gates everything downstream.</li>
+  </ul>
+
+  <div class="callout" style="background:var(--red-soft);border-color:#F1C9CF;">
+    <span class="k" style="color:var(--red-deep)">Decision needed before more building</span>
+    <p>Who is the primary buyer — SMB/consumer across 5 segments, or enterprise/industrial by product class? "Fill the 22 stubs" is the right next move for the first answer; "restructure the IA around product class + proof" is the right move for the second. Building more pages before answering this risks 19 well-crafted pages aimed at the wrong reader.</p>
+  </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section class="sec pb">
+  <div class="kic">06 · Remediation roadmap</div>
+  <h2 class="title">Sequenced, not just listed</h2>
+  <p class="lede">Ordered by leverage. The first three are cross-cutting fixes that touch every page; do them before any per-page work, because per-page work multiplies whatever state they're in.</p>
+
+  <div class="road">
+    <div class="step"><div class="n">1</div><div><span class="tag">P0 · ~½ day · cross-cutting</span><h4>De-fabricate the nav</h4><p>Strip kWh bands + dead SKUs from GlobalHeader &amp; MobileSiteNav; map tiles to Nano/Micro/Mega/Giga. Removes the single highest-severity defect from every page at once.</p></div></div>
+    <div class="step"><div class="n">2</div><div><span class="tag">P0 · ~½ day · cross-cutting</span><h4>Stop serving blank routes</h4><p>Until built, unlink the 22 stubs and route them through the honest catch-all. No menu link should land on an empty 200.</p></div></div>
+    <div class="step"><div class="n">3</div><div><span class="tag">P0 · ~1–2 days</span><h4>Wire lead capture</h4><p>Worker + form action for the survey/contact form (SAG-3350). The site's purpose. Everything else markets toward this.</p></div></div>
+    <div class="step"><div class="n">4</div><div><span class="tag">Decision gate</span><h4>Confirm primary buyer</h4><p>Retail-SMB vs enterprise. This routes all subsequent page work (see §05). Do not skip.</p></div></div>
+    <div class="step"><div class="n">5</div><div><span class="tag">P1 · ~1 day</span><h4>Copy + hygiene sweep</h4><p>Em-dash codemod (or relax the rule), de-dupe legacy headers/footers, add robots + sitemap + OG.</p></div></div>
+    <div class="step"><div class="n">6</div><div><span class="tag">P1 · ~1 day</span><h4>Validate one spoke fully</h4><p>Take the buyer-correct spoke (enterprise: factory/data-center; retail: a homes spoke) to final, with real objection handling. This becomes the proven clone source.</p></div></div>
+    <div class="step"><div class="n">7</div><div><span class="tag">P2 · multi-day</span><h4>Assembly line</h4><p>Clone-and-fill the remaining spokes + product pages; rebuild the 4 superseded hubs; build a real homepage; review legal.</p></div></div>
+    <div class="step"><div class="n">8</div><div><span class="tag">Parallel ops track</span><h4>Source the gated numbers</h4><p>Owned list mapping each gate → sourced value → owner. Enterprise can't launch on placeholders.</p></div></div>
+  </div>
+
+  <div class="callout">
+    <span class="k">Critical path to "honest public soft-launch"</span>
+    <p>Steps 1 + 2 + 3 + 5 (≈ 4–5 focused days) get you to a site that is small but <em>truthful and functional</em>: clean nav, no dead ends, working lead capture, crawlable. That beats a 48-route site that fabricates in its menu and drops survey requests into the void. Ship narrow and honest before wide and broken.</p>
+  </div>
+</section>
+
+<!-- ============ ROUTE APPENDIX ============ -->
+<section class="sec pb">
+  <div class="kic">Appendix A</div>
+  <h2 class="title">Route-by-route status</h2>
+  <table>
+    <thead><tr><th>Route</th><th style="width:120px">Status</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">/</td><td><span class="pill p2">Foundation</span></td><td>Chrome + section scaffolding, no real homepage</td></tr>
+      <tr><td class="mono">/solutions</td><td><span class="pill ok">Draft</span></td><td>Index — audience carousel + grid</td></tr>
+      <tr><td class="mono">/solutions/homes</td><td><span class="pill ok">Draft</span></td><td>Hub</td></tr>
+      <tr><td class="mono">/solutions/homes/apartment</td><td><span class="pill ok">Gold</span></td><td>Reference spoke template</td></tr>
+      <tr><td class="mono">/solutions/homes/{small-home,large-home,solar-storage}</td><td><span class="pill p0">Stub</span></td><td>return null · 200 blank</td></tr>
+      <tr><td class="mono">/solutions/offices-industrial</td><td><span class="pill p1">Superseded</span></td><td>Pre-hub/spoke; rebuild</td></tr>
+      <tr><td class="mono">/solutions/offices-industrial/{small-office,mid-office,large-campus,factory}</td><td><span class="pill p0">Stub</span></td><td>blank</td></tr>
+      <tr><td class="mono">/solutions/institutes</td><td><span class="pill p1">Superseded</span></td><td>rebuild as hub</td></tr>
+      <tr><td class="mono">/solutions/institutes/{school,college,university,hostels}</td><td><span class="pill p0">Stub</span></td><td>blank</td></tr>
+      <tr><td class="mono">/solutions/enterprises</td><td><span class="pill p1">Superseded</span></td><td>rebuild as hub</td></tr>
+      <tr><td class="mono">/solutions/enterprises/{data-center,telecom,hospital,multi-site}</td><td><span class="pill p0">Stub</span></td><td>blank · enterprise-critical</td></tr>
+      <tr><td class="mono">/solutions/hospitality</td><td><span class="pill p1">Superseded</span></td><td>rebuild as hub</td></tr>
+      <tr><td class="mono">/solutions/hospitality/{hotel,resort,restaurant,mall}</td><td><span class="pill p0">Stub</span></td><td>blank</td></tr>
+      <tr><td class="mono">/products</td><td><span class="pill ok">Draft</span></td><td>Range index</td></tr>
+      <tr><td class="mono">/products/nano</td><td><span class="pill ok">Gold</span></td><td>Reference product template</td></tr>
+      <tr><td class="mono">/products/{micro,mega,giga}</td><td><span class="pill p0">Stub</span></td><td>blank · enterprise-critical</td></tr>
+      <tr><td class="mono">/platform</td><td><span class="pill ok">Draft</span></td><td>GridOS</td></tr>
+      <tr><td class="mono">/configure</td><td><span class="pill ok">Draft</span></td><td>Honest sizer; no backend</td></tr>
+      <tr><td class="mono">/about · /partners · /support · /contact · /sign-in</td><td><span class="pill ok">Draft</span></td><td>Company set; contact/sign-in have no backend</td></tr>
+      <tr><td class="mono">/app · /economics · /resources · /careers</td><td><span class="pill ok">Draft</span></td><td>Footer-linked secondary</td></tr>
+      <tr><td class="mono">/privacy · /terms · /cookies · /disclaimer · /warranty</td><td><span class="pill p2">Inherited</span></td><td>Unreviewed; legal risk on warranty</td></tr>
+      <tr><td class="mono">/system/* · /preview/*</td><td><span class="pill p2">Internal</span></td><td>26 design-system + preview routes; suppressed from public chrome</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:10px;font-size:9pt;color:var(--muted)">Counts: 2 gold · ~19 drafts · 22 stubs · 4 superseded · 5 inherited · 26 internal.</p>
+</section>
+
+<!-- ============ CONSTRAINT LEDGER ============ -->
+<section class="sec avoid">
+  <div class="kic">Appendix B</div>
+  <h2 class="title">Constraint-compliance ledger</h2>
+  <table>
+    <thead><tr><th>Rule</th><th style="width:110px">Status</th><th>Evidence</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">No fabricated numbers (bodies)</td><td><span class="pill ok">Holds</span></td><td>129 &lt;Gated&gt; guards, 25 files</td></tr>
+      <tr><td class="dim">No fabricated numbers (nav/chrome)</td><td><span class="pill p0">Breached</span></td><td>GlobalHeader/MobileSiteNav kWh + SKUs (F-01)</td></tr>
+      <tr><td class="dim">GridPower absent from public copy</td><td><span class="pill ok">Holds*</span></td><td>Active footer clean; leaks confined to legacy + /system</td></tr>
+      <tr><td class="dim">Product names Nano/Micro/Mega/Giga only</td><td><span class="pill p1">At risk</span></td><td>Dead SKUs in nav (F-01); "container" descriptors (F-07)</td></tr>
+      <tr><td class="dim">No em dashes / no --</td><td><span class="pill p1">Breached</span></td><td>786 em-dash hits; -- clean (F-04)</td></tr>
+      <tr><td class="dim">olive + GridRed + Inter, inline token styles</td><td><span class="pill ok">Holds</span></td><td>House style consistent in audited files</td></tr>
+      <tr><td class="dim">GridOS presented as live</td><td><span class="pill ok">Holds</span></td><td>platform.tsx / app.tsx</td></tr>
+      <tr><td class="dim">Configurator never fabricates price/payback</td><td><span class="pill ok">Holds</span></td><td>configure.tsx:4–5</td></tr>
+      <tr><td class="dim">Legal entity = DeltaEV Mobility Pvt Ltd</td><td><span class="pill ok">Holds</span></td><td>SiteFooter.tsx:165–167</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:9px;font-size:9pt;color:var(--muted)">* "Holds" with an asterisk: no public-surface leak today, but legacy components retain GridPower and re-leak on any rewire (F-05).</p>
+
+  <div class="foot" style="margin-top:14mm;">
+    <span>GridEnergy Website Audit · commit fa6b2ec · 09 June 2026</span>
+    <span>Confidential · internal</span>
+  </div>
+</section>
+</div>
+
+</body>
+</html>

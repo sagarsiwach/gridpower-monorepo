@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>GridEnergy — Complete Sitemap</title>
+<style>
+  :root{
+    --red:#DD0026;--red-deep:#A8001D;--red-soft:#FBE9EC;
+    --ink:#1B1C17;--ink-2:#3C3E34;--body:#4A4C40;--muted:#7C7E70;--faint:#9D9E92;
+    --page:#F6F6F1;--card:#FFFFFF;--hair:#E4E4DA;--hair-2:#D2D3C6;
+    --olive:#6B6E4E;--olive-soft:#EEEFE4;
+    --amber:#9A6400;--amber-soft:#FBF0DB;--slate:#4C5560;--slate-soft:#EBEEF1;--green:#3E6B43;--green-soft:#E7F0E6;
+    --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Inter",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--page);font-size:10.5pt;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  @page{size:A4;margin:14mm 0 14mm 0;}
+  .sheet{max-width:184mm;margin:0 auto;padding:0 14mm;}
+  h1,h2,h3,h4{margin:0;letter-spacing:-0.02em;line-height:1.12;text-wrap:balance;}
+  .mono{font-family:var(--mono);}
+
+  /* cover band */
+  .head{padding:18mm 14mm 0;}
+  .mark{display:flex;align-items:center;gap:9px;}
+  .dot{width:13px;height:13px;border-radius:3px;background:var(--red);transform:rotate(45deg);}
+  .brand{font-weight:700;font-size:13pt;letter-spacing:-0.02em;}
+  .brand span{color:var(--red);}
+  .kic{font-family:var(--mono);font-size:8pt;color:var(--red);text-transform:uppercase;letter-spacing:0.12em;font-weight:600;margin-top:22px;}
+  h1.title{font-size:30pt;font-weight:700;margin-top:5px;letter-spacing:-0.035em;}
+  .lede{font-size:11pt;color:var(--body);max-width:66ch;margin-top:9px;}
+  .metarow{display:flex;gap:26px;margin-top:16px;flex-wrap:wrap;border-top:1px solid var(--hair);padding-top:12px;}
+  .metarow div .k{font-family:var(--mono);font-size:7.4pt;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+  .metarow div .v{font-size:10pt;margin-top:2px;}
+
+  /* legend */
+  .legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .pill{display:inline-block;font-family:var(--mono);font-size:7.4pt;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;padding:2.5px 7px;border-radius:999px;white-space:nowrap;}
+  .gold{background:var(--green-soft);color:var(--green);}
+  .draft{background:var(--slate-soft);color:var(--slate);}
+  .stub{background:var(--red-soft);color:var(--red-deep);}
+  .super{background:var(--amber-soft);color:var(--amber);}
+  .inh{background:#EFEDE6;color:var(--olive);}
+  .intl{background:#ECECE4;color:var(--muted);}
+
+  /* tree */
+  .grp{margin-top:16px;break-inside:avoid;}
+  .grp-h{display:flex;align-items:baseline;gap:10px;border-bottom:1.5px solid var(--hair-2);padding-bottom:5px;}
+  .grp-h h3{font-size:13pt;font-weight:700;letter-spacing:-0.02em;}
+  .grp-h .url{font-family:var(--mono);font-size:8.5pt;color:var(--muted);}
+  .grp-h .cnt{margin-left:auto;font-family:var(--mono);font-size:8pt;color:var(--faint);}
+
+  .node{display:flex;align-items:center;gap:9px;padding:5.5px 0;border-bottom:1px solid var(--hair);break-inside:avoid;}
+  .node.l1{padding-left:0;}
+  .node.l2{padding-left:20px;}
+  .node .br{color:var(--hair-2);font-family:var(--mono);font-size:9pt;}
+  .node .path{font-family:var(--mono);font-size:9.2pt;color:var(--ink);}
+  .node.l1 .path{font-weight:600;}
+  .node.l2 .path{color:var(--ink-2);}
+  .node .desc{font-size:8.8pt;color:var(--muted);margin-left:6px;}
+  .node .sp{margin-left:auto;}
+
+  .colwrap{column-count:2;column-gap:18px;margin-top:6px;}
+  .colwrap .grp{break-inside:avoid;margin-top:0;margin-bottom:14px;}
+
+  .foot{margin-top:10mm;padding-top:8px;border-top:1px solid var(--hair);font-family:var(--mono);font-size:7.6pt;color:var(--faint);display:flex;justify-content:space-between;}
+  .pb{page-break-before:always;}
+  .summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:14px;}
+  .stat{background:var(--card);border:1px solid var(--hair);border-radius:11px;padding:10px 12px;text-align:center;}
+  .stat .n{font-size:17pt;font-weight:700;letter-spacing:-0.02em;}
+  .stat .l{font-family:var(--mono);font-size:7pt;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-top:2px;}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div class="mark"><span class="dot"></span><span class="brand">Grid<span>Energy</span></span></div>
+  <div class="kic">Complete Sitemap · gridenergy.co.in</div>
+  <h1 class="title">Site Map &amp; Route Inventory</h1>
+  <p class="lede">Every route in the GridEnergy standalone site, public and internal, with build status. Hub-and-spoke information architecture: thin index → audience hub → dense spoke.</p>
+
+  <div class="metarow">
+    <div><div class="k">Public routes</div><div class="v">48</div></div>
+    <div><div class="k">Internal routes</div><div class="v">26</div></div>
+    <div><div class="k">Stack</div><div class="v">React Router 7 · Bun · Cloudflare SSG</div></div>
+    <div><div class="k">Branch</div><div class="v mono">sagar/gridenergy-standalone-site</div></div>
+    <div><div class="k">Date</div><div class="v">09 Jun 2026</div></div>
+  </div>
+
+  <div class="summary">
+    <div class="stat"><div class="n" style="color:var(--green)">2</div><div class="l">Gold</div></div>
+    <div class="stat"><div class="n" style="color:var(--slate)">19</div><div class="l">Draft</div></div>
+    <div class="stat"><div class="n" style="color:var(--red-deep)">22</div><div class="l">Stub</div></div>
+    <div class="stat"><div class="n" style="color:var(--amber)">4</div><div class="l">Superseded</div></div>
+    <div class="stat"><div class="n" style="color:var(--olive)">5</div><div class="l">Inherited</div></div>
+    <div class="stat"><div class="n" style="color:var(--muted)">26</div><div class="l">Internal</div></div>
+  </div>
+
+  <div class="legend">
+    <span class="pill gold">Gold · template</span>
+    <span class="pill draft">Draft</span>
+    <span class="pill stub">Stub · blank</span>
+    <span class="pill super">Superseded</span>
+    <span class="pill inh">Inherited</span>
+    <span class="pill intl">Internal</span>
+  </div>
+</div>
+
+<div class="sheet">
+
+  <!-- TOP LEVEL -->
+  <div class="grp" style="margin-top:18px;">
+    <div class="grp-h"><h3>Top level</h3><span class="url">/</span></div>
+    <div class="node l1"><span class="path">/</span><span class="desc">Homepage — foundation only, no real body yet</span><span class="sp"><span class="pill super">Foundation</span></span></div>
+  </div>
+
+  <!-- SOLUTIONS -->
+  <div class="grp">
+    <div class="grp-h"><h3>Solutions</h3><span class="url">/solutions</span><span class="cnt">1 index · 5 hubs · 20 spokes</span></div>
+    <div class="node l1"><span class="path">/solutions</span><span class="desc">Thin index — audience carousel + grid</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+
+    <div class="node l1"><span class="path">/solutions/homes</span><span class="desc">Hub</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/homes/apartment</span><span class="desc">Reference spoke template</span><span class="sp"><span class="pill gold">Gold</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/homes/small-home</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/homes/large-home</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/homes/solar-storage</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+
+    <div class="node l1"><span class="path">/solutions/offices-industrial</span><span class="desc">Hub</span><span class="sp"><span class="pill super">Superseded</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/offices-industrial/small-office</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/offices-industrial/mid-office</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/offices-industrial/large-campus</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/offices-industrial/factory</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+
+    <div class="node l1"><span class="path">/solutions/institutes</span><span class="desc">Hub</span><span class="sp"><span class="pill super">Superseded</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/institutes/school</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/institutes/college</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/institutes/university</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/institutes/hostels</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+
+    <div class="node l1"><span class="path">/solutions/enterprises</span><span class="desc">Hub</span><span class="sp"><span class="pill super">Superseded</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/enterprises/data-center</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/enterprises/telecom</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/enterprises/hospital</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/enterprises/multi-site</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+
+    <div class="node l1"><span class="path">/solutions/hospitality</span><span class="desc">Hub</span><span class="sp"><span class="pill super">Superseded</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/hospitality/hotel</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/hospitality/resort</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/hospitality/restaurant</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/hospitality/mall</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+  </div>
+
+  <div class="foot"><span>GridEnergy — a brand of DeltaEV Mobility Private Limited</span><span>Sitemap · page 1</span></div>
+
+  <!-- PAGE 2 -->
+  <div class="pb"></div>
+
+  <!-- PRODUCTS -->
+  <div class="grp" style="margin-top:6px;">
+    <div class="grp-h"><h3>Products</h3><span class="url">/products</span><span class="cnt">1 index · 4 detail</span></div>
+    <div class="node l1"><span class="path">/products</span><span class="desc">Range index — Nano / Micro / Mega / Giga</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/products/nano</span><span class="desc">Reference product template · residential</span><span class="sp"><span class="pill gold">Gold</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/products/micro</span><span class="desc">Commercial</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/products/mega</span><span class="desc">Industrial</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+    <div class="node l2"><span class="br">└</span><span class="path">/products/giga</span><span class="desc">Utility / critical scale</span><span class="sp"><span class="pill stub">Stub</span></span></div>
+  </div>
+
+  <!-- PLATFORM / CONVERSION -->
+  <div class="grp">
+    <div class="grp-h"><h3>Platform &amp; conversion</h3><span class="cnt">2</span></div>
+    <div class="node l1"><span class="path">/platform</span><span class="desc">GridOS — the software layer</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l1"><span class="path">/configure</span><span class="desc">Guided sizer — honest, no fabricated price/payback</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+  </div>
+
+  <!-- COMPANY -->
+  <div class="grp">
+    <div class="grp-h"><h3>Company</h3><span class="cnt">5</span></div>
+    <div class="node l1"><span class="path">/about</span><span class="desc">DeltaEV / GridEnergy story</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l1"><span class="path">/partners</span><span class="desc">Installer program</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l1"><span class="path">/support</span><span class="desc">Help centre</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l1"><span class="path">/contact</span><span class="desc">Survey booking form — no backend yet</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l1"><span class="path">/sign-in</span><span class="desc">GridOS account — presentational</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+  </div>
+
+  <!-- FOOTER SECONDARY -->
+  <div class="grp">
+    <div class="grp-h"><h3>Footer-linked secondary</h3><span class="cnt">4</span></div>
+    <div class="node l1"><span class="path">/app</span><span class="desc">GridOS mobile showcase</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l1"><span class="path">/economics</span><span class="desc">ROI model — all figures gated</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l1"><span class="path">/resources</span><span class="desc">Guides &amp; datasheets</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="node l1"><span class="path">/careers</span><span class="desc">Roles via /contact</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+  </div>
+
+  <!-- LEGAL -->
+  <div class="grp">
+    <div class="grp-h"><h3>Legal</h3><span class="cnt">5</span></div>
+    <div class="node l1"><span class="path">/privacy</span><span class="sp"><span class="pill inh">Inherited</span></span></div>
+    <div class="node l1"><span class="path">/terms</span><span class="sp"><span class="pill inh">Inherited</span></span></div>
+    <div class="node l1"><span class="path">/cookies</span><span class="sp"><span class="pill inh">Inherited</span></span></div>
+    <div class="node l1"><span class="path">/disclaimer</span><span class="sp"><span class="pill inh">Inherited</span></span></div>
+    <div class="node l1"><span class="path">/warranty</span><span class="desc">Unreviewed — verify terms before launch</span><span class="sp"><span class="pill inh">Inherited</span></span></div>
+  </div>
+
+  <div class="foot"><span>GridEnergy — Complete Sitemap · commit fa6b2ec</span><span>Sitemap · page 2</span></div>
+
+  <!-- PAGE 3 — INTERNAL -->
+  <div class="pb"></div>
+  <div class="kic" style="color:var(--muted);margin-top:4px;">Internal · suppressed from public chrome</div>
+  <h2 style="font-size:18pt;font-weight:700;letter-spacing:-0.03em;margin-top:4px;">Internal routes</h2>
+  <p class="lede" style="font-size:10pt;">Design-system showcase and preview galleries. Live in the prototype at <span class="mono">/system</span> and <span class="mono">/preview</span>; the global header/footer are suppressed on these paths. Not part of the public site.</p>
+
+  <div class="colwrap">
+    <div class="grp">
+      <div class="grp-h"><h3>Design system</h3><span class="url">/system</span><span class="cnt">6</span></div>
+      <div class="node l1"><span class="path">/system</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/system/tokens</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/system/buttons</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/system/forms</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/system/cards</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/system/menus</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+    </div>
+
+    <div class="grp">
+      <div class="grp-h"><h3>Preview · key</h3><span class="url">/preview</span><span class="cnt">20</span></div>
+      <div class="node l1"><span class="path">/preview/review</span><span class="desc">Consolidated review hub</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/section-kit</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/all-blocks</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/solution-samples</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/solution-homes</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/modules</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/hero-card-variations</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/solutions-section-variations</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+    </div>
+
+    <div class="grp">
+      <div class="grp-h"><h3>Preview · v3 explorations</h3><span class="cnt">cont.</span></div>
+      <div class="node l1"><span class="path">/preview/v3-website</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/v3-elements</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/v3-megamenu</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/v3-megamenu-impeccable</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/v3-mobile</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/v3-elements</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/v3-solutions-components</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/v3-solutions-hero</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+    </div>
+
+    <div class="grp">
+      <div class="grp-h"><h3>Preview · early</h3><span class="cnt">cont.</span></div>
+      <div class="node l1"><span class="path">/preview</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/full-nav</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/v2-menu</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/stripe-evolve</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/preview/:slug</span><span class="desc">Dynamic variant viewer</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+      <div class="node l1"><span class="path">/* </span><span class="desc">Catch-all — header + title, never a hard 404</span><span class="sp"><span class="pill intl">Internal</span></span></div>
+    </div>
+  </div>
+
+  <div class="foot"><span>GridEnergy — Complete Sitemap · internal routes excluded from public crawl</span><span>Sitemap · page 3</span></div>
+</div>
+
+</body>
+</html>

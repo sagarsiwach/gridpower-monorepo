@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>GridEnergy — Route Content Dump</title>
+<style>
+  :root{
+    --red:#DD0026;--red-deep:#A8001D;--red-soft:#FBE9EC;
+    --ink:#1B1C17;--ink-2:#3C3E34;--body:#4A4C40;--muted:#7C7E70;--faint:#9D9E92;
+    --page:#F6F6F1;--card:#FFFFFF;--hair:#E4E4DA;--hair-2:#D2D3C6;
+    --olive:#6B6E4E;--olive-soft:#EEEFE4;
+    --amber:#9A6400;--amber-soft:#FBF0DB;--slate:#4C5560;--slate-soft:#EBEEF1;--green:#3E6B43;--green-soft:#E7F0E6;
+    --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Inter",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--page);font-size:10pt;line-height:1.48;-webkit-font-smoothing:antialiased;}
+  @page{size:A4;margin:14mm 0 14mm 0;}
+  .sheet{max-width:184mm;margin:0 auto;padding:0 14mm;}
+  h1,h2,h3,h4{margin:0;letter-spacing:-0.02em;line-height:1.12;text-wrap:balance;}
+  .mono{font-family:var(--mono);}
+
+  .head{padding:18mm 14mm 0;}
+  .mark{display:flex;align-items:center;gap:9px;}
+  .dot{width:13px;height:13px;border-radius:3px;background:var(--red);transform:rotate(45deg);}
+  .brand{font-weight:700;font-size:13pt;letter-spacing:-0.02em;}
+  .brand span{color:var(--red);}
+  .kic{font-family:var(--mono);font-size:8pt;color:var(--red);text-transform:uppercase;letter-spacing:0.12em;font-weight:600;margin-top:22px;}
+  h1.title{font-size:30pt;font-weight:700;margin-top:5px;letter-spacing:-0.035em;}
+  .lede{font-size:11pt;color:var(--body);max-width:66ch;margin-top:9px;}
+  .metarow{display:flex;gap:26px;margin-top:16px;flex-wrap:wrap;border-top:1px solid var(--hair);padding-top:12px;}
+  .metarow div .k{font-family:var(--mono);font-size:7.4pt;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+  .metarow div .v{font-size:10pt;margin-top:2px;}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:7pt;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;padding:2px 6px;border-radius:999px;white-space:nowrap;}
+  .gold{background:var(--green-soft);color:var(--green);}
+  .draft{background:var(--slate-soft);color:var(--slate);}
+  .stub{background:var(--red-soft);color:var(--red-deep);}
+  .super{background:var(--amber-soft);color:var(--amber);}
+  .inh{background:#EFEDE6;color:var(--olive);}
+
+  .sech{font-family:var(--mono);font-size:8pt;color:var(--red);text-transform:uppercase;letter-spacing:0.12em;font-weight:600;margin-top:20px;border-top:2px solid var(--hair-2);padding-top:9px;}
+
+  .route{background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:13px 15px;margin-top:11px;break-inside:avoid;}
+  .route .rh{display:flex;align-items:center;gap:9px;margin-bottom:3px;}
+  .route .path{font-family:var(--mono);font-size:10.5pt;font-weight:600;color:var(--ink);}
+  .route .sp{margin-left:auto;}
+  .route .role{font-size:9.6pt;color:var(--body);margin:4px 0 8px;}
+  .route .role b{color:var(--ink);}
+  .lbl{font-family:var(--mono);font-size:7.2pt;text-transform:uppercase;letter-spacing:0.07em;color:var(--olive);font-weight:600;margin-top:7px;margin-bottom:3px;}
+  ul.secs{margin:0;padding-left:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:1px 16px;}
+  ul.secs li{font-size:8.9pt;color:var(--ink-2);padding:1.5px 0;position:relative;padding-left:12px;}
+  ul.secs li::before{content:"›";position:absolute;left:0;color:var(--red);font-weight:700;}
+  ul.secs.one{grid-template-columns:1fr;}
+  .cta{font-size:8.9pt;color:var(--muted);margin-top:6px;}
+  .cta b{color:var(--ink-2);font-weight:600;}
+  .note{font-size:8.6pt;color:var(--muted);margin-top:5px;font-style:italic;}
+
+  .clones{background:var(--olive-soft);border:1px solid #DADCC6;border-radius:12px;padding:12px 15px;margin-top:11px;break-inside:avoid;}
+  .clones h4{font-size:10.5pt;font-weight:650;}
+  .clones p{font-size:9.2pt;color:var(--ink-2);margin:5px 0 0;}
+  .clones .mono{font-size:8.6pt;}
+
+  .foot{margin-top:9mm;padding-top:8px;border-top:1px solid var(--hair);font-family:var(--mono);font-size:7.6pt;color:var(--faint);display:flex;justify-content:space-between;}
+  .pb{page-break-before:always;}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div class="mark"><span class="dot"></span><span class="brand">Grid<span>Energy</span></span></div>
+  <div class="kic">Route Content Reference · gridenergy.co.in</div>
+  <h1 class="title">What Every Route Contains</h1>
+  <p class="lede">Page-by-page content map of the GridEnergy site: each route's job, its real section structure (pulled from the live code), its conversion endpoint, and build status. Section names below are verbatim from the pages.</p>
+  <div class="metarow">
+    <div><div class="k">Source</div><div class="v mono">commit fa6b2ec</div></div>
+    <div><div class="k">Voice</div><div class="v">Honest, specific; numbers gated until sourced</div></div>
+    <div><div class="k">Primary CTA</div><div class="v">Book a free site survey → /configure, /contact</div></div>
+    <div><div class="k">Date</div><div class="v">09 Jun 2026</div></div>
+  </div>
+</div>
+
+<div class="sheet">
+
+  <!-- CORE -->
+  <div class="sech">Core marketing</div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/</span><span class="sp"><span class="pill super">Foundation</span></span></div>
+    <div class="role"><b>Homepage.</b> Top-of-funnel overview: why storage, who it serves, the product range, the software, the economics promise. Currently chrome + section scaffolding, not a finished narrative.</div>
+    <div class="lbl">Sections</div>
+    <ul class="secs">
+      <li>Why storage, why now — "Power isn't the problem. Storing and controlling it is."</li>
+      <li>Who it's for — "One platform, every kind of site."</li>
+      <li>The range — "Nano to Giga." (four classes)</li>
+      <li>GridOS software layer — managed-asset pitch</li>
+      <li>The economics — "Storage that pays for itself" (figures gated)</li>
+      <li>Trust row + survey CTA</li>
+    </ul>
+    <div class="cta"><b>CTA:</b> Book a free survey — homes, business, or infrastructure.</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/platform</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>GridOS — the software layer.</b> Positions software as the reason hardware pays. Monitoring, tariff-aware scheduling, backup reserve, fleet view, outage alerts.</div>
+    <div class="lbl">Sections</div>
+    <ul class="secs">
+      <li>"Everything your system does, visible and in your control."</li>
+      <li>"What changes when your system has software."</li>
+      <li>"The smart layer most installers never give you."</li>
+      <li>"GridOS is live from the day of install."</li>
+      <li>"Runs on every system in the range."</li>
+      <li>How it works — FAQ, answered honestly</li>
+    </ul>
+    <div class="cta"><b>Frame:</b> "Storage is the hardware. GridOS is the reason it pays."</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/configure</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>Guided sizer (conversion endpoint).</b> A 4-step qualitative wizard. By design it NEVER outputs price, payback, or kWh — it collects context and books a survey.</div>
+    <div class="lbl">Steps</div>
+    <ul class="secs">
+      <li>Step 1 — What are we powering?</li>
+      <li>Step 2 — How much should it back up?</li>
+      <li>Step 3 — Do you have solar?</li>
+      <li>Step 4 — Where, and who do we reach?</li>
+    </ul>
+    <div class="note">Outputs a product class + survey booking, not a quote. No backend wired — submission does not persist yet.</div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="sech">Products</div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/products</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>Range index.</b> The four-class system (Nano / Micro / Mega / Giga), matched to load. Routes to each product page.</div>
+    <div class="lbl">Sections</div>
+    <ul class="secs">
+      <li>"Match your load to the right class."</li>
+      <li>Four class cards — Nano, Micro, Mega, Giga</li>
+      <li>"Numbers only once they are yours." (gated specs)</li>
+      <li>"The software platform behind every class."</li>
+      <li>Common questions about the range</li>
+    </ul>
+    <div class="cta"><b>CTA:</b> "Not sure which class fits your site?" → configure/contact</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/products/nano</span><span class="sp"><span class="pill gold">Gold template</span></span></div>
+    <div class="role"><b>Nano product detail (residential).</b> The reference product page every other class clones. Hero → system rows → powers → datasheet → modularity → outcomes → how → GridOS → FAQ → CTA.</div>
+    <div class="lbl">Sections</div>
+    <ul class="secs">
+      <li>Hero — "A complete home energy system in one sealed unit."</li>
+      <li>System rows — battery / inverter / solar</li>
+      <li>"From your Wi-Fi to your AC." (what it powers)</li>
+      <li>"The datasheet, once it is verified." (10 gated specs)</li>
+      <li>"What actually changes." (outcomes)</li>
+      <li>"From enquiry to your app, in three steps."</li>
+      <li>GridOS showcase + 7-question FAQ</li>
+    </ul>
+    <div class="cta"><b>CTA:</b> "See a Nano sized for your home."</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/products/micro · /mega · /giga</span><span class="sp"><span class="pill stub">Stub · blank</span></span></div>
+    <div class="role"><b>Commercial / industrial / utility class pages.</b> Registered routes, render blank. Intended to clone the Nano template with class-specific load, form factor, and use-cases.</div>
+    <div class="note">Micro = commercial · Mega = large commercial/industrial · Giga = utility/critical scale.</div>
+  </div>
+
+  <div class="foot"><span>GridEnergy — Route Content Reference</span><span>page 1</span></div>
+
+  <!-- PAGE 2 — SOLUTIONS -->
+  <div class="pb"></div>
+  <div class="sech" style="margin-top:4px;">Solutions — hubs &amp; spokes</div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/solutions</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>Thin audience index.</b> Carousel + five audience cards routing into each hub. The entry to the hub-and-spoke tree.</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/solutions/homes</span><span class="sp"><span class="pill draft">Draft (hub)</span></span></div>
+    <div class="role"><b>Homes hub.</b> Markets residential storage and routes to home spokes. The shared hub structure every audience reuses.</div>
+    <div class="lbl">Sections</div>
+    <ul class="secs">
+      <li>"A battery, an inverter, solar-ready, run by software."</li>
+      <li>"What you actually get."</li>
+      <li>"Against the diesel genset you would otherwise buy." (comparison)</li>
+      <li>"From enquiry to your app, in three steps."</li>
+      <li>"The honest numbers, once they are yours." (gated)</li>
+      <li>"The objections, answered honestly." (FAQ)</li>
+    </ul>
+    <div class="cta"><b>CTA:</b> "Ready to never sit in the dark again?"</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/solutions/homes/apartment</span><span class="sp"><span class="pill gold">Gold template</span></span></div>
+    <div class="role"><b>Apartment spoke.</b> The reference spoke every audience sub-page clones. Specific, dense, convincing — fit-for-a-flat, not generic brand sell.</div>
+    <div class="lbl">Sections</div>
+    <ul class="secs">
+      <li>Hero — "One sealed unit, sized for a flat." (tagged-card + breadcrumb)</li>
+      <li>Spec strip — GridEnergy Nano, capacity gated</li>
+      <li>"The circuits you actually miss in a cut." (powers)</li>
+      <li>Apartment-fit cards (id="fit")</li>
+      <li>"From enquiry to your app, in three visits."</li>
+      <li>"What flat owners ask first." (6 objections + resources)</li>
+    </ul>
+    <div class="cta"><b>CTA:</b> "Confirm the fit for your flat."</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/solutions/offices-industrial</span><span class="sp"><span class="pill super">Superseded hub</span></span></div>
+    <div class="role"><b>Offices &amp; Industrial hub.</b> Built before the hub/spoke lock; needs rebuilding from the template. Genset-replacement angle, multi-site sizing.</div>
+    <div class="lbl">Sections</div>
+    <ul class="secs">
+      <li>"A battery, an inverter, solar-ready, run by software."</li>
+      <li>"What you actually get." · genset comparison</li>
+      <li>"Sized for every kind of site."</li>
+      <li>"The software layer most installers don't give you."</li>
+      <li>Honest numbers (gated) · objections FAQ</li>
+    </ul>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/solutions/enterprises</span><span class="sp"><span class="pill super">Superseded hub</span></span></div>
+    <div class="role"><b>Enterprises hub.</b> Estate / fleet framing — "Against the UPS and genset fleet you would otherwise run", "From enquiry to a live fleet", "One console for the whole estate."</div>
+    <div class="note">Most enterprise-relevant of the hubs; closest to the "enterprise grid" register.</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/solutions/institutes</span><span class="sp"><span class="pill super">Superseded hub</span></span></div>
+    <div class="role"><b>Educational institutes hub.</b> Campus framing — "Sized for every kind of campus", genset comparison, smart-layer pitch, objections FAQ.</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/solutions/hospitality</span><span class="sp"><span class="pill super">Superseded hub</span></span></div>
+    <div class="role"><b>Hospitality hub.</b> Property framing — "Sized for every kind of property", genset comparison, smart-layer pitch, objections FAQ.</div>
+  </div>
+
+  <div class="clones">
+    <h4>The 19 spoke sub-pages (all <span class="pill stub">Stub</span>)</h4>
+    <p>Registered routes, render blank. Each is intended to clone the <span class="mono">/homes/apartment</span> spoke with audience-specific copy, fit cards, and objections:</p>
+    <p class="mono">homes › small-home, large-home, solar-storage<br>
+    offices-industrial › small-office, mid-office, large-campus, factory<br>
+    institutes › school, college, university, hostels<br>
+    enterprises › data-center, telecom, hospital, multi-site<br>
+    hospitality › hotel, resort, restaurant, mall</p>
+  </div>
+
+  <div class="foot"><span>GridEnergy — Route Content Reference</span><span>page 2</span></div>
+
+  <!-- PAGE 3 — COMPANY / SECONDARY / LEGAL -->
+  <div class="pb"></div>
+  <div class="sech" style="margin-top:4px;">Company</div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/about</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>Company story.</b> "Hardware, software, and the install in between." Principles, proof-once-earned, positioning.</div>
+    <div class="lbl">Sections</div>
+    <ul class="secs">
+      <li>"Six things we hold to." (principles)</li>
+      <li>"The proof, once it is earned." (gated case studies)</li>
+      <li>"What GridEnergy is, and is not."</li>
+      <li>Survey CTA</li>
+    </ul>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/partners</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>Installer program.</b> "Everything to sell, install, and support with confidence." Four-step onboarding, partner-tier GridOS console.</div>
+    <div class="lbl">Sections</div>
+    <ul class="secs one">
+      <li>"From enquiry to your first install, in four steps."</li>
+      <li>"What the programme involves, answered honestly." · CTA: "Ready to add storage to what you offer?"</li>
+    </ul>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/support</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>Help centre.</b> "Things people ask before and after install." Troubleshooting + FAQ, app/gateway guidance.</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/contact</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>Contact &amp; site-survey booking.</b> "Book a free site survey or request a quote. No call required to qualify." Form collects details; office address TBD.</div>
+    <div class="note">No backend — submissions do not persist. Honest pending state shown.</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/sign-in</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>GridOS account.</b> Presentational sign-in for the software console. No auth backend.</div>
+  </div>
+
+  <div class="sech">Footer-linked secondary</div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/app</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>GridOS mobile showcase.</b> "GridOS comes with your system." Live-dashboard caption, pre-go-live FAQ, "put your energy system in your pocket" CTA.</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/economics</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>ROI model.</b> "We build the economics for your home before you decide." All figures gated; pre-numbers FAQ; "Get the real economics for your home" CTA.</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/resources</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>Guides &amp; datasheets.</b> Resource library; "Ready to talk to someone who knows storage?" CTA.</div>
+  </div>
+
+  <div class="route">
+    <div class="rh"><span class="path">/careers</span><span class="sp"><span class="pill draft">Draft</span></span></div>
+    <div class="role"><b>Careers.</b> "Want to build energy infrastructure that matters?" Roles routed via /contact.</div>
+  </div>
+
+  <div class="sech">Legal</div>
+  <div class="route">
+    <div class="rh"><span class="path">/privacy · /terms · /cookies · /disclaimer · /warranty</span><span class="sp"><span class="pill inh">Inherited</span></span></div>
+    <div class="role"><b>Legal set.</b> Short, inherited, unreviewed. <b>/warranty</b> in particular must be verified before launch — stated terms become binding.</div>
+  </div>
+
+  <div class="foot"><span>GridEnergy — a brand of DeltaEV Mobility Private Limited · internal</span><span>page 3</span></div>
+</div>
+
+</body>
+</html>

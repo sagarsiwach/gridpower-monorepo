@@ -1,0 +1,22 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "grid-platform-ocpp",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "vars": { "ENVIRONMENT": "production" },
+  "durable_objects": {
+    "bindings": [{ "name": "CHARGER_SESSIONS", "class_name": "ChargerSession" }],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ChargerSession"] }],
+  "env": {
+    "staging": {
+      "name": "grid-platform-ocpp-staging",
+      "vars": { "ENVIRONMENT": "staging" },
+      "durable_objects": {
+        "bindings": [{ "name": "CHARGER_SESSIONS", "class_name": "ChargerSession" }],
+      },
+    },
+  },
+}

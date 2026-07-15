@@ -1,20 +1,28 @@
 import * as React from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import {
+  AlertTriangle,
   BarChart3,
   Car,
+  CircuitBoard,
+  HelpCircle,
+  History,
   LayoutGrid,
-  Moon,
+  Menu,
+  Receipt,
+  Search as SearchIcon,
   Settings as SettingsIcon,
-  Sun,
+  Tags,
+  Users,
+  Wrench,
+  X,
   Zap,
 } from "lucide-react";
 import { DotGrid, Sidebar, Topbar, type SidebarSection } from "@gridpower/ui";
+import { CommandPalette, ShortcutHelp, useCommandPaletteHotkeys } from "~/components/CommandPalette";
 import { useAuth } from "~/lib/auth";
-import { useTheme } from "~/lib/theme";
 
-// ─── Path B nav items (5, NO Energy) ──────────────────────────────────────────
-// Order: Dashboard · Stations · Analytics · Fleet · Settings
+// Sidebar nav grouped into Operations, Money, System.
 
 interface NavDef {
   key: string;
@@ -22,15 +30,35 @@ interface NavDef {
   href: string;
   icon: React.ReactNode;
   title: string;
+  group: "operations" | "money" | "system";
 }
 
 const NAV: NavDef[] = [
-  { key: "dashboard", label: "Dashboard", href: "/dashboard", icon: <LayoutGrid size={15} />, title: "Dashboard" },
-  { key: "stations",  label: "Stations",  href: "/stations",  icon: <Zap size={15} />,        title: "Stations" },
-  { key: "analytics", label: "Analytics", href: "/analytics", icon: <BarChart3 size={15} />,  title: "Analytics" },
-  { key: "fleet",     label: "Fleet",     href: "/fleet",     icon: <Car size={15} />,        title: "Fleet" },
-  { key: "settings",  label: "Settings",  href: "/settings",  icon: <SettingsIcon size={15} />, title: "Settings" },
+  // Operations
+  { key: "dashboard",   label: "Dashboard",   href: "/dashboard",   icon: <LayoutGrid size={15} />,    title: "Dashboard",   group: "operations" },
+  { key: "stations",    label: "Stations",    href: "/stations",    icon: <Zap size={15} />,           title: "Stations",    group: "operations" },
+  { key: "sessions",    label: "Sessions",    href: "/sessions",    icon: <History size={15} />,       title: "Sessions",    group: "operations" },
+  { key: "drivers",     label: "Drivers",     href: "/drivers",     icon: <Users size={15} />,         title: "Drivers",     group: "operations" },
+  { key: "alerts",      label: "Alerts",      href: "/alerts",      icon: <AlertTriangle size={15} />, title: "Alerts",      group: "operations" },
+  { key: "maintenance", label: "Maintenance", href: "/maintenance", icon: <Wrench size={15} />,        title: "Maintenance", group: "operations" },
+
+  // Money
+  { key: "tariffs",  label: "Tariffs",  href: "/tariffs",  icon: <Tags size={15} />,    title: "Tariffs",  group: "money" },
+  { key: "payments", label: "Payments", href: "/payments", icon: <Receipt size={15} />, title: "Payments", group: "money" },
+
+  // System
+  { key: "analytics", label: "Analytics", href: "/analytics", icon: <BarChart3 size={15} />,    title: "Analytics", group: "system" },
+  { key: "fleet",     label: "Fleet",     href: "/fleet",     icon: <Car size={15} />,          title: "Fleet",     group: "system" },
+  { key: "firmware",  label: "Firmware",  href: "/firmware",  icon: <CircuitBoard size={15} />, title: "Firmware",  group: "system" },
+  { key: "settings",  label: "Settings",  href: "/settings",  icon: <SettingsIcon size={15} />, title: "Settings",  group: "system" },
+  { key: "help",      label: "Help",      href: "/help",      icon: <HelpCircle size={15} />,   title: "Help",      group: "system" },
 ];
+
+const NAV_TITLES = {
+  operations: "Operations",
+  money: "Money",
+  system: "System",
+} as const;
 
 const NAV_BY_KEY: Record<string, NavDef> = NAV.reduce(
   (acc, item) => {
@@ -41,44 +69,24 @@ const NAV_BY_KEY: Record<string, NavDef> = NAV.reduce(
 );
 
 function deriveActiveKey(pathname: string): string {
-  // Match top-level segment (e.g. /stations/abc → "stations")
   const segment = pathname.split("/").filter(Boolean)[0];
   if (segment && NAV_BY_KEY[segment]) return segment;
   return "dashboard";
 }
 
-// ─── Theme toggle button ──────────────────────────────────────────────────────
-
-function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
-  const isDark = theme === "dark";
-  return (
-    <button
-      type="button"
-      onClick={toggleTheme}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="flex items-center gap-1.5 px-2 py-1 rounded-[6px] border border-dark-6 bg-transparent text-dark-11 font-body text-[11px] hover:bg-dark-4 transition-colors cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-primary"
-    >
-      {isDark ? <Sun size={13} /> : <Moon size={13} />}
-      <span>{isDark ? "Light" : "Dark"}</span>
-    </button>
-  );
-}
-
-// ─── Topbar breadcrumb (left slot) ────────────────────────────────────────────
-
 function ConsoleBreadcrumb({ title }: { title: string }) {
   return (
-    <div className="flex items-center gap-2">
-      <span className="font-body text-[15px] font-semibold text-dark-12">{title}</span>
-      <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-primary">
-        GRIDCHARGE CONSOLE
+    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+      <h1 className="font-body text-[14px] sm:text-[15px] font-semibold text-foreground truncate">{title}</h1>
+      <span
+        className="hidden md:inline font-mono text-[10px] uppercase tracking-[0.1em] text-primary"
+        aria-label="GridCharge Console"
+      >
+        GridCharge Console
       </span>
     </div>
   );
 }
-
-// ─── ConsoleShell ─────────────────────────────────────────────────────────────
 
 export function ConsoleShell() {
   const navigate = useNavigate();
@@ -88,18 +96,38 @@ export function ConsoleShell() {
   const activeKey = deriveActiveKey(location.pathname);
   const activeNav = NAV_BY_KEY[activeKey] ?? NAV[0]!;
 
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const { paletteOpen, closePalette, openPalette, helpOpen, closeHelp } =
+    useCommandPaletteHotkeys();
+
+  // Close drawer on route change.
+  React.useEffect(() => {
+    setDrawerOpen(false);
+  }, [location.pathname]);
+
+  // Close drawer on Escape key.
+  React.useEffect(() => {
+    if (!drawerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDrawerOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [drawerOpen]);
+
   const sections: SidebarSection[] = React.useMemo(
-    () => [
-      {
-        label: "Navigation",
-        items: NAV.map((item) => ({
-          key: item.key,
-          label: item.label,
-          icon: item.icon,
-          href: item.href,
-        })),
-      },
-    ],
+    () =>
+      (Object.keys(NAV_TITLES) as Array<keyof typeof NAV_TITLES>).map(
+        (group) => ({
+          label: NAV_TITLES[group],
+          items: NAV.filter((item) => item.group === group).map((item) => ({
+            key: item.key,
+            label: item.label,
+            icon: item.icon,
+            href: item.href,
+          })),
+        }),
+      ),
     [],
   );
 
@@ -108,47 +136,112 @@ export function ConsoleShell() {
       const target = NAV_BY_KEY[key];
       if (target) {
         navigate(target.href);
+        setDrawerOpen(false);
       }
     },
     [navigate],
   );
 
-  return (
-    <div className="h-screen flex bg-dark-1 overflow-hidden">
-      <Sidebar
-        appName="GridCharge"
-        appLabel="Console"
-        sections={sections}
-        activeKey={activeKey}
-        onActiveChange={handleActiveChange}
-        user={
-          user
-            ? {
-                name: user.name,
-                role: user.role,
-                initials: user.initials,
-              }
-            : undefined
-        }
-      />
+  const sidebarUser = user
+    ? { name: user.name, role: user.role, initials: user.initials }
+    : undefined;
 
-      <div className="flex-1 flex flex-col overflow-hidden">
+  return (
+    <div className="flex h-screen overflow-hidden bg-background">
+      {/* Desktop sidebar, hidden below lg */}
+      <div className="hidden lg:flex">
+        <Sidebar
+          appName="GridCharge"
+          appLabel="Console"
+          sections={sections}
+          activeKey={activeKey}
+          onActiveChange={handleActiveChange}
+          user={sidebarUser}
+        />
+      </div>
+
+      {/* Mobile drawer overlay */}
+      {drawerOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={() => setDrawerOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile drawer panel */}
+      <div
+        className={[
+          "fixed inset-y-0 left-0 z-50 flex lg:hidden",
+          "transition-transform duration-200 ease-out",
+          drawerOpen ? "translate-x-0" : "-translate-x-full",
+        ].join(" ")}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+      >
+        <Sidebar
+          appName="GridCharge"
+          appLabel="Console"
+          sections={sections}
+          activeKey={activeKey}
+          onActiveChange={handleActiveChange}
+          user={sidebarUser}
+        />
+        <button
+          type="button"
+          onClick={() => setDrawerOpen(false)}
+          aria-label="Close menu"
+          className="absolute top-4 right-[-44px] flex h-9 w-9 items-center justify-center rounded-btn bg-card border border-border text-foreground hover:bg-muted transition-colors"
+        >
+          <X size={16} aria-hidden="true" />
+        </button>
+      </div>
+
+      <div className="flex flex-1 flex-col overflow-hidden">
         <Topbar
-          breadcrumb={<ConsoleBreadcrumb title={activeNav.title} />}
-          center={null}
-          actions={<ThemeToggle />}
+          breadcrumb={
+            <div className="flex items-center gap-2 min-w-0">
+              <button
+                type="button"
+                onClick={() => setDrawerOpen(true)}
+                aria-label="Open menu"
+                className="lg:hidden flex h-8 w-8 items-center justify-center rounded-btn border border-border bg-transparent text-foreground hover:bg-muted transition-colors shrink-0"
+              >
+                <Menu size={16} aria-hidden="true" />
+              </button>
+              <ConsoleBreadcrumb title={activeNav.title} />
+            </div>
+          }
+          center={
+            <button
+              type="button"
+              onClick={openPalette}
+              aria-label="Open command palette (Cmd+K)"
+              className="hidden md:inline-flex h-8 w-full max-w-[360px] items-center gap-2 rounded-btn border border-border bg-muted/50 px-3 text-body-sm text-muted-foreground transition-colors duration-150 ease-out hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <SearchIcon size={14} aria-hidden="true" />
+              <span className="flex-1 text-left">Search or jump to…</span>
+              <kbd className="hidden lg:inline-flex h-5 items-center rounded-[4px] border border-border bg-card px-1.5 font-mono text-[10px]">
+                ⌘ K
+              </kbd>
+            </button>
+          }
+          actions={null}
           userInitials={user?.initials}
           userName={user?.name}
         />
 
-        {/* Main content — dotted grid bg, holds child routes */}
         <main className="relative flex-1 overflow-y-auto bg-background">
           <DotGrid />
-          <div className="relative p-6">
+          <div className="relative p-3 sm:p-4 lg:p-6">
             <Outlet />
           </div>
         </main>
       </div>
+
+      <CommandPalette open={paletteOpen} onClose={closePalette} />
+      <ShortcutHelp open={helpOpen} onClose={closeHelp} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 /**
- * Dashboard mock fixtures — 30-day revenue series, 15 alerts, 15 stations.
+ * Dashboard mock fixtures: 30-day revenue series, 15 alerts, 15 stations.
  * Used by Dashboard route. Other agents can reference patterns here.
  */
 

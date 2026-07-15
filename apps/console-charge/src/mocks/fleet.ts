@@ -1,4 +1,4 @@
-// Mock fleet data — 28 vehicles across 4 depots
+// Mock fleet data: 28 vehicles across 4 depots
 // Used by Fleet view (CON.5)
 
 export type VehicleStatus =
@@ -34,7 +34,7 @@ export interface Depot {
 }
 
 export const VEHICLES: Vehicle[] = [
-  // Delhi Depot — 8 vehicles
+  // Delhi Depot: 8 vehicles
   {
     id: "EV-001",
     registration: "DL-01-AB-1234",
@@ -132,7 +132,7 @@ export const VEHICLES: Vehicle[] = [
     costPerKm: "₹1.61",
   },
 
-  // Bangalore Depot — 7 vehicles
+  // Bangalore Depot: 7 vehicles
   {
     id: "EV-009",
     registration: "KA-01-QR-2345",
@@ -218,7 +218,7 @@ export const VEHICLES: Vehicle[] = [
     costPerKm: "₹1.58",
   },
 
-  // Mumbai Depot — 7 vehicles
+  // Mumbai Depot: 7 vehicles
   {
     id: "EV-016",
     registration: "MH-01-EF-0123",
@@ -304,7 +304,7 @@ export const VEHICLES: Vehicle[] = [
     costPerKm: "₹1.56",
   },
 
-  // Goa Depot — 6 vehicles
+  // Goa Depot: 6 vehicles
   {
     id: "EV-023",
     registration: "GA-01-ST-6789",
@@ -442,7 +442,7 @@ export const DEPOTS: Depot[] = [
   },
 ];
 
-// Charge queue — vehicles waiting for open port, ordered by priority (lowest SoC first)
+// Charge queue: vehicles waiting for open port, ordered by priority (lowest SoC first)
 export const CHARGE_QUEUE: Vehicle[] = VEHICLES.filter(
   (v) =>
     (v.status === "low-battery" || (v.soc < 30 && v.status === "idle")) &&

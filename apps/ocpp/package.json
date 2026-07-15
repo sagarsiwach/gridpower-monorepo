@@ -1,0 +1,28 @@
+{
+  "name": "@grid-platform/ocpp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "wrangler deploy --dry-run --env=\"\" --outdir dist",
+    "dev": "wrangler dev --env staging",
+    "lint": "oxlint src",
+    "typecheck": "wrangler types && tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "cf-typegen": "wrangler types",
+    "deploy:preview": "wrangler versions upload --env staging",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy",
+    "release:upload": "wrangler versions upload"
+  },
+  "dependencies": {
+    "@grid-platform/observability": "workspace:*",
+    "hono": "4.12.30",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vitest": "4.1.10",
+    "wrangler": "4.110.0"
+  }
+}

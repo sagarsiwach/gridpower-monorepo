@@ -171,4 +171,8 @@ const LineChart = React.forwardRef<HTMLDivElement, LineChartProps>(
 );
 LineChart.displayName = "LineChart";
 
-export { LineChart };
+// Memoized: charts are expensive (recharts re-measures via ResponsiveContainer
+// on each parent render). Skip when props are referentially stable.
+const MemoLineChart = React.memo(LineChart) as typeof LineChart;
+
+export { MemoLineChart as LineChart };
