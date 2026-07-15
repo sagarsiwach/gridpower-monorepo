@@ -1,6 +1,23 @@
-# GridPower Monorepo
+# Grid Platform
 
-Turborepo + pnpm workspace powering the GridPower marketing site and product consoles.
+The DeltaEV platform monorepo for GridEnergy, GridOS and GridCharge. It follows the proven Satlok workspace shape: Bun, Turborepo, contract-first TypeScript packages, Hono, Drizzle/Postgres, Vitest and separate Flutter apps.
+
+## Start locally
+
+```bash
+bun install
+docker compose -f infra/docker-compose.yml up -d
+bun run dev
+```
+
+Primary mocks:
+
+- GridEnergy operations: `http://localhost:5174`
+- GridOS customer portal: `http://localhost:5175`
+- API health: `http://localhost:14780/api/v1/health`
+- OCPP adapter health: `http://localhost:14781/health`
+
+All checked-in readings and commercial records are demonstration data. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for service boundaries and decisions.
 
 ## Structure
 

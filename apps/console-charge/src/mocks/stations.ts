@@ -340,7 +340,7 @@ export const ALL_STATIONS: Station[] = [
     lastSession: "14:33",
     uptime: "100%",
     lat: 18.5922,
-    lng: 73.7380,
+    lng: 73.738,
     address: "Phase 1, Rajiv Gandhi Infotech Park, Pune 411057",
     portList: [
       makePort("GPWR-Pune-01", 1, "DC 60kW", "charging", "G"),
@@ -515,7 +515,7 @@ export const ALL_STATIONS: Station[] = [
     today: "₹4,920",
     lastSession: "14:31",
     uptime: "99.0%",
-    lat: 12.9010,
+    lat: 12.901,
     lng: 80.2279,
     address: "Old Mahabalipuram Rd, Perungudi, Chennai 600096",
     portList: [

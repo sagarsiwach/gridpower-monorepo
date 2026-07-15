@@ -96,9 +96,7 @@ function PortCell({ port }: { port: Port }) {
       <span className={cn("font-mono text-[9px]", PORT_ICON_COLOR[port.status])}>
         P{port.number}
       </span>
-      <span className="font-mono text-[8px] text-sand-9 dark:text-dark-9">
-        {port.type}
-      </span>
+      <span className="font-mono text-[8px] text-sand-9 dark:text-dark-9">{port.type}</span>
     </div>
   );
 }
@@ -127,10 +125,7 @@ export function StationDetailPanel({
             <span className="font-mono text-[10px] text-sand-9 dark:text-dark-9">
               {station.city}
             </span>
-            <StatusBadge
-              status={STATUS_MAP[station.status]}
-              label={STATUS_LABEL[station.status]}
-            />
+            <StatusBadge status={STATUS_MAP[station.status]} label={STATUS_LABEL[station.status]} />
           </div>
         </div>
         {onClose && (
@@ -150,7 +145,11 @@ export function StationDetailPanel({
         {[
           { label: "Revenue today", value: station.today, className: "text-primary" },
           { label: "Utilisation", value: `${station.util}%`, className: "text-success" },
-          { label: "Total ports", value: String(station.ports), className: "text-sand-12 dark:text-dark-12" },
+          {
+            label: "Total ports",
+            value: String(station.ports),
+            className: "text-sand-12 dark:text-dark-12",
+          },
           { label: "Uptime", value: station.uptime, className: "text-sand-12 dark:text-dark-12" },
         ].map(({ label, value, className }) => (
           <div key={label} className="flex flex-col gap-1 px-4 py-3">
@@ -179,9 +178,7 @@ export function StationDetailPanel({
               <span className="font-mono text-[10px] text-sand-9 dark:text-dark-9">
                 +{station.ports - 6}
               </span>
-              <span className="font-mono text-[8px] text-sand-8 dark:text-dark-8">
-                more
-              </span>
+              <span className="font-mono text-[8px] text-sand-8 dark:text-dark-8">more</span>
             </div>
           )}
         </div>

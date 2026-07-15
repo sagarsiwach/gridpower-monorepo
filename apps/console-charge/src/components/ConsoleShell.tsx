@@ -1,14 +1,6 @@
 import * as React from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
-import {
-  BarChart3,
-  Car,
-  LayoutGrid,
-  Moon,
-  Settings as SettingsIcon,
-  Sun,
-  Zap,
-} from "lucide-react";
+import { BarChart3, Car, LayoutGrid, Moon, Settings as SettingsIcon, Sun, Zap } from "lucide-react";
 import { DotGrid, Sidebar, Topbar, type SidebarSection } from "@gridpower/ui";
 import { useAuth } from "~/lib/auth";
 import { useTheme } from "~/lib/theme";
@@ -25,11 +17,35 @@ interface NavDef {
 }
 
 const NAV: NavDef[] = [
-  { key: "dashboard", label: "Dashboard", href: "/dashboard", icon: <LayoutGrid size={15} />, title: "Dashboard" },
-  { key: "stations",  label: "Stations",  href: "/stations",  icon: <Zap size={15} />,        title: "Stations" },
-  { key: "analytics", label: "Analytics", href: "/analytics", icon: <BarChart3 size={15} />,  title: "Analytics" },
-  { key: "fleet",     label: "Fleet",     href: "/fleet",     icon: <Car size={15} />,        title: "Fleet" },
-  { key: "settings",  label: "Settings",  href: "/settings",  icon: <SettingsIcon size={15} />, title: "Settings" },
+  {
+    key: "dashboard",
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: <LayoutGrid size={15} />,
+    title: "Dashboard",
+  },
+  {
+    key: "stations",
+    label: "Stations",
+    href: "/stations",
+    icon: <Zap size={15} />,
+    title: "Stations",
+  },
+  {
+    key: "analytics",
+    label: "Analytics",
+    href: "/analytics",
+    icon: <BarChart3 size={15} />,
+    title: "Analytics",
+  },
+  { key: "fleet", label: "Fleet", href: "/fleet", icon: <Car size={15} />, title: "Fleet" },
+  {
+    key: "settings",
+    label: "Settings",
+    href: "/settings",
+    icon: <SettingsIcon size={15} />,
+    title: "Settings",
+  },
 ];
 
 const NAV_BY_KEY: Record<string, NavDef> = NAV.reduce(
@@ -115,36 +131,47 @@ export function ConsoleShell() {
 
   return (
     <div className="h-screen flex bg-dark-1 overflow-hidden">
-      <Sidebar
-        appName="GridCharge"
-        appLabel="Console"
-        sections={sections}
-        activeKey={activeKey}
-        onActiveChange={handleActiveChange}
-        user={
-          user
-            ? {
-                name: user.name,
-                role: user.role,
-                initials: user.initials,
-              }
-            : undefined
-        }
-      />
+      <div className="hidden md:block">
+        <Sidebar
+          appName="GridCharge"
+          appLabel="Console"
+          sections={sections}
+          activeKey={activeKey}
+          onActiveChange={handleActiveChange}
+          user={
+            user
+              ? {
+                  name: user.name,
+                  role: user.role,
+                  initials: user.initials,
+                }
+              : undefined
+          }
+        />
+      </div>
 
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Topbar
-          breadcrumb={<ConsoleBreadcrumb title={activeNav.title} />}
-          center={null}
-          actions={<ThemeToggle />}
-          userInitials={user?.initials}
-          userName={user?.name}
-        />
+        <div className="hidden md:block">
+          <Topbar
+            breadcrumb={<ConsoleBreadcrumb title={activeNav.title} />}
+            center={null}
+            actions={<ThemeToggle />}
+            userInitials={user?.initials}
+            userName={user?.name}
+          />
+        </div>
+        <div className="flex h-[52px] items-center justify-between border-b border-dark-6 bg-dark-2 px-3 md:hidden">
+          <ConsoleBreadcrumb title={activeNav.title} />
+          <ThemeToggle />
+        </div>
 
         {/* Main content — dotted grid bg, holds child routes */}
         <main className="relative flex-1 overflow-y-auto bg-background">
           <DotGrid />
-          <div className="relative p-6">
+          <div className="relative p-3 md:p-6">
+            <div className="mb-4 flex items-center gap-2 border border-warning/40 bg-warning/10 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.12em] text-warning">
+              Simulation environment · no live charger or payment connection
+            </div>
             <Outlet />
           </div>
         </main>

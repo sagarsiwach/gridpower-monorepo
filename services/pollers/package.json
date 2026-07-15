@@ -1,0 +1,23 @@
+{
+  "name": "@grid-platform/pollers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@grid-platform/jobs": "workspace:*",
+    "@grid-platform/observability": "workspace:*",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "6.0.3",
+    "vitest": "4.1.9"
+  }
+}

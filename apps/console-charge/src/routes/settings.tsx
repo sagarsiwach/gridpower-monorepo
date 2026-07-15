@@ -14,14 +14,7 @@ import {
   Upload,
   CheckCircle2,
 } from "lucide-react";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-  Input,
-  Switch,
-} from "@gridpower/ui";
+import { Tabs, TabsList, TabsTrigger, TabsContent, Input, Switch } from "@gridpower/ui";
 
 // ─── Shared primitives ────────────────────────────────────────────────────────
 
@@ -93,9 +86,7 @@ function ToggleRow({
           {label}
         </div>
         {sub && (
-          <div className="font-body text-[11px] text-sand-9 dark:text-dark-9 mt-0.5">
-            {sub}
-          </div>
+          <div className="font-body text-[11px] text-sand-9 dark:text-dark-9 mt-0.5">{sub}</div>
         )}
       </div>
       <Switch
@@ -302,9 +293,7 @@ function TeamTab() {
                 {m.role}
               </span>
 
-              <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">
-                {m.active}
-              </span>
+              <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">{m.active}</span>
 
               <button
                 type="button"
@@ -367,9 +356,7 @@ function TeamTab() {
               <span className="font-body text-[12px] text-sand-9 dark:text-dark-9">
                 {perm.label}
               </span>
-              <span className="font-mono text-[12px] text-success">
-                {perm.admin ? "✓" : "—"}
-              </span>
+              <span className="font-mono text-[12px] text-success">{perm.admin ? "✓" : "—"}</span>
               <span
                 className={`font-mono text-[12px] ${perm.operator ? "text-success" : "text-sand-9 dark:text-dark-9"}`}
               >
@@ -416,14 +403,10 @@ function BillingTab() {
             <div className="font-display text-[22px] font-semibold text-foreground dark:text-dark-12 leading-none">
               GridCharge Pro
             </div>
-            <div className="font-mono text-[13px] text-primary mt-1.5">
-              ₹24,999 / month
-            </div>
+            <div className="font-mono text-[13px] text-primary mt-1.5">₹24,999 / month</div>
           </div>
           <div className="text-right">
-            <div className="font-mono text-[10px] text-sand-9 dark:text-dark-9">
-              Renews
-            </div>
+            <div className="font-mono text-[10px] text-sand-9 dark:text-dark-9">Renews</div>
             <div className="font-mono text-[12px] text-foreground dark:text-dark-12 mt-0.5">
               May 25, 2026
             </div>
@@ -454,15 +437,11 @@ function BillingTab() {
                     {m.label}
                   </span>
                   <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">
-                    {m.used.toLocaleString()} / {m.limit.toLocaleString()}{" "}
-                    {m.unit}
+                    {m.used.toLocaleString()} / {m.limit.toLocaleString()} {m.unit}
                   </span>
                 </div>
                 <div className="h-1.5 bg-sand-3 dark:bg-dark-4 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full ${barColor}`}
-                    style={{ width: `${pct}%` }}
-                  />
+                  <div className={`h-full rounded-full ${barColor}`} style={{ width: `${pct}%` }} />
                 </div>
               </div>
             );
@@ -514,18 +493,14 @@ function BillingTab() {
               key={i}
               className="grid grid-cols-[100px_90px_90px_1fr_80px] px-4 py-3 border-b border-border dark:border-dark-6 last:border-0 items-center"
             >
-              <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">
-                {inv.date}
-              </span>
+              <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">{inv.date}</span>
               <span className="font-mono text-[11px] font-medium text-foreground dark:text-dark-12">
                 {inv.amount}
               </span>
               <span className="inline-flex w-fit items-center px-2 py-0.5 rounded-full font-body text-[11px] font-medium bg-success/10 dark:bg-success/20 text-success">
                 {inv.status}
               </span>
-              <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">
-                {inv.id}
-              </span>
+              <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">{inv.id}</span>
               <button
                 type="button"
                 className="flex items-center gap-1 px-2.5 py-1.5 rounded-btn border border-border dark:border-dark-6 font-body text-[11px] text-sand-9 dark:text-dark-9 hover:bg-sand-2 dark:hover:bg-dark-3 transition-colors cursor-pointer w-fit"
@@ -616,17 +591,11 @@ function ApiKeysTab() {
                 {k.name}
               </div>
               <div className="font-mono text-[10px] text-sand-9 dark:text-dark-9">
-                {revealedIdx === i
-                  ? k.masked.replace(/•/g, "x")
-                  : k.masked}
+                {revealedIdx === i ? k.masked.replace(/•/g, "x") : k.masked}
               </div>
             </div>
-            <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">
-              {k.created}
-            </span>
-            <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">
-              {k.lastUsed}
-            </span>
+            <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">{k.created}</span>
+            <span className="font-mono text-[11px] text-sand-9 dark:text-dark-9">{k.lastUsed}</span>
             <span className="inline-flex items-center px-2 py-0.5 rounded font-mono text-[10px] bg-sand-3 dark:bg-dark-4 text-sand-9 dark:text-dark-9 w-fit">
               {k.scopes}
             </span>
@@ -634,9 +603,7 @@ function ApiKeysTab() {
               <button
                 type="button"
                 className="flex items-center justify-center w-7 h-7 rounded-btn border border-border dark:border-dark-6 hover:bg-sand-2 dark:hover:bg-dark-3 text-sand-9 dark:text-dark-9 transition-colors cursor-pointer"
-                onClick={() =>
-                  setRevealedIdx(revealedIdx === i ? null : i)
-                }
+                onClick={() => setRevealedIdx(revealedIdx === i ? null : i)}
                 title={revealedIdx === i ? "Hide key" : "Reveal key"}
               >
                 {revealedIdx === i ? <EyeOff size={12} /> : <Eye size={12} />}
@@ -666,20 +633,9 @@ function NotificationsTab() {
         <div className="font-body text-[12px] font-semibold text-foreground dark:text-dark-12 mb-1">
           Channels
         </div>
-        <ToggleRow
-          label="Email alerts"
-          sub="Sent to sagar@gridpower.co.in"
-          defaultChecked
-        />
-        <ToggleRow
-          label="SMS alerts"
-          sub="+91 98765 43210"
-          defaultChecked
-        />
-        <ToggleRow
-          label="Push notifications"
-          sub="Browser + mobile app"
-        />
+        <ToggleRow label="Email alerts" sub="Sent to sagar@gridpower.co.in" defaultChecked />
+        <ToggleRow label="SMS alerts" sub="+91 98765 43210" defaultChecked />
+        <ToggleRow label="Push notifications" sub="Browser + mobile app" />
       </div>
 
       {/* Alert types */}
@@ -687,32 +643,19 @@ function NotificationsTab() {
         <div className="font-body text-[12px] font-semibold text-foreground dark:text-dark-12 mb-1">
           Alert types
         </div>
-        <ToggleRow
-          label="Station goes offline"
-          sub="Immediate alert"
-          defaultChecked
-        />
+        <ToggleRow label="Station goes offline" sub="Immediate alert" defaultChecked />
         <ToggleRow label="High temperature warning" defaultChecked />
         <ToggleRow label="Session completed" />
         <ToggleRow label="Revenue milestone reached" defaultChecked />
         <ToggleRow label="Firmware update available" defaultChecked />
-        <ToggleRow
-          label="Weekly digest"
-          sub="Every Monday 08:00"
-          defaultChecked
-        />
-        <ToggleRow
-          label="Critical only mode"
-          sub="Suppress all non-critical alerts"
-        />
+        <ToggleRow label="Weekly digest" sub="Every Monday 08:00" defaultChecked />
+        <ToggleRow label="Critical only mode" sub="Suppress all non-critical alerts" />
       </div>
 
       {/* Auto-save indicator */}
       <div className="flex items-center gap-2 mt-5">
         <div className="w-1.5 h-1.5 rounded-full bg-success" />
-        <span className="font-mono text-[11px] text-success">
-          Preferences saved automatically
-        </span>
+        <span className="font-mono text-[11px] text-success">Preferences saved automatically</span>
       </div>
     </div>
   );

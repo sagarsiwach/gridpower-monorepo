@@ -16,12 +16,7 @@ import { VEHICLES, DEPOTS, CHARGE_QUEUE, type Vehicle, type VehicleStatus } from
 // ─── SoC Bar ──────────────────────────────────────────────────────────────────
 
 function SocBar({ soc }: { soc: number }) {
-  const color =
-    soc < 20
-      ? "bg-error"
-      : soc < 50
-        ? "bg-amber-500"
-        : "bg-success";
+  const color = soc < 20 ? "bg-error" : soc < 50 ? "bg-amber-500" : "bg-success";
   return (
     <div className="flex items-center gap-2">
       <div className="w-14 h-1.5 bg-sand-3 dark:bg-dark-4 rounded-full overflow-hidden shrink-0">
@@ -29,11 +24,7 @@ function SocBar({ soc }: { soc: number }) {
       </div>
       <span
         className={`font-mono text-[11px] ${
-          soc < 20
-            ? "text-error"
-            : soc < 50
-              ? "text-amber-500"
-              : "text-success"
+          soc < 20 ? "text-error" : soc < 50 ? "text-amber-500" : "text-success"
         }`}
       >
         {soc}%
@@ -44,10 +35,7 @@ function SocBar({ soc }: { soc: number }) {
 
 // ─── Status Badge ─────────────────────────────────────────────────────────────
 
-const STATUS_STYLES: Record<
-  VehicleStatus,
-  { bg: string; text: string; label: string }
-> = {
+const STATUS_STYLES: Record<VehicleStatus, { bg: string; text: string; label: string }> = {
   charging: {
     bg: "bg-error/10 dark:bg-error/20",
     text: "text-error",
@@ -159,9 +147,7 @@ function DepotOverviewCard({
           <span className="font-mono text-[9px] uppercase tracking-widest text-sand-9 dark:text-dark-9">
             Avg SoC
           </span>
-          <span className="font-mono text-[11px] text-foreground dark:text-dark-12">
-            {avgSoc}%
-          </span>
+          <span className="font-mono text-[11px] text-foreground dark:text-dark-12">{avgSoc}%</span>
         </div>
         <div className="h-1.5 bg-sand-3 dark:bg-dark-4 rounded-full overflow-hidden">
           <div
@@ -201,10 +187,7 @@ function ChargeQueueWidget({ queue }: { queue: Vehicle[] }) {
       ) : (
         <div className="divide-y divide-border dark:divide-dark-6">
           {queue.map((v, i) => (
-            <div
-              key={v.id}
-              className="px-4 py-2.5 flex items-center gap-3"
-            >
+            <div key={v.id} className="px-4 py-2.5 flex items-center gap-3">
               <div className="font-mono text-[11px] text-sand-9 dark:text-dark-9 w-4 shrink-0">
                 {i + 1}
               </div>
@@ -276,16 +259,14 @@ function FleetTable({ vehicles }: { vehicles: Vehicle[] }) {
 
       {/* Table Header */}
       <div className="grid grid-cols-[80px_1fr_100px_110px_120px_1fr_80px_36px] px-5 py-2 bg-sand-2 dark:bg-dark-3 border-b border-border dark:border-dark-6">
-        {["ID", "Registration", "Model", "SoC", "Status", "Location", "Cost/km", ""].map(
-          (h) => (
-            <span
-              key={h}
-              className="font-mono text-[9px] uppercase tracking-[0.08em] text-sand-9 dark:text-dark-9"
-            >
-              {h}
-            </span>
-          )
-        )}
+        {["ID", "Registration", "Model", "SoC", "Status", "Location", "Cost/km", ""].map((h) => (
+          <span
+            key={h}
+            className="font-mono text-[9px] uppercase tracking-[0.08em] text-sand-9 dark:text-dark-9"
+          >
+            {h}
+          </span>
+        ))}
       </div>
 
       {/* Rows */}
@@ -294,9 +275,7 @@ function FleetTable({ vehicles }: { vehicles: Vehicle[] }) {
           key={v.id}
           className="grid grid-cols-[80px_1fr_100px_110px_120px_1fr_80px_36px] px-5 py-3 border-b border-border dark:border-dark-6 last:border-0 items-center hover:bg-sand-2 dark:hover:bg-dark-3 transition-colors"
         >
-          <span className="font-mono text-[10px] text-sand-9 dark:text-dark-9">
-            {v.id}
-          </span>
+          <span className="font-mono text-[10px] text-sand-9 dark:text-dark-9">{v.id}</span>
           <span className="font-mono text-[11px] text-foreground dark:text-dark-12 font-medium">
             {v.registration}
           </span>
@@ -332,9 +311,7 @@ export default function Fleet() {
   const depotNames = ["all", ...DEPOTS.map((d) => d.name)];
 
   const filteredVehicles =
-    activeDepot === "all"
-      ? VEHICLES
-      : VEHICLES.filter((v) => v.depot === activeDepot);
+    activeDepot === "all" ? VEHICLES : VEHICLES.filter((v) => v.depot === activeDepot);
 
   const globalStats = React.useMemo(() => {
     const vehicles = filteredVehicles;
@@ -342,9 +319,7 @@ export default function Fleet() {
       total: vehicles.length,
       charging: vehicles.filter((v) => v.status === "charging").length,
       lowBattery: vehicles.filter((v) => v.status === "low-battery").length,
-      avgSoc: Math.round(
-        vehicles.reduce((a, v) => a + v.soc, 0) / vehicles.length
-      ),
+      avgSoc: Math.round(vehicles.reduce((a, v) => a + v.soc, 0) / vehicles.length),
     };
   }, [filteredVehicles]);
 
@@ -353,9 +328,8 @@ export default function Fleet() {
     return base
       .filter(
         (v) =>
-          (v.status === "low-battery" ||
-            (v.soc < 30 && v.status === "idle")) &&
-          v.chargeStation === null
+          (v.status === "low-battery" || (v.soc < 30 && v.status === "idle")) &&
+          v.chargeStation === null,
       )
       .sort((a, b) => a.soc - b.soc);
   }, [activeDepot, filteredVehicles]);
@@ -401,33 +375,21 @@ export default function Fleet() {
         <div className="grid grid-cols-4 gap-3">
           <StatCard
             label="Vehicles in fleet"
-            value={
-              <span className="font-mono text-[28px]">{globalStats.total}</span>
-            }
+            value={<span className="font-mono text-[28px]">{globalStats.total}</span>}
           />
           <StatCard
             label="Charging now"
-            value={
-              <span className="font-mono text-[28px] text-error">
-                {globalStats.charging}
-              </span>
-            }
+            value={<span className="font-mono text-[28px] text-error">{globalStats.charging}</span>}
           />
           <StatCard
             label="Low battery"
             value={
-              <span className="font-mono text-[28px] text-amber-600">
-                {globalStats.lowBattery}
-              </span>
+              <span className="font-mono text-[28px] text-amber-600">{globalStats.lowBattery}</span>
             }
           />
           <StatCard
             label="Avg. SoC"
-            value={
-              <span className="font-mono text-[28px]">
-                {globalStats.avgSoc}%
-              </span>
-            }
+            value={<span className="font-mono text-[28px]">{globalStats.avgSoc}%</span>}
             trend="+5% vs yesterday"
             trendDir="up"
           />

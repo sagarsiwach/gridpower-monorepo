@@ -4,6 +4,7 @@ dist/
 build/
 .next/
 .cache/
+.dart_tool/
 .DS_Store
 *.log
 .env

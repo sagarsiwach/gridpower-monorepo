@@ -1,0 +1,13 @@
+# Legacy surfaces retain their existing Biome formatting until their dedicated migration.
+_PR-INT.1-web-audit-report.md
+_PR-INT.2-web-launch-checklist.md
+biome.json
+apps/web/
+apps/console-charge/
+packages/config/
+packages/tokens/
+packages/ui/
+pnpm-lock.yaml
+pnpm-workspace.yaml
+_evidence/
+packages/db/migrations/meta/

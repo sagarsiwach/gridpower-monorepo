@@ -123,10 +123,9 @@ function AlertsPanel({ isDark }: { isDark: boolean }) {
               )}
             </div>
             <p
-              className={[
-                "text-[12px] leading-snug",
-                isDark ? "text-dark-9" : "text-sand-9",
-              ].join(" ")}
+              className={["text-[12px] leading-snug", isDark ? "text-dark-9" : "text-sand-9"].join(
+                " ",
+              )}
             >
               {alert.message}
             </p>
@@ -185,17 +184,13 @@ function RecentSessionsPanel({ isDark }: { isDark: boolean }) {
         >
           Recent sessions
         </span>
-        <span className="font-mono text-[10px] tracking-[0.06em] text-success">
-          LIVE
-        </span>
+        <span className="font-mono text-[10px] tracking-[0.06em] text-success">LIVE</span>
       </div>
 
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow
-              className={isDark ? "border-dark-6 bg-dark-3" : "border-border bg-sand-2"}
-            >
+            <TableRow className={isDark ? "border-dark-6 bg-dark-3" : "border-border bg-sand-2"}>
               {["Time", "ID", "Station", "User", "kWh", "Amount"].map((h) => (
                 <TableHead
                   key={h}
@@ -213,37 +208,31 @@ function RecentSessionsPanel({ isDark }: { isDark: boolean }) {
             {RECENT_SESSIONS.map((s) => (
               <TableRow
                 key={s.id}
-                className={isDark ? "border-dark-6 hover:bg-dark-3" : "border-border hover:bg-sand-2"}
+                className={
+                  isDark ? "border-dark-6 hover:bg-dark-3" : "border-border hover:bg-sand-2"
+                }
               >
                 <TableCell
-                  className={[
-                    "font-mono text-[11px]",
-                    isDark ? "text-dark-9" : "text-sand-9",
-                  ].join(" ")}
+                  className={["font-mono text-[11px]", isDark ? "text-dark-9" : "text-sand-9"].join(
+                    " ",
+                  )}
                 >
                   {s.time}
                 </TableCell>
                 <TableCell
-                  className={[
-                    "font-mono text-[11px]",
-                    isDark ? "text-dark-9" : "text-sand-9",
-                  ].join(" ")}
+                  className={["font-mono text-[11px]", isDark ? "text-dark-9" : "text-sand-9"].join(
+                    " ",
+                  )}
                 >
                   {s.sessionId}
                 </TableCell>
                 <TableCell
-                  className={[
-                    "text-[12px]",
-                    isDark ? "text-dark-12" : "text-foreground",
-                  ].join(" ")}
+                  className={["text-[12px]", isDark ? "text-dark-12" : "text-foreground"].join(" ")}
                 >
                   {s.station}
                 </TableCell>
                 <TableCell
-                  className={[
-                    "text-[12px]",
-                    isDark ? "text-dark-9" : "text-sand-9",
-                  ].join(" ")}
+                  className={["text-[12px]", isDark ? "text-dark-9" : "text-sand-9"].join(" ")}
                 >
                   {s.user}
                 </TableCell>
@@ -271,7 +260,7 @@ function RecentSessionsPanel({ isDark }: { isDark: boolean }) {
 
 function TopStationsPanel({ isDark }: { isDark: boolean }) {
   const top10 = STATIONS.slice(0, 10).map((s) => ({
-    name: s.name.replace("GridPower-", ""),
+    name: s.name.replace("GridCharge-", ""),
     revenue: s.revenueToday,
   }));
 
@@ -315,11 +304,7 @@ export default function Dashboard() {
         <StatCard
           theme={isDark ? "dark" : "light"}
           label="Revenue today"
-          value={
-            <span className="font-mono text-grid-red">
-              {STATS.revenueToday}
-            </span>
-          }
+          value={<span className="font-mono text-grid-red">{STATS.revenueToday}</span>}
           trend={`▲ ${STATS.revenueTrend}`}
           trendDir="up"
         />
@@ -330,10 +315,7 @@ export default function Dashboard() {
             <span className="font-mono">
               {STATS.stationsOnline}
               <span
-                className={[
-                  "font-mono text-h4",
-                  isDark ? "text-dark-9" : "text-sand-9",
-                ].join(" ")}
+                className={["font-mono text-h4", isDark ? "text-dark-9" : "text-sand-9"].join(" ")}
               >
                 /{STATS.stationsTotal}
               </span>
@@ -345,18 +327,14 @@ export default function Dashboard() {
         <StatCard
           theme={isDark ? "dark" : "light"}
           label="Sessions today"
-          value={
-            <span className="font-mono">{STATS.sessionsToday}</span>
-          }
+          value={<span className="font-mono">{STATS.sessionsToday}</span>}
           trend={`▲ ${STATS.sessionsTrend}`}
           trendDir="up"
         />
         <StatCard
           theme={isDark ? "dark" : "light"}
           label="Energy delivered"
-          value={
-            <span className="font-mono">{STATS.energyDelivered}</span>
-          }
+          value={<span className="font-mono">{STATS.energyDelivered}</span>}
           trend={`▲ ${STATS.energyTrend}`}
           trendDir="up"
         />

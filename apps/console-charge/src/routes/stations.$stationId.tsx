@@ -28,10 +28,7 @@ export default function StationDetail() {
         </Link>
         <div className="flex items-center justify-center rounded-card border border-sand-6 dark:border-dark-6 bg-sand-1 dark:bg-dark-2 p-12">
           <p className="font-body text-body text-sand-9 dark:text-dark-9">
-            Station{" "}
-            <span className="font-mono text-sand-12 dark:text-dark-12">
-              {stationId}
-            </span>{" "}
+            Station <span className="font-mono text-sand-12 dark:text-dark-12">{stationId}</span>{" "}
             not found.
           </p>
         </div>
@@ -51,9 +48,7 @@ export default function StationDetail() {
           Stations
         </Link>
         <span className="font-mono text-[10px] text-sand-8 dark:text-dark-8">/</span>
-        <span className="font-mono text-[11px] text-sand-11 dark:text-dark-11">
-          {station.id}
-        </span>
+        <span className="font-mono text-[11px] text-sand-11 dark:text-dark-11">{station.id}</span>
       </div>
 
       {/* Detail panel — wider layout */}

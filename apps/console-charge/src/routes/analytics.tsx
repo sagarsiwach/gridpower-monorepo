@@ -128,12 +128,8 @@ function ExportDropdown({ isDark }: { isDark: boolean }) {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => handleExport("csv")}>
-          Export CSV
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleExport("pdf")}>
-          Export PDF
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleExport("csv")}>Export CSV</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleExport("pdf")}>Export PDF</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -189,7 +185,7 @@ function EnergyMixDonut({ period, isDark }: EnergyDonutProps) {
     // offset: start from top (quarter circle back)
     const offset = circ * 0.25 - cumPct * circ * 0.01;
     cumPct += item.pct;
-    return { ...item, dash, gap, offset: -(circ * 0.25) + (cumPct - item.pct) / 100 * circ };
+    return { ...item, dash, gap, offset: -(circ * 0.25) + ((cumPct - item.pct) / 100) * circ };
   });
 
   const trackColor = isDark ? "var(--dark-4)" : "var(--sand-3)";
@@ -211,33 +207,16 @@ function EnergyMixDonut({ period, isDark }: EnergyDonutProps) {
           Energy mix
         </span>
       </div>
-      <div
-        className={cn(
-          "font-mono text-label mb-4",
-          isDark ? "text-dark-9" : "text-sand-9",
-        )}
-      >
+      <div className={cn("font-mono text-label mb-4", isDark ? "text-dark-9" : "text-sand-9")}>
         Charging source split · {period}
       </div>
 
       <div className="flex items-center gap-6 flex-1">
         {/* SVG donut */}
         <div className="relative flex-shrink-0" style={{ width: 120, height: 120 }}>
-          <svg
-            width={120}
-            height={120}
-            viewBox="0 0 120 120"
-            onMouseLeave={() => setTooltip(null)}
-          >
+          <svg width={120} height={120} viewBox="0 0 120 120" onMouseLeave={() => setTooltip(null)}>
             {/* Track */}
-            <circle
-              cx={cx}
-              cy={cy}
-              r={r}
-              fill="none"
-              stroke={trackColor}
-              strokeWidth={strokeW}
-            />
+            <circle cx={cx} cy={cy} r={r} fill="none" stroke={trackColor} strokeWidth={strokeW} />
             {/* Segments */}
             {segments.map((seg, idx) => (
               <circle
@@ -251,10 +230,18 @@ function EnergyMixDonut({ period, isDark }: EnergyDonutProps) {
                 strokeDasharray={`${seg.dash} ${seg.gap}`}
                 strokeDashoffset={seg.offset}
                 strokeLinecap="butt"
-                style={{ transform: "rotate(-90deg)", transformOrigin: `${cx}px ${cy}px`, cursor: "pointer" }}
+                style={{
+                  transform: "rotate(-90deg)",
+                  transformOrigin: `${cx}px ${cy}px`,
+                  cursor: "pointer",
+                }}
                 onMouseEnter={(e) => {
                   const rect = (e.target as SVGElement).closest("svg")?.getBoundingClientRect();
-                  setTooltip({ idx, x: e.clientX - (rect?.left ?? 0), y: e.clientY - (rect?.top ?? 0) });
+                  setTooltip({
+                    idx,
+                    x: e.clientX - (rect?.left ?? 0),
+                    y: e.clientY - (rect?.top ?? 0),
+                  });
                 }}
               />
             ))}
@@ -304,7 +291,9 @@ function EnergyMixDonut({ period, isDark }: EnergyDonutProps) {
                 >
                   <div className="font-semibold">{items[tooltip.idx]!.label}</div>
                   <div>{items[tooltip.idx]!.pct}%</div>
-                  <div className={isDark ? "text-dark-9" : "opacity-60"}>{items[tooltip.idx]!.kwh}</div>
+                  <div className={isDark ? "text-dark-9" : "opacity-60"}>
+                    {items[tooltip.idx]!.kwh}
+                  </div>
                 </div>
               </foreignObject>
             )}
@@ -328,12 +317,7 @@ function EnergyMixDonut({ period, isDark }: EnergyDonutProps) {
                 >
                   {item.label}
                 </div>
-                <div
-                  className={cn(
-                    "font-mono text-label",
-                    isDark ? "text-dark-9" : "text-sand-9",
-                  )}
-                >
+                <div className={cn("font-mono text-label", isDark ? "text-dark-9" : "text-sand-9")}>
                   {item.pct}% · {item.kwh}
                 </div>
               </div>
@@ -402,9 +386,7 @@ function StationTable({ period, isDark }: { period: Period; isDark: boolean }) {
       )}
     >
       {label}
-      {k && sortKey === k && (
-        <span className="ml-1">{sortAsc ? "↑" : "↓"}</span>
-      )}
+      {k && sortKey === k && <span className="ml-1">{sortAsc ? "↑" : "↓"}</span>}
     </button>
   );
 
@@ -510,10 +492,7 @@ function StationTable({ period, isDark }: { period: Period; isDark: boolean }) {
           style={{ gridTemplateColumns: "110px 1fr 80px 80px 100px 90px 80px" }}
         >
           <span
-            className={cn(
-              "font-mono text-label truncate",
-              isDark ? "text-dark-9" : "text-sand-9",
-            )}
+            className={cn("font-mono text-label truncate", isDark ? "text-dark-9" : "text-sand-9")}
           >
             {row.id}
           </span>
@@ -532,9 +511,7 @@ function StationTable({ period, isDark }: { period: Period; isDark: boolean }) {
           <span className={cn("font-mono text-label", isDark ? "text-dark-9" : "text-sand-9")}>
             {row.avgDuration}
           </span>
-          <span className="font-mono text-label text-grid-red font-semibold">
-            {row.revenue}
-          </span>
+          <span className="font-mono text-label text-grid-red font-semibold">{row.revenue}</span>
           <span className={cn("font-mono text-label", isDark ? "text-dark-11" : "text-sand-11")}>
             {row.kwh}
           </span>
@@ -599,12 +576,7 @@ function CustomerInsightsPanel({ period, isDark }: { period: Period; isDark: boo
       >
         Customer insights
       </div>
-      <div
-        className={cn(
-          "grid grid-cols-4 divide-x",
-          isDark ? "divide-dark-6" : "divide-border",
-        )}
-      >
+      <div className={cn("grid grid-cols-4 divide-x", isDark ? "divide-dark-6" : "divide-border")}>
         {items.map((item, i) => (
           <div key={i} className={cn("px-5 first:pl-0")}>
             <div
@@ -624,12 +596,7 @@ function CustomerInsightsPanel({ period, isDark }: { period: Period; isDark: boo
             >
               {item.value}
             </div>
-            <div
-              className={cn(
-                "font-mono text-label",
-                isDark ? "text-dark-9" : "text-sand-9",
-              )}
-            >
+            <div className={cn("font-mono text-label", isDark ? "text-dark-9" : "text-sand-9")}>
               {item.sub}
             </div>
           </div>
@@ -656,8 +623,7 @@ function KpiCard({
   trendDir: "up" | "down" | "neutral";
   isDark: boolean;
 }) {
-  const TrendIcon =
-    trendDir === "up" ? TrendingUp : trendDir === "down" ? TrendingDown : null;
+  const TrendIcon = trendDir === "up" ? TrendingUp : trendDir === "down" ? TrendingDown : null;
   const trendColor =
     trendDir === "up"
       ? "text-success"
@@ -725,8 +691,7 @@ export default function Analytics() {
   const barData = topStations.map((s) => ({
     label: s.id,
     revenue: Math.round(
-      (s.revenue *
-        { Today: 0.033, "7D": 0.23, "30D": 1, "90D": 2.95 }[period]) as number,
+      (s.revenue * { Today: 0.033, "7D": 0.23, "30D": 1, "90D": 2.95 }[period]) as number,
     ),
   }));
 

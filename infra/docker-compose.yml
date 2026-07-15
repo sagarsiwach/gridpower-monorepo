@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: timescale/timescaledb:latest-pg17
+    environment:
+      POSTGRES_USER: grid
+      POSTGRES_PASSWORD: grid
+      POSTGRES_DB: grid_platform
+    ports:
+      - "55432:5432"
+    volumes:
+      - grid_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U grid -d grid_platform"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+volumes:
+  grid_postgres:

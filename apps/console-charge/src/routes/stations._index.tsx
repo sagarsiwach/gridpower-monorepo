@@ -49,7 +49,16 @@ import { StationDetailPanel } from "~/components/StationDetailPanel";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
-type SortKey = "id" | "name" | "city" | "status" | "ports" | "util" | "today" | "lastSession" | "uptime";
+type SortKey =
+  | "id"
+  | "name"
+  | "city"
+  | "status"
+  | "ports"
+  | "util"
+  | "today"
+  | "lastSession"
+  | "uptime";
 type SortDir = "asc" | "desc";
 
 interface SortState {
@@ -84,9 +93,7 @@ function UtilBar({ pct }: { pct: number }) {
           style={{ width: `${pct}%` }}
         />
       </div>
-      <span className="font-mono text-[11px] text-sand-11 dark:text-dark-11">
-        {pct}%
-      </span>
+      <span className="font-mono text-[11px] text-sand-11 dark:text-dark-11">{pct}%</span>
     </div>
   );
 }
@@ -141,16 +148,26 @@ function SortableHead({
 
 function getVal(s: Station, key: SortKey): string | number {
   switch (key) {
-    case "id": return s.id;
-    case "name": return s.name;
-    case "city": return s.city;
-    case "status": return s.status;
-    case "ports": return s.ports;
-    case "util": return s.util;
-    case "today": return parseInt(s.today.replace(/[₹,]/g, "")) || 0;
-    case "lastSession": return s.lastSession;
-    case "uptime": return parseFloat(s.uptime) || 0;
-    default: return "";
+    case "id":
+      return s.id;
+    case "name":
+      return s.name;
+    case "city":
+      return s.city;
+    case "status":
+      return s.status;
+    case "ports":
+      return s.ports;
+    case "util":
+      return s.util;
+    case "today":
+      return parseInt(s.today.replace(/[₹,]/g, "")) || 0;
+    case "lastSession":
+      return s.lastSession;
+    case "uptime":
+      return parseFloat(s.uptime) || 0;
+    default:
+      return "";
   }
 }
 
@@ -213,16 +230,12 @@ export default function StationsIndex() {
   );
 
   // ── Detail station ──────────────────────────────────────────────────────────
-  const detailStation = selectedId
-    ? ALL_STATIONS.find((s) => s.id === selectedId) ?? null
-    : null;
+  const detailStation = selectedId ? (ALL_STATIONS.find((s) => s.id === selectedId) ?? null) : null;
 
   // ── Sort handler ────────────────────────────────────────────────────────────
   const handleSort = React.useCallback((key: SortKey) => {
     setSort((prev) =>
-      prev.key === key
-        ? { key, dir: prev.dir === "asc" ? "desc" : "asc" }
-        : { key, dir: "asc" },
+      prev.key === key ? { key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key, dir: "asc" },
     );
   }, []);
 
@@ -246,17 +259,13 @@ export default function StationsIndex() {
 
   const clearBulk = React.useCallback(() => setBulkSelected(new Set()), []);
 
-  const allBulkChecked =
-    filtered.length > 0 && bulkSelected.size === filtered.length;
+  const allBulkChecked = filtered.length > 0 && bulkSelected.size === filtered.length;
   const someBulkChecked = bulkSelected.size > 0 && !allBulkChecked;
 
   // ── Row click ───────────────────────────────────────────────────────────────
-  const handleRowClick = React.useCallback(
-    (id: string) => {
-      setSelectedId((prev) => (prev === id ? null : id));
-    },
-    [],
-  );
+  const handleRowClick = React.useCallback((id: string) => {
+    setSelectedId((prev) => (prev === id ? null : id));
+  }, []);
 
   return (
     <div className="flex flex-col gap-4">
@@ -277,10 +286,12 @@ export default function StationsIndex() {
               )}
             >
               <span className="capitalize">{key}</span>
-              <span className={cn(
-                "font-mono text-[10px]",
-                filter === key ? "text-primary" : "text-sand-8 dark:text-dark-8",
-              )}>
+              <span
+                className={cn(
+                  "font-mono text-[10px]",
+                  filter === key ? "text-primary" : "text-sand-8 dark:text-dark-8",
+                )}
+              >
                 {counts[key]}
               </span>
             </button>
@@ -307,10 +318,7 @@ export default function StationsIndex() {
               )}
             />
           </div>
-          <Button
-            size="sm"
-            className="gap-1.5 h-8 rounded-btn font-body text-[12px]"
-          >
+          <Button size="sm" className="gap-1.5 h-8 rounded-btn font-body text-[12px]">
             <Plus size={13} />
             Add station
           </Button>
@@ -398,13 +406,49 @@ export default function StationsIndex() {
                     onChange={toggleAllBulk}
                   />
                 </TableHead>
-                <SortableHead label="ID" columnKey="id" sort={sort} onSort={handleSort} className="w-[130px]" />
+                <SortableHead
+                  label="ID"
+                  columnKey="id"
+                  sort={sort}
+                  onSort={handleSort}
+                  className="w-[130px]"
+                />
                 <SortableHead label="Station" columnKey="name" sort={sort} onSort={handleSort} />
-                <SortableHead label="Status" columnKey="status" sort={sort} onSort={handleSort} className="w-[130px]" />
-                <SortableHead label="Ports" columnKey="ports" sort={sort} onSort={handleSort} className="w-[70px]" />
-                <SortableHead label="Utilisation" columnKey="util" sort={sort} onSort={handleSort} className="w-[120px]" />
-                <SortableHead label="Today" columnKey="today" sort={sort} onSort={handleSort} className="w-[100px]" />
-                <SortableHead label="Last session" columnKey="lastSession" sort={sort} onSort={handleSort} className="w-[100px]" />
+                <SortableHead
+                  label="Status"
+                  columnKey="status"
+                  sort={sort}
+                  onSort={handleSort}
+                  className="w-[130px]"
+                />
+                <SortableHead
+                  label="Ports"
+                  columnKey="ports"
+                  sort={sort}
+                  onSort={handleSort}
+                  className="w-[70px]"
+                />
+                <SortableHead
+                  label="Utilisation"
+                  columnKey="util"
+                  sort={sort}
+                  onSort={handleSort}
+                  className="w-[120px]"
+                />
+                <SortableHead
+                  label="Today"
+                  columnKey="today"
+                  sort={sort}
+                  onSort={handleSort}
+                  className="w-[100px]"
+                />
+                <SortableHead
+                  label="Last session"
+                  columnKey="lastSession"
+                  sort={sort}
+                  onSort={handleSort}
+                  className="w-[100px]"
+                />
                 {/* Actions column */}
                 <TableHead className="w-10" />
               </TableRow>
@@ -429,17 +473,15 @@ export default function StationsIndex() {
                     onClick={() => handleRowClick(station.id)}
                     className={cn(
                       "cursor-pointer transition-colors",
-                      isDetailOpen && "bg-sand-3 dark:bg-dark-4 hover:bg-sand-3 dark:hover:bg-dark-4",
+                      isDetailOpen &&
+                        "bg-sand-3 dark:bg-dark-4 hover:bg-sand-3 dark:hover:bg-dark-4",
                       isBulk && !isDetailOpen && "bg-grid-red/5 hover:bg-grid-red/8",
                     )}
                     data-state={isDetailOpen ? "selected" : undefined}
                   >
                     {/* Checkbox */}
                     <TableCell className="pr-0" onClick={(e) => toggleBulk(station.id, e)}>
-                      <CheckboxCell
-                        checked={isBulk}
-                        onChange={() => {}}
-                      />
+                      <CheckboxCell checked={isBulk} onChange={() => {}} />
                     </TableCell>
 
                     {/* ID */}
@@ -486,9 +528,7 @@ export default function StationsIndex() {
                       <span
                         className={cn(
                           "font-mono text-[12px] font-medium",
-                          station.today === "₹0"
-                            ? "text-sand-9 dark:text-dark-9"
-                            : "text-primary",
+                          station.today === "₹0" ? "text-sand-9 dark:text-dark-9" : "text-primary",
                         )}
                       >
                         {station.today}
@@ -556,10 +596,7 @@ export default function StationsIndex() {
 
         {/* Detail panel */}
         {detailStation && (
-          <StationDetailPanel
-            station={detailStation}
-            onClose={() => setSelectedId(null)}
-          />
+          <StationDetailPanel station={detailStation} onClose={() => setSelectedId(null)} />
         )}
       </div>
     </div>

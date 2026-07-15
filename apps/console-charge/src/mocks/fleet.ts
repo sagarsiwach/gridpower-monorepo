@@ -44,7 +44,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 87,
     status: "charging",
     lastSeen: "Now",
-    chargeStation: "GridPower-Del-03",
+    chargeStation: "GridCharge-Del-03",
     costPerKm: "₹1.82",
   },
   {
@@ -80,7 +80,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 100,
     status: "full",
     lastSeen: "Now",
-    chargeStation: "GridPower-Del-01",
+    chargeStation: "GridCharge-Del-01",
     costPerKm: "₹2.14",
   },
   {
@@ -92,7 +92,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 63,
     status: "charging",
     lastSeen: "Now",
-    chargeStation: "GridPower-Del-02",
+    chargeStation: "GridCharge-Del-02",
     costPerKm: "₹0.68",
   },
   {
@@ -154,7 +154,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 31,
     status: "charging",
     lastSeen: "Now",
-    chargeStation: "GridPower-Blr-01",
+    chargeStation: "GridCharge-Blr-01",
     costPerKm: "₹0.61",
   },
   {
@@ -178,7 +178,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 92,
     status: "full",
     lastSeen: "Now",
-    chargeStation: "GridPower-Blr-02",
+    chargeStation: "GridCharge-Blr-02",
     costPerKm: "₹0.66",
   },
   {
@@ -214,7 +214,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 68,
     status: "charging",
     lastSeen: "Now",
-    chargeStation: "GridPower-Blr-03",
+    chargeStation: "GridCharge-Blr-03",
     costPerKm: "₹1.58",
   },
 
@@ -228,7 +228,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 92,
     status: "full",
     lastSeen: "Now",
-    chargeStation: "GridPower-Mum-01",
+    chargeStation: "GridCharge-Mum-01",
     costPerKm: "₹2.22",
   },
   {
@@ -264,7 +264,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 43,
     status: "charging",
     lastSeen: "Now",
-    chargeStation: "GridPower-Mum-02",
+    chargeStation: "GridCharge-Mum-02",
     costPerKm: "₹0.72",
   },
   {
@@ -314,7 +314,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 79,
     status: "charging",
     lastSeen: "Now",
-    chargeStation: "GridPower-Goa-01",
+    chargeStation: "GridCharge-Goa-01",
     costPerKm: "₹0.84",
   },
   {
@@ -338,7 +338,7 @@ export const VEHICLES: Vehicle[] = [
     soc: 85,
     status: "full",
     lastSeen: "Now",
-    chargeStation: "GridPower-Goa-02",
+    chargeStation: "GridCharge-Goa-02",
     costPerKm: "₹2.09",
   },
   {
@@ -389,10 +389,8 @@ export const DEPOTS: Depot[] = [
     idle: 2,
     lowBattery: 1,
     avgSoc: Math.round(
-      VEHICLES.filter((v) => v.depot === "Delhi Depot").reduce(
-        (a, v) => a + v.soc,
-        0
-      ) / VEHICLES.filter((v) => v.depot === "Delhi Depot").length
+      VEHICLES.filter((v) => v.depot === "Delhi Depot").reduce((a, v) => a + v.soc, 0) /
+        VEHICLES.filter((v) => v.depot === "Delhi Depot").length,
     ),
   },
   {
@@ -404,10 +402,8 @@ export const DEPOTS: Depot[] = [
     idle: 2,
     lowBattery: 1,
     avgSoc: Math.round(
-      VEHICLES.filter((v) => v.depot === "Bangalore Depot").reduce(
-        (a, v) => a + v.soc,
-        0
-      ) / VEHICLES.filter((v) => v.depot === "Bangalore Depot").length
+      VEHICLES.filter((v) => v.depot === "Bangalore Depot").reduce((a, v) => a + v.soc, 0) /
+        VEHICLES.filter((v) => v.depot === "Bangalore Depot").length,
     ),
   },
   {
@@ -419,10 +415,8 @@ export const DEPOTS: Depot[] = [
     idle: 2,
     lowBattery: 1,
     avgSoc: Math.round(
-      VEHICLES.filter((v) => v.depot === "Mumbai Depot").reduce(
-        (a, v) => a + v.soc,
-        0
-      ) / VEHICLES.filter((v) => v.depot === "Mumbai Depot").length
+      VEHICLES.filter((v) => v.depot === "Mumbai Depot").reduce((a, v) => a + v.soc, 0) /
+        VEHICLES.filter((v) => v.depot === "Mumbai Depot").length,
     ),
   },
   {
@@ -434,10 +428,8 @@ export const DEPOTS: Depot[] = [
     idle: 2,
     lowBattery: 1,
     avgSoc: Math.round(
-      VEHICLES.filter((v) => v.depot === "Goa Depot").reduce(
-        (a, v) => a + v.soc,
-        0
-      ) / VEHICLES.filter((v) => v.depot === "Goa Depot").length
+      VEHICLES.filter((v) => v.depot === "Goa Depot").reduce((a, v) => a + v.soc, 0) /
+        VEHICLES.filter((v) => v.depot === "Goa Depot").length,
     ),
   },
 ];
@@ -445,6 +437,5 @@ export const DEPOTS: Depot[] = [
 // Charge queue — vehicles waiting for open port, ordered by priority (lowest SoC first)
 export const CHARGE_QUEUE: Vehicle[] = VEHICLES.filter(
   (v) =>
-    (v.status === "low-battery" || (v.soc < 30 && v.status === "idle")) &&
-    v.chargeStation === null
+    (v.status === "low-battery" || (v.soc < 30 && v.status === "idle")) && v.chargeStation === null,
 ).sort((a, b) => a.soc - b.soc);

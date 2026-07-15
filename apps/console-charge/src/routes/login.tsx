@@ -63,9 +63,7 @@ export default function Login() {
       <div
         className={[
           "w-full max-w-[400px] rounded-modal border p-10",
-          isDark
-            ? "bg-dark-2 border-dark-6"
-            : "bg-white border-sand-6 shadow-lg",
+          isDark ? "bg-dark-2 border-dark-6" : "bg-white border-sand-6 shadow-lg",
         ].join(" ")}
       >
         {/* Logo */}
@@ -95,12 +93,7 @@ export default function Login() {
         >
           Sign in to Console
         </h1>
-        <p
-          className={[
-            "text-body-sm mb-7",
-            isDark ? "text-dark-9" : "text-sand-9",
-          ].join(" ")}
-        >
+        <p className={["text-body-sm mb-7", isDark ? "text-dark-9" : "text-sand-9"].join(" ")}>
           Manage your charging network.
         </p>
 
@@ -110,10 +103,9 @@ export default function Login() {
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="email"
-              className={[
-                "text-[12px] font-medium",
-                isDark ? "text-dark-9" : "text-sand-9",
-              ].join(" ")}
+              className={["text-[12px] font-medium", isDark ? "text-dark-9" : "text-sand-9"].join(
+                " ",
+              )}
             >
               Email
             </label>
@@ -125,9 +117,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={
-                isDark
-                  ? "bg-dark-3 border-dark-6 text-dark-12 placeholder:text-dark-8"
-                  : ""
+                isDark ? "bg-dark-3 border-dark-6 text-dark-12 placeholder:text-dark-8" : ""
               }
             />
           </div>
@@ -137,10 +127,9 @@ export default function Login() {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className={[
-                  "text-[12px] font-medium",
-                  isDark ? "text-dark-9" : "text-sand-9",
-                ].join(" ")}
+                className={["text-[12px] font-medium", isDark ? "text-dark-9" : "text-sand-9"].join(
+                  " ",
+                )}
               >
                 Password
               </label>
@@ -161,9 +150,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 className={[
                   "pr-10",
-                  isDark
-                    ? "bg-dark-3 border-dark-6 text-dark-12 placeholder:text-dark-8"
-                    : "",
+                  isDark ? "bg-dark-3 border-dark-6 text-dark-12 placeholder:text-dark-8" : "",
                 ].join(" ")}
               />
               <button
@@ -207,10 +194,7 @@ export default function Login() {
         <div className="flex items-center gap-3 my-5">
           <div className={isDark ? "flex-1 h-px bg-dark-6" : "flex-1 h-px bg-sand-6"} />
           <span
-            className={[
-              "font-mono text-[11px]",
-              isDark ? "text-dark-9" : "text-sand-9",
-            ].join(" ")}
+            className={["font-mono text-[11px]", isDark ? "text-dark-9" : "text-sand-9"].join(" ")}
           >
             OR
           </span>
@@ -251,10 +235,9 @@ export default function Login() {
 
         {/* Footer note */}
         <p
-          className={[
-            "text-center mt-5 text-[12px]",
-            isDark ? "text-dark-9" : "text-sand-9",
-          ].join(" ")}
+          className={["text-center mt-5 text-[12px]", isDark ? "text-dark-9" : "text-sand-9"].join(
+            " ",
+          )}
         >
           {"Don't have access? "}
           <a href="#" className="text-grid-red no-underline hover:underline">
