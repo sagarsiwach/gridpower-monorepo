@@ -72,7 +72,6 @@ function NavButton({
     </button>
   );
 }
-
 /* The framed stage: a real video, or the house ASSET TBD placeholder. */
 function Stage({ slide, ratio }: { slide: VideoSlide; ratio: string }) {
   const frame: CSSProperties = {
@@ -125,6 +124,8 @@ export function VideoShowcase({ eyebrow = "See it work", title, intro, slides, r
   const dirRef = useRef(1);
   const n = slides.length;
 
+  if (n === 0) return null;
+
   const go = (next: number) => {
     dirRef.current = next > i || (i === n - 1 && next === 0) ? 1 : -1;
     setI(((next % n) + n) % n);
@@ -132,7 +133,7 @@ export function VideoShowcase({ eyebrow = "See it work", title, intro, slides, r
   const prev = () => go(i - 1);
   const next = () => go(i + 1);
 
-  const active = slides[i];
+  const active = slides[i]!;
 
   return (
     <Band id={id}>
@@ -198,16 +199,27 @@ export function VideoShowcase({ eyebrow = "See it work", title, intro, slides, r
                     aria-label={`Show ${s.title}`}
                     onClick={() => go(k)}
                     style={{
-                      width: k === i ? 26 : 8,
-                      height: 8,
-                      borderRadius: 999,
+                      width: 26,
+                      height: 16,
                       border: "none",
                       cursor: "pointer",
                       padding: 0,
-                      background: k === i ? tokens.brand : tokens.hairlineStrong,
-                      transition: "width .24s ease, background .24s ease",
+                      background: "transparent",
                     }}
-                  />
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        display: "block",
+                        width: 26,
+                        height: 8,
+                        borderRadius: 999,
+                        background: k === i ? tokens.brand : tokens.hairlineStrong,
+                        transform: `scaleX(${k === i ? 1 : 8 / 26})`,
+                        transition: "transform .24s ease, background .24s ease",
+                      }}
+                    />
+                  </button>
                 ))}
               </div>
               <div style={{ display: "flex", gap: 10 }}>

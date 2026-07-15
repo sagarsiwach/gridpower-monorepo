@@ -16,7 +16,7 @@
   },
   "files": ["src", "fonts", "tailwind-preset.cjs", "tailwind-preset.d.ts"],
   "scripts": {
-    "lint": "biome check src",
+    "lint": "oxlint src",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

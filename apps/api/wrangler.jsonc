@@ -1,0 +1,59 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "grid-platform-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "vars": {
+    "ALLOWED_ORIGINS": "https://gridenergy.co.in,https://console.gridenergy.co.in",
+    "ENVIRONMENT": "production",
+    "LOG_LEVEL": "info",
+  },
+  "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "00000000-0000-0000-0000-000000000000" }],
+  "kv_namespaces": [{ "binding": "CACHE", "id": "00000000000000000000000000000000" }],
+  "r2_buckets": [{ "binding": "FILES", "bucket_name": "grid-platform-files" }],
+  "analytics_engine_datasets": [{ "binding": "ANALYTICS", "dataset": "grid_platform_events" }],
+  "queues": {
+    "producers": [{ "binding": "PLATFORM_JOBS", "queue": "grid-platform-jobs" }],
+    "consumers": [{ "queue": "grid-platform-jobs", "max_batch_size": 10, "max_retries": 5 }],
+  },
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "workflows": [
+    {
+      "binding": "COMMISSIONING",
+      "name": "grid-platform-commissioning",
+      "class_name": "CommissioningWorkflow",
+    },
+  ],
+  "env": {
+    "staging": {
+      "name": "grid-platform-api-staging",
+      "vars": {
+        "ALLOWED_ORIGINS": "https://staging.gridenergy.co.in,https://console-staging.gridenergy.co.in",
+        "ENVIRONMENT": "staging",
+        "LOG_LEVEL": "debug",
+      },
+      "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "00000000-0000-0000-0000-000000000000" }],
+      "kv_namespaces": [{ "binding": "CACHE", "id": "00000000000000000000000000000000" }],
+      "r2_buckets": [{ "binding": "FILES", "bucket_name": "grid-platform-files-staging" }],
+      "analytics_engine_datasets": [
+        { "binding": "ANALYTICS", "dataset": "grid_platform_events_staging" },
+      ],
+      "queues": {
+        "producers": [{ "binding": "PLATFORM_JOBS", "queue": "grid-platform-jobs-staging" }],
+        "consumers": [
+          { "queue": "grid-platform-jobs-staging", "max_batch_size": 10, "max_retries": 5 },
+        ],
+      },
+      "triggers": { "crons": ["*/15 * * * *"] },
+      "workflows": [
+        {
+          "binding": "COMMISSIONING",
+          "name": "grid-platform-commissioning-staging",
+          "class_name": "CommissioningWorkflow",
+        },
+      ],
+    },
+  },
+}

@@ -13,7 +13,6 @@ function InlineNotice({ message, onDismiss }: { message: string; onDismiss: () =
     </div>
   );
 }
-
 function MetaField({ label, value }: { label: string; value: string | number }) {
   return (
     <div className="flex flex-col gap-0.5">
@@ -24,7 +23,7 @@ function MetaField({ label, value }: { label: string; value: string | number }) 
 }
 
 // Simulated last 10 executions
-function makeExecHistory(sch: ReturnType<typeof ALL_SCHEDULES[number]["type"]>, id: string) {
+function makeExecHistory(_scheduleType: (typeof ALL_SCHEDULES)[number]["type"], _id: string) {
   const rows = [];
   for (let i = 0; i < 10; i++) {
     rows.push({

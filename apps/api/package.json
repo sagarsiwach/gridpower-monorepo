@@ -1,0 +1,40 @@
+{
+  "name": "@grid-platform/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "wrangler deploy --dry-run --env=\"\" --outdir dist",
+    "dev": "wrangler dev --env staging",
+    "lint": "oxlint src drizzle.config.ts",
+    "typecheck": "wrangler types && tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "cf-typegen": "wrangler types",
+    "deploy:preview": "wrangler versions upload --env staging",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy",
+    "release:upload": "wrangler versions upload",
+    "drizzle:generate": "drizzle-kit generate --config drizzle.config.ts",
+    "drizzle:migrate": "drizzle-kit migrate --config drizzle.config.ts"
+  },
+  "dependencies": {
+    "@grid-platform/contracts": "workspace:*",
+    "@grid-platform/db": "workspace:*",
+    "@grid-platform/env": "workspace:*",
+    "@grid-platform/jobs": "workspace:*",
+    "@grid-platform/observability": "workspace:*",
+    "@grid-platform/pollers": "workspace:*",
+    "@hono/zod-openapi": "1.5.1",
+    "drizzle-orm": "0.45.2",
+    "hono": "4.12.30",
+    "postgres": "3.4.9",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.14",
+    "drizzle-kit": "0.31.10",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10",
+    "wrangler": "4.110.0"
+  }
+}

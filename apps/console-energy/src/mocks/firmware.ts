@@ -34,7 +34,7 @@ export interface FirmwareRollout {
   stacksTotal: number;
   stacksDone: number;
   status: RolloutStatus;
-  startedAt: string;
+  startedAt?: string;
   completedAt?: string;
   scheduledAt?: string;
   sites: RolloutSiteStatus[];
@@ -57,7 +57,6 @@ export const ALL_FIRMWARE_VERSIONS: FirmwareVersion[] = [
   { id: "fw_002", version: "1.8.6", releaseDate: "Oct 14, 2023", status: "deprecated",compatibility: ["BYD"],                                       changelogExcerpt: "Pre-production firmware for pilot sites.", installCount: 0,  minHardwareRev: "HW-1.4" },
   { id: "fw_001", version: "1.7.0", releaseDate: "Aug 01, 2023", status: "deprecated",compatibility: ["BYD"],                                       changelogExcerpt: "Engineering validation firmware. Not for production use.", installCount: 0,  minHardwareRev: "HW-1.3" },
 ];
-
 export const ALL_ROLLOUTS: FirmwareRollout[] = [
   {
     id: "ro_001", name: "v2.4.1 Fleet Rollout Phase 2", targetVersion: "2.4.1", fromVersion: "2.4.0 / 2.3.8",

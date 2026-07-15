@@ -13,6 +13,13 @@ coverage/
 .vscode/
 .idea/
 
+# Flutter generated metadata
+.dart_tool/
+**/.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
 # react-router v7 generated types
 .react-router/
 **/.react-router/

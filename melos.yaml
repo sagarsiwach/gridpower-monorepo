@@ -1,0 +1,7 @@
+name: grid_platform_mobile
+packages:
+  - apps/energy_app
+  - apps/charge_app
+scripts:
+  analyze: melos exec -- flutter analyze
+  test: melos exec -- flutter test

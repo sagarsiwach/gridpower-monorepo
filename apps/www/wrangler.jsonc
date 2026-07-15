@@ -1,13 +1,26 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "gridenergy-www",
-  "compatibility_date": "2025-09-01",
+  "compatibility_date": "2026-07-15",
   "compatibility_flags": ["nodejs_compat"],
   "main": "./workers/app.ts",
+  "routes": [
+    { "pattern": "gridenergy.co.in", "custom_domain": true },
+    { "pattern": "www.gridenergy.co.in", "custom_domain": true },
+  ],
   "assets": {
-    "directory": "./build/client"
+    "directory": "./build/client",
   },
   "observability": {
-    "enabled": true
-  }
+    "enabled": true,
+  },
+  "env": {
+    "staging": {
+      "name": "gridenergy-www-staging",
+      "routes": [{ "pattern": "staging.gridenergy.co.in", "custom_domain": true }],
+      "assets": {
+        "directory": "./build/client",
+      },
+    },
+  },
 }

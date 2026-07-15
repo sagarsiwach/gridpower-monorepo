@@ -48,7 +48,7 @@ export default function TariffsIndex() {
                     <span className="inline-flex items-center rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-foreground capitalize">{tar.type}</span>
                   </TableCell>
                   <TableCell className="font-body text-[12px] text-muted-foreground">
-                    {tar.slots.length > 0 ? `₹${tar.slots[0].ratePerKwh}/kWh peak` : "–"}
+                    {tar.slots.length > 0 ? `₹${tar.slots[0]!.ratePerKwh}/kWh peak` : "–"}
                   </TableCell>
                   <TableCell className="font-mono text-[12px] text-foreground">{tar.sitesAssigned}</TableCell>
                   <TableCell className="font-mono text-[11px] text-muted-foreground whitespace-nowrap">{tar.activePeriod}</TableCell>
